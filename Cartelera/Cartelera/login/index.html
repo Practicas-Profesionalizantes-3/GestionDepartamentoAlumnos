@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    #copy <a href="https://twitter.com/igcorreia" target="_blank">Crafted by: <b>@igcorreia</b><br/>Searching for a Dribbble invite :)</a>
+.mask
+  .modal
+    .circle(style='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9589/0+%281%29.jfif')
+    .login
+      h1 Login
+      form(method="post")
+        input(type="text",name="u",placeholder="Username",required="required")
+        input(type="password",name="p",placeholder="Password",required="required")
+        button(type="submit",class="btn btn-primary btn-block btn-large") Let me in.
+      
+- for (var x = 0; x < 10; x++)
+  .vertical(class='vertical'+x)
+    - var image = 0
+    - for (var y = 0; y < 6; y++)
+      .horizontal(style='background: url("https://source.unsplash.com/featured/?sports/'+y+'")',
+      class='horizontal'+x+y+0)
+      .horizontal(style='background: url("https://source.unsplash.com/featured/?nature/'+y+'")',
+      class='horizontal'+x+y+1)
+      .horizontal(style='background: url("https://source.unsplash.com/featured/?business/'+y+'")',
+      class='horizontal'+x+y+2)
+      .horizontal(style='background: url("https://source.unsplash.com/featured/?people/'+y+'")',
+      class='horizontal'+x+y+3)
+      .horizontal(style='background: url("https://source.unsplash.com/featured/?technics/'+y+'")',
+      class='horizontal'+x+y+4)
+      .horizontal(style='background: url("https://source.unsplash.com/featured/?people/'+y+'")',
+      class='horizontal'+x+y+5)
+      .horizontal(style='background: url("https://source.unsplash.com/featured/?fashion/'+y+'")',
+      class='horizontal'+x+y+6)
+      .horizontal(style='background: url("https://source.unsplash.com/featured/?city/'+y+'")',
+      class='horizontal'+x+y+7)
+      .horizontal(style='background: url("https://source.unsplash.com/featured/?animals/'+y+'")',
+      class='horizontal'+x+y+8)
+      
+</body>
+</html>
