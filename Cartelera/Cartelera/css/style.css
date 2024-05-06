@@ -1,0 +1,15 @@
+.nav-toggle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #333;
+    cursor: pointer;
+}
+
+.side-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    transition: left 0.3s ease;
+}
