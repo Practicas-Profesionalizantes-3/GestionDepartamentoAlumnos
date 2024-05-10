@@ -13,6 +13,44 @@
     <link rel="stylesheet" href="slick/slick-theme.css">
     <link rel="stylesheet" href="css/templatemo-upright.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Estilos responsive */
+        @media (max-width:1000px) {
+            .div-nav{
+                display: none;
+            }
+        }
+        @media (max-width:1400px){
+            .div-section{
+                
+            }
+        }
+        /* @media (max-width: 768px) {
+          .tm-sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #333;
+                z-index: 9999;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-out;
+            }
+          .tm-sidebar.open {
+                transform: translateX(0);
+            }
+          .tm-nav {
+                flex-direction: column;
+            }
+          .tm-nav-item {
+                margin-bottom: 1rem;
+            }
+          .tm-nav-link {
+                font-size: 1.5rem;
+            } */
+        /* } */
+    </style>
 </head>
 <body>
     <div class="container-fluid" >
@@ -22,7 +60,7 @@
             <nav id="side-nav" class="side-nav tm-nav">
                 <!-- BOTON DESAPARECER -->
                 <button class="navbar-toggler" type="button" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
-                <div>
+                <div class="div-nav">
                     <!-- BOTON APARECER -->
                     <div class="mb-3">
                         <button id="nav-toggle-desaparecer" class="btn nav-toggle"><i class="fa-solid fa-bars"></i></button>
@@ -119,7 +157,7 @@
                             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                                 <h2 class="mb-5"><span class="tm-text-primary">Cartelera de Alumnos Noticias & Novedades</span></h2>
                             </div>
-                            <div class="row g-4">
+                            <div class="row g-4 div-section">
                                 <!-- ANUNCIO 1 -->
                                 <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                                     <div class="room-item shadow rounded overflow-hidden">
