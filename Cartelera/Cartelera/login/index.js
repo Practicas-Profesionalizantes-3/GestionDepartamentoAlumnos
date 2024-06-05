@@ -4,25 +4,24 @@ $("#formulario").submit(function (event) {
         user: $("#username").val(),
         password: $("#password").val()
     }
-    mostrarModal()
+    mostrarModal();
 
     $.ajax({
         type: "POST",
         data: JSON.stringify(usuario),
-        url: "http://localhost/Practicas3/login/login.php",
+        url: "http://localhost/api/api-Alumnos/usuarios.php",
         success: function (data) {
-            console.log("funciona")
-            console.log(data)
             ocultarModal();
-            if (data.success == true)
-                location.href = "../index.html"
+            if (data.success == true){
+                location.href = "../index.php"
+            }
             else{
                 $("#errorMessage").show();
                 $("#errorMessage").text(data.error);
             }
         },
         error: function (errorThrown) {
-            console.log("no funciona: " + errorThrown)
+            console.log(errorThrown)
         }
     });
 })
