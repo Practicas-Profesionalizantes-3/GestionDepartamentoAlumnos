@@ -49,6 +49,14 @@ session_start();
                                     Calendario
                                 </a>
                             </div>
+                             <!-- CARTELERA -->
+                             <div class="nav-item dropdown">
+                                <a href="#cartelera" class="nav-link">
+                                    <div class="triangle-right"></div>
+                                    <i class="fa fa-calendar-check-o nav-icon" aria-hidden="true"></i>
+                                    Cartelera
+                                </a>
+                            </div>
                             <!-- CARRERAS -->
                             <div class="nav-item">
                                 <a href="carreras.html" class="nav-link">
@@ -102,7 +110,7 @@ session_start();
                                 <?php
                                 if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
                                 ?>
-                                    <a href="login/index.html" class="nav-link">
+                                    <a href="login/index.php" class="nav-link">
                                         <div class="triangle-right"></div>
                                         <i class="fa-solid fa-right-to-bracket nav-icon"></i>
                                         <span id="loginButton">Campus</span>
@@ -111,7 +119,7 @@ session_start();
                                 } else {
                                     session_destroy();
                                 ?>
-                                    <a href="login/index.html" class="nav-link">
+                                    <a href="login/index.php" class="nav-link">
                                         <div class="triangle-right"></div>
                                         <i class="fa-solid fa-right-to-bracket nav-icon"></i>
                                         <span id="loginButton">Cerrar sesión</span>
