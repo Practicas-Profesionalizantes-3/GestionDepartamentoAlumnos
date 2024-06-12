@@ -1,7 +1,9 @@
 <?php
-session_start();
-?>
+$api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
 
+$response = file_get_contents($api_url);
+$data = json_decode($response, true);
+?>
 <!DOCTYPE html>
 <br lang="es">
 
@@ -28,27 +30,21 @@ session_start();
             include("includes/navbar.php");
             ?>
 
-            <div class="tm-main">
+            <div class="cartelera">
                 <!-- Home section -->
-                <div class="tm-section-wrap">
-                    <div class="tm-parallax" data-parallax="scroll" data-image-src="img/img-01.jpg"></div>
-                    <!-- Include Cartelera -->
                     <?php
-                    $_SESSION['mostrar_opciones_cartelera'] = 'opciones1';
+                    $_SESSION['mostrar_opciones_cartelera'] = 'opciones2';
                     include("includes/cartelera.php")
                     ?>
-
-                    <!-- Include Contacto -->
-                    <?php
-                    include("includes/contacto.php")
-                    ?>
+                    
 
 
-                </div> <!-- .tm-section-wrap -->
                 <!-- Include Footer -->
-                <?php
-                include("includes/footer.php")
-                ?>
+                <div style="margin-top: 550px;">
+                    <?php
+                    include("includes/footer.php")
+                    ?>
+                </div>
             </div> <!-- .tm-main -->
         </div> <!-- .row -->
     </div> <!-- .container-fluid -->

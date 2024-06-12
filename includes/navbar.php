@@ -14,7 +14,7 @@
             </a>
             <!-- INICIO -->
             <div class="nav-item" id="nav-item">
-                <a href="#home" class="nav-link" id="inicio">
+                <a href="index.php" class="nav-link" id="inicio">
                     <div class="triangle-right"></div>
                     <i class="fas fa-home nav-icon"></i>
                     <span class="text-nav" id="text-inicio">Inicio</span>
@@ -30,7 +30,7 @@
             </div>
                 <!-- CARTELERA -->
                 <div class="nav-item dropdown">
-                <a href="#cartelera" class="nav-link" id="cartelera">
+                <a href="cartelera.php" class="nav-link" id="cartelera">
                     <div class="triangle-right"></div>
                     <i class="fa fa-calendar-check-o nav-icon" aria-hidden="true"></i>
                     <span class="text-nav" id="text-cartelera">Cartelera</span>

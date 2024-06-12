@@ -656,10 +656,22 @@ select:not([multiple]) {
 
 .tm-copyright { padding: 50px 70px 20px 0; }
 
+@media (min-width: 1401px) {
+	.cartelera {
+		width: calc(100% - 290px);
+		margin-left: 290px;
+	}
+}
+
 @media (max-width: 1400px) {
 	.tm-section-wrap {
 		width: calc(100% - 630px);
 		margin-left: 630px;
+	}
+	
+	.cartelera {
+		width: calc(100% - 290px);
+		margin-left: 290px;
 	}
 }
 
@@ -716,6 +728,11 @@ select:not([multiple]) {
 		margin-left: 280px;		
 	}
 
+	.cartelera {
+		width: calc(100% - 280px);
+		margin-left: 280px;		
+	}
+
 	.tm-section {
 		padding-left: 30px;
 		padding-right: 30px;
@@ -732,6 +749,11 @@ select:not([multiple]) {
 	}
 
 	.tm-section-wrap {
+		width: 100%;
+		margin-left: 0;
+	}
+	
+	.cartelera {
 		width: 100%;
 		margin-left: 0;
 	}
