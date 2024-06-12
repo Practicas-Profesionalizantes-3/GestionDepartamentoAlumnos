@@ -21,7 +21,7 @@ try {
 // Verifica si la consulta se ejecutó correctamente
 if ($sentencia->rowCount() > 0) {
     echo "Contraseña restablecida con éxito";
-    header('Location: index.php');
+    header('Location: index.html');
 } else {
     echo "Error al restablecer la contraseña: " ;
 }
