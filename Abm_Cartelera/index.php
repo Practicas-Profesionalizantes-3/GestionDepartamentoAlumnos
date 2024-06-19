@@ -5,7 +5,24 @@ $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
 $response = file_get_contents($api_url);
 $data = json_decode($response, true);
 
+usort($data, function($a, $b) {
+    return $a['id_aviso'] - $b['id_aviso'];
+});
+
 $avisos = $data;
+
+$items_per_page = 5; // Número de filas por página
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
+$offset = ($page - 1) * $items_per_page; // Desplazamiento
+
+// Obtener el total de avisos
+$total_avisos = count($avisos);
+
+// Calcular el total de páginas
+$total_pages = ceil($total_avisos / $items_per_page);
+
+// Obtener los avisos para la página actual
+$current_page_avisos = array_slice($avisos, $offset, $items_per_page);
 echo "<script>console.log(" . $response . ")</script>";
 ?>
 <!DOCTYPE html>
@@ -32,31 +49,31 @@ echo "<script>console.log(" . $response . ")</script>";
         var loggedIn = sessionStorage.getItem('loggedIn');
         if (!loggedIn) {
             window.location.href = '../index.php'; // Redirigir al index si no está logueado
-        }
-        else{
+        } else {
             var usuario = JSON.parse(sessionStorage.getItem("usuario"));
             console.log(usuario)
-            if(usuario.id_usuario_estado != 1){
+            if (usuario.id_usuario_estado != 1) {
                 window.location.href = '../index.php';
             }
         }
     </script>
-    <div class="card container">
-        <div class="card-header">
-            <a name="" id="" class="btn btn-primary" href="Create.php" role="button">Agrega anuncio</a>
-        </div>
-        <div class="card-body">
-
+    <div class="">
+    <div class="card-header">
+        <h5 class="card-title text-center">Lista de Avisos</h5>
+        <a class="btn btn-primary mt-2 mr-2" href="Create.php" role="button">Agregar anuncio</a>
+    </div>
+    <div style="display:flex;justify-content:center; align-items:center;">
+        <div style="width: 90%; border: 4px solid #64bded; border-radius: 8px">
             <div class="table-responsive">
-                <table class="table table">
-                    <thead>
+                <table class="table table-bordered table-striped table-hover">
+                    <thead class="thead" style="background-color: #64bded; color:white">
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Tipo de aviso</th>
                             <th scope="col">Usuario</th>
-                            <th scope="col">Titulo</th>
-                            <th scope="col">Descripcion</th>
-                            <th scope="col">Fecha de publicacion</th>
+                            <th scope="col">Título</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Fecha de publicación</th>
                             <th scope="col">Fecha de vencimiento</th>
                             <th scope="col">Adjunto</th>
                             <th scope="col">Fijado</th>
@@ -66,7 +83,7 @@ echo "<script>console.log(" . $response . ")</script>";
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($avisos as $datos) { ?>
+                        <?php foreach ($current_page_avisos as $datos) { ?>
                             <tr>
                                 <td><?php echo $datos['id_aviso']; ?></td>
                                 <td><?php echo $datos['aviso_tipo']; ?></td>
@@ -80,9 +97,12 @@ echo "<script>console.log(" . $response . ")</script>";
                                 <td><img width="70" src="<?= $datos["ubicacion_imagen"] != "" ? $datos["ubicacion_imagen"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s" ?>" /></td>
                                 <td><?php echo $datos['estado']; ?></td>
                                 <td>
-                                    <a name="" id="" class="btn btn-info" href="Update.php?id_aviso=<?php echo $datos['id_aviso']; ?>" role="button">Editar</a>
-
-                                    <a name="" id="" class="btn btn-danger" onclick="eliminarAviso(<?= $datos['id_aviso']; ?>)" role="button">Eliminar</a>
+                                    <a class="btn btn-info" href="Update.php?id_aviso=<?php echo $datos['id_aviso']; ?>" role="button">Editar</a>
+                                    <?php
+                                    if($datos["estado"] != "Inactivo"){ ?>
+                                        <a class="btn btn-danger" style="color:white" onclick="eliminarAviso(<?= $datos['id_aviso']; ?>)" role="button">Eliminar</a><?php
+                                    }
+                                    ?>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -91,4 +111,28 @@ echo "<script>console.log(" . $response . ")</script>";
             </div>
         </div>
     </div>
+    <!-- Paginación -->
+    <nav>
+        <ul class="pagination justify-content-center mt-3">
+            <?php if ($page > 1): ?>
+                <li class="page-item">
+                    <a class="page-link" href="?page=<?php echo $page - 1; ?>">Anterior</a>
+                </li>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
+                    <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                </li>
+            <?php endfor; ?>
+
+            <?php if ($page < $total_pages): ?>
+                <li class="page-item">
+                    <a class="page-link" href="?page=<?php echo $page + 1; ?>">Siguiente</a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+</div>
+
 </body>
