@@ -94,11 +94,11 @@ include('../includes/header.php');
             </div>
             <div class="mb-3">
               <label for="fecha_publicacion" class="form-label">Fecha de publicacion:</label>
-              <input type="text" class="form-control" value="<?php echo $aviso['fecha_publicacion']; ?>" name="fecha_publicacion" id="fecha_publicacion" aria-describedby="helpId" placeholder="Fecha de publicacion">
+              <input type="date" class="form-control" value="<?php echo $aviso['fecha_publicacion']; ?>" name="fecha_publicacion" id="fecha_publicacion" aria-describedby="helpId" placeholder="Fecha de publicacion">
             </div>
             <div class="mb-3">
               <label for="fecha_vencimiento" class="form-label">Fecha de vencimiento:</label>
-              <input type="text" class="form-control" value="<?php echo $aviso['fecha_vencimiento']; ?>" name="fecha_vencimiento" id="fecha_vencimiento" aria-describedby="helpId" placeholder="Fecha de vencimiento">
+              <input type="date" class="form-control" value="<?php echo $aviso['fecha_vencimiento']; ?>" name="fecha_vencimiento" id="fecha_vencimiento" aria-describedby="helpId" placeholder="Fecha de vencimiento">
             </div>
             <div class="mb-3">
               <label for="adjunto" class="form-label">Adjunto:</label>
@@ -106,14 +106,17 @@ include('../includes/header.php');
             </div>
             <div class="mb-3">
               <label for="fijado" class="form-label">Fijado:</label>
-              <input type="text" class="form-control" value="<?php echo $aviso['fijado']; ?>" name="fijado" id="fijado" aria-describedby="helpId" placeholder="Fijado">
+              <select class="form-control" name="fijado" id="fijado">
+                <option value="0" <?= $aviso["fijado"] == "0" ? 'selected="selected"' : "" ?>>No</option>
+                <option value="1" <?= $aviso["fijado"] == "1" ? 'selected="selected"' : "" ?>>Si</option>
+              </select>
             </div>
             <div class="mb-3">
               <label for="ubicacion_imagen" class="form-label">Imagen:</label>
               <?php if (isset($aviso['ubicacion_imagen'])) { ?>
-                <input type="file" class="form-control" name="ubicacion_imagen" id="ubicacion_imagen" placeholder="ubicacion_imagen" aria-describedby="fileHelpId" value="<?php echo $aviso['ubicacion_imagen']; ?>">
+                <input type="text" class="form-control" name="ubicacion_imagen" id="ubicacion_imagen" placeholder="Ubicacion imagen" aria-describedby="fileHelpId" value="<?php echo $aviso['ubicacion_imagen']; ?>">
               <?php } else { ?>
-                <input type="file" class="form-control" name="ubicacion_imagen" id="ubicacion_imagen" placeholder="ubicacion_imagen" aria-describedby="fileHelpId">
+                <input type="text" class="form-control" name="ubicacion_imagen" id="ubicacion_imagen" placeholder="Ubicacion imagen" aria-describedby="fileHelpId">
               <?php } ?>
             </div>
             <div class="mb-3">

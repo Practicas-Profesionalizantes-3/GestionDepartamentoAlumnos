@@ -77,7 +77,7 @@ echo "<script>console.log(" . $response . ")</script>";
                                 <td><?php echo $datos['fecha_vencimiento']; ?></td>
                                 <td><?php echo $datos['adjunto']; ?></td>
                                 <td><?php echo $datos['fijado']; ?></td>
-                                <td><img width="70" src="<?php echo $_SERVER['HTTP_HOST'] . '/img/cartelera/' . $datos['../img/cartelera/conmemoracion.jpeg']; ?>" /></td>
+                                <td><img width="70" src="<?= $datos["ubicacion_imagen"] != "" ? $datos["ubicacion_imagen"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s" ?>" /></td>
                                 <td><?php echo $datos['estado']; ?></td>
                                 <td>
                                     <a name="" id="" class="btn btn-info" href="Update.php?id_aviso=<?php echo $datos['id_aviso']; ?>" role="button">Editar</a>

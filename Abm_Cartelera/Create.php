@@ -1,6 +1,9 @@
 <?php
 session_start();
-$api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
+
+$combo_aviso_tipo_url = "http://localhost/api/api-Alumnos/cartelera.php?action=aviso_tipos";
+$response_aviso_tipos = file_get_contents($combo_aviso_tipo_url);
+$data_aviso_tipos = json_decode($response_aviso_tipos, true);
 ?>
 <?php ?>
 
@@ -34,6 +37,11 @@ $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
         window.location.href = '../index.php';
       }
     }
+
+    $(document).ready(function() {
+      var usuario = JSON.parse(sessionStorage.getItem("usuario"));
+      $("#id_usuario").val(usuario.nombre + " " + usuario.apellido); // Establecer el valor del campo id_usuario
+    });
   </script>
   <div class="container">
     <div class="card">
@@ -45,13 +53,23 @@ $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
 
         <form id="formulario">
           <div class="mb-3">
-            <label for="id_aviso_tipo" class="form-label">Tipo de aviso:</label>
-            <input type="text" class="form-control" name="id_aviso_tipo" id="id_aviso_tipo" aria-describedby="helpId" placeholder="Tipo de aviso" required>
+            <label for="id_usuario" class="form-label">Usuario:</label>
+            <input type="text" class="form-control" name="id_usuario" id="id_usuario" aria-describedby="helpId" placeholder="Usuario" readonly required>
           </div>
           <div class="mb-3">
-            <label for="id_usuario" class="form-label">Usuario:</label>
-            <input type="text" class="form-control" name="id_usuario" id="id_usuario" aria-describedby="helpId" placeholder="Usuario" required>
-          </div>
+              <label for="id_aviso_tipo" class="form-label">Tipo de aviso:</label>
+              <select class="form-control" name="id_aviso_tipo" id="id_aviso_tipo">
+                <?php
+                foreach ($data_aviso_tipos as $aviso_tipo) {
+                ?>
+                  <option value="<?php echo $aviso_tipo["id_aviso_tipo"]; ?>";?>
+                    <?php echo $aviso_tipo["descripcion"]; ?>
+                  </option>
+                <?php
+                }
+                ?>
+              </select>
+            </div>
           <div class="mb-3">
             <label for="titulo" class="form-label">Titulo:</label>
             <input type="text" class="form-control" name="titulo" id="titulo" aria-describedby="helpId" placeholder="Titulo" required>
@@ -62,11 +80,11 @@ $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
           </div>
           <div class="mb-3">
             <label for="fecha_publicacion" class="form-label">Fecha de Publicacion:</label>
-            <input type="text" class="form-control" name="fecha_publicacion" id="fecha_publicacion" aria-describedby="helpId" placeholder="Fecha de Publicacion" required>
+            <input type="date" class="form-control" name="fecha_publicacion" id="fecha_publicacion" aria-describedby="helpId" placeholder="Fecha de Publicacion" required value="2024-06-19">
           </div>
           <div class="mb-3">
             <label for="fecha_vencimiento" class="form-label">Fecha de Vencimiento:</label>
-            <input type="text" class="form-control" name="fecha_vencimiento" id="fecha_vencimiento" aria-describedby="helpId" placeholder="Fecha de Vencimiento" required>
+            <input type="date" class="form-control" name="fecha_vencimiento" id="fecha_vencimiento" aria-describedby="helpId" placeholder="Fecha de Vencimiento" required value="2024-06-19">
           </div>
           <div class="mb-3">
             <label for="adjunto" class="form-label">Adjunto:</label>
@@ -74,15 +92,21 @@ $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
           </div>
           <div class="mb-3">
             <label for="fijado" class="form-label">Fijado:</label>
-            <input type="text" class="form-control" name="fijado" id="fijado" aria-describedby="helpId" placeholder="Fijado" required>
+            <select class="form-control" name="fijado" id="fijado">
+              <option value="0">No</option>
+              <option value="1">Si</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="ubicacion_imagen" class="form-label">Imagen:</label>
-            <input type="file" class="form-control" name="ubicacion_imagen" id="ubicacion_imagen" placeholder="ubicacion_imagen" aria-describedby="fileHelpId" required>
+            <input type="text" class="form-control" name="ubicacion_imagen" id="ubicacion_imagen" placeholder="Ubicacion imagen" aria-describedby="fileHelpId" required>
           </div>
           <div class="mb-3">
             <label for="id_aviso_estado" class="form-label">Estado del aviso:</label>
-            <input type="text" class="form-control" name="id_aviso_estado" id="id_aviso_estado" aria-describedby="helpId" placeholder="Estado del aviso" required>
+            <select class="form-control" name="id_aviso_estado" id="id_aviso_estado">
+              <option value="1">Activo</option>
+              <option value="2">Inactivo</option>
+            </select>
           </div>
 
           <button type="submit" class="btn btn-success">Agregar</button>
