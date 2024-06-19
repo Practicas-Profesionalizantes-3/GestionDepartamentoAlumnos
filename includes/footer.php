@@ -1,5 +1,5 @@
 <!-- Footer -->
-<div class="footer-widget-area bg-dark mt-3">
+<div class="footer-widget-area bg-dark mt-3" style="margin-left: 76px;">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-6">
@@ -51,7 +51,7 @@
 </div> <!-- Fin del Footer -->
 
 <!--Footer Area Start-->
-<footer class="footer-area bg-primary">
+<footer class="footer-area bg-primary" style="margin-left: 76px;">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-7">

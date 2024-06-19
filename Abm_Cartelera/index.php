@@ -5,7 +5,7 @@ $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
 $response = file_get_contents($api_url);
 $data = json_decode($response, true);
 
-usort($data, function($a, $b) {
+usort($data, function ($a, $b) {
     return $a['id_aviso'] - $b['id_aviso'];
 });
 
@@ -40,11 +40,15 @@ echo "<script>console.log(" . $response . ")</script>";
     <link rel="stylesheet" href="../slick/slick-theme.css">
     <link rel="stylesheet" href="../css/templatemo-upright.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../includes/style.css">
     <script src="js/delete.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 
 <body>
+    <?php
+    include("../includes/navbar2.php");
+    ?>
     <script>
         var loggedIn = sessionStorage.getItem('loggedIn');
         if (!loggedIn) {
@@ -57,82 +61,81 @@ echo "<script>console.log(" . $response . ")</script>";
             }
         }
     </script>
-    <div class="">
-    <div class="card-header">
-        <h5 class="card-title text-center">Lista de Avisos</h5>
-        <a class="btn btn-primary mt-2 mr-2" href="Create.php" role="button">Agregar anuncio</a>
-    </div>
-    <div style="display:flex;justify-content:center; align-items:center;">
-        <div style="width: 90%; border: 4px solid #64bded; border-radius: 8px">
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped table-hover">
-                    <thead class="thead" style="background-color: #64bded; color:white">
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Tipo de aviso</th>
-                            <th scope="col">Usuario</th>
-                            <th scope="col">Título</th>
-                            <th scope="col">Descripción</th>
-                            <th scope="col">Fecha de publicación</th>
-                            <th scope="col">Fecha de vencimiento</th>
-                            <th scope="col">Adjunto</th>
-                            <th scope="col">Fijado</th>
-                            <th scope="col">Imagen</th>
-                            <th scope="col">Estado del aviso</th>
-                            <th scope="col">Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($current_page_avisos as $datos) { ?>
+    <div class="listadoAvisos" style="margin-left: 88px;">
+        <div class="card-header">
+            <h5 class="card-title text-center">Lista de Avisos</h5>
+            <a class="btn btn-primary mt-2 mr-2" href="Create.php" role="button">Agregar anuncio</a>
+        </div>
+        <div style="display:flex;justify-content:center; align-items:center;">
+            <div style="width: 90%; border: 4px solid #64bded; border-radius: 8px">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead class="thead" style="background-color: #64bded; color:white">
                             <tr>
-                                <td><?php echo $datos['id_aviso']; ?></td>
-                                <td><?php echo $datos['aviso_tipo']; ?></td>
-                                <td><?php echo $datos['usuario']; ?></td>
-                                <td><?php echo $datos['titulo']; ?></td>
-                                <td><?php echo $datos['descripcion']; ?></td>
-                                <td><?php echo $datos['fecha_publicacion']; ?></td>
-                                <td><?php echo $datos['fecha_vencimiento']; ?></td>
-                                <td><?php echo $datos['adjunto']; ?></td>
-                                <td><?php echo $datos['fijado']; ?></td>
-                                <td><img width="70" src="<?= $datos["ubicacion_imagen"] != "" ? $datos["ubicacion_imagen"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s" ?>" /></td>
-                                <td><?php echo $datos['estado']; ?></td>
-                                <td>
-                                    <a class="btn btn-info" href="Update.php?id_aviso=<?php echo $datos['id_aviso']; ?>" role="button">Editar</a>
-                                    <?php
-                                    if($datos["estado"] != "Inactivo"){ ?>
-                                        <a class="btn btn-danger" style="color:white" onclick="eliminarAviso(<?= $datos['id_aviso']; ?>)" role="button">Eliminar</a><?php
-                                    }
-                                    ?>
-                                </td>
+                                <th scope="col">Id</th>
+                                <th scope="col">Tipo de aviso</th>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Título</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Fecha de publicación</th>
+                                <th scope="col">Fecha de vencimiento</th>
+                                <th scope="col">Adjunto</th>
+                                <th scope="col">Fijado</th>
+                                <th scope="col">Imagen</th>
+                                <th scope="col">Estado del aviso</th>
+                                <th scope="col">Acción</th>
                             </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($current_page_avisos as $datos) { ?>
+                                <tr>
+                                    <td><?php echo $datos['id_aviso']; ?></td>
+                                    <td><?php echo $datos['aviso_tipo']; ?></td>
+                                    <td><?php echo $datos['usuario']; ?></td>
+                                    <td><?php echo $datos['titulo']; ?></td>
+                                    <td><?php echo $datos['descripcion']; ?></td>
+                                    <td><?php echo $datos['fecha_publicacion']; ?></td>
+                                    <td><?php echo $datos['fecha_vencimiento']; ?></td>
+                                    <td><?php echo $datos['adjunto']; ?></td>
+                                    <td><?php echo $datos['fijado']; ?></td>
+                                    <td><img width="70" src="<?= $datos["ubicacion_imagen"] != "" ? $datos["ubicacion_imagen"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s" ?>" /></td>
+                                    <td><?php echo $datos['estado']; ?></td>
+                                    <td>
+                                        <a class="btn btn-info" href="Update.php?id_aviso=<?php echo $datos['id_aviso']; ?>" role="button">Editar</a>
+                                        <?php
+                                        if ($datos["estado"] != "Inactivo") { ?>
+                                            <a class="btn btn-danger" style="color:white" onclick="eliminarAviso(<?= $datos['id_aviso']; ?>)" role="button">Eliminar</a><?php
+                                                                                                                                                                    }
+                                                                                                                                                                        ?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+        <!-- Paginación -->
+        <nav>
+            <ul class="pagination justify-content-center mt-3">
+                <?php if ($page > 1) : ?>
+                    <li class="page-item">
+                        <a class="page-link" href="?page=<?php echo $page - 1; ?>">Anterior</a>
+                    </li>
+                <?php endif; ?>
+
+                <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+                    <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
+                        <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                    </li>
+                <?php endfor; ?>
+
+                <?php if ($page < $total_pages) : ?>
+                    <li class="page-item">
+                        <a class="page-link" href="?page=<?php echo $page + 1; ?>">Siguiente</a>
+                    </li>
+                <?php endif; ?>
+            </ul>
+        </nav>
     </div>
-    <!-- Paginación -->
-    <nav>
-        <ul class="pagination justify-content-center mt-3">
-            <?php if ($page > 1): ?>
-                <li class="page-item">
-                    <a class="page-link" href="?page=<?php echo $page - 1; ?>">Anterior</a>
-                </li>
-            <?php endif; ?>
-
-            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
-                    <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                </li>
-            <?php endfor; ?>
-
-            <?php if ($page < $total_pages): ?>
-                <li class="page-item">
-                    <a class="page-link" href="?page=<?php echo $page + 1; ?>">Siguiente</a>
-                </li>
-            <?php endif; ?>
-        </ul>
-    </nav>
-</div>
-
 </body>

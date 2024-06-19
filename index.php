@@ -1,6 +1,5 @@
 <?php
 session_start();
-echo "<script>console.log(" . json_encode($_SESSION['usuario']) . ")</script>";
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +18,7 @@ echo "<script>console.log(" . json_encode($_SESSION['usuario']) . ")</script>";
     <link rel="stylesheet" href="slick/slick-theme.css">
     <link rel="stylesheet" href="css/templatemo-upright.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="includes/style.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@ echo "<script>console.log(" . json_encode($_SESSION['usuario']) . ")</script>";
 
             <!-- Include Navbar -->
             <?php
-            include("includes/navbar.php");
+            include("includes/navbar2.php");
             ?>
 
             <div class="tm-main">

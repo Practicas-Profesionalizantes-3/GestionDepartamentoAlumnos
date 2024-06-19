@@ -12,6 +12,7 @@ $("#formulario").submit(function (event) {
         ubicacion_imagen: $("#ubicacion_imagen").val(),
         id_aviso_estado: $("#id_aviso_estado").val()
     }
+    console.log(aviso)
     $.ajax({
         type: "POST",
         data: JSON.stringify(aviso),
@@ -19,7 +20,7 @@ $("#formulario").submit(function (event) {
         success: function (data) {
             if (data.success == true){
                 console.log("funciono", data)
-                location.href = "../index.php"
+                location.href = "index.php"
             }
             else{
                 console.log("no funciono", data)

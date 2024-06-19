@@ -20,6 +20,7 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
   <link rel="stylesheet" href="../slick/slick-theme.css">
   <link rel="stylesheet" href="../css/templatemo-upright.css">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../includes/style.css">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 
@@ -33,6 +34,7 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
       window.location.href = '../index.php'; // Redirigir al index si no está logueado
     } else {
       var usuario = JSON.parse(sessionStorage.getItem("usuario"));
+      console.log(usuario)
       if (usuario.id_usuario_estado != 1) {
         window.location.href = '../index.php';
       }
@@ -40,9 +42,13 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
 
     $(document).ready(function() {
       var usuario = JSON.parse(sessionStorage.getItem("usuario"));
-      $("#id_usuario").val(usuario.nombre + " " + usuario.apellido); // Establecer el valor del campo id_usuario
+      $("#nombre").val(usuario.nombre + " " + usuario.apellido); // Establecer el valor del campo id_usuario
+      $("#id_usuario").val(usuario.id_usuario);
     });
   </script>
+  <?php
+  include("../includes/navbar2.php");
+  ?>
   <div class="container">
     <div class="card">
 
@@ -54,22 +60,23 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
         <form id="formulario">
           <div class="mb-3">
             <label for="id_usuario" class="form-label">Usuario:</label>
-            <input type="text" class="form-control" name="id_usuario" id="id_usuario" aria-describedby="helpId" placeholder="Usuario" readonly required>
+            <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId" placeholder="Usuario" readonly required>
+            <input type="text" class="form-control" name="id_usuario" id="id_usuario" aria-describedby="helpId" placeholder="Usuario" readonly hidden>
           </div>
           <div class="mb-3">
-              <label for="id_aviso_tipo" class="form-label">Tipo de aviso:</label>
-              <select class="form-control" name="id_aviso_tipo" id="id_aviso_tipo">
-                <?php
-                foreach ($data_aviso_tipos as $aviso_tipo) {
-                ?>
-                  <option value="<?php echo $aviso_tipo["id_aviso_tipo"]; ?>";?>
-                    <?php echo $aviso_tipo["descripcion"]; ?>
-                  </option>
-                <?php
-                }
-                ?>
-              </select>
-            </div>
+            <label for="id_aviso_tipo" class="form-label">Tipo de aviso:</label>
+            <select class="form-control" name="id_aviso_tipo" id="id_aviso_tipo">
+              <?php
+              foreach ($data_aviso_tipos as $aviso_tipo) {
+              ?>
+                <option value="<?php echo $aviso_tipo["id_aviso_tipo"]; ?>" ;?>
+                  <?php echo $aviso_tipo["descripcion"]; ?>
+                </option>
+              <?php
+              }
+              ?>
+            </select>
+          </div>
           <div class="mb-3">
             <label for="titulo" class="form-label">Titulo:</label>
             <input type="text" class="form-control" name="titulo" id="titulo" aria-describedby="helpId" placeholder="Titulo" required>
@@ -99,7 +106,7 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
           </div>
           <div class="mb-3">
             <label for="ubicacion_imagen" class="form-label">Imagen:</label>
-            <input type="text" class="form-control" name="ubicacion_imagen" id="ubicacion_imagen" placeholder="Ubicacion imagen" aria-describedby="fileHelpId" required>
+            <input type="text" class="form-control" name="ubicacion_imagen" id="ubicacion_imagen" placeholder="Ubicacion imagen" aria-describedby="fileHelpId">
           </div>
           <div class="mb-3">
             <label for="id_aviso_estado" class="form-label">Estado del aviso:</label>

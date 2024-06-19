@@ -10,6 +10,10 @@
             $('#loginButton').attr('href', 'login/index.html');
         } else {
             // Si está logueado, mostrar botón de cerrar sesión
+            var usuario = JSON.parse(sessionStorage.getItem("usuario"));
+            if (usuario.id_usuario_estado == 1) {
+                $("#crear_aviso").show();
+            }
             $('#texto').text('Cerrar sesión');
             $('#loginButton').on('click', function(e) {
 
@@ -94,7 +98,7 @@
                 </a>
             </div>
             <!-- CREAR ANUNCIO -->
-            <div class="nav-item dropdown">
+            <div class="nav-item dropdown" id="crear_aviso" style="display: none;">
                 <a href="Abm_Cartelera/index.php" class="nav-link">
                     <div class="triangle-right"></div>
                     <i class="fa-solid fa-receipt nav-icon"></i>
