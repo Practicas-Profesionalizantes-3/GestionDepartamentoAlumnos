@@ -1,3 +1,28 @@
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+    // Verificar sesión con JavaScript
+    var loggedIn = sessionStorage.getItem('loggedIn');
+
+    $(document).ready(function() {
+        if (loggedIn !== 'true') {
+            // Si no está logueado, mostrar botón de inicio de sesión
+            $('#texto').text('Campus');
+            $('#loginButton').attr('href', 'login/index.html');
+        } else {
+            // Si está logueado, mostrar botón de cerrar sesión
+            $('#texto').text('Cerrar sesión');
+            $('#loginButton').on('click', function(e) {
+
+                // Destruir la sesión
+                sessionStorage.removeItem('loggedIn');
+                sessionStorage.removeItem('usuario');
+
+                // Redirigir al usuario a la página de inicio de sesión
+                window.location.href = 'login/index.html';
+            });
+        }
+    });
+</script>
 <!-- Leftside bar -->
 <div id="tm-sidebar" class="tm-sidebar">
     <nav class="tm-nav">
@@ -28,8 +53,8 @@
                     <span class="text-nav" id="text-calendario">Calendario</span>
                 </a>
             </div>
-                <!-- CARTELERA -->
-                <div class="nav-item dropdown">
+            <!-- CARTELERA -->
+            <div class="nav-item dropdown">
                 <a href="cartelera.php" class="nav-link" id="cartelera">
                     <div class="triangle-right"></div>
                     <i class="fa fa-calendar-check-o nav-icon" aria-hidden="true"></i>
@@ -70,7 +95,7 @@
             </div>
             <!-- CREAR ANUNCIO -->
             <div class="nav-item dropdown">
-                <a href="nuevo_evento.html" class="nav-link">
+                <a href="Abm_Cartelera/index.php" class="nav-link">
                     <div class="triangle-right"></div>
                     <i class="fa-solid fa-receipt nav-icon"></i>
                     <span class="text-nav">Crear anuncio</span>
@@ -86,30 +111,13 @@
             </div>
             <!-- CAMPUS VIRTUAL -->
             <div>
-                <?php
-                if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
-                ?>
-                    <div class="nav-item">
-                        <a href="login/index.html" class="nav-link">
-                            <div class="triangle-right"></div>
-                            <i class="fa-solid fa-right-to-bracket nav-icon"></i>
-                            <span id="loginButton" class="text-nav">Campus</span>
-                        </a>
-                    </div>
-                <?php
-                } else {
-                    session_destroy();
-                ?>
-                    <div class="nav-item">
-                        <a href="login/index.html" class="nav-link">
-                            <div class="triangle-right"></div>
-                            <i class="fa-solid fa-right-to-bracket nav-icon"></i>
-                            <span id="loginButton"  class="text-nav">Cerrar sesión</span>
-                        </a>
-                    </div>
-                <?php
-                }
-                ?>
+                <div class="nav-item">
+                    <a id="loginButton" class="nav-link" style="cursor:pointer">
+                        <div class="triangle-right"></div>
+                        <i class="fa-solid fa-right-to-bracket nav-icon" style="color: #006699;"></i>
+                        <span class="text-nav" id="texto" style="color: #006699;">Campus</span>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>

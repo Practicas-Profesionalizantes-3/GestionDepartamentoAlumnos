@@ -1,5 +1,6 @@
 <?php
 session_start();
+echo "<script>console.log(" . json_encode($_SESSION['usuario']) . ")</script>";
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +24,7 @@ session_start();
 <body>
     <div class="container-fluid">
         <div class="row">
+
             <!-- Include Navbar -->
             <?php
             include("includes/navbar.php");
@@ -31,7 +33,6 @@ session_start();
             <div class="tm-main">
                 <!-- Home section -->
                 <div class="tm-section-wrap">
-                    <div class="tm-parallax" data-parallax="scroll" data-image-src="img/img-01.jpg"></div>
                     <!-- Include Cartelera -->
                     <?php
                     $_SESSION['mostrar_opciones_cartelera'] = 'opciones1';

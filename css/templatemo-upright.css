@@ -73,8 +73,8 @@ hr { border-top: 4px solid #CCC; }
 }
 
 .tm-section-wrap {
-	width: calc(100% - 750px);
-	margin-left: 750px;
+	width: calc(100% - 250px);
+	margin-left: 250px;
 	margin-right: 0;
 	position: relative;
 }
@@ -664,14 +664,11 @@ select:not([multiple]) {
 }
 
 @media (max-width: 1400px) {
-	.tm-section-wrap {
-		width: calc(100% - 630px);
-		margin-left: 630px;
-	}
+
 	
 	.cartelera {
 		width: calc(100% - 290px);
-		margin-left: 290px;
+		margin-left: 200px;
 	}
 }
 
@@ -724,13 +721,13 @@ select:not([multiple]) {
 	}
 
 	.tm-section-wrap {
-		width: calc(100% - 280px);
-		margin-left: 280px;		
+		width: 100%;
+		margin-left: 0px;		
 	}
 
 	.cartelera {
 		width: calc(100% - 280px);
-		margin-left: 280px;		
+		margin-left: 200px;		
 	}
 
 	.tm-section {
@@ -758,3 +755,11 @@ select:not([multiple]) {
 		margin-left: 0;
 	}
 }
+.fecha-container {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 10px;
+	font-size: 16px;
+	color: #666;
+  }

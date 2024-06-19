@@ -11,7 +11,7 @@ $("#formulario").submit(function (event) {
     $.ajax({
         type: "POST",
         data: JSON.stringify(usuario),
-        url: "http://localhost/Practicas3/login/registrar.php",
+        url: "http://localhost/GestionDepartamentoAlumnos/login/registrar.php",
         success: function (data) {
             console.log("funciona")
             console.log(data)

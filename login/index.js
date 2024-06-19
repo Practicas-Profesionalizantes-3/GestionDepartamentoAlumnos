@@ -14,6 +14,8 @@ $("#formulario").submit(function (event) {
             ocultarModal();
             if (data.success == true){
                 location.href = "../index.php"
+                sessionStorage.setItem("loggedIn", true);
+                sessionStorage.setItem("usuario", data.data);
             }
             else{
                 $("#errorMessage").show();
