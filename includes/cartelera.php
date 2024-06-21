@@ -17,8 +17,11 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
         $datos = $datos_filtrados;
     }
 }
+
+
 ?>
 
+<link rel="stylesheet" href="includes/style.css">
 <section id="home" class="tm-section">
     <?php
     if (isset($_SESSION['mostrar_opciones_cartelera'])) {
@@ -26,10 +29,11 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
         if ($mostrar_opciones == "opciones1") {
     ?>
             <h2 class="tm-text-primary" style="text-align: center;">Centro de Tecnológia e Innovación</h2>
-    <hr class="mb-5">
+            <hr class="mb-5">
     <?php
         }
     }
+
     ?>
     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
         <h2 class="mb-5"><span class="tm-text-primary">Cartelera de Alumnos - Noticias & Novedades</span></h2>
@@ -42,15 +46,13 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
                     <div class="tm-text-container">
                         <div class="position-relative">
                             <div class="img-container">
-                                <img class="img-fluid w-100" src="img/cartelera/clase.jpeg" alt="">
                                 <div class="overlay">
                                     <div class="mt-2">
-                                        <h5 class="mb-3 titulo"><?php echo htmlspecialchars($item['titulo']); ?></h5>
+                                        <h5 class="mb-3" style="font-size: 40px;"><?php echo htmlspecialchars($item['titulo']); ?></h5>
 
-                                        <p class="text-body"><?php echo htmlspecialchars($item['descripcion']); ?></p>
-                                        <div class="d-flex justify-content-around">
-                                            <p class="rounded py-2 px-4 bg-primary text-light"><?php echo htmlspecialchars($item['fecha_publicacion']); ?></p>
-                                            <p class="rounded py-2 px-4 bg-danger text-light"><?php echo htmlspecialchars($item['fecha_vencimiento']); ?></p>
+                                        <p style="font-size: 25px;"><?php echo htmlspecialchars($item['descripcion']); ?></p>
+                                        <div class="fecha-container">
+                                            <p><?php echo htmlspecialchars($item['fecha_publicacion']); ?></p>
                                         </div>
                                     </div>
                                 </div>

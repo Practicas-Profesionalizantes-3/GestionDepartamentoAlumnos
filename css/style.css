@@ -44,6 +44,7 @@
     position: relative;
     overflow: hidden;
     height: 400px;
+    
 }
 
 .img-fluid{
@@ -56,8 +57,8 @@
     width: 100%;
     height: 100%;
     background: rgb(255, 255, 255);
-    color: white;
-    opacity: 0;
+    color: rgb(0, 0, 0);
+    opacity: 100;
     transition: opacity 0.3s ease;
     display: flex;
     align-items: center;
@@ -87,3 +88,64 @@
     opacity: 1; /* Mostrar el texto al pasar el mouse */
 }
 
+.tm-nav {
+    flex-direction: column; /* Alinear elementos verticalmente */
+    align-items: center; /* Centrar elementos horizontalmente */
+    width: 50px; /* Ancho del nav */
+    margin-left: 20px;
+  }
+  
+  .nav-item {
+    margin-bottom: 10px; /* Espacio entre elementos */
+    width: 50px; /* Ancho del elemento */
+    text-align: center; /* Centrar texto */
+    position: relative; /* Posicionar elemento relativo */
+    
+  }
+  
+  .nav-item.nav-icon {
+    font-size: 24px; /* Tamaño de los iconos */
+    margin-right: 0; /* No espacio entre icono y texto */
+  }
+  
+  .nav-item.text-nav {
+    display: none; /* Ocultar texto por defecto */
+    position: absolute; /* Posicionar texto absoluto */
+    left: 30px; /* Posicionar texto a la derecha del icono */
+    top: 0; /* Posicionar texto al mismo nivel que el icono */
+    background-color: #fff; /* Fondo blanco para el texto */
+    padding: 5px; /* Espacio entre texto y borde */
+    border: 1px solid #ddd; /* Borde para el texto */
+  }
+  
+  .nav-item:hover {
+    width: 150px; /* Ancho del elemento al pasar el mouse */
+  }
+  
+  .nav-item:hover.text-nav {
+    display: block; /* Mostrar texto al pasar el mouse */
+  }
+  .img-logo {
+    margin-left: 20px; /* Agregar un margen de 20px entre el logo y el borde izquierdo de la pantalla */
+  }
+  
+  [data-initials]:before {
+    background: #099bdd;
+    color: white;
+    opacity: 1;
+    content: attr(data-initials);
+    display: inline-block;
+    font-weight: bold;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-left: 0.5em;
+    width: 80px; /* Increased width to 60px */
+    height: 80px; /* Increased height to 60px */
+    line-height: 60px;
+    text-align: center;
+    float: right; /* Alinea el logo a la derecha de la pantalla */
+    margin-right: 20px; 
+    display: flex;
+    justify-content: flex-start; /* Alinea el logo a la izquierda de la pantalla */
+    margin-left: 20px;
+  }

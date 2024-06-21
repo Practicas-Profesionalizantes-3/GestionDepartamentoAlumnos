@@ -27,20 +27,20 @@ $data = json_decode($response, true);
         <div class="row">
             <!-- Include Navbar -->
             <?php
-            include("includes/navbar.php");
+            include("includes/navbar2.php");
             ?>
 
             <div class="cartelera">
                 <!-- Home section -->
-                    <?php
-                    $_SESSION['mostrar_opciones_cartelera'] = 'opciones2';
-                    include("includes/cartelera.php")
-                    ?>
-                    
+                <?php
+                $_SESSION['mostrar_opciones_cartelera'] = 'opciones2';
+                include("includes/cartelera.php")
+                ?>
+
 
 
                 <!-- Include Footer -->
-                <div style="margin-top: 550px;">
+                <div style="margin-top: 550px; margin-left:-26%">
                     <?php
                     include("includes/footer.php")
                     ?>

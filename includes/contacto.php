@@ -1,6 +1,6 @@
 <!-- Contact section -->
-<div class="container mt-4">
-    <div id="contact" style="margin-left: 12px;">
+<div class=" mt-4 contacto">
+    <div id="contact">
         <h2 class="tm-text-primary">Contactanos</h2>
         <hr class="mb-5">
         <div class="row">

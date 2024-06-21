@@ -18,20 +18,21 @@ session_start();
     <link rel="stylesheet" href="slick/slick-theme.css">
     <link rel="stylesheet" href="css/templatemo-upright.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="includes/style.css">
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
+
             <!-- Include Navbar -->
             <?php
-            include("includes/navbar.php");
+            include("includes/navbar2.php");
             ?>
 
             <div class="tm-main">
                 <!-- Home section -->
                 <div class="tm-section-wrap">
-                    <div class="tm-parallax" data-parallax="scroll" data-image-src="img/img-01.jpg"></div>
                     <!-- Include Cartelera -->
                     <?php
                     $_SESSION['mostrar_opciones_cartelera'] = 'opciones1';
