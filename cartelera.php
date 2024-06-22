@@ -20,6 +20,7 @@ $data = json_decode($response, true);
     <link rel="stylesheet" href="slick/slick-theme.css">
     <link rel="stylesheet" href="css/templatemo-upright.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="includes/style.css">
 </head>
 
 <body>
@@ -27,32 +28,30 @@ $data = json_decode($response, true);
         <div class="row">
             <!-- Include Navbar -->
             <?php
-            include("includes/navbar2.php");
+                include("includes/navbar.php");
             ?>
 
-            <div class="cartelera">
+            <div class="tm-main">
                 <!-- Home section -->
-                <?php
-                $_SESSION['mostrar_opciones_cartelera'] = 'opciones2';
-                include("includes/cartelera.php")
-                ?>
-
-
-
-                <!-- Include Footer -->
-                <div style="margin-top: 550px; margin-left:-26%">
+                <div class="tm-section-wrap">
+                    <!-- Include Cartelera -->
                     <?php
-                    include("includes/footer.php")
+                        $_SESSION['mostrar_opciones_cartelera'] = 'opciones2';
+                        include("includes/cartelera.php")
                     ?>
-                </div>
+                </div> <!-- .tm-section-wrap -->
             </div> <!-- .tm-main -->
         </div> <!-- .row -->
     </div> <!-- .container-fluid -->
 
-
+    <!-- Include Footer -->
+    <?php
+        include("includes/footer.php")
+    ?>
 
 
     <script src="js/index.js"></script>
+    <script src="js/navbar.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
     <script src="js/jquery-3.4.1.min.js"></script> <!-- https://jquery.com/ -->
     <script src="js/jquery.singlePageNav.min.js"></script> <!-- https://github.com/ChrisWojcik/single-page-nav -->

@@ -27,7 +27,7 @@ session_start();
 
             <!-- Include Navbar -->
             <?php
-            include("includes/navbar2.php");
+            include("includes/navbar.php");
             ?>
 
             <div class="tm-main">
@@ -38,26 +38,22 @@ session_start();
                     $_SESSION['mostrar_opciones_cartelera'] = 'opciones1';
                     include("includes/cartelera.php")
                     ?>
-
                     <!-- Include Contacto -->
                     <?php
                     include("includes/contacto.php")
                     ?>
-
-
                 </div> <!-- .tm-section-wrap -->
-                <!-- Include Footer -->
-                <?php
-                include("includes/footer.php")
-                ?>
             </div> <!-- .tm-main -->
         </div> <!-- .row -->
     </div> <!-- .container-fluid -->
 
-
-
+    <!-- Include Footer -->
+    <?php
+        include("includes/footer.php")
+    ?>
 
     <script src="js/index.js"></script>
+    <script src="js/navbar.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
     <script src="js/jquery-3.4.1.min.js"></script> <!-- https://jquery.com/ -->
     <script src="js/jquery.singlePageNav.min.js"></script> <!-- https://github.com/ChrisWojcik/single-page-nav -->

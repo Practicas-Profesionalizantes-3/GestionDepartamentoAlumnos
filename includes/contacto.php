@@ -1,6 +1,6 @@
 <!-- Contact section -->
-<div class=" mt-4 contacto">
-    <div id="contact">
+<div class="mt-4">
+    <div>
         <h2 class="tm-text-primary">Contactanos</h2>
         <hr class="mb-5">
         <div class="row">
@@ -19,7 +19,7 @@
                         <textarea rows="8" style="resize: none;" name="message" class="form-control rounded-0" placeholder="Mensaje" required=></textarea>
                     </div>
 
-                    <div class="form-group tm-text-right">
+                    <div class="form-group tm-text-right text-center">
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </div>
                 </form>

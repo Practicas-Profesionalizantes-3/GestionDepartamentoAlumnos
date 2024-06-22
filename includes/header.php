@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../slick/slick-theme.css">
     <link rel="stylesheet" href="../css/templatemo-upright.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="includes/style.css">
 </head>
-
 
     

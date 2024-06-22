@@ -17,12 +17,9 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
         $datos = $datos_filtrados;
     }
 }
-
-
 ?>
 
-<link rel="stylesheet" href="includes/style.css">
-<section id="home" class="tm-section">
+<section>
     <?php
     if (isset($_SESSION['mostrar_opciones_cartelera'])) {
         $mostrar_opciones = $_SESSION['mostrar_opciones_cartelera'];
@@ -43,17 +40,14 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
         <?php if ($datos) : ?>
             <?php foreach ($datos as $item) : ?>
                 <div class="col-lg-6 tm-col-home mb-4 shadow" data-wow-delay="0.1s">
-                    <div class="tm-text-container">
-                        <div class="position-relative">
-                            <div class="img-container">
-                                <div class="overlay">
-                                    <div class="mt-2">
-                                        <h5 class="mb-3" style="font-size: 40px;"><?php echo htmlspecialchars($item['titulo']); ?></h5>
-
-                                        <p style="font-size: 25px;"><?php echo htmlspecialchars($item['descripcion']); ?></p>
-                                        <div class="fecha-container">
-                                            <p><?php echo htmlspecialchars($item['fecha_publicacion']); ?></p>
-                                        </div>
+                    <div class="position-relative">
+                        <div class="img-container">
+                            <div class="overlay">
+                                <div class="mt-2">
+                                    <h5 class="mb-3 cartelera-titulo"><?php echo htmlspecialchars($item['titulo']); ?></h5>
+                                    <p class="cartelera-desc"><?php echo htmlspecialchars($item['descripcion']); ?></p>
+                                    <div class="fecha-container">
+                                        <p><?php echo htmlspecialchars($item['fecha_publicacion']); ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +56,5 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
-
-
     </div> <!--Fin de cartelera.row-->
 </section> <!--Fin de section-->

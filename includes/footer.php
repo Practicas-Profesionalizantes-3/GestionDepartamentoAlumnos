@@ -1,14 +1,14 @@
 <!-- Footer -->
-<div class="footer-widget-area bg-dark mt-3" style="margin-left: 76px;">
+<div class="footer-widget-area bg-dark mt-3">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-6">
                 <div class="single-footer-widget text-light">
-                    <div class="footer-logo">
+                    <div class="footer-logo mb-3">
                         <img src="img/inst.png" alt="logo" class="w-50">
                     </div>
                     <span>Centro de Tecnología e Innovación Avellaneda-Buenos Aires - Argentina</span>
-                    <div class="social-icons">
+                    <div class="social-icons mt-3">
                         <a href="https://www.facebook.com/institutobeltran" target="_blank"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://www.instagram.com/instbeltran/" target="_blank"><i class="fab fa-instagram"></i></a>
                         <a href="https://twitter.com/#!/CentroBeltran" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -16,9 +16,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-4">
+            <div class="col-md-3 col-sm-4 mt-4">
                 <div class="single-footer-widget text-light">
-                    <h2>Contacto</h2>
+                    <h2 class="single-footer-titulo">Contacto</h2>
                     <div class="text-light">
                         <span><i class="fa fa-phone" ></i> (+54.11) 4265.0247 / 4265.0342 / 4203.0222 / 4203.0134</span>
                     </div>
@@ -33,9 +33,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 hidden-sm">
+            <div class="col-md-3 hidden-sm mt-4">
                 <div class="single-footer-widget text-light">
-                    <h2>Enlaces útiles</h2>
+                    <h2 class="single-footer-titulo">Enlaces útiles</h2>
                     <ul class="footer-list">
                         <li><a href="autoridades.php" class="text-light">Autoridades</a></li>
                         <li><a href="inscripcion_telefonica.php" class="text-light">Inscripción Telefonica</a></li>
@@ -51,9 +51,9 @@
 </div> <!-- Fin del Footer -->
 
 <!--Footer Area Start-->
-<footer class="footer-area bg-primary" style="margin-left: 76px;">
+<footer class="footer-widget-area bg-primary">
     <div class="container">
-        <div class="row">
+        <div class="row single-footer-widget">
             <div class="col-md-6 col-sm-7">
                 <span class="text-light">Prohibida la reproducción total ó parcial de imágenes y textos. Todos los derechos reservados.</span>
             </div>
