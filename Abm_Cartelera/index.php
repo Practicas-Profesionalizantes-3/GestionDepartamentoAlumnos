@@ -33,18 +33,16 @@ echo "<script>console.log(" . $response . ")</script>";
     <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="../fontawesome/css/all.min.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../slick/slick.min.css">
-    <link rel="stylesheet" href="../slick/slick-theme.css">
     <link rel="stylesheet" href="../css/templatemo-upright.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../includes/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> <!----===== Boxicons CSS ===== -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
 </head>
 
 <body>
     <?php
-    include("../includes/navbar.php");
+    include("includes/navcartelera.php");
     ?>
     <script>
         var loggedIn = sessionStorage.getItem('loggedIn');
@@ -58,6 +56,7 @@ echo "<script>console.log(" . $response . ")</script>";
             }
         }
     </script>
+    
     <div class="listadoAvisos" style="margin-left: 88px;">
         <div class="card-header">
             <h5 class="card-title text-center">Lista de Avisos</h5>
@@ -87,8 +86,8 @@ echo "<script>console.log(" . $response . ")</script>";
                             <?php foreach ($current_page_avisos as $datos) { ?>
                                 <tr>
                                     <td><?php echo $datos['id_aviso']; ?></td>
-                                    <td><?php echo $datos['id_aviso_tipo']; ?></td>
-                                    <td><?php echo $datos['id_usuario']; ?></td>
+                                    <td><?php echo $datos['aviso_tipo']; ?></td>
+                                    <td><?php echo $datos['usuario']; ?></td>
                                     <td><?php echo $datos['titulo']; ?></td>
                                     <td><?php echo $datos['descripcion']; ?></td>
                                     <td><?php echo $datos['fecha_publicacion']; ?></td>
@@ -96,11 +95,11 @@ echo "<script>console.log(" . $response . ")</script>";
                                     <td><?php echo $datos['adjunto']; ?></td>
                                     <td><?php echo $datos['fijado']; ?></td>
                                     <td><img width="70" src="<?= $datos["ubicacion_imagen"] != "" ? $datos["ubicacion_imagen"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s" ?>" /></td>
-                                    <td><?php echo $datos['id_aviso_estado']; ?></td>
+                                    <td><?php echo $datos['estado']; ?></td>
                                     <td>
                                         <a class="btn btn-info" href="Update.php?id_aviso=<?php echo $datos['id_aviso']; ?>" role="button">Editar</a>
                                         <?php
-                                        if ($datos["id_aviso_estado"] != "Inactivo") { ?>
+                                        if ($datos["estado"] != "Inactivo") { ?>
                                             <a class="btn btn-danger" style="color:white" onclick="eliminarAviso(<?= $datos['id_aviso']; ?>)" role="button">Eliminar</a><?php
                                                                                                                                                                     }
                                                                                                                                                                         ?>
@@ -138,7 +137,7 @@ echo "<script>console.log(" . $response . ")</script>";
 
     <script src="../js/navbar.js"></script>
     <script src="js/delete.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -29,15 +29,24 @@
             <div class="tm-main">
                 <!-- Home section -->
                 <div class="tm-section-wrap">
-                    <!-- Include Cartelera -->
-                    <?php
-                    $_SESSION['mostrar_opciones_cartelera'] = 'opciones1';
-                    include("includes/cartelera.php")
-                    ?>
-                    <!-- Include Contacto -->
-                    <?php
-                    include("includes/contacto.php")
-                    ?>
+                    <h2 class="tm-text-primary">Asistente Virtual</h2>
+                    <hr class="mb-5">
+                    <div class="chatbot-padre">
+                        <div class="chatbot-container">
+                            <div class="chatbot-header">
+                                <h2>Chatbot</h2>
+                            </div>
+                            <div class="chatbot-body" id="chatbot-body">
+                                <div class="chatbot-message bot">
+                                    <p>Hola, en este momento estoy en mantenimiento. Por favor, vuelve más tarde.</p>
+                                </div>
+                            </div>
+                            <div class="chatbot-footer">
+                                <input type="text" id="user-input" placeholder="Escribe un mensaje...">
+                                <button id="send-button"><i class="fa-regular fa-paper-plane"></i></button>
+                            </div>
+                        </div>
+                    </div>
                 </div> <!-- .tm-section-wrap -->
             </div> <!-- .tm-main -->
         </div> <!-- .row -->
@@ -53,3 +62,4 @@
 </body>
 
 </html>
+

@@ -62,58 +62,60 @@ if (isset($_POST['submit'])) {
         }
     }
 }
-
-// Mostrar errores o mensaje de éxito
-if (!empty($errores)) {
-    echo $errores;
-} else {
-    echo $enviado;
-}
 ?>
 
 <!doctype html>
-<html lang="en">
-<head>
-  <title>Instituto Tecnológico Beltran</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body class="img js-fullheight" style="background-image: url(images/4.jpg);">
-  <section class="ftco-section">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-6 text-center mb-5">
-          <h2 class="heading-section">Instituto Tecnológico Beltran </h2>
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-4">
-          <div class="login-wrap p-0">
-            <h3 class="mb-4 text-center"> Reestablecer la Contraseña</h3>
-            <div class="form-container">
-              <form action="recuperar.php" method="post">
-                <div class="form-group">
-                      <input type="email" name="email" id="email" class="form-control" placeholder="Correo Institucional" required>
-                </div>
-                <div class="form-group">
-                  <button type="submit" name="submit" class="form-control btn btn-primary submit px-3 mt-4">Enviar</button>
-                  <a name="" id="" class="form-control btn btn-primary submit px-3 mt-4" href="index.html" role="button">Cancelar</a>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<html lang="es">
 
-  <script src="js/jquery.min.js"></script>
-  <script src="js/popper.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/main.js"></script>
+<head>
+    <title>Instituto Tecnológico Beltran</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="scss/style.css">
+</head>
+
+<body class="img js-fullheight" style="background-image: url(images/4.jpg);">
+    <section class="ftco-section shadow">
+        <div class="login-wrap p-0">
+            <div class="overflow-hidden">
+                <img src="../img/nuevologo.png" alt="Logo" class="login-wrap-img">
+            </div>
+            <hr class="mb-5">
+            <h2>Restablecer Contraseña</h2>
+            <!-- Nuevo contenedor -->
+            <div class="form-container mt-5">
+                <form action="recuperar.php" class="signin-form" id="formulario" method="post">
+                    <div class="form-group">
+                        <input id="username" type="email" class="form-control" placeholder="Email" name="email" required>
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <button type="submit" name="submit" class="form-control btn btn-primary submit px-3 mt-3">Enviar</button>
+                        <button type="button" name="cancelar" class="form-control btn btn-primary submit px-3 mt-2" onclick="window.location.href='index.html'">Cancelar</button>
+                    </div>
+
+                    <!-- Mostrar errores o mensaje de éxito -->
+                    <?php if (!empty($errores)): ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?php echo $errores; ?>
+                        </div>
+                    <?php elseif (!empty($enviado)): ?>
+                        <div class="alert alert-success" role="alert">
+                            <?php echo $enviado; ?>
+                        </div>
+                    <?php endif; ?>
+                </form>
+            </div> <!-- Fin del nuevo contenedor -->
+        </div>
+    </section>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+
 </body>
 </html>

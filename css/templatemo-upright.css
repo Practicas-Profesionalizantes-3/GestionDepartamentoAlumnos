@@ -45,6 +45,7 @@ a:hover {
 
 .tm-text-primary {
 	color: #006699;
+	text-align: center;
 }
 
 .tm-text-secondary {
@@ -83,7 +84,6 @@ hr {
 	margin-right: 0;
 	position: relative;
 }
-
 
 .tm-brand-box {
 	width: 240px;
@@ -225,113 +225,6 @@ hr {
 
 .tm-social-link:hover .fa-youtube {
 	color: #c4302b;
-}
-
-.slick-dots {
-	position: static;
-	margin-top: 50px;
-}
-
-.slick-dots li {
-	width: 24px;
-	margin-bottom: 10px;
-}
-
-.slick-dots li button {
-	width: 24px;
-}
-
-.slick-dots li button:before {
-	font-family: "Font Awesome 5 Free";
-	font-size: 24px;
-	font-weight: 900;
-	content: "\f04d";
-	color: #eee;
-	opacity: 1;
-	width: 24px;
-	height: 24px;
-	transition: all 0.3s ease;
-}
-
-.slick-dots li button:hover:before,
-.slick-dots li button:focus:before,
-.slick-dots li.slick-active button:before {
-	color: #006699;
-}
-
-.tm-carousel {
-	width: 100%;
-	max-width: 1800px;
-	margin-left: -15px;
-	margin-right: -15px;
-}
-
-.tm-carousel-item {
-	padding-left: 15px;
-	padding-right: 15px;
-	max-width: 300px;
-}
-
-.tm-carousel figure {
-	position: relative;
-	float: left;
-	overflow: hidden;
-	background: #3085a3;
-	text-align: center;
-	cursor: pointer;
-	max-width: 270px;
-}
-
-.tm-carousel figure img {
-	position: relative;
-	display: block;
-	min-height: 100%;
-	max-width: 100%;
-	opacity: 0.8;
-}
-
-.tm-carousel figure figcaption {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: #fff;
-	text-transform: uppercase;
-	font-size: 1.25em;
-	-webkit-backface-visibility: hidden;
-	backface-visibility: hidden;
-}
-
-.tm-carousel figure figcaption::before,
-.tm-carousel figure figcaption::after {
-	pointer-events: none;
-}
-
-.tm-carousel figure figcaption,
-.tm-carousel figure figcaption>a {
-	position: absolute;
-	top: 0;
-	left: 0;
-	box-sizing: border-box;
-	width: 100%;
-	height: 100%;
-}
-
-/* Anchor will cover the whole item by default */
-/* For some effects it will show as a button */
-.tm-carousel figure figcaption>a {
-	z-index: 1000;
-	text-indent: 200%;
-	white-space: nowrap;
-	font-size: 0;
-	opacity: 0;
-}
-
-.tm-about-title {
-	font-size: 24px;
-}
-
-.tm-about-subtitle {
-	font-size: 20px;
 }
 
 /* Contact */

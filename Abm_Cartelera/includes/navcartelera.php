@@ -33,7 +33,7 @@
     <header>
         <div class="image-text">
             <span class="image">
-                <img src="img/logo.png" alt="Logo ITB">
+                <img src="../img/logo.png" alt="Logo ITB">
             </span>
 
             <div class="text logo-text">
@@ -47,7 +47,7 @@
     <div class="menu-bar">
         <div class="menu">
             <li class="search-box">
-                <a href="index.php"; return false;>
+                <a href="../index.php"; return false;>
                     <i class='icon fas fa-home nav-icon'></i>
                     <span class="text nav-text">Inicio</span>
                 </a>
@@ -59,7 +59,7 @@
                 </a>
             </li>
             <li class="search-box">
-                <a href="cartelera.php">
+                <a href="../cartelera.php">
                     <i class='bx bxs-news icon'></i>
                     <span class="text nav-text">Cartelera</span>
                 </a>
@@ -83,13 +83,13 @@
                 </a>
             </li>
             <li class="search-box">
-                <a href="chatbot.php">
+                <a href="../chatbot.php">
                     <i class='icon fas fa-comments nav-icon'></i>
                     <span class="text nav-text">Chat</span>
                 </a>
             </li>
             <li class="search-box">
-                <a href="Abm_Cartelera/index.php">
+                <a href="index.php">
                     <i class='bx bx-add-to-queue icon'></i>
                     <span class="text nav-text">Crear anuncio</span>
                 </a>
@@ -97,7 +97,7 @@
         </div>
         <div class="bottom-content">
             <li class="">
-                <a href="login/index.html"id="loginButton" style="margin-top: -48px; cursor:pointer">
+                <a href="../login/index.html"id="loginButton" style="margin-top: -48px; cursor:pointer">
                     <i class='bx bx-log-out icon'></i>
                     <span class="text nav-text" id="texto">Campus</span>
                 </a>
