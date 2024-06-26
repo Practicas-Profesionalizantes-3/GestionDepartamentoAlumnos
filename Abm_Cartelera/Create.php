@@ -95,7 +95,7 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
           </div>
           <div class="mb-3">
             <label for="adjunto" class="form-label">Adjunto:</label>
-            <input type="text" class="form-control" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto" required>
+            <input type="file" accept=".pdf" class="form-control" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto">
           </div>
           <div class="mb-3">
             <label for="fijado" class="form-label">Fijado:</label>
@@ -105,8 +105,8 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
             </select>
           </div>
           <div class="mb-3">
-            <label for="ubicacion_imagen" class="form-label">Imagen:</label>
-            <input type="text" class="form-control" name="ubicacion_imagen" id="ubicacion_imagen" placeholder="Ubicacion imagen" aria-describedby="fileHelpId">
+            <label for="imagen" class="form-label">Imagen:</label>
+            <input type="file" accept="image/jpeg, image/png" class="form-control" name="imagen" id="imagen" placeholder="Imagen" aria-describedby="fileHelpId">
           </div>
           <div class="mb-3">
             <label for="id_aviso_estado" class="form-label">Estado del aviso:</label>

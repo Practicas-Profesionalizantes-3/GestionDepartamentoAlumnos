@@ -6,7 +6,7 @@
     <!----======== CSS ======== -->
     <!----===== Boxicons CSS ===== -->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/gestiondepartamentoalumnos/fontawesome/css/all.min.css">
     <!--<title>Dashboard Sidebar Menu</title>-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
@@ -44,7 +44,7 @@
         <header>
             <div class="image-text">
                 <span class="image">
-                    <img src="/web/img/ITB.png" alt="Logo ITB">
+                    <img src="/gestiondepartamentoalumnos/img/ITB.png" alt="Logo ITB">
                 </span>
 
                 <div class="text logo-text">
@@ -61,7 +61,7 @@
             <div class="menu">
 
                 <li class="search-box">
-                    <a href="/web/index.php"; return false;">
+                    <a href="/gestiondepartamentoalumnos/index.php"; return false;">
                         <i class='icon fas fa-home nav-icon'></i>
                         <span class="text nav-text">Inicio</span>
                     </a>
@@ -73,7 +73,7 @@
                     </a>
                 </li>
                 <li class="search-box">
-                    <a href="/web/cartelera.php">
+                    <a href="/gestiondepartamentoalumnos/cartelera.php">
                         <i class='bx bxs-news icon' style="font-size:100%"></i>
                         <span class="text nav-text" style="padding-left: 8%;">Cartelera</span>
                     </a>
@@ -102,8 +102,8 @@
                         <span class="text nav-text">Chat</span>
                     </a>
                 </li>
-                <li class="search-box">
-                    <a href="/web/Abm_Cartelera/index.php">
+                <li class="search-box" style="display: none;" id="crear_aviso">
+                    <a href="/gestiondepartamentoalumnos/Abm_Cartelera/index.php">
                         <i class='bx bx-add-to-queue icon' style="font-size: 100%;"></i>
                         <span class="text nav-text" style="padding-left: 8%;">Crear anuncio</span>
                     </a>

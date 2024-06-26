@@ -115,7 +115,7 @@ include('../includes/header.php');
             </div>
             <div class="mb-3">
               <label for="adjunto" class="form-label">Adjunto:</label>
-              <input type="text" class="form-control" value="<?php echo $aviso['adjunto']; ?>" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto">
+              <input type="file" accept=".pdf" class="form-control" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto">
             </div>
             <div class="mb-3">
               <label for="fijado" class="form-label">Fijado:</label>
@@ -125,12 +125,8 @@ include('../includes/header.php');
               </select>
             </div>
             <div class="mb-3">
-              <label for="ubicacion_imagen" class="form-label">Imagen:</label>
-              <?php if (isset($aviso['ubicacion_imagen'])) { ?>
-                <input type="text" class="form-control" name="ubicacion_imagen" id="ubicacion_imagen" placeholder="Ubicacion imagen" aria-describedby="fileHelpId" value="<?php echo $aviso['ubicacion_imagen']; ?>">
-              <?php } else { ?>
-                <input type="text" class="form-control" name="ubicacion_imagen" id="ubicacion_imagen" placeholder="Ubicacion imagen" aria-describedby="fileHelpId">
-              <?php } ?>
+              <label for="imagen" class="form-label">Imagen:</label>
+              <input type="file" accept="image/png, image/jpeg" class="form-control" name="imagen" id="imagen" placeholder="Imagen" aria-describedby="fileHelpId" >
             </div>
             <div class="mb-3">
               <label for="id_aviso_estado" class="form-label">Estado del aviso:</label>

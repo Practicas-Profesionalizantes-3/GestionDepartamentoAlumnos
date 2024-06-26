@@ -251,15 +251,14 @@
         </div>
     </footer> <!--End of Footer Area-->
 
-    <script src="js/app.js"></script>
+    <script src="/gestiondepartamentoalumnos/js/app.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
-    <script src="js/jquery-3.4.1.min.js"></script>          <!-- https://jquery.com/ -->
-    <script src="js/jquery.singlePageNav.min.js"></script>  <!-- https://github.com/ChrisWojcik/single-page-nav -->
-    <script src="js/parallax/parallax.min.js"></script>     <!-- https://pixelcog.github.io/parallax.js/ -->
-    <script src="js/imagesloaded.pkgd.min.js"></script>     <!-- https://imagesloaded.desandro.com/ -->
-    <script src="js/isotope.pkgd.min.js"></script>          <!-- https://isotope.metafizzy.co/ -->
-    <script src="js/jquery.magnific-popup.min.js"></script> <!-- https://dimsemenov.com/plugins/magnific-popup/ -->
-    <script src="slick/slick.min.js"></script>              <!-- https://kenwheeler.github.io/slick/ -->
-    <script src="js/templatemo-script.js"></script> 
+    <script src="/gestiondepartamentoalumnos/js/jquery-3.4.1.min.js"></script>          <!-- https://jquery.com/ -->
+    <script src="/gestiondepartamentoalumnos/js/parallax/parallax.min.js"></script>     <!-- https://pixelcog.github.io/parallax.js/ -->
+    <script src="/gestiondepartamentoalumnos/js/imagesloaded.pkgd.min.js"></script>     <!-- https://imagesloaded.desandro.com/ -->
+    <script src="/gestiondepartamentoalumnos/js/isotope.pkgd.min.js"></script>          <!-- https://isotope.metafizzy.co/ -->
+    <script src="/gestiondepartamentoalumnos/js/jquery.magnific-popup.min.js"></script> <!-- https://dimsemenov.com/plugins/magnific-popup/ -->
+    <script src="/gestiondepartamentoalumnos/slick/slick.min.js"></script>              <!-- https://kenwheeler.github.io/slick/ -->
+    <script src="/gestiondepartamentoalumnos/js/templatemo-script.js"></script> 
 </body>
 </html> 

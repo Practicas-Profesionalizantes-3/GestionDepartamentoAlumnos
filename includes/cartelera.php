@@ -4,24 +4,28 @@ $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
 $response = file_get_contents($api_url);
 $data = json_decode($response, true);
 $datos = $data;
-if (isset($_SESSION['mostrar_opciones_cartelera'])) {
-    $mostrar_opciones = $_SESSION['mostrar_opciones_cartelera'];
-    if ($mostrar_opciones == "opciones1") {
 
-        $fecha_actual = date('Y-m-d');
-        $datos_filtrados = array_filter($data, function ($item) use ($fecha_actual) {
-            return isset($item['fecha_vencimiento']) && $item['fecha_vencimiento'] >= $fecha_actual;
-        });
+echo "<script>console.log(".$response.")</script>";
+// $fecha_actual = date('Y-m-d');
+// $datos_filtrados = array_filter($data, function ($item) use ($fecha_actual) {
+//     return (isset($item['fecha_vencimiento']) && $item['fecha_vencimiento'] >= $fecha_actual) && ($item["estado"] != "Inactivo");
+// });
 
-        $datos_filtrados = array_slice($datos_filtrados, 0, 4);
-        $datos = $datos_filtrados;
-    }
-}
+// $datos = $datos_filtrados;
+// if (isset($_SESSION['mostrar_opciones_cartelera'])) {
+//     $mostrar_opciones = $_SESSION['mostrar_opciones_cartelera'];
+//     if ($mostrar_opciones == "opciones1") {
+
+
+//         $datos_filtrados = array_slice($datos_filtrados, 0, 4);
+//         $datos = $datos_filtrados;
+//     }
+// }
 
 
 ?>
 
-<link rel="stylesheet" href="includes/style.css">
+<link rel="stylesheet" href="/gestiondepartamentoalumnos/includes/style.css">
 <section id="home" class="tm-section">
     <?php
     if (isset($_SESSION['mostrar_opciones_cartelera'])) {
@@ -64,5 +68,5 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
         <?php endif; ?>
 
 
-    </div> <!--Fin de cartelera.row-->
-</section> <!--Fin de section-->
+    </div> 
+</section> 
