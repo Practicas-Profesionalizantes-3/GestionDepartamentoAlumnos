@@ -3,20 +3,24 @@ document.addEventListener('DOMContentLoaded', function () {
     const userInput = document.getElementById('user-input');
     const chatbotBody = document.getElementById('chatbot-body');
 
-    sendButton.addEventListener('click', function () {
-        const userMessage = userInput.value.trim();
-        if (userMessage !== "") {
-            addUserMessage(userMessage);
-            addBotResponse(userMessage);
-            userInput.value = "";
-        }
-    });
+    if(sendButton != null){
+        sendButton.addEventListener('click', function () {
+            const userMessage = userInput.value.trim();
+            if (userMessage !== "") {
+                addUserMessage(userMessage);
+                addBotResponse(userMessage);
+                userInput.value = "";
+            }
+        });
+    }
 
-    userInput.addEventListener('keypress', function (event) {
-        if (event.key === 'Enter') {
-            sendButton.click();
-        }
-    });
+    if(userInput != null){
+        userInput.addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                sendButton.click();
+            }
+        });
+    }
 
     function addUserMessage(message) {
         const messageElement = document.createElement('div');

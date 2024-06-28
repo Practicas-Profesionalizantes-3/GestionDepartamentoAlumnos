@@ -4,15 +4,15 @@ $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
 $response = file_get_contents($api_url);
 $data = json_decode($response, true);
 $datos = $data;
+$fecha_actual = date('Y-m-d');
+$datos_filtrados = array_filter($data, function ($item) use ($fecha_actual) {
+    return ($item['fecha_vencimiento'] >= $fecha_actual) && ($item["estado"] != "Inactivo");
+});
+
+$datos = $datos_filtrados;
 if (isset($_SESSION['mostrar_opciones_cartelera'])) {
     $mostrar_opciones = $_SESSION['mostrar_opciones_cartelera'];
     if ($mostrar_opciones == "opciones1") {
-
-        $fecha_actual = date('Y-m-d');
-        $datos_filtrados = array_filter($data, function ($item) use ($fecha_actual) {
-            return isset($item['fecha_vencimiento']) && $item['fecha_vencimiento'] >= $fecha_actual;
-        });
-
         $datos_filtrados = array_slice($datos_filtrados, 0, 4);
         $datos = $datos_filtrados;
     }
@@ -47,7 +47,7 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
                                     <h5 class="mb-3 cartelera-titulo"><?php echo htmlspecialchars($item['titulo']); ?></h5>
                                     <p class="cartelera-desc"><?php echo htmlspecialchars($item['descripcion']); ?></p>
                                     <div class="fecha-container">
-                                        <p><?php echo htmlspecialchars($item['fecha_publicacion']); ?></p>
+                                        <p><?php echo htmlspecialchars($item['fecha_publicacion']) . "/" . htmlspecialchars($item['fecha_vencimiento']); ?></p>
                                     </div>
                                 </div>
                             </div>

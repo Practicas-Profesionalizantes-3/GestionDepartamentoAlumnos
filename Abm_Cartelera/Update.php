@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
 
 $response = file_get_contents($api_url);
@@ -19,7 +17,7 @@ echo "<script>
   console.log(" . json_encode($aviso) . ")
 </script>";
 
-$combo_aviso_tipo_url = "http://localhost/api/api-Alumnos/cartelera.php?action=aviso_tipos";
+$combo_aviso_tipo_url = "http://localhost/api/api-Alumnos/aviso_tipo.php";
 $response_aviso_tipos = file_get_contents($combo_aviso_tipo_url);
 $data_aviso_tipos = json_decode($response_aviso_tipos, true);
 
@@ -48,7 +46,7 @@ if (!$aviso) {
 
 <body>
   <?php
-  include("includes/navcartelera.php");
+  include("../includes/navbar.php");
   ?>
   <script>
     var loggedIn = sessionStorage.getItem('loggedIn');
@@ -82,7 +80,7 @@ if (!$aviso) {
                 <?php
                 foreach ($data_aviso_tipos as $aviso_tipo) {
                 ?>
-                  <option value="<?php echo $aviso_tipo["id_aviso_tipo"]; ?>" <?= $aviso_tipo["descripcion"] == $aviso["estado"] ? 'selected="selected"' : ''; ?>>
+                  <option value="<?php echo $aviso_tipo["id_aviso_tipo"]; ?>" <?= $aviso_tipo["descripcion"] == $aviso["aviso_tipo"] ? 'selected="selected"' : ''; ?>>
                     <?php echo $aviso_tipo["descripcion"]; ?>
                   </option>
                 <?php
@@ -112,7 +110,7 @@ if (!$aviso) {
             </div>
             <div class="mb-3">
               <label for="adjunto" class="form-label">Adjunto:</label>
-              <input type="text" class="form-control" value="<?php echo $aviso['adjunto']; ?>" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto">
+              <input type="file" accept=".pdf" class="form-control" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto">
             </div>
             <div class="mb-3">
               <label for="fijado" class="form-label">Fijado:</label>
@@ -122,12 +120,8 @@ if (!$aviso) {
               </select>
             </div>
             <div class="mb-3">
-              <label for="ubicacion_imagen" class="form-label">Imagen:</label>
-              <?php if (isset($aviso['ubicacion_imagen'])) { ?>
-                <input type="text" class="form-control" name="ubicacion_imagen" id="ubicacion_imagen" placeholder="Ubicacion imagen" aria-describedby="fileHelpId" value="<?php echo $aviso['ubicacion_imagen']; ?>">
-              <?php } else { ?>
-                <input type="text" class="form-control" name="ubicacion_imagen" id="ubicacion_imagen" placeholder="Ubicacion imagen" aria-describedby="fileHelpId">
-              <?php } ?>
+              <label for="imagen" class="form-label">Imagen:</label>
+              <input type="file" accept="image/png, image/jpeg" class="form-control" name="imagen" id="imagen" placeholder="Imagen" aria-describedby="fileHelpId" >
             </div>
             <div class="mb-3">
               <label for="id_aviso_estado" class="form-label">Estado del aviso:</label>

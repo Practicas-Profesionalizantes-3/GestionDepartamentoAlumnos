@@ -42,7 +42,7 @@ echo "<script>console.log(" . $response . ")</script>";
 
 <body>
     <?php
-    include("includes/navcartelera.php");
+    include("../includes/navbar.php");
     ?>
     <script>
         var loggedIn = sessionStorage.getItem('loggedIn');
@@ -87,22 +87,25 @@ echo "<script>console.log(" . $response . ")</script>";
                                 <tr>
                                     <td><?php echo $datos['id_aviso']; ?></td>
                                     <td><?php echo $datos['aviso_tipo']; ?></td>
-                                    <td><?php echo $datos['usuario']; ?></td>
+                                    <td><?php echo $datos['id_usuario']; ?></td>
                                     <td><?php echo $datos['titulo']; ?></td>
                                     <td><?php echo $datos['descripcion']; ?></td>
                                     <td><?php echo $datos['fecha_publicacion']; ?></td>
                                     <td><?php echo $datos['fecha_vencimiento']; ?></td>
-                                    <td><?php echo $datos['adjunto']; ?></td>
+                                    <td><?php if($datos["adjunto"] != ""){ ?>
+                                    <a href="data:application/pdf;base64,<?= $datos["adjunto"]; ?>" download="<?= htmlspecialchars($datos["titulo"]); ?>">Descargar adjunto</a>
+                                    <?php } else {?>
+                                        No
+                                        <?php } ?>
+                                    </td>
                                     <td><?php echo $datos['fijado']; ?></td>
-                                    <td><img width="70" src="<?= $datos["ubicacion_imagen"] != "" ? $datos["ubicacion_imagen"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s" ?>" /></td>
+                                    <td><img width="70" src="<?= $datos["imagen"] != "" ? "data:image/jpeg;base64," . $datos["imagen"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s" ?>" /></td>
                                     <td><?php echo $datos['estado']; ?></td>
                                     <td>
                                         <a class="btn btn-info" href="Update.php?id_aviso=<?php echo $datos['id_aviso']; ?>" role="button">Editar</a>
                                         <?php
                                         if ($datos["estado"] != "Inactivo") { ?>
-                                            <a class="btn btn-danger" style="color:white" onclick="eliminarAviso(<?= $datos['id_aviso']; ?>)" role="button">Eliminar</a><?php
-                                                                                                                                                                    }
-                                                                                                                                                                        ?>
+                                            <a class="btn btn-danger" style="color:white" onclick="eliminarAviso(<?= $datos['id_aviso']; ?>)" role="button">Eliminar</a><?php } ?>
                                     </td>
                                 </tr>
                             <?php } ?>

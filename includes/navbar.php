@@ -27,13 +27,14 @@
             }
         });
     </script>
+
 </head>
 
 <nav class="sidebar close">
     <header>
         <div class="image-text">
             <span class="image">
-                <img src="img/logo.png" alt="Logo ITB">
+                <img src="/gestiondepartamentoalumnos/img/logo.png" alt="Logo ITB">
             </span>
 
             <div class="text logo-text">
@@ -47,7 +48,7 @@
     <div class="menu-bar">
         <div class="menu">
             <li class="search-box">
-                <a href="index.php"; return false;>
+                <a href="/gestiondepartamentoalumnos/index.php" ; return false;>
                     <i class='icon fas fa-home nav-icon'></i>
                     <span class="text nav-text">Inicio</span>
                 </a>
@@ -59,7 +60,7 @@
                 </a>
             </li>
             <li class="search-box">
-                <a href="cartelera.php">
+                <a href="/gestiondepartamentoalumnos/cartelera.php">
                     <i class='bx bxs-news icon'></i>
                     <span class="text nav-text">Cartelera</span>
                 </a>
@@ -83,21 +84,21 @@
                 </a>
             </li>
             <li class="search-box">
-                <a href="chatbot.php">
+                <a href="/gestiondepartamentoalumnos/chatbot.php">
                     <i class='icon fas fa-comments nav-icon'></i>
                     <span class="text nav-text">Chat</span>
                 </a>
             </li>
-            <li class="search-box">
-                <a href="Abm_Cartelera/index.php">
-                    <i class='bx bx-add-to-queue icon'></i>
-                    <span class="text nav-text">Crear anuncio</span>
+            <li class="search-box" style="display: none;" id="crear_aviso">
+                <a href="/gestiondepartamentoalumnos/Abm_Cartelera/index.php">
+                    <i class='bx bx-add-to-queue icon' style="font-size: 100%;"></i>
+                    <span class="text nav-text" style="padding-left: 8%;">Crear anuncio</span>
                 </a>
             </li>
         </div>
         <div class="bottom-content">
             <li class="">
-                <a href="login/index.html"id="loginButton" style="margin-top: -48px; cursor:pointer">
+                <a href="/gestiondepartamentoalumnos/login/index.html" id="loginButton" style="margin-top: -48px; cursor:pointer">
                     <i class='bx bx-log-out icon'></i>
                     <span class="text nav-text" id="texto">Campus</span>
                 </a>
@@ -105,3 +106,18 @@
         </div>
     </div>
 </nav>
+
+<script>
+    const body = document.querySelector('body'),
+        sidebar = body.querySelector('nav'),
+        toggle = body.querySelector(".toggle"),
+        searchBtn = body.querySelector(".search-box"),
+        //   modeSwitch = body.querySelector(".toggle-switch"),
+        modeText = body.querySelector(".mode-text");
+    toggle.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+    })
+    searchBtn.addEventListener("click", () => {
+        sidebar.classList.remove("close");
+    })
+</script>

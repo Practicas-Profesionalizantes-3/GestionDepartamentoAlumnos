@@ -1,7 +1,5 @@
 <?php
-session_start();
-
-$combo_aviso_tipo_url = "http://localhost/api/api-Alumnos/cartelera.php?action=aviso_tipos";
+$combo_aviso_tipo_url = "http://localhost/api/api-Alumnos/aviso_tipo.php";
 $response_aviso_tipos = file_get_contents($combo_aviso_tipo_url);
 $data_aviso_tipos = json_decode($response_aviso_tipos, true);
 ?>
@@ -14,18 +12,15 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
     <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/templatemo-upright.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="/gestiondepartamentoalumnos/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/gestiondepartamentoalumnos/css/templatemo-upright.css">
+    <link rel="stylesheet" href="/gestiondepartamentoalumnos/css/style.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> <!----===== Boxicons CSS ===== -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
 </head>
 
 <body>
-  <?php
-  include("includes/navcartelera.php");
-  ?>
-  <script>
+<script>
     var loggedIn = sessionStorage.getItem('loggedIn');
     if (!loggedIn) {
       window.location.href = '../index.php'; // Redirigir al index si no está logueado
@@ -43,6 +38,9 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
       $("#id_usuario").val(usuario.id_usuario);
     });
   </script>
+  <?php
+  include("../includes/navbar.php");
+  ?>
   <div class="container">
     <div class="card">
 
@@ -89,7 +87,7 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
           </div>
           <div class="mb-3">
             <label for="adjunto" class="form-label">Adjunto:</label>
-            <input type="text" class="form-control" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto" required>
+            <input type="file" accept=".pdf" class="form-control" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto">
           </div>
           <div class="mb-3">
             <label for="fijado" class="form-label">Fijado:</label>
@@ -99,8 +97,8 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
             </select>
           </div>
           <div class="mb-3">
-            <label for="ubicacion_imagen" class="form-label">Imagen:</label>
-            <input type="text" class="form-control" name="ubicacion_imagen" id="ubicacion_imagen" placeholder="Ubicacion imagen" aria-describedby="fileHelpId">
+            <label for="imagen" class="form-label">Imagen:</label>
+            <input type="file" accept="image/jpeg, image/png" class="form-control" name="imagen" id="imagen" placeholder="Imagen" aria-describedby="fileHelpId">
           </div>
           <div class="mb-3">
             <label for="id_aviso_estado" class="form-label">Estado del aviso:</label>
@@ -119,12 +117,10 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
     </div>
   </div>
 
-  <script src="../js/navbar.js"></script>
   <script src="js/create.js"></script>
   <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
   <script src="js/jquery.min.js"></script>
   <script src="js/popper.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/main.js"></script>
-
 </body>
