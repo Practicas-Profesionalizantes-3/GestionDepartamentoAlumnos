@@ -52,6 +52,9 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
                                     <div class="fecha-container">
                                         <p><?php echo htmlspecialchars($item['fecha_publicacion']) . "/" . htmlspecialchars($item['fecha_vencimiento']); ?></p>
                                     </div>
+                                    <div class="descargar-adjunto">
+                                        <a href="data:application/pdf;base64,<?= $item["adjunto"]; ?>" download="<?= htmlspecialchars($item["titulo"]); ?>">Descargar adjunto</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

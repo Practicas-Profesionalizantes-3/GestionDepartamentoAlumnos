@@ -346,6 +346,13 @@ select:not([multiple]) {
 	color: #666;
 }
 
+.descargar-adjunto{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	font-size: 16px;
+	margin: 5px;
+}
 /* Footer area */
 .footer-widget-area{
 	margin-left: 88px;
