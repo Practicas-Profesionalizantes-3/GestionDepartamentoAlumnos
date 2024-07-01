@@ -19,7 +19,7 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
 }
 ?>
 
-<section>
+<section class="container-md">
     <?php
     if (isset($_SESSION['mostrar_opciones_cartelera'])) {
         $mostrar_opciones = $_SESSION['mostrar_opciones_cartelera'];
@@ -41,9 +41,12 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
             <?php foreach ($datos as $item) : ?>
                 <div class="col-lg-6 tm-col-home mb-4 shadow" data-wow-delay="0.1s">
                     <div class="position-relative">
+                        <div class="img-cartelera">
+                            <img class="img-cartelera-item" src="<?= $item["imagen"] != "" ? "data:image/jpeg;base64," . $item["imagen"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s" ?>" />
+                        </div>
                         <div class="img-container">
                             <div class="overlay">
-                                <div class="mt-2">
+                                <div>
                                     <h5 class="mb-3 cartelera-titulo"><?php echo htmlspecialchars($item['titulo']); ?></h5>
                                     <p class="cartelera-desc"><?php echo htmlspecialchars($item['descripcion']); ?></p>
                                     <div class="fecha-container">

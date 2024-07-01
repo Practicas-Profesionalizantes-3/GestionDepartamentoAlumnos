@@ -12,25 +12,46 @@ $("#formulario").submit(function (event) {
     formData.append('fijado', $("#fijado").val());
     formData.append('imagen', $("#imagen")[0].files[0]);
     formData.append('id_aviso_estado', $("#id_aviso_estado").val());
+
     for (var pair of formData.entries()) {
         console.log(pair[0] + ': ' + pair[1]);
     }
-    $.ajax({
-        type: "POST",
-        url: "http://localhost/api/api-Alumnos/cartelera.php",
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function (data) {
-            if (data.success == true) {
-                console.log("funciono", data);
-                location.href = "index.php";
-            } else {
-                console.log("no funciono", data);
+
+    if (descripcion.value === "" || titulo.value === "" || imagen.value === "" || adjunto.value === "") {
+        Toastify({
+            text: "⚠️ Faltan datos por completar ⚠️",
+            duration: 1500,
+            gravity: "top",
+            style: {
+                background: "#c41e1e",
+                color: "#fff"
             }
-        },
-        error: function (errorThrown) {
-            console.log("error", errorThrown);
-        }
-    });
+        }).showToast()
+    } else{
+        $.ajax({
+            type: "POST",
+            url: "http://localhost/api/api-Alumnos/cartelera.php",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                if (data.success == true) {
+                    console.log("funciono", data);
+                    Swal.fire({
+                        title: "Su aviso fue creado con exito!",
+                        confirmButtonColor: "#006699",
+                        icon: "success",
+                        iconColor: "#118911",
+                    }).then(() => {
+                        location.href = "index.php";
+                    });
+                } else {
+                    console.log("no funciono", data);
+                }
+            },
+            error: function (errorThrown) {
+                console.log("error", errorThrown);
+            }
+        });
+    }
 });

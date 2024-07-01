@@ -28,25 +28,44 @@ $("#formulario").submit(async function (event) {
         id_aviso_estado: $("#id_aviso_estado").val()
     };
 
-    $.ajax({
-        type: "PUT",
-        url: "http://localhost/api/api-Alumnos/cartelera.php",
-        data: JSON.stringify(aviso),
-        contentType: "application/json",
-        dataType: "json",
-        success: function (data) {
-            console.log(data)
-            if (data.success == true) {
-                console.log("funciono", data);
-                location.href = "index.php";
-            } else {
-                console.log("no funciono", data);
+    if (!aviso.titulo || !aviso.descripcion || !aviso.imagen || !aviso.adjunto) {
+        Toastify({
+            text: "⚠️ Faltan datos por completar ⚠️",
+            duration: 1500,
+            gravity: "top",
+            style: {
+                background: "#c41e1e",
+                color: "#fff"
             }
-        },
-        error: function (errorThrown) {
-            console.log("error", errorThrown);
-        }
-    });
+        }).showToast()
+    } else{
+        $.ajax({
+            type: "PUT",
+            url: "http://localhost/api/api-Alumnos/cartelera.php",
+            data: JSON.stringify(aviso),
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+                if (data.success == true) {
+                    console.log("funciono", data);
+                    Swal.fire({
+                        title: "Su aviso fue modificado con exito!",
+                        confirmButtonColor: "#006699",
+                        icon: "success",
+                        iconColor: "#118911",
+                    }).then(() => {
+                        location.href = "index.php";
+                    });
+                } else {
+                    console.log("no funciono", data);
+                }
+            },
+            error: function (errorThrown) {
+                console.log("error", errorThrown);
+            }
+        });
+    }
     function toBase64(file) {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();

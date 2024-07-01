@@ -91,8 +91,8 @@
             </li>
             <li class="search-box" style="display: none;" id="crear_aviso">
                 <a href="/gestiondepartamentoalumnos/Abm_Cartelera/index.php">
-                    <i class='bx bx-add-to-queue icon' style="font-size: 100%;"></i>
-                    <span class="text nav-text" style="padding-left: 8%;">Crear anuncio</span>
+                    <i class='bx bx-add-to-queue icon'></i>
+                    <span class="text nav-text">Crear anuncio</span>
                 </a>
             </li>
         </div>

@@ -5,6 +5,8 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
 ?>
 <?php ?>
 
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,10 +19,13 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
     <link rel="stylesheet" href="/gestiondepartamentoalumnos/css/style.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> <!----===== Boxicons CSS ===== -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"> <!-- Toastify CSS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script> <!-- Toastify JS-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  <!-- SwettAlert -->
 </head>
 
 <body>
-<script>
+  <script>
     var loggedIn = sessionStorage.getItem('loggedIn');
     if (!loggedIn) {
       window.location.href = '../index.php'; // Redirigir al index si no está logueado
@@ -38,9 +43,11 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
       $("#id_usuario").val(usuario.id_usuario);
     });
   </script>
+
   <?php
   include("../includes/navbar.php");
   ?>
+
   <div class="container">
     <div class="card">
 
@@ -71,19 +78,19 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
           </div>
           <div class="mb-3">
             <label for="titulo" class="form-label">Titulo:</label>
-            <input type="text" class="form-control" name="titulo" id="titulo" aria-describedby="helpId" placeholder="Titulo" required>
+            <input type="text" class="form-control" name="titulo" id="titulo" aria-describedby="helpId" placeholder="Titulo">
           </div>
           <div class="mb-3">
             <label for="descripcion" class="form-label">Descripcion:</label>
-            <input type="text" class="form-control" name="descripcion" id="descripcion" aria-describedby="helpId" placeholder="Descripcion" required>
+            <input type="text" class="form-control" name="descripcion" id="descripcion" aria-describedby="helpId" placeholder="Descripcion">
           </div>
           <div class="mb-3">
             <label for="fecha_publicacion" class="form-label">Fecha de Publicacion:</label>
-            <input type="date" class="form-control" name="fecha_publicacion" id="fecha_publicacion" aria-describedby="helpId" placeholder="Fecha de Publicacion" required value="2024-06-19">
+            <input type="date" class="form-control" name="fecha_publicacion" id="fecha_publicacion" aria-describedby="helpId" placeholder="Fecha de Publicacion" required value="<?php $hoy = date("Y-m-d"); echo $hoy; ?>">
           </div>
           <div class="mb-3">
             <label for="fecha_vencimiento" class="form-label">Fecha de Vencimiento:</label>
-            <input type="date" class="form-control" name="fecha_vencimiento" id="fecha_vencimiento" aria-describedby="helpId" placeholder="Fecha de Vencimiento" required value="2024-06-19">
+            <input type="date" class="form-control" name="fecha_vencimiento" id="fecha_vencimiento" aria-describedby="helpId" placeholder="Fecha de Vencimiento" required value="<?php $hoy = date("Y-m-d"); echo $hoy; ?>">
           </div>
           <div class="mb-3">
             <label for="adjunto" class="form-label">Adjunto:</label>
@@ -108,7 +115,7 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
             </select>
           </div>
 
-          <button type="submit" class="btn btn-success">Agregar</button>
+          <button type="submit" class="btn btn-success" id="agregar-anuncio">Agregar</button>
           <button type="submit" class="btn btn-info" onclick="location.href='index.php'">Cancelar</button>
         </form>
       </div>
@@ -116,6 +123,7 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
       </div>
     </div>
   </div>
+
 
   <script src="js/create.js"></script>
   <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
