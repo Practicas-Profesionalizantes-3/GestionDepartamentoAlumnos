@@ -21,6 +21,8 @@
     justify-content: center;
     text-align: center;
     box-sizing: border-box;
+    border: 2px solid rgba(102, 102, 102, 0.771) ;
+    border-radius: 10px;
 }
 
 .cartelera-titulo{
@@ -428,4 +430,28 @@ body.dark .home .text {
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+/* Tema Claro (por defecto) */
+body {
+  background-color: white;
+  color: black;
+}
+
+/* Tema Oscuro */
+body.dark-theme {
+  background-color: black;
+  color: white;
+}
+
+/* Ajustar estilos del sidebar para tema oscuro */
+.sidebar.dark-theme {
+  background-color: #333;
+  color: white;
+}
+
+/* Ajustar iconos y texto del sidebar para tema oscuro */
+.sidebar.dark-theme .nav-icon,
+.sidebar.dark-theme .nav-text {
+  color: white;
 }

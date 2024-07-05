@@ -94,6 +94,14 @@
                     <span class="text nav-text">Crear anuncio</span>
                 </a>
             </li>
+            
+            <li class="search-box">
+                <a href="javascript:void(0);" id="theme-toggle">
+                    <i class='icon fas fa-adjust nav-icon'></i>
+                    <span class="text nav-text">Cambiar Tema</span>
+                </a>
+            </li>
+
         </div>
         <div class="bottom-content">
             <li class="">
