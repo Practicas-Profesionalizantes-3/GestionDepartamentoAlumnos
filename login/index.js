@@ -9,7 +9,7 @@ $("#formulario").submit(function (event) {
     $.ajax({
         type: "POST",
         data: JSON.stringify(usuario),
-        url: "http://localhost/api/api-Alumnos/usuarios.php",
+        url: "http://localhost/api/api-Alumnos/login.php",
         success: function (data) {
             ocultarModal();
             if (data.success == true){
