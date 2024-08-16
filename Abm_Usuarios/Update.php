@@ -1,36 +1,35 @@
 <?php
-$api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
+$api_url = 'http://localhost/api/api-Alumnos/usuarios.php';
 
 $response = file_get_contents($api_url);
 $data = json_decode($response, true);
-$avisos = $data;
+$usuarios = $data;
 
-$id_aviso_editar = $_GET['id_aviso'];
-$aviso = null;
-foreach ($avisos as $aviso_temp) {
-  if ($aviso_temp['id_aviso'] == $id_aviso_editar) {
-    $aviso = $aviso_temp;
+$id_usuario_editar = $_GET['id_usuario'];
+$usuario = null;
+foreach ($usuarios as $usuario_temp) {
+  if ($usuario_temp['id_usuario'] == $id_usuario_editar) {
+    $usuario = $usuario_temp;
     break;
   }
 }
 echo "<script>
-  console.log(" . json_encode($aviso) . ")
+  console.log(" . json_encode($usuario) . ")
 </script>";
 
-$combo_aviso_tipo_url = "http://localhost/api/api-Alumnos/aviso_tipo.php";
-$response_aviso_tipos = file_get_contents($combo_aviso_tipo_url);
-$data_aviso_tipos = json_decode($response_aviso_tipos, true);
+$combo_usuarios_url = "http://localhost/api/api-Alumnos/usuarios.php";
+$response_usuarios = file_get_contents($combo_usuarios_url);
+$data_usuarios = json_decode($response_usuarios, true);
 
-if (!$aviso) {
+if (!$usuarios) {
   http_response_code(404); // No encontrado
-  echo json_encode(['error' => 'Aviso no encontrado']);
+  echo json_encode(['error' => 'usuarios no encontrado']);
   exit;
 } else {
   //header('Location: index.php');
 }
-?>
-
-<head>
+?> 
+<head>  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instituto Tecnologico Beltran</title>
@@ -66,71 +65,77 @@ if (!$aviso) {
     <div class="card">
 
       <div class="card-header">
-        Editar anuncio
+        Editar usuario
       </div>
       <div class="card-body">
-        <?php if ($aviso) { ?>
+        <?php if ($usuarios) { ?>
           <form id="formulario">
-            <input type="hidden" name="_method" value="PUT">
-            <input type="hidden" name="id_aviso" value="<?php echo $aviso['id_aviso']; ?>">
-            <div class="mb-3">
-              <label for="id_aviso" class="form-label">Id aviso:</label>
-              <input readonly type="text" class="form-control" value="<?php echo $aviso['id_aviso']; ?>" name="id_aviso" id="id_aviso" aria-describedby="helpId" placeholder="Tipo de aviso">
+          <div class="mb-3">
+              <label for="id_usuario" class="form-label">Id Usuario:</label>
+              <input readonly type="text" class="form-control" value="<?php echo $usuarios['id_usuario']; ?>" name="id_usuario" id="id_usuario" aria-describedby="helpId">
             </div>
             <div class="mb-3">
-              <label for="id_aviso_tipo" class="form-label">Tipo de aviso:</label>
-              <select class="form-control" name="id_aviso_tipo" id="id_aviso_tipo">
-                <?php
-                foreach ($data_aviso_tipos as $aviso_tipo) {
-                ?>
-                  <option value="<?php echo $aviso_tipo["id_aviso_tipo"]; ?>" <?= $aviso_tipo["descripcion"] == $aviso["aviso_tipo"] ? 'selected="selected"' : ''; ?>>
-                    <?php echo $aviso_tipo["descripcion"]; ?>
-                  </option>
-                <?php
-                }
-                ?>
+              <label for="nombre" class="form-label">Nombre:</label>
+              <input type="text" class="form-control" value="<?php echo $usuarios['nombre']; ?>" name="nombre" id="nombre" aria-describedby="helpId">
+            </div>
+            <div class="mb-3">
+              <label for="apellido" class="form-label">Apellido:</label>
+              <input type="text" class="form-control" value="<?php echo $usuarios['apellido']; ?>" name="apellido" id="apellido" aria-describedby="helpId">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email:</label>
+              <input type="text" class="form-control" value="<?php echo $usuarios['email']; ?>" name="email" id="email" aria-describedby="helpId">
+            </div>
+            <div class="mb-3">
+              <label for="id_documento_tipo" class="form-label">Tipo de Documento:</label>
+              <select class="form-control" name="id_documento_tipo" id="id_documento_tipo">
+                <option value="0" <?= $usuarios["documento_tipo"] == "0" ? 'selected="selected"' : "" ?>><?php echo $usuarios['documento_tipo']; ?></option>
+                <option value="1" <?= $usuarios["documento_tipo"] == "1" ? 'selected="selected"' : "" ?>>DNI</option>
+                <option value="1" <?= $usuarios["documento_tipo"] == "2" ? 'selected="selected"' : "" ?>>Licencia</option>
+                <option value="1" <?= $usuarios["documento_tipo"] == "3" ? 'selected="selected"' : "" ?>>Pasaporte</option>
               </select>
             </div>
             <div class="mb-3">
-              <label for="id_usuario" class="form-label">Usuario:</label>
-              <input type="text" class="form-control" value="<?php echo $aviso['usuario']; ?>" readonly aria-describedby="helpId" placeholder="Usuario">
-            </div>
-            <div class="mb-3">
-              <label for="titulo" class="form-label">Titulo:</label>
-              <input type="text" class="form-control" value="<?php echo $aviso['titulo']; ?>" name="titulo" id="titulo" aria-describedby="helpId" placeholder="Titulo">
-            </div>
-            <div class="mb-3">
-              <label for="descripcion" class="form-label">Descripcion:</label>
-              <input type="text" class="form-control" value="<?php echo $aviso['descripcion']; ?>" name="descripcion" id="descripcion" aria-describedby="helpId" placeholder="Descripcion">
-            </div>
-            <div class="mb-3">
-              <label for="fecha_publicacion" class="form-label">Fecha de publicacion:</label>
-              <input type="date" class="form-control" value="<?php echo $aviso['fecha_publicacion']; ?>" name="fecha_publicacion" id="fecha_publicacion" aria-describedby="helpId" placeholder="Fecha de publicacion">
-            </div>
-            <div class="mb-3">
-              <label for="fecha_vencimiento" class="form-label">Fecha de vencimiento:</label>
-              <input type="date" class="form-control" value="<?php echo $aviso['fecha_vencimiento']; ?>" name="fecha_vencimiento" id="fecha_vencimiento" aria-describedby="helpId" placeholder="Fecha de vencimiento">
-            </div>
-            <div class="mb-3">
-              <label for="adjunto" class="form-label">Adjunto:</label>
-              <input type="file" accept=".pdf" class="form-control" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto">
-            </div>
-            <div class="mb-3">
-              <label for="fijado" class="form-label">Fijado:</label>
-              <select class="form-control" name="fijado" id="fijado">
-                <option value="0" <?= $aviso["fijado"] == "0" ? 'selected="selected"' : "" ?>>No</option>
-                <option value="1" <?= $aviso["fijado"] == "1" ? 'selected="selected"' : "" ?>>Si</option>
+              <label for="id_usuario_estado" class="form-label">Estado de Usuario:</label>
+              <select class="form-control" name="id_usuario_estado" id="id_usuario_estado">
+                <option value="0" <?= $usuarios["usuario_estado"] == "0" ? 'selected="selected"' : "" ?>><?php echo $usuarios['usuario_estado']; ?></option>
+                <option value="1" <?= $usuarios["usuario_estado"] == "1" ? 'selected="selected"' : "" ?>>Activo</option>
+                <option value="1" <?= $usuarios["usuario_estado"] == "2" ? 'selected="selected"' : "" ?>>Inactivo</option>
               </select>
             </div>
             <div class="mb-3">
-              <label for="imagen" class="form-label">Imagen:</label>
-              <input type="file" accept="image/png, image/jpeg" class="form-control" name="imagen" id="imagen" placeholder="Imagen" aria-describedby="fileHelpId" >
+              <label for="numero_documento" class="form-label">Numero de Documento:</label>
+              <input type="text" class="form-control" value="<?php echo $usuarios['numero_documento']; ?>" name="numero_documento" id="numero_documento" aria-describedby="helpId" >
             </div>
             <div class="mb-3">
-              <label for="id_aviso_estado" class="form-label">Estado del aviso:</label>
-              <select class="form-control" name="id_aviso_estado" id="id_aviso_estado">
-                <option value="1" <?= $aviso["estado"] == "Activo" ? 'selected="selected"' : "" ?>>Activo</option>
-                <option value="2" <?= $aviso["estado"] == "Inactivo" ? 'selected="selected"' : "" ?>>Inactivo</option>
+              <label for="id_carrera" class="form-label">Carrera:</label>
+              <select class="form-control" name="id_carrera" id="id_carrera">
+                <option value="0" <?= $usuarios["id_carrera"] == "0" ? 'selected="selected"' : "" ?>><?php echo $carrera['descripcion']; ?></option>
+                <option value="1" <?= $usuarios["id_carrera"] == "1" ? 'selected="selected"' : "" ?>>Ingenieria Informatica</option>
+                <option value="1" <?= $usuarios["id_carrera"] == "2" ? 'selected="selected"' : "" ?>>Medicina</option>
+                <option value="1" <?= $usuarios["id_carrera"] == "3" ? 'selected="selected"' : "" ?>>Derecho</option>
+                <option value="1" <?= $usuarios["id_carrera"] == "4" ? 'selected="selected"' : "" ?>>Administración de Empresas</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="anio" class="form-label">Año:</label>
+              <input type="text" class="form-control" value="<?php echo $usuarios['anio']; ?>" name="anio" id="anio" aria-describedby="helpId" >
+            </div>
+            <div class="mb-3">
+              <label for="comision" class="form-label">Comision:</label>
+              <select class="form-control" name="comision" id="comision">
+                <option value="1" <?= $usuarios["comision"] == "0" ? 'selected="selected"' : "" ?>>A</option>
+                <option value="2" <?= $usuarios["comision"] == "1" ? 'selected="selected"' : "" ?>>B</option>
+                <option value="2" <?= $usuarios["comision"] == "2" ? 'selected="selected"' : "" ?>>C</option>
+                <option value="2" <?= $usuarios["comision"] == "3" ? 'selected="selected"' : "" ?>>D</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="id_usuario_tipo" class="form-label">Tipo de usuario:</label>
+              <select class="form-control" name="id_usuario_tipo" id="id_usuario_tipo">
+                <option value="1" <?= $usuarios["id_usuario_tipo"] == "0" ? 'selected="selected"' : "" ?>>Administrador</option>
+                <option value="2" <?= $usuarios["id_usuario_tipo"] == "1" ? 'selected="selected"' : "" ?>>Usuario Regular</option>
+                <option value="2" <?= $usuarios["id_usuario_tipo"] == "2" ? 'selected="selected"' : "" ?>>Docente</option>
               </select>
             </div>
             <input type="text" value="<?= $aviso["id_usuario"] ?>" name="id_usuario" id="id_usuario" readonly hidden />
@@ -141,7 +146,8 @@ if (!$aviso) {
       </div>
     </div>
   </div>
-
+  
+  <script src="../js/index.js"></script>
   <script src="../js/navbar.js"></script>
   <script src="js/update.js"></script>
   <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>

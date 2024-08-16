@@ -13,6 +13,7 @@
                 var usuario = JSON.parse(sessionStorage.getItem("usuario"));
                 if (usuario.id_usuario_estado == 1) {
                     $("#crear_aviso").show();
+                    $("#crear_usuario").show();
                 }
                 $('#texto').text('Cerrar sesión');
                 $('#loginButton').on('click', function(e) {
@@ -61,7 +62,7 @@
             </li>
             <li class="search-box">
                 <a href="/gestiondepartamentoalumnos/cartelera.php">
-                    <i class='bx bxs-news icon'></i>
+                    <i class='bx bxs-news icon nav-icon'></i>
                     <span class="text nav-text">Cartelera</span>
                 </a>
             </li>
@@ -91,8 +92,14 @@
             </li>
             <li class="search-box" style="display: none;" id="crear_aviso">
                 <a href="/gestiondepartamentoalumnos/Abm_Cartelera/index.php">
-                    <i class='bx bx-add-to-queue icon'></i>
+                    <i class='bx bx-add-to-queue icon nav-icon'></i>
                     <span class="text nav-text">Crear anuncio</span>
+                </a>
+            </li>
+            <li class="search-box" style="display: none;" id="crear_usuario">
+                <a href="/gestiondepartamentoalumnos/Abm_Usuarios/index.php">
+                    <i class="fa-solid fa-user-plus icon nav-icon"></i>
+                    <span class="text nav-text">Crear usuario</span>
                 </a>
             </li>
             <li class="search-box">
@@ -106,7 +113,7 @@
         <div class="bottom-content">
             <li class="">
                 <a href="/gestiondepartamentoalumnos/login/index.html" id="loginButton" style="margin-top: -48px; cursor:pointer">
-                    <i class='bx bx-log-out icon'></i>
+                    <i class='bx bx-log-out icon nav-icon'></i>
                     <span class="text nav-text" id="texto">Campus</span>
                 </a>
             </li>

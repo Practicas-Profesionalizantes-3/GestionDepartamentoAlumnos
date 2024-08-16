@@ -50,12 +50,10 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
 
   <div class="container">
     <div class="card">
-
       <div class="card-header">
         Agregar nuevo anuncio
       </div>
       <div class="card-body">
-
         <form id="formulario">
           <div class="mb-3">
             <label for="id_usuario" class="form-label">Usuario:</label>
@@ -124,7 +122,7 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
     </div>
   </div>
 
-
+  <script src="../js/index.js"></script>
   <script src="js/create.js"></script>
   <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
   <script src="js/jquery.min.js"></script>

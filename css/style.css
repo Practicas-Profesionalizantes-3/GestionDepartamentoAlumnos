@@ -4,7 +4,6 @@
     position: relative;
     overflow: hidden;
     height: 350px;
-
 }
 
 .overlay {
@@ -22,17 +21,13 @@
     justify-content: center;
     text-align: center;
     box-sizing: border-box;
+    border: 2px solid rgba(102, 102, 102, 0.771) ;
+    border-radius: 10px;
 }
-.border-cartelera{
-  border: 2px solid rgba(102, 102, 102, 0.317) ;
-  border-radius: 2px;
-}
-
 .img-cartelera{
   width: 90%;
   height: 350px;
   margin: auto;
-
 }
 .img-cartelera-item{
   width: 100%;

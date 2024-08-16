@@ -1,6 +1,5 @@
 <?php
 $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
-
 $response = file_get_contents($api_url);
 $data = json_decode($response, true);
 $avisos = $data;
@@ -141,7 +140,8 @@ if (!$aviso) {
       </div>
     </div>
   </div>
-
+  
+  <script src="../js/index.js"></script>
   <script src="../js/navbar.js"></script>
   <script src="js/update.js"></script>
   <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>

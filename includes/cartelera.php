@@ -39,8 +39,8 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
     <div class="row">
         <?php if ($datos) : ?>
             <?php foreach ($datos as $item) : ?>
-                <div class="col-lg-6 tm-col-home mb-4" data-wow-delay="0.1s">
-                    <div class="position-relative border-cartelera">
+                <div class="col-lg-6 tm-col-home mb-4 shadow" data-wow-delay="0.1s">
+                    <div class="position-relative">
                         <div class="img-cartelera">
                             <img class="img-cartelera-item" src="<?= $item["imagen"] != "" ? "data:image/jpeg;base64," . $item["imagen"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s" ?>" />
                         </div>

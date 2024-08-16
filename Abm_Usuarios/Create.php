@@ -1,10 +1,28 @@
 <?php
-$combo_aviso_tipo_url = "http://localhost/api/api-Alumnos/aviso_tipo.php";
-$response_aviso_tipos = file_get_contents($combo_aviso_tipo_url);
-$data_aviso_tipos = json_decode($response_aviso_tipos, true);
-?>
-<?php ?>
+// $combo_usuarios_url = "http://localhost/api/api-Alumnos/usuarios.php";
+// $response_usuarios = file_get_contents($combo_usuarios_url);
+// $data_usuarios = json_decode($response_usuarios, true);
 
+//API - DOCUMENTO_TIPOS
+$combo_documento_tipos_url = "http://localhost/api/api-Alumnos/documento_tipos.php";
+$response_documento_tipos = file_get_contents($combo_documento_tipos_url);
+$data_documento_tipos = json_decode($response_documento_tipos, true);
+
+//API - USUARIO_ESTADOS
+$combo_usuario_estados_url = "http://localhost/api/api-Alumnos/usuario_estados.php";
+$response_usuario_estados = file_get_contents($combo_usuario_estados_url);
+$data_usuario_estados = json_decode($response_usuario_estados, true);
+
+//API - CARRERAS
+$combo_carreras_url = "http://localhost/api/api-Alumnos/carreras.php";
+$response_carreras = file_get_contents($combo_carreras_url);
+$data_carreras = json_decode($response_carreras, true);
+
+//API - USUARIO_TIPOS
+$combo_usuario_tipos_url = "http://localhost/api/api-Alumnos/usuario_tipos.php";
+$response_usuario_tipos = file_get_contents($combo_usuario_tipos_url);
+$data_usuario_tipos = json_decode($response_usuario_tipos, true);
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -36,12 +54,6 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
         window.location.href = '../index.php';
       }
     }
-
-    $(document).ready(function() {
-      var usuario = JSON.parse(sessionStorage.getItem("usuario"));
-      $("#nombre").val(usuario.nombre + " " + usuario.apellido); // Establecer el valor del campo id_usuario
-      $("#id_usuario").val(usuario.id_usuario);
-    });
   </script>
 
   <?php
@@ -52,79 +64,103 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
     <div class="card">
 
       <div class="card-header">
-        Agregar nuevo anuncio
+        Agregar nuevo usuario
       </div>
       <div class="card-body">
 
         <form id="formulario">
           <div class="mb-3">
-            <label for="id_usuario" class="form-label">Usuario:</label>
-            <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId" placeholder="Usuario" readonly required>
-            <input type="text" class="form-control" name="id_usuario" id="id_usuario" aria-describedby="helpId" placeholder="Usuario" readonly hidden>
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId" placeholder="Nombre">
           </div>
           <div class="mb-3">
-            <label for="id_aviso_tipo" class="form-label">Tipo de aviso:</label>
-            <select class="form-control" name="id_aviso_tipo" id="id_aviso_tipo">
+            <label for="apellido" class="form-label">Apellido:</label>
+            <input type="text" class="form-control" name="apellido" id="apellido" aria-describedby="helpId" placeholder="Apellido">
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="text" class="form-control" name="password" id="password" aria-describedby="helpId" placeholder="Password">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" class="form-control" name="email" id="email" aria-describedby="helpId" placeholder="Email">
+          </div>
+          <div class="mb-3">
+            <label for="id_documento_tipo" class="form-label">Tipo de Documento:</label>
+            <select class="form-control" name="id_documento_tipo" id="id_documento_tipo">
               <?php
-              foreach ($data_aviso_tipos as $aviso_tipo) {
+                foreach ($data_documento_tipos as $documento_tipo) {
+                ?>
+                  <option value="<?php echo $documento_tipo["id_documento_tipo"]; ?>" ;?>
+                    <?php echo $documento_tipo["descripcion"]; ?>
+                  </option>
+                <?php
+                }
               ?>
-                <option value="<?php echo $aviso_tipo["id_aviso_tipo"]; ?>" ;?>
-                  <?php echo $aviso_tipo["descripcion"]; ?>
-                </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="id_usuario_estado" class="form-label">Estado de Usuario:</label>
+            <select class="form-control" name="id_usuario_estado" id="id_usuario_estado">
               <?php
-              }
+                foreach ($data_usuario_estados as $usuario_estado) {
+                ?>
+                  <option value="<?php echo $usuario_estado["id_usuario_estado"]; ?>" ;?>
+                    <?php echo $usuario_estado["descripcion"]; ?>
+                  </option>
+                <?php
+                }
               ?>
             </select>
           </div>
           <div class="mb-3">
-            <label for="titulo" class="form-label">Titulo:</label>
-            <input type="text" class="form-control" name="titulo" id="titulo" aria-describedby="helpId" placeholder="Titulo">
+            <label for="numero_documento" class="form-label">Numero de Documento:</label>
+            <input type="text" class="form-control" name="numero_documento" id="numero_documento" aria-describedby="helpId" placeholder="Numero de Documento">
           </div>
           <div class="mb-3">
-            <label for="descripcion" class="form-label">Descripcion:</label>
-            <input type="text" class="form-control" name="descripcion" id="descripcion" aria-describedby="helpId" placeholder="Descripcion">
-          </div>
-          <div class="mb-3">
-            <label for="fecha_publicacion" class="form-label">Fecha de Publicacion:</label>
-            <input type="date" class="form-control" name="fecha_publicacion" id="fecha_publicacion" aria-describedby="helpId" placeholder="Fecha de Publicacion" required value="<?php $hoy = date("Y-m-d"); echo $hoy; ?>">
-          </div>
-          <div class="mb-3">
-            <label for="fecha_vencimiento" class="form-label">Fecha de Vencimiento:</label>
-            <input type="date" class="form-control" name="fecha_vencimiento" id="fecha_vencimiento" aria-describedby="helpId" placeholder="Fecha de Vencimiento" required value="<?php $hoy = date("Y-m-d"); echo $hoy; ?>">
-          </div>
-          <div class="mb-3">
-            <label for="adjunto" class="form-label">Adjunto:</label>
-            <input type="file" accept=".pdf" class="form-control" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto">
-          </div>
-          <div class="mb-3">
-            <label for="fijado" class="form-label">Fijado:</label>
-            <select class="form-control" name="fijado" id="fijado">
-              <option value="0">No</option>
-              <option value="1">Si</option>
+            <label for="id_carrera" class="form-label">Carrera:</label>
+            <select class="form-control" name="id_carrera" id="id_carrera">
+              <?php
+                foreach ($data_carreras as $carrera) {
+                ?>
+                  <option value="<?php echo $carrera["id_carrera"]; ?>" ;?>
+                    <?php echo $carrera["descripcion"]; ?>
+                  </option>
+                <?php
+                }
+              ?>
             </select>
           </div>
           <div class="mb-3">
-            <label for="imagen" class="form-label">Imagen:</label>
-            <input type="file" accept="image/jpeg, image/png" class="form-control" name="imagen" id="imagen" placeholder="Imagen" aria-describedby="fileHelpId">
+            <label for="anio" class="form-label">Año:</label>
+            <input type="text" class="form-control" name="anio" id="anio" aria-describedby="helpId" placeholder="Año">
           </div>
           <div class="mb-3">
-            <label for="id_aviso_estado" class="form-label">Estado del aviso:</label>
-            <select class="form-control" name="id_aviso_estado" id="id_aviso_estado">
-              <option value="1">Activo</option>
-              <option value="2">Inactivo</option>
+            <label for="comision" class="form-label">Comision:</label>
+            <input type="text" class="form-control" name="comision" id="comision" aria-describedby="helpId" placeholder="Comisión">
+          </div>
+          <div class="mb-3">
+            <label for="id_usuario_tipo" class="form-label">Tipo de Usuario:</label>
+            <select class="form-control" name="id_usuario_tipo" id="id_usuario_tipo">
+              <?php
+                foreach ($data_usuario_tipos as $usuario_tipo) {
+                ?>
+                  <option value="<?php echo $usuario_tipo["id_usuario_tipo"]; ?>" ;?>
+                    <?php echo $usuario_tipo["descripcion"]; ?>
+                  </option>
+                <?php
+                }
+              ?>
             </select>
           </div>
-
-          <button type="submit" class="btn btn-success" id="agregar-anuncio">Agregar</button>
+          <button type="submit" class="btn btn-success" id="agregar-usuario">Agregar</button>
           <button type="submit" class="btn btn-info" onclick="location.href='index.php'">Cancelar</button>
         </form>
       </div>
-      <div class="card-footer text-muted">
-      </div>
     </div>
   </div>
-
-
+  
+  <script src="../js/index.js"></script>
   <script src="js/create.js"></script>
   <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
   <script src="js/jquery.min.js"></script>
