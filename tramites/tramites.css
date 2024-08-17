@@ -1,0 +1,49 @@
+.tramite-card {
+    width: 100%;
+    max-width: 300px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa;
+    border: 1px solid #6c757d;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #000;
+}
+
+.tramite-card img {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+}
+
+.tramite-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.tramite-card-title {
+    font-weight: bold;
+    
+}
+
+.tramite-card-description {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+
+.tm-main {
+    flex: 1; 
+    min-height: 300px; 
+    padding: 20px; 
+}
+
+
+
+
+
+
+
