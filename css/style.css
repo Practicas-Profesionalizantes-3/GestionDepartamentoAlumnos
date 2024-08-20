@@ -464,3 +464,51 @@ body.dark-theme {
 .sidebar.dark-theme .nav-text {
   color: white;
 }
+
+    
+
+
+
+body {
+  font-family: sans-serif;
+}
+
+.label {
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #eee;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.label-title {
+  font-weight: bold;
+}
+
+.label-content {
+  margin-top: 5px;
+}
+
+.label-procesando {
+  background-color: #ffcc00; /* Color amarillo */
+  cursor: pointer;
+}
+
+.label-procesando:hover {
+  background-color: #ffdd00; /* Color amarillo más claro */
+}
+
+.ficha {
+  display: none; /* Oculta la ficha por defecto */
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  z-index: 10; /* Asegúrate que la ficha esté encima */
+}
+
+.ficha-contenido {
+  margin-top: 10px;
+}

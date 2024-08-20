@@ -49,8 +49,8 @@ foreach ($tiposTramites as $tipo) {
                     </div>
                     <form class="container mt-5" id="formulario">
                         <div class="mb-3">
-                            <label for="nombre" class="form-label">Nombre y Apellido:</label>
-                            <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId" placeholder="Nombre" required>
+                            <label for="id_usuario_creacion" class="form-label">Nombre y Apellido:</label>
+                            <input type="text" class="form-control" name="id_usuario_creacion" id="id_usuario_creacion" aria-describedby="helpId" placeholder="Nombre" required>
                         </div>
                         <div class="mb-3">
                             <label for="dni" class="form-label">DNI:</label>
@@ -59,21 +59,21 @@ foreach ($tiposTramites as $tipo) {
                         <div class="mb-3">
                             <label for="carrera" class="form-label">Seleccione su Carrera:</label>
                             <select class="form-control" name="carrera" id="carrera">
-                            <option value="1">- -</option>
+                            <option value="0">- -</option>
                             <option value="1">Ingenieria Informatica</option>
-                            <option value="1">Medicina</option>
-                            <option value="2">Derecho</option>
-                            <option value="2">Administracion de Empresas</option>
-                            <option value="2">Tecnicatura en Radiologia</option>
+                            <option value="2">Medicina</option>
+                            <option value="3">Derecho</option>
+                            <option value="4">Administracion de Empresas</option>
+                            <option value="5">Tecnicatura en Radiologia</option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="turno" class="form-label">Seleccione su Turno:</label>
                             <select class="form-control" name="turno" id="turno">
-                            <option value="1">- -</option>
+                            <option value="0">- -</option>
                             <option value="1">Turno Mañana</option>
-                            <option value="1">Turno Tarde</option>
-                            <option value="2">Turno Noche</option>
+                            <option value="2">Turno Tarde</option>
+                            <option value="3">Turno Noche</option>
                             </select>
                         </div> <div class="mb-3">
                             <label for="email" class="form-label">Ingrese el mail de su cuenta Office 365:</label>
@@ -99,6 +99,7 @@ foreach ($tiposTramites as $tipo) {
 
     <script src="../../js/index.js"></script>
     <script src="../../js/navbar.js"></script>
+    <script src="js/create.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>
 </html>

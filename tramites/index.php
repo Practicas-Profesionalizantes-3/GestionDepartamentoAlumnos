@@ -72,10 +72,11 @@ $formularios_path = null;
                         }
                         ?>
                     </div>
+                    <a type="buttom" class="btn btn-primary mis-tramites-btn" href="mis_tramites.php" role="button">Mis Tramites</a>
                 </div> <!-- .tm-section-wrap -->
             </div> <!-- .tm-main -->
         </div> <!-- .row -->
-    </div> <!-- .container-fluid -->
+    </div > <!-- .container-fluid -->
     <?php include("../includes/footer.php"); ?>
     <script src="../js/index.js"></script>
     <script src="../js/navbar.js"></script>
