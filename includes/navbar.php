@@ -62,7 +62,7 @@
             </li>
             <li class="search-box">
                 <a href="/gestiondepartamentoalumnos/cartelera.php">
-                    <i class='bx bxs-news icon nav-icon'></i>
+                    <i class='bx bxs-news icon'></i>
                     <span class="text nav-text">Cartelera</span>
                 </a>
             </li>
@@ -73,7 +73,7 @@
                 </a>
             </li>
             <li class="search-box">
-                <a href="/gestiondepartamentoalumnos/tramites">
+                <a>
                     <i class='icon fas fa-envelope nav-icon'></i>
                     <span class="text nav-text">Tramites</span>
                 </a>
@@ -113,7 +113,7 @@
         <div class="bottom-content">
             <li class="">
                 <a href="/gestiondepartamentoalumnos/login/index.html" id="loginButton" style="margin-top: -48px; cursor:pointer">
-                    <i class='bx bx-log-out icon nav-icon'></i>
+                    <i class='bx bx-log-out icon'></i>
                     <span class="text nav-text" id="texto">Campus</span>
                 </a>
             </li>

@@ -1,4 +1,4 @@
-function eliminarUsuario(id) {
+function eliminarAviso(id) {
     Swal.fire({
         title: "¿Queres eliminar este anuncio?",
         text: "No podrás revertir esto!",
@@ -11,8 +11,8 @@ function eliminarUsuario(id) {
         if (result.isConfirmed) {
             $.ajax({
                 type: "DELETE",
-                url: "http://localhost/api/api-Alumnos/usuarios.php",
-                data: JSON.stringify({ id_usuario: id }),
+                url: "http://localhost/api/api-Alumnos/cartelera.php",
+                data: JSON.stringify({ id_aviso: id }),
                 contentType: "application/json",
                 dataType: "json",
                 success: function (data) {
@@ -32,7 +32,6 @@ function eliminarUsuario(id) {
                     }
                 },
                 error: function (errorThrown) {
-                    console.log("No funcionó:", id);
                     console.log("Error:", errorThrown);
                 }
             });

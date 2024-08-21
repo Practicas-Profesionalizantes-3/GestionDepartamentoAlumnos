@@ -1,4 +1,3 @@
-//Chatbot
 document.addEventListener('DOMContentLoaded', function () {
     const sendButton = document.getElementById('send-button');
     const userInput = document.getElementById('user-input');
@@ -46,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// Cambiar a modo oscuro
 document.addEventListener("DOMContentLoaded", function() {
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;

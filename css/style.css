@@ -4,6 +4,7 @@
     position: relative;
     overflow: hidden;
     height: 350px;
+
 }
 
 .overlay {
@@ -21,13 +22,17 @@
     justify-content: center;
     text-align: center;
     box-sizing: border-box;
-    border: 2px solid rgba(102, 102, 102, 0.771) ;
-    border-radius: 10px;
 }
+.border-cartelera{
+  border: 2px solid rgba(102, 102, 102, 0.317) ;
+  border-radius: 2px;
+}
+
 .img-cartelera{
   width: 90%;
   height: 350px;
   margin: auto;
+
 }
 .img-cartelera-item{
   width: 100%;
@@ -464,49 +469,3 @@ body.dark-theme {
 .sidebar.dark-theme .nav-text {
   color: white;
 }
-
-    /*TRAMITES*/
-
-    body {
-      font-family: Arial, sans-serif;
-  }
-  .container {
-      max-width: 1200px; /* Ancho máximo del contenedor */
-      margin: 60px auto 40px; /* Margen superior e inferior de 40px y centrado horizontalmente */
-      padding: 20px; /* Paddings de 20px */
-      background-color: #fff; /* Fondo blanco */
-      border: 1px solid #ddd; /* Borde gris claro */
-      border-radius: 20px; /* Borde redondeado de 10px */
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra leve */
-  }
-  input[type="text"] {
-      border-radius: 20px; /* Borde redondeado */
-      margin: 10px; /* Agregué un margen de 10px entre inputs */
-      padding: 20px;
-      width: 20%; /* Ancho de los inputs */
-      margin-left: 30px; /* Agregué un margen izquierdo de 20px */
-      display: inline-block; /* Mostrar inputs en línea */
-      text-align: center; /* Centrar las letras */
-    }
-  .procesando {
-      background-color: yellow; /* Fondo amarillo */
-      color: white; /* Letras blancas */
-      border: 4px solid darkorange; /* Borde amarillo oscuro */
-      font-size: 20px; /* Tamaño de la letra */
-      font-weight: bold;
-  }
-  .detalles {
-      background-color: white; /* Fondo blanco */
-      color: black; /* Letras negras */
-      border: 4px solid black; /* Borde negro */
-      font-size: 18px; /* Tamaño de la letra */
-
-  }
-  .usuario-responsable {
-      background-color: black; /* Fondo negro */
-      color: white; /* Letras blancas */
-      border: 4px solid black; /* Borde negro */
-      font-size: 17px; /* Tamaño de la letra */
-      font-weight: bold;
-    }
-
