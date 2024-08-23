@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-08-2024 a las 00:43:32
+-- Tiempo de generación: 22-08-2024 a las 20:46:02
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -265,10 +265,7 @@ CREATE TABLE `tramites` (
 --
 
 INSERT INTO `tramites` (`id_tramite`, `id_usuario_creacion`, `id_usuario_responsable`, `id_tramite_tipo`, `id_estado_tramite`, `descripcion`, `fecha_creacion`) VALUES
-(1, 1, 2, 1, 1, 'Solicitud de nueva clave', '2024-05-01'),
-(2, 2, 3, 2, 2, 'Reclamación de notas', '2024-05-10'),
-(3, 3, 4, 3, 3, 'Consulta sobre inscripción', '2024-05-15'),
-(4, 1, 2, 3, 2, 'Consulta sql', '2024-08-08');
+(1, 1, 2, 1, 1, 'Solicitud de certificado de alumno regular', '2024-08-21');
 
 -- --------------------------------------------------------
 
@@ -286,9 +283,12 @@ CREATE TABLE `tramites_tipo` (
 --
 
 INSERT INTO `tramites_tipo` (`id_tramite_tipo`, `descripcion`) VALUES
-(1, 'Solicitud'),
-(2, 'Reclamación'),
-(3, 'Consulta');
+(1, 'Certificado de Alumno Regular'),
+(2, 'Justificar Inasistencias'),
+(3, 'Constancia de Examenes'),
+(4, 'Cambio de Turno'),
+(5, 'Inscripción como Figura de Oyente'),
+(6, 'Inscripcion a Libre para Examen Final');
 
 -- --------------------------------------------------------
 
@@ -301,15 +301,6 @@ CREATE TABLE `tramite_adjuntos` (
   `id_tramite` int(11) NOT NULL,
   `ubicacion_archivo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `tramite_adjuntos`
---
-
-INSERT INTO `tramite_adjuntos` (`id_tramite_adjunto`, `id_tramite`, `ubicacion_archivo`) VALUES
-(1, 1, 'solicitud_clave.pdf'),
-(2, 2, 'reclamacion_notas.pdf'),
-(3, 3, 'consulta_inscripcion.pdf');
 
 -- --------------------------------------------------------
 

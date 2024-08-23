@@ -36,6 +36,46 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
         <h2 class="mb-5"><span class="tm-text-primary">Cartelera de Alumnos - Noticias & Novedades</span></h2>
     </div>
 
+    <h2 class="text-center">Buscar anuncio</h2>
+    
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="fecha-inicio">Fecha de inicio:</label>
+                <input type="date" id="fecha-inicio" name="fecha-inicio">
+            </div>
+            <div class="col-md-4">
+                <label for="fecha-fin">Fecha de fin:</label>
+                <input type="date" id="fecha-fin" name="fecha-fin">
+            </div>
+            <div class="col-md-4">
+            <button type="submit" name="filtrar" class="btn btn-primary btn-sm">
+            <i class="bi bi-filter"></i> Filtrar <!-- Icono de filtración -->
+                </button>
+            </div>
+        </div>
+    </form>
+        
+    <?php
+            if (isset($_POST['filtrar'])) {
+                $fecha_inicio = $_POST['fecha-inicio'];
+                $fecha_fin = $_POST['fecha-fin'];
+                $conexion = mysqli_connect("localhost", "root", "", "gestiondptoalumnos");
+                if (!$conexion) {
+                    die("Error de conexión: " . mysqli_connect_error());
+                }
+                $query = "SELECT * FROM `avisos` WHERE fecha_publicacion BETWEEN '$fecha_inicio' AND '$fecha_fin'";
+                $resultado = mysqli_query($conexion, $query);
+                while ($fila = mysqli_fetch_assoc($resultado)) {
+                    
+
+                }
+
+                mysqli_close($conexion);
+            }
+
+            ?>  
+
     <div class="row">
         <?php if ($datos) : ?>
             <?php foreach ($datos as $item) : ?>
