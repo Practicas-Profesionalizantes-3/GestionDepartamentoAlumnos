@@ -119,7 +119,7 @@ echo "<script>console.log(" . $response . ")</script>";
         <div style="display: flex; align-items: center;">
           <div style="display: flex; flex-direction: column; margin: 10px;">
             <span style="font-weight: bold; font-size: 18px;"><?php print_r ($tramite['tipo_tramite']); ?></span>
-            <span style="margin-left: 50px; margin-top: 20px;"><?php print_r ($tramite['descripcion']); ?></span>
+            <span style="margin-left: 50px; margin-top: 20px;"><?php echo ($tramite['descripcion']); ?></span>
         </div>
           <input type="text" id="procesando" class="procesando" placeholder=<?php print_r ($tramite['estado_tramite']); ?>>
           <input type="text" id="usuario-responsable" class="usuario-responsable" placeholder=<?php print_r ($tramite['responsable']); ?>>
