@@ -50,61 +50,61 @@
         <div class="menu">
             <li class="search-box">
                 <a href="/gestiondepartamentoalumnos/index.php" ; return false;>
-                    <i class='icon fas fa-home nav-icon'></i>
+                    <i class='icon fas fa-home'></i>
                     <span class="text nav-text">Inicio</span>
                 </a>
             </li>
             <li class="search-box">
                 <a>
-                    <i class='icon fas fa-calendar nav-icon'></i>
+                    <i class='icon fas fa-calendar'></i>
                     <span class="text nav-text">Calendario</span>
                 </a>
             </li>
             <li class="search-box">
                 <a href="/gestiondepartamentoalumnos/cartelera.php">
-                    <i class='bx bxs-news icon'></i>
+                    <i class='icon bx bxs-news'></i>
                     <span class="text nav-text">Cartelera</span>
                 </a>
             </li>
             <li class="search-box">
                 <a>
-                    <i class='icon fas fa-user-friends nav-icon'></i>
+                    <i class='icon fas fa-user-friends'></i>
                     <span class="text nav-text">Carreras</span>
                 </a>
             </li>
             <li class="search-box">
                 <a>
-                    <i class='icon fas fa-envelope nav-icon'></i>
+                    <i class='icon fas fa-envelope'></i>
                     <span class="text nav-text">Tramites</span>
                 </a>
             </li>
             <li class="search-box">
                 <a>
-                    <i class='icon fas fa-bell nav-icon'></i>
+                    <i class='icon fas fa-bell'></i>
                     <span class="text nav-text">Notificaciones</span>
                 </a>
             </li>
             <li class="search-box">
                 <a href="/gestiondepartamentoalumnos/chatbot.php">
-                    <i class='icon fas fa-comments nav-icon'></i>
+                    <i class='icon fas fa-comments'></i>
                     <span class="text nav-text">Chat</span>
                 </a>
             </li>
             <li class="search-box" style="display: none;" id="crear_aviso">
                 <a href="/gestiondepartamentoalumnos/Abm_Cartelera/index.php">
-                    <i class='bx bx-add-to-queue icon nav-icon'></i>
+                    <i class='icon bx bx-add-to-queue'></i>
                     <span class="text nav-text">Crear anuncio</span>
                 </a>
             </li>
             <li class="search-box" style="display: none;" id="crear_usuario">
                 <a href="/gestiondepartamentoalumnos/Abm_Usuarios/index.php">
-                    <i class="fa-solid fa-user-plus icon nav-icon"></i>
+                    <i class="icon fa-solid fa-user-plus"></i>
                     <span class="text nav-text">Crear usuario</span>
                 </a>
             </li>
             <li class="search-box">
                 <a href="javascript:void(0);" id="theme-toggle">
-                    <i class='icon fas fa-adjust nav-icon'></i>
+                    <i class='icon fas fa-adjust '></i>
                     <span class="text nav-text">Cambiar Tema</span>
                 </a>
             </li>
