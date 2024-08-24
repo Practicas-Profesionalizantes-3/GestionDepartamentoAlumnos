@@ -4,7 +4,7 @@
     position: relative;
     overflow: hidden;
     height: 350px;
-
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .overlay {
@@ -25,7 +25,8 @@
 }
 .border-cartelera{
   border: 2px solid rgba(102, 102, 102, 0.317) ;
-  border-radius: 2px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .img-cartelera{
@@ -469,3 +470,80 @@ body.dark-theme {
 .sidebar.dark-theme .nav-text {
   color: white;
 }
+
+
+/*Mis Tramites */
+
+.container-mis-tramites {
+    margin-top: 50px;
+    margin-left: 100px;
+    margin-right: -60px;
+    width: 300px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 20px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .subtitle {
+    color: #888;
+    font-size: 14px;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    
+  }
+  
+  .img-flecha {
+    width: 50px;
+  }
+
+  .img-tilde {
+    border-radius: 30px;
+    width: 12%;
+    height: 50%;
+    margin-top: 16px;
+  }
+
+  .responsable {
+    margin-top: 15px;
+    margin-left: 20px;
+    width: 120px;
+    padding: 10px;
+    border-radius: 30px;
+    background-color: rgb(81, 136, 49);
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .number {
+    font-weight: bold;
+    
+  }
+  
+  .avatar {
+    margin-left: 200px;
+    text-align: center;
+    font-size: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+  }
+
