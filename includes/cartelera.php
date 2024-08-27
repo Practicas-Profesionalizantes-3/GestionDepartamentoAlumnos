@@ -50,7 +50,7 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
                                     <h5 class="mb-3 cartelera-titulo"><?php echo htmlspecialchars($item['titulo']); ?></h5>
                                     <p class="cartelera-desc"><?php echo htmlspecialchars($item['descripcion']); ?></p>
                                     <div class="fecha-container">
-                                        <p><?php echo htmlspecialchars($item['fecha_publicacion']) . "/" . htmlspecialchars($item['fecha_vencimiento']); ?></p>
+                                        <p><?php echo htmlspecialchars($item['fecha_publicacion']) ?></p>
                                     </div>
                                     <div class="descargar-adjunto">
                                         <a href="data:application/pdf;base64,<?= $item["adjunto"]; ?>" download="<?= htmlspecialchars($item["titulo"]); ?>">Descargar adjunto</a>

@@ -73,8 +73,13 @@
                 </a>
             </li>
             <li class="search-box">
+<<<<<<< HEAD
                 <a href="/gestiondepartamentoalumnos/tramites/index.php">
                     <i class='icon fas fa-envelope'></i>
+=======
+                   <a href="/gestiondepartamentoalumnos/tramites">
+                    <i class='icon fas fa-envelope nav-icon'></i>
+>>>>>>> 6206a344c790b429ff19f14a33a5376d02b6b816
                     <span class="text nav-text">Tramites</span>
                 </a>
             </li>

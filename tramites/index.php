@@ -35,13 +35,13 @@ $formularios_path = null;
     <link rel="stylesheet" href="tramites.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
-<body>
-    <div class="container-fluid">
+<body class="body_tramites">
+    <div class="container-tramites-fluid">
         <div class="row">
             <?php include("../includes/navbar.php"); ?>
             <div class="tm-main">
                 <div class="tm-section-wrap">
-                    <div class="text-center mb-4">
+                    <div class="text-center mb-4"> 
                         <h1>Crea un trámite</h1>
                     </div>
                     <div class="row">
@@ -57,7 +57,6 @@ $formularios_path = null;
                             echo '    <a href="' . $formularios_path . '?id=' . $id_tramite_tipo . '" class="tramite-card text-decoration-none">';
                             echo '        <div class="tramite-card-body d-flex align-items-center p-3 border rounded">';
                             echo '            <div class="tramite-card-image me-3">';
-                            echo '                <img src="../img/logo.png" alt="Ícono Trámite" class="img-fluid">';
                             echo '            </div>';
                             echo '            <div class="tramite-card-content">';
                             echo '                <div class="tramite-card-title mb-2 h5">' . $descripcion . '</div>';
@@ -77,7 +76,10 @@ $formularios_path = null;
             </div> <!-- .tm-main -->
         </div> <!-- .row -->
     </div > <!-- .container-fluid -->
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6206a344c790b429ff19f14a33a5376d02b6b816
     <script src="../js/index.js"></script>
     <script src="../js/navbar.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
