@@ -77,7 +77,7 @@ $formularios_path = null;
             </div> <!-- .tm-main -->
         </div> <!-- .row -->
     </div > <!-- .container-fluid -->
-    <?php include("../includes/footer.php"); ?>
+
     <script src="../js/index.js"></script>
     <script src="../js/navbar.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
