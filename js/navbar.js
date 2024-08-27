@@ -19,7 +19,7 @@ const body = document.querySelector('body'),
     //     section_wrap.style.width = "calc(100% - 250px)";
     //     footer_wrap.style.marginLeft = "250px";
     // }
-})
+// })
 searchBtn.addEventListener("click", () => {
     sidebar.classList.remove("close");
 })

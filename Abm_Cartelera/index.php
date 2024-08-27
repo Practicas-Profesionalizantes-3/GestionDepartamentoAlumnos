@@ -62,12 +62,12 @@ echo "<script>console.log(" . $response . ")</script>";
     
     <div class="listadoAvisos" style="margin-left: 88px;">
         <div class="card-header">
-            <h5 class="card-title text-center">Lista de Avisos</h5>
+            <h3 class="card-title tm-text-primary">Lista de Avisos</h3>
             <a class="btn btn-primary mt-2 mr-2" href="Create.php" role="button">Agregar anuncio</a>
         </div>
         <div style="display:flex;justify-content:center; align-items:center;">
             <div style="width: 90%; border: 4px solid #64bded; border-radius: 8px">
-                <div class="table-responsive">
+                <div class="bg-light table-responsive">
                     <table class="table table-bordered table-striped table-hover">
                         <thead class="thead" style="background-color: #64bded; color:white">
                             <tr>
@@ -140,7 +140,7 @@ echo "<script>console.log(" . $response . ")</script>";
             </ul>
         </nav>
     </div>
-
+    <script src="../js/index.js"></script>
     <script src="../js/navbar.js"></script>
     <script src="js/delete.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
