@@ -35,47 +35,30 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
         <h2 class="mb-5"><span class="tm-text-primary">Cartelera de Alumnos - Noticias & Novedades</span></h2>
     </div>
-
     <h2 class="text-center">Buscar anuncio</h2>
-    
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-        <div class="row">
-            <div class="col-md-4">
-                <label for="fecha-inicio">Fecha de inicio:</label>
-                <input type="date" id="fecha-inicio" name="fecha-inicio">
+    <div class="buscador">
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <div class="row">
+                <div class="col-md-8">
+                    <input class="barra" type="text" id="search-input" name="search-input" placeholder="Buscar...">
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" name="buscar" class="boton-buscar">
+                        <i class="bi bi-search"></i><!-- Icono de búsqueda -->
+                    </button>
+                </div>
             </div>
-            <div class="col-md-4">
-                <label for="fecha-fin">Fecha de fin:</label>
-                <input type="date" id="fecha-fin" name="fecha-fin">
-            </div>
-            <div class="col-md-4">
-            <button type="submit" name="filtrar" class="btn btn-primary btn-sm">
-            <i class="bi bi-filter"></i> Filtrar <!-- Icono de filtración -->
-                </button>
-            </div>
-        </div>
-    </form>
-        
+        </form>
+    </div>
     <?php
-            if (isset($_POST['filtrar'])) {
-                $fecha_inicio = $_POST['fecha-inicio'];
-                $fecha_fin = $_POST['fecha-fin'];
-                $conexion = mysqli_connect("localhost", "root", "", "gestiondptoalumnos");
-                if (!$conexion) {
-                    die("Error de conexión: " . mysqli_connect_error());
-                }
-                $query = "SELECT * FROM `avisos` WHERE fecha_publicacion BETWEEN '$fecha_inicio' AND '$fecha_fin'";
-                $resultado = mysqli_query($conexion, $query);
-                while ($fila = mysqli_fetch_assoc($resultado)) {
-                    
-
-                }
-
-                mysqli_close($conexion);
-            }
-
+           if (isset($_POST['buscar'])) {
+            $search_term = $_POST['search-input'];
+            $datos_filtrados = array_filter($datos, function ($item) use ($search_term) {
+                return strpos($item['titulo'], $search_term) !== false || strpos($item['descripcion'], $search_term) !== false;
+            });
+            $datos = $datos_filtrados;
+        }
             ?>  
-
     <div class="row">
         <?php if ($datos) : ?>
             <?php foreach ($datos as $item) : ?>
