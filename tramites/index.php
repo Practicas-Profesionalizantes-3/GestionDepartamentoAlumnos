@@ -32,7 +32,7 @@ $formularios_path = null;
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/templatemo-upright.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="tramites.css">
+    <link rel="stylesheet" href="css/tramites.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body class="body_tramites">
@@ -41,8 +41,8 @@ $formularios_path = null;
             <?php include("../includes/navbar.php"); ?>
             <div class="tm-main">
                 <div class="tm-section-wrap">
-                    <div class="text-center mb-4"> 
-                        <h1>Crea un trámite</h1>
+                    <div class="tm-text-primary mb-4"> 
+                        <h2>Crea un trámite</h2>
                     </div>
                     <div class="row">
                         <?php

@@ -66,8 +66,13 @@ echo "<script>console.log(" . $response . ")</script>";
             <a class="btn btn-primary mt-2 mr-2" href="Create.php" role="button">Agregar anuncio</a>
         </div>
         <div style="display:flex;justify-content:center; align-items:center;">
+<<<<<<< HEAD
             <div class="bg-light" style="width: 90%; border: 4px solid #64bded; border-radius: 8px">
                 <div class="table-responsive">
+=======
+            <div style="width: 90%; border: 4px solid #64bded; border-radius: 8px">
+                <div class="bg-light table-responsive">
+>>>>>>> e6e45330bda7769329d5899e0b6ca794bc14163e
                     <table class="table table-bordered table-striped table-hover">
                         <thead class="thead" style="background-color: #64bded; color:white">
                             <tr>
@@ -140,7 +145,10 @@ echo "<script>console.log(" . $response . ")</script>";
             </ul>
         </nav>
     </div>
+<<<<<<< HEAD
     
+=======
+>>>>>>> e6e45330bda7769329d5899e0b6ca794bc14163e
     <script src="../js/index.js"></script>
     <script src="../js/navbar.js"></script>
     <script src="js/delete.js"></script>
