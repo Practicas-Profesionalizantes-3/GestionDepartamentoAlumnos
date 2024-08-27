@@ -70,33 +70,119 @@ echo "<script>console.log(" . $response . ")</script>";
                 window.location.href = '../index.php';
             }
         }
+
+
+        function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    var tramite = document.getElementById(data);
+    if (ev.target.id === "pendientes") {
+        ev.target.appendChild(tramite);
+    } else {
+        ev.target.appendChild(tramite);
+    }
+    tramite.classList.add("dragged"); // Agrega una clase para indicar que el elemento ha sido arrastrado
+}
+
+// Agrega un evento para remover la clase "dragged" cuando el elemento es soltado
+document.addEventListener("dragend", function(event) {
+    var tramite = document.getElementById(event.target.id);
+    tramite.classList.remove("dragged");
+});
+
+
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    var tramite = document.getElementById(data);
+    var columna = ev.target.id;
+    var estado = "";
+
+    switch (columna) {
+        case "pendiente":
+            estado = "pendiente";
+            break;
+        case "en-proceso":
+            estado = "en proceso";
+            break;
+        case "terminado":
+            estado = "terminado";
+            break;
+        default:
+            console.error("Columna no válida");
+            return;
+    }
+
+    // Obtener el ID del trámite
+    var idTramite = tramite.id.replace("tramite-", "");
+
+    // Enviar la solicitud a la API
+    fetch('http://localhost/api/api-Alumnos/tramites.php', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id_tramite: idTramite,
+            id_estado_tramite: estado
+        })
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+
+    ev.target.appendChild(tramite);
+    tramite.classList.add("dragged"); // Agrega una clase para indicar que el elemento ha sido arrastrado
+}
     </script>
 
     <div class="listadoAvisos" style="margin-left: 88px;">
         <div class="card-header">
-            <h1 class="card-title tm-text-primary">Mis Tramites</h1>
+            <h1 class="card-title tm-text-primary">Tramites</h1>
             <a type="buttom" class="btn btn-primary mis-tramites-btn" href="index.php" style="align-items: end;" role="button">Volver</a>
         </div>
     </div>
     
     <div class="tm-section-wrap">
-        <div class="row">
-        <?php foreach ($tramites as $datos) { ?>
-            <div class="container-mis-tramites">
-                <h2 class="titlulo"><?php echo $datos['tipo_tramite']; ?></h2>
-                <p class="subtitle"><?php echo $datos['descripcion']; ?></p>
-                <div class="actions">
-                    <img src="../img/flechas.jpg" class="img-flecha" alt="" />
-                    <img src="../img/tilde.jpg" class="img-tilde" alt="" />
-                    <label class="responsable"><?php echo $datos['responsable']; ?></label>
-                </div>
-                <div class="info">
-                    <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
-                    <input type="text" alt="Avatar" class="avatar" value="<?php print_r($iniciales); ?>">
-                </div>
-            </div>
-        <?php } ?>
-
+  <div class="row">
+  <div class="col-lg-3 col-md-3 col-sm-12" id="pendiente" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h2>Pendientes</h2>
+      <?php foreach ($current_page_tramites as $datos) { ?>
+        <div class="container_tramites_dpto" draggable="true" ondragstart="drag(event)" id="tramite-1">
+          <h4 class="titlulo_tramites"><?php echo $datos['tipo_tramite']; ?></h4>
+          <p class="subtitle_tramites"><?php echo $datos['descripcion']; ?></p>
+          <div class="actions-tramites">
+            <img src="../img/flechas.jpg" class="img-flecha_tramites" alt="" />
+            <img src="../img/tilde.jpg" class="img-tilde_tramites" alt="" />
+            <label class="responsable_tramites"><?php echo $datos['responsable']; ?></label>
+          </div>
+          <div class="info">
+            <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
+            <input type="text" alt="Avatar" class="avatar" value="<?php print_r($iniciales); ?>">
+          </div>
+          <p class="fecha"><?php echo $datos['fecha_creacion']; ?></p>
+        </div>
+      <?php } ?>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-12" id="en-proceso" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h2>En Proceso</h2>
+      <!-- Contenido vacío -->
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-12" id="terminado" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h2>Terminados</h2>
+      <!-- Contenido vacío -->
+    </div>
+  </div>
+</div>
             <!-- Paginación -->
             <nav>
                 <ul class="pagination justify-content-center mt-3">
