@@ -100,32 +100,41 @@ document.addEventListener("dragend", function(event) {
 
 
 
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     var tramite = document.getElementById(data);
     var columna = ev.target.id;
-    var estado = "";
 
+    // Determinar el nuevo estado basado en la columna
+    var estado = "";
     switch (columna) {
         case "pendiente":
-            estado = "pendiente";
+            estado = "1"; // ID para 'Pendiente'
             break;
         case "en-proceso":
-            estado = "en proceso";
+            estado = "2"; // ID para 'En Proceso'
             break;
         case "terminado":
-            estado = "terminado";
+            estado = "3"; // ID para 'Completado'
             break;
         default:
             console.error("Columna no válida");
             return;
     }
 
-    // Obtener el ID del trámite
+    // Obtener el ID del trámite (remover el prefijo 'tramite-')
     var idTramite = tramite.id.replace("tramite-", "");
 
-    // Enviar la solicitud a la API
+    // Enviar la solicitud a la API para actualizar el estado
     fetch('http://localhost/api/api-Alumnos/tramites.php', {
         method: 'PUT',
         headers: {
@@ -136,13 +145,32 @@ function drop(ev) {
             id_estado_tramite: estado
         })
     })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Error en la actualización');
+        }
+    })
+    .then(data => {
+        console.log(data);
 
-    ev.target.appendChild(tramite);
-    tramite.classList.add("dragged"); // Agrega una clase para indicar que el elemento ha sido arrastrado
+        // Mover el trámite a la columna correcta
+        ev.target.appendChild(tramite);
+        tramite.classList.add("dragged");
+
+        // Actualizar la página para reflejar los cambios
+        location.reload(); // Esto recargará la página y reflejará los cambios en la base de datos
+    })
+    .catch(error => console.error(error));
 }
+
+// Evento para remover la clase 'dragged' cuando el elemento es soltado
+document.addEventListener("dragend", function(event) {
+    var tramite = document.getElementById(event.target.id);
+    tramite.classList.remove("dragged");
+});
+
     </script>
 
     <div class="listadoAvisos" style="margin-left: 88px;">
@@ -151,38 +179,76 @@ function drop(ev) {
             <a type="buttom" class="btn btn-primary mis-tramites-btn" href="index.php" style="align-items: end;" role="button">Volver</a>
         </div>
     </div>
-    
     <div class="tm-section-wrap">
   <div class="row">
-  <div class="col-lg-3 col-md-3 col-sm-12" id="pendiente" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <div class="col-lg-3 col-md-3 col-sm-12" id="pendiente" ondrop="drop(event)" ondragover="allowDrop(event)">
       <h2>Pendientes</h2>
-      <?php foreach ($current_page_tramites as $datos) { ?>
-        <div class="container_tramites_dpto" draggable="true" ondragstart="drag(event)" id="tramite-1">
-          <h4 class="titlulo_tramites"><?php echo $datos['tipo_tramite']; ?></h4>
-          <p class="subtitle_tramites"><?php echo $datos['descripcion']; ?></p>
-          <div class="actions-tramites">
-            <img src="../img/flechas.jpg" class="img-flecha_tramites" alt="" />
-            <img src="../img/tilde.jpg" class="img-tilde_tramites" alt="" />
-            <label class="responsable_tramites"><?php echo $datos['responsable']; ?></label>
+      <?php foreach ($current_page_tramites as $datos) {
+        if ($datos['estado_tramite'] == "Pendiente") { ?>
+          <div class="container_tramites_dpto" draggable="true" ondragstart="drag(event)" id="tramite-<?php echo $datos['id_tramite']; ?>">
+            <h4 class="titlulo_tramites"><?php echo $datos['tipo_tramite']; ?></h4>
+            <p class="subtitle_tramites"><?php echo $datos['descripcion']; ?></p>
+            <div class="actions-tramites">
+              <img src="../img/flechas.jpg" class="img-flecha_tramites" alt="" />
+              <img src="../img/tilde.jpg" class="img-tilde_tramites" alt="" />
+              <label class="responsable_tramites"><?php echo $datos['responsable']; ?></label>
+            </div>
+            <div class="info">
+              <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
+              <input type="text" alt="Avatar" class="avatar" value="<?php echo $iniciales; ?>">
+            </div>
+            <p class="fecha"><?php echo $datos['fecha_creacion']; ?></p>
           </div>
-          <div class="info">
-            <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
-            <input type="text" alt="Avatar" class="avatar" value="<?php print_r($iniciales); ?>">
-          </div>
-          <p class="fecha"><?php echo $datos['fecha_creacion']; ?></p>
-        </div>
-      <?php } ?>
+      <?php }
+      } ?>
     </div>
+
     <div class="col-lg-3 col-md-3 col-sm-12" id="en-proceso" ondrop="drop(event)" ondragover="allowDrop(event)">
       <h2>En Proceso</h2>
-      <!-- Contenido vacío -->
+      <?php foreach ($current_page_tramites as $datos) {
+        if ($datos['estado_tramite'] == "En Proceso") { ?>
+          <div class="container_tramites_dpto" draggable="true" ondragstart="drag(event)" id="tramite-<?php echo $datos['id_tramite']; ?>">
+            <h4 class="titlulo_tramites"><?php echo $datos['tipo_tramite']; ?></h4>
+            <p class="subtitle_tramites"><?php echo $datos['descripcion']; ?></p>
+            <div class="actions-tramites">
+              <img src="../img/flechas.jpg" class="img-flecha_tramites" alt="" />
+              <img src="../img/tilde.jpg" class="img-tilde_tramites" alt="" />
+              <label class="responsable_tramites"><?php echo $datos['responsable']; ?></label>
+            </div>
+            <div class="info">
+              <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
+              <input type="text" alt="Avatar" class="avatar" value="<?php echo $iniciales; ?>">
+            </div>
+            <p class="fecha"><?php echo $datos['fecha_creacion']; ?></p>
+          </div>
+      <?php }
+      } ?>
     </div>
+
     <div class="col-lg-3 col-md-3 col-sm-12" id="terminado" ondrop="drop(event)" ondragover="allowDrop(event)">
       <h2>Terminados</h2>
-      <!-- Contenido vacío -->
+      <?php foreach ($current_page_tramites as $datos) {
+        if ($datos['estado_tramite'] == "Completado") { ?>
+          <div class="container_tramites_dpto" draggable="true" ondragstart="drag(event)" id="tramite-<?php echo $datos['id_tramite']; ?>">
+            <h4 class="titlulo_tramites"><?php echo $datos['tipo_tramite']; ?></h4>
+            <p class="subtitle_tramites"><?php echo $datos['descripcion']; ?></p>
+            <div class="actions-tramites">
+              <img src="../img/flechas.jpg" class="img-flecha_tramites" alt="" />
+              <img src="../img/tilde.jpg" class="img-tilde_tramites" alt="" />
+              <label class="responsable_tramites"><?php echo $datos['responsable']; ?></label>
+            </div>
+            <div class="info">
+              <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
+              <input type="text" alt="Avatar" class="avatar" value="<?php echo $iniciales; ?>">
+            </div>
+            <p class="fecha"><?php echo $datos['fecha_creacion']; ?></p>
+          </div>
+      <?php }
+      } ?>
     </div>
   </div>
 </div>
+
             <!-- Paginación -->
             <nav>
                 <ul class="pagination justify-content-center mt-3">
