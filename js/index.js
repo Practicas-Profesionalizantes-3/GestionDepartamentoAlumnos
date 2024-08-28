@@ -68,4 +68,3 @@ document.addEventListener("DOMContentLoaded", function() {
             sidebar.classList.add('dark-theme');
         }
 });
-

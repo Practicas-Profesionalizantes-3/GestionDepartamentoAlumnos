@@ -22,6 +22,10 @@ $data = json_decode($response, true);
 </head>
 
 <body>
+    <!-- Include Perfil -->
+    <?php
+    include("includes/perfil.php");
+    ?>
     <div class="container-fluid">
         <div class="row">
             <!-- Include Navbar -->
@@ -44,7 +48,8 @@ $data = json_decode($response, true);
     <?php
         include("includes/footer.php")
     ?>
-
+    
+    <script src="js/perfil.js"></script>
     <script src="js/index.js"></script>
     <script src="js/navbar.js"></script> <!--JS de Navbar-->
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
