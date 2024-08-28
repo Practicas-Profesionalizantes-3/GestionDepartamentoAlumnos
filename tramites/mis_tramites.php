@@ -93,7 +93,6 @@ echo "<script>console.log(" . $response . ")</script>";
                 </div>
                 <div class="info">
                     <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
-                    <input type="text" alt="Avatar" class="avatar" value="<?php print_r($iniciales); ?>">
                 </div>
             </div>
         <?php } ?>

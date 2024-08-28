@@ -28,7 +28,6 @@
             }
         });
     </script>
-
 </head>
 
 <nav class="sidebar close">

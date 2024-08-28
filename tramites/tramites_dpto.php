@@ -187,18 +187,18 @@ document.addEventListener("dragend", function(event) {
       <?php foreach ($current_page_tramites as $datos) {
         if ($datos['estado_tramite'] == "Pendiente") { ?>
           <div class="container_tramites_dpto" draggable="true" ondragstart="drag(event)" id="tramite-<?php echo $datos['id_tramite']; ?>">
-            <h4 class="titlulo_tramites"><?php echo $datos['tipo_tramite']; ?></h4>
-            <p class="subtitle_tramites"><?php echo $datos['descripcion']; ?></p>
-            <div class="actions-tramites">
-              <img src="../img/flechas.jpg" class="img-flecha_tramites" alt="" />
-              <img src="../img/tilde.jpg" class="img-tilde_tramites" alt="" />
-              <label class="responsable_tramites"><?php echo $datos['responsable']; ?></label>
+            <h4 class="titlulo_tramites_dpto"><?php echo $datos['tipo_tramite']; ?></h4>
+            <p class="subtitle_tramites_dpto"><?php echo $datos['descripcion']; ?></p>
+            <div class="actions-tramites_dpto">
+              <img src="../img/flechas.jpg" class="img-flecha_tramites_dpto" alt="" />
+              <img src="../img/tilde.jpg" class="img-tilde_tramites_dpto" alt="" />
+              <label class="responsable_tramites_dpto"><?php echo $datos['responsable']; ?></label>
             </div>
-            <div class="info">
-              <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
-              <input type="text" alt="Avatar" class="avatar" value="<?php echo $iniciales; ?>">
+            <div class="info_dpto">
+              <label class="estado_tramites_dpto"><?php echo $datos['estado_tramite']; ?></label>
+              <input type="text" alt="Avatar" class="avatar_dpto" value="<?php echo $iniciales; ?>">
             </div>
-            <p class="fecha"><?php echo $datos['fecha_creacion']; ?></p>
+            <p class="fecha_dpto"><?php echo $datos['fecha_creacion']; ?></p>
           </div>
       <?php }
       } ?>
@@ -209,18 +209,18 @@ document.addEventListener("dragend", function(event) {
       <?php foreach ($current_page_tramites as $datos) {
         if ($datos['estado_tramite'] == "En Proceso") { ?>
           <div class="container_tramites_dpto" draggable="true" ondragstart="drag(event)" id="tramite-<?php echo $datos['id_tramite']; ?>">
-            <h4 class="titlulo_tramites"><?php echo $datos['tipo_tramite']; ?></h4>
-            <p class="subtitle_tramites"><?php echo $datos['descripcion']; ?></p>
-            <div class="actions-tramites">
-              <img src="../img/flechas.jpg" class="img-flecha_tramites" alt="" />
-              <img src="../img/tilde.jpg" class="img-tilde_tramites" alt="" />
-              <label class="responsable_tramites"><?php echo $datos['responsable']; ?></label>
+            <h4 class="titlulo_tramites_dpto"><?php echo $datos['tipo_tramite']; ?></h4>
+            <p class="subtitle_tramites_dpto"><?php echo $datos['descripcion']; ?></p>
+            <div class="actions-tramites_dpto">
+              <img src="../img/flechas.jpg" class="img-flecha_tramites_dpto" alt="" />
+              <img src="../img/tilde.jpg" class="img-tilde_tramites_dpto" alt="" />
+              <label class="responsable_tramites_dpto"><?php echo $datos['responsable']; ?></label>
             </div>
-            <div class="info">
-              <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
-              <input type="text" alt="Avatar" class="avatar" value="<?php echo $iniciales; ?>">
+            <div class="info_dpto">
+              <label class="estado_tramites_dpto"><?php echo $datos['estado_tramite']; ?></label>
+              <input type="text" alt="Avatar" class="avatar_dpto" value="<?php echo $iniciales; ?>">
             </div>
-            <p class="fecha"><?php echo $datos['fecha_creacion']; ?></p>
+            <p class="fecha_dpto"><?php echo $datos['fecha_creacion']; ?></p>
           </div>
       <?php }
       } ?>
@@ -231,18 +231,18 @@ document.addEventListener("dragend", function(event) {
       <?php foreach ($current_page_tramites as $datos) {
         if ($datos['estado_tramite'] == "Completado") { ?>
           <div class="container_tramites_dpto" draggable="true" ondragstart="drag(event)" id="tramite-<?php echo $datos['id_tramite']; ?>">
-            <h4 class="titlulo_tramites"><?php echo $datos['tipo_tramite']; ?></h4>
-            <p class="subtitle_tramites"><?php echo $datos['descripcion']; ?></p>
-            <div class="actions-tramites">
-              <img src="../img/flechas.jpg" class="img-flecha_tramites" alt="" />
-              <img src="../img/tilde.jpg" class="img-tilde_tramites" alt="" />
-              <label class="responsable_tramites"><?php echo $datos['responsable']; ?></label>
+            <h4 class="titlulo_tramites_dpto"><?php echo $datos['tipo_tramite']; ?></h4>
+            <p class="subtitle_tramites_dpto"><?php echo $datos['descripcion']; ?></p>
+            <div class="actions-tramites_dpto">
+              <img src="../img/flechas.jpg" class="img-flecha_tramites_dpto" alt="" />
+              <img src="../img/tilde.jpg" class="img-tilde_tramites_dpto" alt="" />
+              <label class="responsable_tramites_dpto"><?php echo $datos['responsable']; ?></label>
             </div>
-            <div class="info">
-              <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
-              <input type="text" alt="Avatar" class="avatar" value="<?php echo $iniciales; ?>">
+            <div class="info_dpto">
+              <label class="estado_tramites_dpto"><?php echo $datos['estado_tramite']; ?></label>
+              <input type="text" alt="Avatar" class="avatar_dpto" value="<?php echo $iniciales; ?>">
             </div>
-            <p class="fecha"><?php echo $datos['fecha_creacion']; ?></p>
+            <p class="fecha_dpto"><?php echo $datos['fecha_creacion']; ?></p>
           </div>
       <?php }
       } ?>
