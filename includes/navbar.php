@@ -62,7 +62,7 @@
             </li>
             <li class="search-box">
                 <a href="/gestiondepartamentoalumnos/cartelera.php">
-                    <i class='icon bx bxs-news'></i>
+                    <i class='bx bxs-news icon'></i>
                     <span class="text nav-text">Cartelera</span>
                 </a>
             </li>
@@ -73,17 +73,8 @@
                 </a>
             </li>
             <li class="search-box">
-<<<<<<< HEAD
-                <a href="/gestiondepartamentoalumnos/tramites/index.php">
-                    <i class='icon fas fa-envelope'></i>
-=======
                    <a href="/gestiondepartamentoalumnos/tramites">
-<<<<<<< HEAD
-                    <i class='icon fas fa-envelope nav-icon'></i>
->>>>>>> 6206a344c790b429ff19f14a33a5376d02b6b816
-=======
                     <i class='icon fas fa-envelope'></i>
->>>>>>> e6e45330bda7769329d5899e0b6ca794bc14163e
                     <span class="text nav-text">Tramites</span>
                 </a>
             </li>
@@ -101,31 +92,19 @@
             </li>
             <li class="search-box" style="display: none;" id="crear_aviso">
                 <a href="/gestiondepartamentoalumnos/Abm_Cartelera/index.php">
-<<<<<<< HEAD
-                    <i class='icon bx bx-add-to-queue'></i>
-=======
                     <i class='bx bx-add-to-queue icon'></i>
->>>>>>> e6e45330bda7769329d5899e0b6ca794bc14163e
                     <span class="text nav-text">Crear anuncio</span>
                 </a>
             </li>
             <li class="search-box" style="display: none;" id="crear_usuario">
                 <a href="/gestiondepartamentoalumnos/Abm_Usuarios/index.php">
-<<<<<<< HEAD
-                    <i class="icon fa-solid fa-user-plus"></i>
-=======
                     <i class="fa-solid fa-user-plus icon"></i>
->>>>>>> e6e45330bda7769329d5899e0b6ca794bc14163e
                     <span class="text nav-text">Crear usuario</span>
                 </a>
             </li>
             <li class="search-box">
                 <a href="javascript:void(0);" id="theme-toggle">
-<<<<<<< HEAD
-                    <i class='icon fas fa-adjust '></i>
-=======
                     <i class='icon fas fa-adjust'></i>
->>>>>>> e6e45330bda7769329d5899e0b6ca794bc14163e
                     <span class="text nav-text">Cambiar Tema</span>
                 </a>
             </li>

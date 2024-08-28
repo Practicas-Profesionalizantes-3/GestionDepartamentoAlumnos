@@ -77,8 +77,8 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="scss/style.css">
 </head>
 
-<body class="img js-fullheight" style="background-image: url(images/4.jpg);">
-    <section class="ftco-section shadow">
+<body style="background-image: url(images/4.jpg);">
+    <section class="ftco-section">
         <div class="login-wrap p-0">
             <div class="overflow-hidden">
                 <img src="../img/nuevologo.png" alt="Logo" class="login-wrap-img">

@@ -79,28 +79,6 @@ echo "<script>console.log(" . $response . ")</script>";
             <a type="buttom" class="btn btn-primary mis-tramites-btn" href="index.php" style="align-items: end;" role="button">Volver</a>
         </div>
     </div>
-<<<<<<< HEAD
-    <?php foreach ($data as $tramite) : ?>
-    <div class="container" style="width: 80%; margin: 20px auto;">
-        <div style="display: flex; align-items: center;">
-          <div style="display: flex; flex-direction: column; margin: 10px;">
-            <span style="font-weight: bold; font-size: 18px;"><?php print_r ($tramite['tipo_tramite']); ?></span>
-            <span style="margin-left: 50px; margin-top: 20px;"><?php echo ($tramite['descripcion']); ?></span>
-        </div>
-          <input type="text" id="procesando" class="procesando" placeholder=<?php print_r ($tramite['estado_tramite']); ?>>
-          <input type="text" id="usuario-responsable" class="usuario-responsable" placeholder=<?php print_r ($tramite['responsable']); ?>>
-        </div>
-    </div>
-    <?php endforeach; ?>
-    <!-- Paginación -->
-    <nav>
-        <ul class="pagination justify-content-center mt-3">
-            <?php if ($page > 1) : ?>
-                <li class="page-item">
-                    <a class="page-link" href="?page=<?php echo $page - 1; ?>">Anterior</a>
-                </li>
-            <?php endif; ?>
-=======
     
     <div class="tm-section-wrap">
         <div class="row">
@@ -119,7 +97,6 @@ echo "<script>console.log(" . $response . ")</script>";
                 </div>
             </div>
         <?php } ?>
->>>>>>> 6206a344c790b429ff19f14a33a5376d02b6b816
 
             <!-- Paginación -->
             <nav>

@@ -76,10 +76,6 @@ $formularios_path = null;
             </div> <!-- .tm-main -->
         </div> <!-- .row -->
     </div > <!-- .container-fluid -->
-<<<<<<< HEAD
-
-=======
->>>>>>> 6206a344c790b429ff19f14a33a5376d02b6b816
     <script src="../js/index.js"></script>
     <script src="../js/navbar.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
