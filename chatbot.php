@@ -64,6 +64,7 @@
 
     <script src="js/perfil.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/chatbot.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>
 

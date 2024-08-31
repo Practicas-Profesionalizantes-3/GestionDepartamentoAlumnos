@@ -66,7 +66,7 @@
                 </a>
             </li>
             <li class="search-box">
-                <a>
+                <a href="/gestiondepartamentoalumnos/carreras.php">
                     <i class='icon fas fa-user-friends'></i>
                     <span class="text nav-text">Carreras</span>
                 </a>
@@ -120,6 +120,7 @@
 </nav>
 
 <script>
+    //Esto funciona para abrir y cerrar el navbar
     const body = document.querySelector('body'),
         sidebar = body.querySelector('nav'),
         toggle = body.querySelector(".toggle"),
