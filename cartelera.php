@@ -51,7 +51,6 @@ $data = json_decode($response, true);
     
     <script src="js/perfil.js"></script>
     <script src="js/index.js"></script>
-    <script src="js/navbar.js"></script> <!--JS de Navbar-->
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>
 

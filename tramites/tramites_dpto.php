@@ -60,119 +60,6 @@ echo "<script>console.log(" . $response . ")</script>";
     <?php
     include("../includes/navbar.php");
     ?>
-    <script>
-        var loggedIn = sessionStorage.getItem('loggedIn');
-        if (!loggedIn) {
-            window.location.href = '../index.php'; // Redirigir al index si no está logueado
-        } else {
-            var usuario = JSON.parse(sessionStorage.getItem("usuario"));
-            console.log(usuario)
-            if (usuario.id_usuario_estado != 1) {
-                window.location.href = '../index.php';
-            }
-        }
-
-
-        function allowDrop(ev) {
-    ev.preventDefault();
-}
-
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-}
-
-function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    var tramite = document.getElementById(data);
-    if (ev.target.id === "pendientes") {
-        ev.target.appendChild(tramite);
-    } else {
-        ev.target.appendChild(tramite);
-    }
-    tramite.classList.add("dragged"); // Agrega una clase para indicar que el elemento ha sido arrastrado
-}
-
-// Agrega un evento para remover la clase "dragged" cuando el elemento es soltado
-document.addEventListener("dragend", function(event) {
-    var tramite = document.getElementById(event.target.id);
-    tramite.classList.remove("dragged");
-});
-
-
-
-function allowDrop(ev) {
-    ev.preventDefault();
-}
-
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-}
-
-function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    var tramite = document.getElementById(data);
-    var columna = ev.target.id;
-
-    // Determinar el nuevo estado basado en la columna
-    var estado = "";
-    switch (columna) {
-        case "pendiente":
-            estado = "1"; // ID para 'Pendiente'
-            break;
-        case "en-proceso":
-            estado = "2"; // ID para 'En Proceso'
-            break;
-        case "terminado":
-            estado = "3"; // ID para 'Completado'
-            break;
-        default:
-            console.error("Columna no válida");
-            return;
-    }
-
-    // Obtener el ID del trámite (remover el prefijo 'tramite-')
-    var idTramite = tramite.id.replace("tramite-", "");
-
-    // Enviar la solicitud a la API para actualizar el estado
-    fetch('http://localhost/api/api-Alumnos/tramites.php', {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            id_tramite: idTramite,
-            id_estado_tramite: estado
-        })
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error('Error en la actualización');
-        }
-    })
-    .then(data => {
-        console.log(data);
-
-        // Mover el trámite a la columna correcta
-        ev.target.appendChild(tramite);
-        tramite.classList.add("dragged");
-
-        // Actualizar la página para reflejar los cambios
-        location.reload(); // Esto recargará la página y reflejará los cambios en la base de datos
-    })
-    .catch(error => console.error(error));
-}
-
-// Evento para remover la clase 'dragged' cuando el elemento es soltado
-document.addEventListener("dragend", function(event) {
-    var tramite = document.getElementById(event.target.id);
-    tramite.classList.remove("dragged");
-});
-
-    </script>
 
     <div class="listadoAvisos" style="margin-left: 88px;">
         <div class="card-header">
@@ -180,104 +67,102 @@ document.addEventListener("dragend", function(event) {
             <a type="buttom" class="btn btn-primary mis-tramites-btn" href="index.php" style="align-items: end;" role="button">Volver</a>
         </div>
     </div>
+
     <div class="tm-section-wrap">
-  <div class="row">
-    <div class="col-lg-3 col-md-3 col-sm-12" id="pendiente" ondrop="drop(event)" ondragover="allowDrop(event)">
-      <h2>Pendientes</h2>
-      <?php foreach ($current_page_tramites as $datos) {
-        if ($datos['estado_tramite'] == "Pendiente") { ?>
-          <div class="container_tramites_dpto" draggable="true" ondragstart="drag(event)" id="tramite-<?php echo $datos['id_tramite']; ?>">
-            <h4 class="titlulo_tramites_dpto"><?php echo $datos['tipo_tramite']; ?></h4>
-            <p class="subtitle_tramites_dpto"><?php echo $datos['descripcion']; ?></p>
-            <div class="actions-tramites_dpto">
-              <img src="../img/flechas.jpg" class="img-flecha_tramites_dpto" alt="" />
-              <img src="../img/tilde.jpg" class="img-tilde_tramites_dpto" alt="" />
-              <label class="responsable_tramites_dpto"><?php echo $datos['responsable']; ?></label>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12" id="pendiente" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <h2>Pendientes</h2>
+                <?php foreach ($current_page_tramites as $datos) {
+                    if ($datos['estado_tramite'] == "Pendiente") { ?>
+                    <div class="container_tramites_dpto" draggable="true" ondragstart="drag(event)" id="tramite-<?php echo $datos['id_tramite']; ?>">
+                        <h4 class="titlulo_tramites_dpto"><?php echo $datos['tipo_tramite']; ?></h4>
+                        <p class="subtitle_tramites_dpto"><?php echo $datos['descripcion']; ?></p>
+                        <div class="actions-tramites_dpto">
+                            <img src="../img/flechas.jpg" class="img-flecha_tramites_dpto" alt="" />
+                            <img src="../img/tilde.jpg" class="img-tilde_tramites_dpto" alt="" />
+                            <label class="responsable_tramites_dpto"><?php echo $datos['responsable']; ?></label>
+                        </div>
+                        <div class="info_dpto">
+                            <label class="estado_tramites_dpto"><?php echo $datos['estado_tramite']; ?></label>
+                            <input type="text" alt="Avatar" class="avatar_dpto" value="<?php echo $iniciales; ?>">
+                        </div>
+                        <p class="fecha_dpto"><?php echo $datos['fecha_creacion']; ?></p>
+                    </div>
+                <?php }
+                } ?> 
             </div>
-            <div class="info_dpto">
-              <label class="estado_tramites_dpto"><?php echo $datos['estado_tramite']; ?></label>
-              <input type="text" alt="Avatar" class="avatar_dpto" value="<?php echo $iniciales; ?>">
+
+            <div class="col-lg-3 col-md-3 col-sm-12" id="en-proceso" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <h2>En Proceso</h2>
+                <?php foreach ($current_page_tramites as $datos) {
+                    if ($datos['estado_tramite'] == "En Proceso") { ?>
+                    <div class="container_tramites_dpto" draggable="true" ondragstart="drag(event)" id="tramite-<?php echo $datos['id_tramite']; ?>">
+                        <h4 class="titlulo_tramites_dpto"><?php echo $datos['tipo_tramite']; ?></h4>
+                        <p class="subtitle_tramites_dpto"><?php echo $datos['descripcion']; ?></p>
+                        <div class="actions-tramites_dpto">
+                            <img src="../img/flechas.jpg" class="img-flecha_tramites_dpto" alt="" />
+                            <img src="../img/tilde.jpg" class="img-tilde_tramites_dpto" alt="" />
+                            <label class="responsable_tramites_dpto"><?php echo $datos['responsable']; ?></label>
+                        </div>
+                        <div class="info_dpto">
+                            <label class="estado_tramites_dpto"><?php echo $datos['estado_tramite']; ?></label>
+                            <input type="text" alt="Avatar" class="avatar_dpto" value="<?php echo $iniciales; ?>">
+                        </div>
+                        <p class="fecha_dpto"><?php echo $datos['fecha_creacion']; ?></p>
+                    </div>
+                <?php }
+                } ?>
             </div>
-            <p class="fecha_dpto"><?php echo $datos['fecha_creacion']; ?></p>
-          </div>
-      <?php }
-      } ?>
+
+        <div class="col-lg-3 col-md-3 col-sm-12" id="terminado" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h2>Terminados</h2>
+            <?php foreach ($current_page_tramites as $datos) {
+                if ($datos['estado_tramite'] == "Completado") { ?>
+                <div class="container_tramites_dpto" draggable="true" ondragstart="drag(event)" id="tramite-<?php echo $datos['id_tramite']; ?>">
+                    <h4 class="titlulo_tramites_dpto"><?php echo $datos['tipo_tramite']; ?></h4>
+                    <p class="subtitle_tramites_dpto"><?php echo $datos['descripcion']; ?></p>
+                    <div class="actions-tramites_dpto">
+                        <img src="../img/flechas.jpg" class="img-flecha_tramites_dpto" alt="" />
+                        <img src="../img/tilde.jpg" class="img-tilde_tramites_dpto" alt="" />
+                        <label class="responsable_tramites_dpto"><?php echo $datos['responsable']; ?></label>
+                    </div>
+                    <div class="info_dpto">
+                        <label class="estado_tramites_dpto"><?php echo $datos['estado_tramite']; ?></label>
+                        <input type="text" alt="Avatar" class="avatar_dpto" value="<?php echo $iniciales; ?>">
+                    </div>
+                    <p class="fecha_dpto"><?php echo $datos['fecha_creacion']; ?></p>
+                </div>
+            <?php }
+            } ?>
+        </div>
     </div>
 
-    <div class="col-lg-3 col-md-3 col-sm-12" id="en-proceso" ondrop="drop(event)" ondragover="allowDrop(event)">
-      <h2>En Proceso</h2>
-      <?php foreach ($current_page_tramites as $datos) {
-        if ($datos['estado_tramite'] == "En Proceso") { ?>
-          <div class="container_tramites_dpto" draggable="true" ondragstart="drag(event)" id="tramite-<?php echo $datos['id_tramite']; ?>">
-            <h4 class="titlulo_tramites_dpto"><?php echo $datos['tipo_tramite']; ?></h4>
-            <p class="subtitle_tramites_dpto"><?php echo $datos['descripcion']; ?></p>
-            <div class="actions-tramites_dpto">
-              <img src="../img/flechas.jpg" class="img-flecha_tramites_dpto" alt="" />
-              <img src="../img/tilde.jpg" class="img-tilde_tramites_dpto" alt="" />
-              <label class="responsable_tramites_dpto"><?php echo $datos['responsable']; ?></label>
-            </div>
-            <div class="info_dpto">
-              <label class="estado_tramites_dpto"><?php echo $datos['estado_tramite']; ?></label>
-              <input type="text" alt="Avatar" class="avatar_dpto" value="<?php echo $iniciales; ?>">
-            </div>
-            <p class="fecha_dpto"><?php echo $datos['fecha_creacion']; ?></p>
-          </div>
-      <?php }
-      } ?>
-    </div>
+    <!-- Paginación -->
+    <nav>
+        <ul class="pagination justify-content-center mt-3">
+            <?php if ($page > 1) : ?>
+                <li class="page-item">
+                    <a class="page-link" href="?page=<?php echo $page - 1; ?>">Anterior</a>
+                </li>
+            <?php endif; ?>
 
-    <div class="col-lg-3 col-md-3 col-sm-12" id="terminado" ondrop="drop(event)" ondragover="allowDrop(event)">
-      <h2>Terminados</h2>
-      <?php foreach ($current_page_tramites as $datos) {
-        if ($datos['estado_tramite'] == "Completado") { ?>
-          <div class="container_tramites_dpto" draggable="true" ondragstart="drag(event)" id="tramite-<?php echo $datos['id_tramite']; ?>">
-            <h4 class="titlulo_tramites_dpto"><?php echo $datos['tipo_tramite']; ?></h4>
-            <p class="subtitle_tramites_dpto"><?php echo $datos['descripcion']; ?></p>
-            <div class="actions-tramites_dpto">
-              <img src="../img/flechas.jpg" class="img-flecha_tramites_dpto" alt="" />
-              <img src="../img/tilde.jpg" class="img-tilde_tramites_dpto" alt="" />
-              <label class="responsable_tramites_dpto"><?php echo $datos['responsable']; ?></label>
-            </div>
-            <div class="info_dpto">
-              <label class="estado_tramites_dpto"><?php echo $datos['estado_tramite']; ?></label>
-              <input type="text" alt="Avatar" class="avatar_dpto" value="<?php echo $iniciales; ?>">
-            </div>
-            <p class="fecha_dpto"><?php echo $datos['fecha_creacion']; ?></p>
-          </div>
-      <?php }
-      } ?>
-    </div>
-  </div>
-</div>
+            <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+                <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
+                    <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                </li>
+            <?php endfor; ?>
 
-            <!-- Paginación -->
-            <nav>
-                <ul class="pagination justify-content-center mt-3">
-                    <?php if ($page > 1) : ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=<?php echo $page - 1; ?>">Anterior</a>
-                        </li>
-                    <?php endif; ?>
+            <?php if ($page < $total_pages) : ?>
+                <li class="page-item">
+                    <a class="page-link" href="?page=<?php echo $page + 1; ?>">Siguiente</a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </nav>
 
-                    <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-                        <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
-                            <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                        </li>
-                    <?php endfor; ?>
-
-                    <?php if ($page < $total_pages) : ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=<?php echo $page + 1; ?>">Siguiente</a>
-                        </li>
-                    <?php endif; ?>
-                </ul>
-            </nav>
-
-
-            <script src="../js/index.js"></script>
-            <script src="../js/navbar.js"></script>
-            <script src="js/delete.js"></script>
-            <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
+    <script src="js/tramites_dpto.js"></script>
+    <script src="../js/index.js"></script>
+    <script src="js/delete.js"></script>
+    <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>
-
 </html>

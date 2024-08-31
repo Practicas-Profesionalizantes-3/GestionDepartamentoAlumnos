@@ -57,6 +57,8 @@ echo "<script>console.log(" . $response . ")</script>";
 </head>
 
 <body>
+
+    <!-- Include del Navbar -->
     <?php
     include("../includes/navbar.php");
     ?>
@@ -82,49 +84,49 @@ echo "<script>console.log(" . $response . ")</script>";
     
     <div class="tm-section-wrap">
         <div class="row">
-        <?php foreach ($tramites as $datos) { ?>
-            <div class="container-mis-tramites">
-                <h2 class="titlulo"><?php echo $datos['tipo_tramite']; ?></h2>
-                <p class="subtitle"><?php echo $datos['descripcion']; ?></p>
-                <div class="actions">
-                    <img src="../img/flechas.jpg" class="img-flecha" alt="" />
-                    <img src="../img/tilde.jpg" class="img-tilde" alt="" />
-                    <label class="responsable"><?php echo $datos['responsable']; ?></label>
+            <?php foreach ($tramites as $datos) { ?>
+                <div class="container-mis-tramites">
+                    <h2 class="titlulo"><?php echo $datos['tipo_tramite']; ?></h2>
+                    <p class="subtitle"><?php echo $datos['descripcion']; ?></p>
+                    <div class="actions">
+                        <img src="../img/flechas.jpg" class="img-flecha" alt="" /> 
+                        <img src="../img/tilde.jpg" class="img-tilde" alt="" />
+                        <label class="responsable"><?php echo $datos['responsable']; ?></label>
+                    </div>
+                    <div class="info">
+                        <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
+                    </div>
                 </div>
-                <div class="info">
-                    <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
-                </div>
-            </div>
-        <?php } ?>
+            <?php } ?>
+        </div>
+    </div>
+    
+    <!-- Paginación -->
+    <nav>
+        <ul class="pagination justify-content-center mt-3">
+            <?php if ($page > 1) : ?>
+                <li class="page-item">
+                    <a class="page-link" href="?page=<?php echo $page - 1; ?>">Anterior</a>
+                </li>
+            <?php endif; ?>
 
-            <!-- Paginación -->
-            <nav>
-                <ul class="pagination justify-content-center mt-3">
-                    <?php if ($page > 1) : ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=<?php echo $page - 1; ?>">Anterior</a>
-                        </li>
-                    <?php endif; ?>
+            <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+                <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
+                    <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                </li>
+            <?php endfor; ?>
 
-                    <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-                        <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
-                            <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                        </li>
-                    <?php endfor; ?>
-
-                    <?php if ($page < $total_pages) : ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=<?php echo $page + 1; ?>">Siguiente</a>
-                        </li>
-                    <?php endif; ?>
-                </ul>
-            </nav>
+            <?php if ($page < $total_pages) : ?>
+                <li class="page-item">
+                    <a class="page-link" href="?page=<?php echo $page + 1; ?>">Siguiente</a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </nav>
 
 
-            <script src="../js/index.js"></script>
-            <script src="../js/navbar.js"></script>
-            <script src="js/delete.js"></script>
-            <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
+    <script src="../js/index.js"></script>
+    <script src="js/delete.js"></script>
+    <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>
-
 </html>
