@@ -70,6 +70,10 @@ function drop(ev) {
     // Obtener el ID del trámite (remover el prefijo 'tramite-')
     var idTramite = tramite.id.replace("tramite-", "");
 
+    // Obtener el ID del usuario desde la sesión
+    var usuario = JSON.parse(sessionStorage.getItem("usuario"));
+    var idUsuario = usuario.id_usuario;
+
     // Enviar la solicitud a la API para actualizar el estado
     fetch('http://localhost/api/api-Alumnos/tramites.php', {
     method: 'PUT',
@@ -94,6 +98,30 @@ function drop(ev) {
     // Mover el trámite a la columna correcta
     ev.target.appendChild(tramite);
     tramite.classList.add("dragged");
+    
+    actualizarMovimiento(idTramite, idUsuario, 'Estado actualizado a ' + columna, estado);
+
+    function actualizarMovimiento(idTramite, idUsuario, observacion, estado) {
+        fetch('http://localhost/api/api-Alumnos/tramite_movimientos.php', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id_tramite: idTramite,
+                id_usuario: idUsuario,
+                observacion: observacion,
+                id_estado_tramite: estado
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            // Aquí puedes agregar lógica adicional después de actualizar el movimiento
+        })
+        .catch(error => console.error('Error:', error));
+    }
+    
 
     // Actualizar la página para reflejar los cambios
     location.reload(); // Esto recargará la página y reflejará los cambios en la base de datos
