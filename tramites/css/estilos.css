@@ -1,0 +1,210 @@
+
+
+/*Mis Tramites */
+
+.container-mis-tramites {
+    margin-top: 50px;
+    margin-left: 100px;
+    margin-right: -80px;
+    width: 340px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 20px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .subtitle {
+    color: #888;
+    font-size: 14px;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    
+  }
+  
+  .img-flecha {
+    width: 70px;
+  }
+
+  .img-tilde {
+    border-radius: 30px;
+    width: 15%;
+    height: 50%;
+    margin-top: 16px;
+  }
+
+  .responsable {
+    margin-top: 15px;
+    margin-left: 20px;
+    width: 140px;
+    padding: 10px;
+    border-radius: 30px;
+    background-image: linear-gradient(to right, #98d9f3, #034b78);
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 25px;
+  }
+  
+  .number {
+    font-weight: bold;
+  }
+  
+  .estado {
+    margin-left: 40px;
+    width: 180px;
+    padding: 10px;
+    border-radius: 30px;
+    background-color: rgb(81, 136, 49);
+    color: #ffffff;
+    text-align: center;
+    background-image: linear-gradient(to right, #f10000, #f6d657);
+    border: 3px solid #FFC107; /* borde naranja */
+}
+
+/*Tramites Dpto*/
+
+.container_tramites_dpto {
+  margin-top: 20px;
+  margin-left: -5px;
+  margin-right: -30px;
+  width: 420px;
+  height: 350px;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 20px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  
+    /* Add some basic styling to make the tramites draggable */
+    cursor: move;
+    z-index: 100;
+    position: relative;
+}
+
+.titlulo_tramites_dpto {
+margin-bottom: 40px;
+}
+
+.subtitle_tramites_dpto {
+  color: #888;
+  font-size: 14px;
+  text-align: center;
+  padding: 5px;
+  margin-top: -15px;
+}
+
+.actions-tramites_dpto {
+  display: flex;
+  gap: 10px;
+  position: relative;
+  top: -10px;
+}
+
+.img-flecha_tramites_dpto {
+  width: 70px;
+}
+
+.img-tilde_tramites_dpto {
+  border-radius: 30px;
+  width: 15%;
+  height: 60%;
+  margin-top: 16px;
+}
+
+.responsable_tramites_dpto {
+  margin-top: 15px;
+  margin-left: 100px;
+  width: 120px;
+  padding: 10px;
+  border-radius: 30px;
+  background-image: linear-gradient(to right, #98d9f3, #034b78);
+  color: #ffffff;
+  text-align: center;
+}
+
+.info_dpto {
+  display: flex;
+  gap: 10px;
+  margin-top: 90px;
+  position: relative;
+  top: -75px;
+}
+
+.number {
+  font-weight: bold;
+}
+
+.avatar_dpto {
+  margin-left: 130px;
+  text-align: center;
+  font-size: 30px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #162b40;
+  color: white;
+}
+
+.estado_tramites_dpto {
+  margin-right: -70px;
+  margin-left: 50px;
+  margin-top: 10px;
+  width: 200px;
+  border-radius: 30px;
+  font-size: 25px;
+  color: #ffffff;
+  text-align: center;
+  background-image: linear-gradient(to right, #f10000, #f6d657);
+  border: 3px solid #FFC107; /* borde naranja */
+}
+
+.fecha_dpto {
+ margin-top: -45px; 
+}
+ 
+/*columnas*/
+
+.tm-section-wrap .col-lg-3{
+  background-color: #dfdbdb;  /* Establecemos un fondo gris para las columnas */
+  margin: 10px;  /* Establecemos un margen para separar las columnas */
+  border-radius: 10px;   /* Borde redondeado para dar un toque visual */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  /* Sombra para dar profundidad */
+  
+}
+
+.tm-section-wrap .col-lg-4 h2 {
+  margin-bottom: 18px;   /* Centramos los títulos */
+  font-weight: bold;
+}
+
+.row {
+  margin-left: 200px;
+  width: 1800px;
+}
+
+.col-lg-3 {
+  padding: 10px;    /* Add some basic styling to make the columns droppable */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+  min-height: 600px;    /* Set a minimum height for the columns */
+}

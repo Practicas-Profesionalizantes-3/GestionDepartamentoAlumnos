@@ -16,6 +16,7 @@ $("#formulario").submit(function (event) {
                 location.href = "../index.php"
                 sessionStorage.setItem("loggedIn", true);
                 sessionStorage.setItem("usuario", data.data);
+                console.log(data.data);
             }
             else{
                 $("#errorMessage").show();

@@ -5,7 +5,7 @@
             <div class="col-md-6 col-sm-6">
                 <div class="single-footer-widget text-light">
                     <div class="footer-logo mb-3">
-                        <img src="img/inst.png" alt="logo" class="w-50">
+                        <img src="/gestiondepartamentoalumnos/img/inst.png" alt="logo" class="w-50">
                     </div>
                     <span>Centro de Tecnología e Innovación Avellaneda-Buenos Aires - Argentina</span>
                     <div class="social-icons mt-3">
