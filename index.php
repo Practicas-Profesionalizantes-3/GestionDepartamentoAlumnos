@@ -22,7 +22,7 @@
 
 <body>
     <!-- Include Perfil -->
-    <?php
+    <?php 
     include("includes/perfil.php");
     ?>
     <div class="container-fluid">
