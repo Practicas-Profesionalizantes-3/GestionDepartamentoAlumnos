@@ -29,13 +29,42 @@ function generar_tramite_html($datos, $iniciales) {
             <img src='../img/flechas.jpg' class='img-flecha_tramites_dpto' alt='' />
             <img src='../img/tilde.jpg' class='img-tilde_tramites_dpto' alt='' />
             <label class='responsable_tramites_dpto'>{$datos['responsable']}</label>
+            <button class='btn-modal' data-toggle='modal' data-target='#modal-tramite-{$datos['id_tramite']}'>Abrir modal</button>
         </div>
         <div class='info_dpto'>
             <label class='estado_tramites_dpto'>{$datos['estado_tramite']}</label>
             <input type='text' alt='Avatar' class='avatar_dpto' value='{$iniciales}'>
         </div>
         <p class='fecha_dpto'>{$datos['fecha_creacion']}</p>
-    </div>";
+    </div>
+    
+    <!-- Modal -->
+<div class='modal fade modal-tramites' id='modal-tramite-{$datos['id_tramite']}' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true' data-backdrop='false' style='z-index: 1000;'>
+    <div class='modal-dialog' role='document'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h2 class='modal-title' id='exampleModalLabel'>{$datos['tipo_tramite']}</h2>
+                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                </button>
+            </div>
+            <div class='modal-body'>
+                <div class='modal-usuario'>
+                    <span class='alumno'>Alumno: {$iniciales}</span>
+                </div>
+                <div class='modal-descripcion'>
+                    {$datos['descripcion']}
+                </div>
+            </div>
+            <div class='modal-footer' style='display: flex; justify-content: space-between;'>
+                <div class='modal-responsable'>
+                    <span class='responsable'>Responsable: {$datos['responsable']}</span>
+                </div>
+                <button id='imprimirPantalla' type='button' class='btn btn-secondary' data-modal-id='{$datos['id_tramite']}'>Imprimir Ticket</button>
+            </div>
+        </div>
+    </div>
+</div>";
 }
 
 $items_per_page = 5; // Número de filas por página
@@ -126,5 +155,6 @@ $iniciales = obtener_iniciales($current_page_tramites[0]);
     <script src="../js/index.js"></script>
     <script src="js/delete.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

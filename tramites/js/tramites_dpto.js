@@ -134,3 +134,18 @@ document.addEventListener("dragend", function(event) {
 var tramite = document.getElementById(event.target.id);
 tramite.classList.remove("dragged");
 });
+
+
+
+document.getElementById('imprimirPantalla').addEventListener('click', function() {
+    var opciones = {
+      pageSize: 'A4',
+      pageOrientation: 'portrait',
+      pages: 1
+    };
+    
+    window.print(opciones);
+  });
+
+
+
