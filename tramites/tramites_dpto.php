@@ -35,28 +35,8 @@ function generar_tramite_html($datos, $iniciales) {
             <input type='text' alt='Avatar' class='avatar_dpto' value='{$iniciales}'>
         </div>
         <p class='fecha_dpto'>{$datos['fecha_creacion']}</p>
-        <button class='btn-imp' onclick='abrirModal()'>Generar Ticket</button>
-    </div>
-    <!-- Modal -->
-<div id='modal-ticket' class='modal'>
-  <div class='modal-content'>
-    <div class='modal-header'>
-      <h5>{$datos['tipo_tramite']}</h5>
-      <button type='button' class='close' onclick='cerrarModal()'>×</button>
-    </div>
-    <div class='modal-body'>
-      <!-- Aquí puedes agregar el contenido del modal -->
-      <p>¿Estás seguro de que deseas generar un ticket?</p>
-    </div>
-    <div class='modal-footer'>
-      <button type='button' class='btn btn-secondary' onclick='cerrarModal()'>Cancelar</button>
-      <button type='button' class='btn btn-primary'>Imprimir</button>
-    </div>
-  </div>
-</div>
-";}?>
-
-<?php
+    </div>";
+}
 
 $items_per_page = 5; // Número de filas por página
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
@@ -143,7 +123,6 @@ $iniciales = obtener_iniciales($current_page_tramites[0]);
     </nav>
 
     <script src="js/tramites_dpto.js"></script>
-    <script src="js/ticket.js"></script>
     <script src="../js/index.js"></script>
     <script src="js/delete.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>

@@ -40,9 +40,12 @@ if (isset($_POST['submit'])) {
                 $mail->Port = 587;
 
                 // Destinatario
+                // Configuración del correo
                 $mail->setFrom('maximilianojlopez@hotmail.com');
                 $mail->addAddress($correo);
-
+                $mail->CharSet = 'UTF-8';
+                $mail->Encoding = 'base64';
+                
                 // Contenido del correo electrónico
                 $mail->isHTML(true);
                 $mail->Subject = 'Restablecer password';

@@ -56,6 +56,7 @@ $(document).ready(function() {
 
         var newPassword = $("#new_password").val();
         var confirmPassword = $("#confirm_password").val();
+        var currentPassword = $("#current_password").val();
 
         if (newPassword !== confirmPassword) {
             Swal.fire({
@@ -87,6 +88,7 @@ $(document).ready(function() {
                     },
                     body: JSON.stringify({
                         id_usuario: usuario.id_usuario,
+                        current_password: currentPassword,
                         password: newPassword
                     })
                 })
