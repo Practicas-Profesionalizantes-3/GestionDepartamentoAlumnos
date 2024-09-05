@@ -3,7 +3,7 @@
     <i class="fa-solid fa-user"></i>
 </button>
 
-<!-- El Modal -->
+<!-- El Modal --> 
 <div id="perfilModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>

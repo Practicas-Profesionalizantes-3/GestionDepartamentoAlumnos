@@ -138,14 +138,25 @@ tramite.classList.remove("dragged");
 
 
 document.getElementById('imprimirPantalla').addEventListener('click', function() {
-    var opciones = {
-      pageSize: 'A4',
-      pageOrientation: 'portrait',
-      pages: 1
-    };
-    
-    window.print(opciones);
-  });
+  var opciones = {
+    pageSize: 'A4',
+    pageOrientation: 'portrait',
+    pages: 1
+  };
+  
+  // Configuramos las opciones de impresión
+  var estilo = '@page { size: A4 portrait; margin: 0; }';
+  var estiloHtml = '<style>' + estilo + '</style>';
+  
+  // Agregamos el estilo al documento
+  document.head.innerHTML += estiloHtml;
+  
+  // Imprimimos el documento
+  window.print();
+  
+  // Eliminamos el estilo agregado
+  document.head.innerHTML = document.head.innerHTML.replace(estiloHtml, '');
+});
 
 
 

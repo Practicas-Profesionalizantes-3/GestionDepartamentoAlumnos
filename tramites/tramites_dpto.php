@@ -10,17 +10,13 @@ $tramites = json_decode($response, true);
 
 $data = $tramites;
 
-// Función para obtener las iniciales del responsable
-function obtener_iniciales($usuario) {
-    $nombre = $usuario['usuario'];
-    $apellido = $usuario['usuarioap'];
-    $inicial_nombre = substr($nombre, 0, 1);
-    $inicial_apellido = substr($apellido, 0, 1);
-    return $inicial_nombre . $inicial_apellido;
-}
 
 // Función para generar el bloque HTML de un trámite
-function generar_tramite_html($datos, $iniciales) {
+function generar_tramite_html($datos, $tramites) {
+    $boton_ticket = '';
+    if ($datos['estado_tramite'] == 'Pendiente') {
+        $boton_ticket = '<button class="btn-modal" data-toggle="modal" data-target="#modal-tramite-' . $datos['id_tramite'] . '">Generar ticket</button>';
+    }
     return "
     <div class='container_tramites_dpto' draggable='true' ondragstart='drag(event)' id='tramite-{$datos['id_tramite']}'>
         <h4 class='titlulo_tramites_dpto'>{$datos['tipo_tramite']}</h4>
@@ -29,16 +25,15 @@ function generar_tramite_html($datos, $iniciales) {
             <img src='../img/flechas.jpg' class='img-flecha_tramites_dpto' alt='' />
             <img src='../img/tilde.jpg' class='img-tilde_tramites_dpto' alt='' />
             <label class='responsable_tramites_dpto'>{$datos['responsable']}</label>
-            <button class='btn-modal' data-toggle='modal' data-target='#modal-tramite-{$datos['id_tramite']}'>Abrir modal</button>
         </div>
         <div class='info_dpto'>
             <label class='estado_tramites_dpto'>{$datos['estado_tramite']}</label>
-            <input type='text' alt='Avatar' class='avatar_dpto' value='{$iniciales}'>
-        </div>
-        <p class='fecha_dpto'>{$datos['fecha_creacion']}</p>
+        </div class='footer'>
+          <p class='fecha_dpto'>{$datos['fecha_creacion']}</p>
+          $boton_ticket
     </div>
     
-    <!-- Modal -->
+    <!-- Modal Ticket-->
 <div class='modal fade modal-tramites' id='modal-tramite-{$datos['id_tramite']}' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true' data-backdrop='false' style='z-index: 1000;'>
     <div class='modal-dialog' role='document'>
         <div class='modal-content'>
@@ -50,8 +45,8 @@ function generar_tramite_html($datos, $iniciales) {
             </div>
             <div class='modal-body'>
                 <div class='modal-usuario'>
-                    <span class='alumno'>Alumno: {$iniciales}</span>
-                </div>
+ 
+    </div>
                 <div class='modal-descripcion'>
                     {$datos['descripcion']}
                 </div>
@@ -65,7 +60,7 @@ function generar_tramite_html($datos, $iniciales) {
         </div>
     </div>
 </div>";
-}
+};
 
 $items_per_page = 5; // Número de filas por página
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
@@ -79,11 +74,12 @@ $total_pages = ceil($total_tramites / $items_per_page);
 
 // Obtener los tramites para la página actual
 $current_page_tramites = array_slice($data, $offset, $items_per_page);
-$iniciales = obtener_iniciales($current_page_tramites[0]);
+
 
 ?>
 
 <!DOCTYPE html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -101,6 +97,7 @@ $iniciales = obtener_iniciales($current_page_tramites[0]);
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script> <!-- Toastify JS-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SwettAlert -->
 </head>
+
 <body>
     <?php include("../includes/navbar.php"); ?>
 
@@ -113,14 +110,14 @@ $iniciales = obtener_iniciales($current_page_tramites[0]);
 
     <div class="tm-section-wrap">
         <div class="row">
-            <?php 
+            <?php
             $estados = ['Pendiente' => 'pendiente', 'En Proceso' => 'en-proceso', 'Completado' => 'terminado'];
             foreach ($estados as $estado => $id_columna) { ?>
                 <div class="col-lg-3 col-md-3 col-sm-12" id="<?php echo $id_columna; ?>" ondrop="drop(event)" ondragover="allowDrop(event)">
                     <h2><?php echo $estado; ?></h2>
                     <?php foreach ($current_page_tramites as $datos) {
                         if ($datos['estado_tramite'] == $estado) {
-                            echo generar_tramite_html($datos, $iniciales);
+                            echo generar_tramite_html($datos, $tramites);
                         }
                     } ?>
                 </div>
@@ -157,4 +154,5 @@ $iniciales = obtener_iniciales($current_page_tramites[0]);
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>

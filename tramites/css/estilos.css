@@ -153,22 +153,25 @@ margin-bottom: 40px;
   font-weight: bold;
 }
 
+.footer {
+
+}
 .avatar_dpto {
-  margin-left: 130px;
-  text-align: center;
-  font-size: 30px;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
+  margin-left: 5px;
+  font-size: 20px;
+  width: 180px;
+  height: 50px;
+  border-radius: 30px;
   background-color: #162b40;
   color: white;
+  padding: 10px;
 }
 
 .estado_tramites_dpto {
-  margin-right: -70px;
-  margin-left: 50px;
-  margin-top: 10px;
+  margin-left: -5px;
+  margin-bottom: 20px;
   width: 200px;
+  height: 50px;
   border-radius: 30px;
   font-size: 25px;
   color: #ffffff;
@@ -177,8 +180,17 @@ margin-bottom: 40px;
   border: 3px solid #FFC107; /* borde naranja */
 }
 
+.btn-modal {
+  margin-left: 250px;
+  margin-top: -50px;
+  width: 120px;
+  height: 50px;
+  font-weight: bolder;
+  border-radius: 20px;
+}
+
 .fecha_dpto {
- margin-top: -45px; 
+ margin-top: -50px; 
 }
  
 /*columnas*/
