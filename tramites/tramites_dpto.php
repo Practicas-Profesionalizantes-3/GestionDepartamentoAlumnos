@@ -109,58 +109,47 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
     <div class="tm-section-wrap">
         <div class="row">
             <?php
-            $tramites_pendientes = array_filter($data, function($tramite) {
-                return $tramite['estado_tramite'] == 'Pendiente';
-            });
-            
-            $tramites_en_proceso = array_filter($data, function($tramite) {
-                return $tramite['estado_tramite'] == 'En Proceso';
-            });
-            
-            $tramites_terminados = array_filter($data, function($tramite) {
-                return $tramite['estado_tramite'] == 'Completado';
-            });
-            
-            $items_per_page = 5; // Número de filas por página
-            $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
-            $offset = ($page - 1) * $items_per_page; // Desplazamiento
-            
-            $tramites_pendientes_paginados = array_slice($tramites_pendientes, $offset, $items_per_page);
-            
-            if ($page == 1) {
-                $tramites_en_proceso_paginados = $tramites_en_proceso;
-                $tramites_terminados_paginados = $tramites_terminados;
-            } else {
-                $tramites_en_proceso_paginados = array();
-                $tramites_terminados_paginados = array();
+            $estados = ['Pendiente' => 'pendiente', 'En Proceso' => 'en-proceso', 'Completado' => 'terminado'];
+          $tramites_pendientes = array_filter($data, function($tramite) {
+    return $tramite['estado_tramite'] == 'Pendiente';
+});
+
+$tramites_en_proceso = array_filter($data, function($tramite) {
+    return $tramite['estado_tramite'] == 'En Proceso';
+});
+
+$tramites_terminados = array_filter($data, function($tramite) {
+    return $tramite['estado_tramite'] == 'Completado';
+});
+
+$items_per_page = 5; // Número de filas por página
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
+$offset = ($page - 1) * $items_per_page; // Desplazamiento
+
+$tramites_pendientes_paginados = array_slice($tramites_pendientes, $offset, $items_per_page);
+$tramites_en_proceso_paginados = array_slice($tramites_en_proceso, 0, $items_per_page); // Mostrar todos los trámites en Proceso en la página 1
+$tramites_terminados_paginados = array_slice($tramites_terminados, 0, $items_per_page); // Mostrar todos los trámites Terminados en la página 1
+
+foreach ($estados as $estado => $id_columna) { ?>
+    <div class="col-lg-3 col-md-3 col-sm-12" id="<?php echo $id_columna; ?>" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <h2><?php echo $estado; ?></h2>
+        <?php 
+        if ($estado == 'Pendiente') {
+            foreach ($tramites_pendientes_paginados as $datos) {
+                echo generar_tramite_html($datos);
             }
-            
-            $estados = array(
-                'Pendiente' => 'pendiente',
-                'En Proceso' => 'en_proceso',
-                'Completado' => 'completado'
-            );
-            
-            foreach ($estados as $estado => $id_columna) { ?>
-                <div class="col-lg-3 col-md-3 col-sm-12" id="<?php echo $id_columna; ?>" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    <h2><?php echo $estado; ?></h2>
-                    <?php 
-                    if ($estado == 'Pendiente') {
-                        foreach ($tramites_pendientes_paginados as $datos) {
-                            echo generar_tramite_html($datos);
-                        }
-                    } elseif ($estado == 'En Proceso') {
-                        foreach ($tramites_en_proceso_paginados as $datos) {
-                            echo generar_tramite_html($datos);
-                        }
-                    } elseif ($estado == 'Completado') {
-                        foreach ($tramites_terminados_paginados as $datos) {
-                            echo generar_tramite_html($datos);
-                        }
-                    }
-                    ?>
-                </div>
-            <?php } ?>
+        } elseif ($estado == 'En Proceso') {
+            foreach ($tramites_en_proceso_paginados as $datos) {
+                echo generar_tramite_html($datos);
+            }
+        } elseif ($estado == 'Completado') {
+            foreach ($tramites_terminados_paginados as $datos) {
+                echo generar_tramite_html($datos);
+            }
+        }
+        ?>
+    </div>
+<?php } ?>
         </div>
     </div>
 
