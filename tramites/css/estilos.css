@@ -148,6 +148,7 @@ margin-bottom: 40px;
   color: #ffffff;
   text-align: center;
   font-weight: bolder;
+  font-size: 18px;
 }
 
 .info_dpto {
@@ -165,7 +166,7 @@ margin-bottom: 40px;
 .avatar_dpto {
   margin-left: 5px;
   font-size: 20px;
-  width: 180px;
+  width: 190px;
   height: 50px;
   border-radius: 30px;
   background-color: #162b40;

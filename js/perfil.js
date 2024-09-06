@@ -132,3 +132,27 @@ $(document).ready(function () {
     }
   });
 });
+
+function cerrarsesion() {
+  // Mostrar alerta de confirmación
+  Swal.fire({
+    title: "Cerrar sesión",
+    text: "¿Estás seguro de que deseas cerrar sesión?",
+    icon: "Danger",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    cancelButtonText: "cancelar",
+    confirmButtonText: "Si, cerrar!"
+}).then((result) => {
+    if (result.isConfirmed) {
+         // Destruir la sesión
+      sessionStorage.removeItem('loggedIn');
+      sessionStorage.removeItem('usuario');
+
+      // Redirigir al usuario a la página de inicio de sesión
+      window.location.href = 'login/index.html';
+  
+  }});
+
+}

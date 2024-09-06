@@ -10,15 +10,8 @@ $tramites = json_decode($response, true);
 
 $data = $tramites;
 
-// Función para obtener las iniciales del responsable
-function obtener_iniciales($usuario) {
-    $nombre = $usuario['usuario'];
-    $apellido = $usuario['usuarioap'];
-    return $apellido  . " " .  $nombre;
-}
-
 // Función para generar el bloque HTML de un trámite
-function generar_tramite_html($datos, $nombre_apellido) {
+function generar_tramite_html($datos) {
     $boton_ticket = '';
     if ($datos['estado_tramite'] == 'Pendiente') {
         $boton_ticket = '<button class="btn-modal" data-toggle="modal" data-target="#modal-tramite-' . $datos['id_tramite'] . '">Generar ticket</button>';
@@ -34,7 +27,7 @@ function generar_tramite_html($datos, $nombre_apellido) {
         </div>
         <div class='info_dpto'>
             <label class='estado_tramites_dpto'>{$datos['estado_tramite']}</label>
-            <input type='text' alt='Avatar' class='avatar_dpto' value='{$nombre_apellido}'>
+            <input type='text' alt='Avatar' class='avatar_dpto' value='{$datos['usuarioap']} {$datos['usuario']}'>
         </div>
         <p class='fecha_dpto'>{$datos['fecha_creacion']}</p>
             $boton_ticket
@@ -81,8 +74,6 @@ $total_pages = ceil($total_tramites / $items_per_page);
 
 // Obtener los tramites para la página actual
 $current_page_tramites = array_slice($data, $offset, $items_per_page);
-$nombre_apellido = obtener_iniciales($current_page_tramites[0]);
-
 ?>
 
 <!DOCTYPE html>
@@ -118,15 +109,56 @@ $nombre_apellido = obtener_iniciales($current_page_tramites[0]);
     <div class="tm-section-wrap">
         <div class="row">
             <?php
-            $estados = ['Pendiente' => 'pendiente', 'En Proceso' => 'en-proceso', 'Completado' => 'terminado'];
+            $tramites_pendientes = array_filter($data, function($tramite) {
+                return $tramite['estado_tramite'] == 'Pendiente';
+            });
+            
+            $tramites_en_proceso = array_filter($data, function($tramite) {
+                return $tramite['estado_tramite'] == 'En Proceso';
+            });
+            
+            $tramites_terminados = array_filter($data, function($tramite) {
+                return $tramite['estado_tramite'] == 'Completado';
+            });
+            
+            $items_per_page = 5; // Número de filas por página
+            $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
+            $offset = ($page - 1) * $items_per_page; // Desplazamiento
+            
+            $tramites_pendientes_paginados = array_slice($tramites_pendientes, $offset, $items_per_page);
+            
+            if ($page == 1) {
+                $tramites_en_proceso_paginados = $tramites_en_proceso;
+                $tramites_terminados_paginados = $tramites_terminados;
+            } else {
+                $tramites_en_proceso_paginados = array();
+                $tramites_terminados_paginados = array();
+            }
+            
+            $estados = array(
+                'Pendiente' => 'pendiente',
+                'En Proceso' => 'en_proceso',
+                'Completado' => 'completado'
+            );
+            
             foreach ($estados as $estado => $id_columna) { ?>
                 <div class="col-lg-3 col-md-3 col-sm-12" id="<?php echo $id_columna; ?>" ondrop="drop(event)" ondragover="allowDrop(event)">
                     <h2><?php echo $estado; ?></h2>
-                    <?php foreach ($current_page_tramites as $datos) {
-                        if ($datos['estado_tramite'] == $estado) {
-                            echo generar_tramite_html($datos, $nombre_apellido);
+                    <?php 
+                    if ($estado == 'Pendiente') {
+                        foreach ($tramites_pendientes_paginados as $datos) {
+                            echo generar_tramite_html($datos);
                         }
-                    } ?>
+                    } elseif ($estado == 'En Proceso') {
+                        foreach ($tramites_en_proceso_paginados as $datos) {
+                            echo generar_tramite_html($datos);
+                        }
+                    } elseif ($estado == 'Completado') {
+                        foreach ($tramites_terminados_paginados as $datos) {
+                            echo generar_tramite_html($datos);
+                        }
+                    }
+                    ?>
                 </div>
             <?php } ?>
         </div>
