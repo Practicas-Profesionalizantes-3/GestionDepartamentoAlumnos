@@ -3,23 +3,29 @@
 /*Mis Tramites */
 
 .container-mis-tramites {
-    margin-top: 50px;
-    margin-left: 100px;
-    margin-right: -80px;
-    width: 340px;
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    border-radius: 20px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  margin-top: 50px;
+  margin-left: 100px;
+  margin-right: -80px;
+  width: 340px;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 20px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+  .titlulo {
+    height: 100px;
+    text-align: center;
+
   }
   
   .subtitle {
     color: #888;
-    font-size: 14px;
+    font-size: 18px;
     text-align: center;
     padding: 10px;
   }
@@ -120,7 +126,7 @@ margin-bottom: 40px;
 }
 
 .img-flecha_tramites_dpto {
-  width: 70px;
+  width: 80px;
 }
 
 .img-tilde_tramites_dpto {
@@ -128,17 +134,21 @@ margin-bottom: 40px;
   width: 15%;
   height: 60%;
   margin-top: 16px;
+  margin-left: -6px;
 }
 
 .responsable_tramites_dpto {
   margin-top: 15px;
-  margin-left: 100px;
-  width: 120px;
+  margin-left: -2px;
+  width: 300px;
+  height: 50px;
   padding: 10px;
   border-radius: 30px;
   background-image: linear-gradient(to right, #98d9f3, #034b78);
   color: #ffffff;
   text-align: center;
+  font-weight: bolder;
+  font-size: 18px;
 }
 
 .info_dpto {
@@ -154,31 +164,40 @@ margin-bottom: 40px;
 }
 
 .avatar_dpto {
-  margin-left: 130px;
-  text-align: center;
-  font-size: 30px;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
+  margin-left: 5px;
+  font-size: 20px;
+  width: 190px;
+  height: 50px;
+  border-radius: 30px;
   background-color: #162b40;
   color: white;
+  padding: 10px;
 }
 
 .estado_tramites_dpto {
-  margin-right: -70px;
-  margin-left: 50px;
-  margin-top: 10px;
+  margin-left: -10px;
+  margin-bottom: 20px;
   width: 200px;
+  height: 50px;
   border-radius: 30px;
   font-size: 25px;
   color: #ffffff;
   text-align: center;
-  background-image: linear-gradient(to right, #f10000, #f6d657);
-  border: 3px solid #FFC107; /* borde naranja */
+  background-image: linear-gradient(to right, #98d9f3, #034b78);
+  border: 3px solid #000000; /* borde naranja */
+}
+
+.btn-modal {
+  margin-left: 250px;
+  margin-top: -50px;
+  width: 120px;
+  height: 50px;
+  font-weight: bolder;
+  border-radius: 20px;
 }
 
 .fecha_dpto {
- margin-top: -45px; 
+ margin-top: -50px; 
 }
  
 /*columnas*/
@@ -208,3 +227,69 @@ margin-bottom: 40px;
   background-color: #f0f0f0;
   min-height: 600px;    /* Set a minimum height for the columns */
 }
+
+/*modal*/
+
+.modal-content{
+  margin-top: 100px;
+  margin-left: -50px;
+  width: auto;
+  height: auto;
+
+}
+
+.alumno {
+  font-weight: bold;
+  color: #333;
+}
+
+.modal-descripcion {
+  font-size: 25px;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.responsable {
+  font-weight: bold;
+  color: #666;
+  background: none;
+  text-align: left;
+  margin-left: 0;
+}
+
+
+
+
+
+
+@media print {
+  
+  /* Mostrar solo el ticket */
+  .modal-content {
+    visibility: visible;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  
+  /* Ajustar el tamaño del ticket para que quepa en una sola hoja */
+  .modal-content {
+    width: 100%;
+    height: 400px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Ocultar el botón de imprimir */
+  #imprimirPantalla {
+    visibility: hidden;
+  }
+  
+  /* Ocultar el navbar */
+  .navbar {
+    display: none;
+  }
+
+  
+}
+

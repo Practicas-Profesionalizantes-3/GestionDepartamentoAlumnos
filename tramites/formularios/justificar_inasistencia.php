@@ -77,9 +77,9 @@ foreach ($tiposTramites as $tipo) {
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="adjunto" class="form-label">Adjuntar archivo (pdf):</label>
-                            <input type="file" accept=".pdf" class="form-control" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto">
-                        </div>
+                            <label for="imagen" class="form-label">Adjuntar archivo (jpeg/png):</label>
+                            <input type="file" accept="image/jpeg, image/png" class="form-control" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto">
+                        </div> 
                         <div class="mb-3">
                             <label for="fecha_solicitud" class="form-label">Fecha de Solicitud:</label>
                             <input type="date" class="form-control" name="fecha_solicitud" id="fecha_solicitud" aria-describedby="helpId" placeholder="Fecha de solicitud" required value="<?php $hoy = date("Y-m-d"); echo $hoy; ?>">
