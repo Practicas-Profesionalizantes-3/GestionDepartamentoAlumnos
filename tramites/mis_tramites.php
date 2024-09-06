@@ -19,7 +19,7 @@ foreach ($data as $usuario) {
     $iniciales = $inicial_nombre . $inicial_apellido;
 }
 
-$items_per_page = 5; // Número de filas por página
+$items_per_page = 6; // Número de filas por página
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
 $offset = ($page - 1) * $items_per_page; // Desplazamiento
 
@@ -81,15 +81,18 @@ echo "<script>console.log(" . $response . ")</script>";
             <a type="buttom" class="btn btn-primary mis-tramites-btn" href="index.php" style="align-items: end;" role="button">Volver</a>
         </div>
     </div>
-    
+
     <div class="tm-section-wrap">
-        <div class="row">
-            <?php foreach ($tramites as $datos) { ?>
-                <div class="container-mis-tramites">
+        <?php $contador = 0; ?>
+        <?php foreach ($current_page_tramites as $datos) { ?>
+            <?php if ($contador % 3 == 0) { ?>
+                <div class="row">
+                <?php } ?>
+                <div class="col-md-3 container-mis-tramites">
                     <h2 class="titlulo"><?php echo $datos['tipo_tramite']; ?></h2>
                     <p class="subtitle"><?php echo $datos['descripcion']; ?></p>
                     <div class="actions">
-                        <img src="../img/flechas.jpg" class="img-flecha" alt="" /> 
+                        <img src="../img/flechas.jpg" class="img-flecha" alt="" />
                         <img src="../img/tilde.jpg" class="img-tilde" alt="" />
                         <label class="responsable"><?php echo $datos['responsable']; ?></label>
                     </div>
@@ -97,10 +100,14 @@ echo "<script>console.log(" . $response . ")</script>";
                         <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
                     </div>
                 </div>
+                <?php $contador++;
+                if ($contador % 3 == 0 || $contador == count($current_page_tramites)) { ?>
+                </div>
             <?php } ?>
-        </div>
+        <?php } ?>
     </div>
-    
+    </div>
+
     <!-- Paginación -->
     <nav>
         <ul class="pagination justify-content-center mt-3">
@@ -129,4 +136,5 @@ echo "<script>console.log(" . $response . ")</script>";
     <script src="js/delete.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>
+
 </html>

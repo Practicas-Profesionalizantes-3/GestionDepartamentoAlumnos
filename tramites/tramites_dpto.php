@@ -10,27 +10,34 @@ $tramites = json_decode($response, true);
 
 $data = $tramites;
 
+// Función para obtener las iniciales del responsable
+function obtener_iniciales($usuario) {
+    $nombre = $usuario['usuario'];
+    $apellido = $usuario['usuarioap'];
+    return $apellido  . " " .  $nombre;
+}
 
 // Función para generar el bloque HTML de un trámite
-function generar_tramite_html($datos, $tramites) {
+function generar_tramite_html($datos, $nombre_apellido) {
     $boton_ticket = '';
     if ($datos['estado_tramite'] == 'Pendiente') {
         $boton_ticket = '<button class="btn-modal" data-toggle="modal" data-target="#modal-tramite-' . $datos['id_tramite'] . '">Generar ticket</button>';
     }
     return "
-    <div class='container_tramites_dpto' draggable='true' ondragstart='drag(event)' id='tramite-{$datos['id_tramite']}'>
+      <div class='container_tramites_dpto' draggable='true' ondragstart='drag(event)' id='tramite-{$datos['id_tramite']}'>
         <h4 class='titlulo_tramites_dpto'>{$datos['tipo_tramite']}</h4>
         <p class='subtitle_tramites_dpto'>{$datos['descripcion']}</p>
         <div class='actions-tramites_dpto'>
             <img src='../img/flechas.jpg' class='img-flecha_tramites_dpto' alt='' />
             <img src='../img/tilde.jpg' class='img-tilde_tramites_dpto' alt='' />
-            <label class='responsable_tramites_dpto'>{$datos['responsable']}</label>
+            <label class='responsable_tramites_dpto'> Responsable: {$datos['responsable']}</label>
         </div>
         <div class='info_dpto'>
             <label class='estado_tramites_dpto'>{$datos['estado_tramite']}</label>
-        </div class='footer'>
-          <p class='fecha_dpto'>{$datos['fecha_creacion']}</p>
-          $boton_ticket
+            <input type='text' alt='Avatar' class='avatar_dpto' value='{$nombre_apellido}'>
+        </div>
+        <p class='fecha_dpto'>{$datos['fecha_creacion']}</p>
+            $boton_ticket
     </div>
     
     <!-- Modal Ticket-->
@@ -74,7 +81,7 @@ $total_pages = ceil($total_tramites / $items_per_page);
 
 // Obtener los tramites para la página actual
 $current_page_tramites = array_slice($data, $offset, $items_per_page);
-
+$nombre_apellido = obtener_iniciales($current_page_tramites[0]);
 
 ?>
 
@@ -117,7 +124,7 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
                     <h2><?php echo $estado; ?></h2>
                     <?php foreach ($current_page_tramites as $datos) {
                         if ($datos['estado_tramite'] == $estado) {
-                            echo generar_tramite_html($datos, $tramites);
+                            echo generar_tramite_html($datos, $nombre_apellido);
                         }
                     } ?>
                 </div>

@@ -84,9 +84,14 @@ foreach ($tiposTramites as $tipo) {
                             <option value="1">Turno Tarde</option>
                             <option value="2">Turno Noche</option>
                             </select>
-                        </div class="mb-3">
+                        </div>
+                        <div class="mb-3">
                             <label for="fecha_solicitud" class="form-label">Fecha de Solicitud:</label>
                             <input type="date" class="form-control" name="fecha_solicitud" id="fecha_solicitud" aria-describedby="helpId" placeholder="Fecha de solicitud" required value="<?php $hoy = date("Y-m-d"); echo $hoy; ?>">
+                        </div>
+                        <div class="mb-3">
+                            <label for="motivo" class="form-label">Motivo:</label>
+                            <input type="text" class="form-control" name="motivo" id="motivo" aria-describedby="helpId" placeholder="Motivo" required>
                         </div>
                         <div class="text-center">
                              <a type="submit" class="btn btn-success" id="enviar-formulario" href="../index.php" role="button">Enviar</a>

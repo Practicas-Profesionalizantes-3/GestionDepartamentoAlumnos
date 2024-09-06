@@ -3,23 +3,29 @@
 /*Mis Tramites */
 
 .container-mis-tramites {
-    margin-top: 50px;
-    margin-left: 100px;
-    margin-right: -80px;
-    width: 340px;
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    border-radius: 20px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  margin-top: 50px;
+  margin-left: 100px;
+  margin-right: -80px;
+  width: 340px;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 20px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+  .titlulo {
+    height: 100px;
+    text-align: center;
+
   }
   
   .subtitle {
     color: #888;
-    font-size: 14px;
+    font-size: 18px;
     text-align: center;
     padding: 10px;
   }
@@ -120,7 +126,7 @@ margin-bottom: 40px;
 }
 
 .img-flecha_tramites_dpto {
-  width: 70px;
+  width: 80px;
 }
 
 .img-tilde_tramites_dpto {
@@ -128,17 +134,20 @@ margin-bottom: 40px;
   width: 15%;
   height: 60%;
   margin-top: 16px;
+  margin-left: -6px;
 }
 
 .responsable_tramites_dpto {
   margin-top: 15px;
-  margin-left: 100px;
-  width: 120px;
+  margin-left: -2px;
+  width: 300px;
+  height: 50px;
   padding: 10px;
   border-radius: 30px;
   background-image: linear-gradient(to right, #98d9f3, #034b78);
   color: #ffffff;
   text-align: center;
+  font-weight: bolder;
 }
 
 .info_dpto {
@@ -153,9 +162,6 @@ margin-bottom: 40px;
   font-weight: bold;
 }
 
-.footer {
-
-}
 .avatar_dpto {
   margin-left: 5px;
   font-size: 20px;
@@ -168,7 +174,7 @@ margin-bottom: 40px;
 }
 
 .estado_tramites_dpto {
-  margin-left: -5px;
+  margin-left: -10px;
   margin-bottom: 20px;
   width: 200px;
   height: 50px;
@@ -176,8 +182,8 @@ margin-bottom: 40px;
   font-size: 25px;
   color: #ffffff;
   text-align: center;
-  background-image: linear-gradient(to right, #f10000, #f6d657);
-  border: 3px solid #FFC107; /* borde naranja */
+  background-image: linear-gradient(to right, #98d9f3, #034b78);
+  border: 3px solid #000000; /* borde naranja */
 }
 
 .btn-modal {
