@@ -41,7 +41,7 @@ foreach ($tiposTramites as $tipo) {
 <body>
     <div class="container-fluid">
         <div class="row">
-            <?php include('../../includes/navbar.php'); ?>
+            <?php include '../../includes/navbar.php'; ?>
             <div class="tm-main">
                 <div class="tm-section-wrap mt-3 border-dark">
                     <div class="text-center mb-4">
