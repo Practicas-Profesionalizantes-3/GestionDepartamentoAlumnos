@@ -482,7 +482,7 @@ body.dark-theme {
 .modal {
   display: none; /* Oculto por defecto */
   position: fixed; /* Fijo */
-  z-index: 1; /* Sobre otros elementos */
+  z-index: 1000; /* Sobre otros elementos */
   left: 0;
   top: 0;
   margin-left: 88px;
