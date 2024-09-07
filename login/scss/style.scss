@@ -7,14 +7,17 @@ $primary: #006699;
 
 
 body{
-	font-family: $font-primary;
-	font-size: 16px;
-	line-height: 1.8;
-	font-weight: normal;
-	color: lighten($black,50%);
-	position: relative;
-	z-index: 0;
+	margin: 0;
 	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url("../images/bg.jpg");
+    animation: moveBackground 30s linear infinite;
 	&:after{
 		position: absolute;
 		top: 0;
@@ -27,6 +30,20 @@ body{
 		z-index: -1;
 	}
 }
+
+@keyframes moveBackground {
+    0% {
+        background-position: center center;
+    }
+    50% {
+        background-position: center right;
+    }
+    100% {
+        background-position: center center;
+    }
+}
+
+
 a {
 	transition: .3s all ease;
 	color: $primary;
@@ -52,12 +69,17 @@ h1, h2, h3, h4, h5,
 	padding: 7em 0;
 	background-color: #e4e9f7;
 	width: 500px;
-	margin: auto;
+	margin: 50px auto;
 	border-radius: 10%;
-	border: 2px solid $primary;
+	border: 3px solid $primary; /* Color del borde */
+	box-shadow: 0 0 20px $primary, 0 0 30px $primary, 0 0 40px $primary; /* Efecto de neón */
+	transition: box-shadow 0.3s ease-in-out; /* Transición suave */
 	h2{
-		text-shadow: 2px 2px 2px gray;
+		text-shadow: 0 0 10px gray;
 	}
+}
+.ftco-section:hover{
+	box-shadow: 0 0 30px $primary, 0 0 60px $primary, 0 0 90px $primary; /* Incrementa el resplandor al hacer hover */
 }
 
 
@@ -66,15 +88,6 @@ h1, h2, h3, h4, h5,
 }
 .ftco-no-pb{
 	padding-bottom: 0;
-}
-
-
-//COVER BG
-.img{
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-image: url("../images/bg.jpg");
 }
 
 .login-wrap{
@@ -254,3 +267,6 @@ textarea.form-control {
 	}
 }
 
+.btn:hover{
+	background-color: #2a84b1 !important;
+}

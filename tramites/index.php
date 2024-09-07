@@ -32,17 +32,32 @@ $formularios_path = null;
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/templatemo-upright.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="tramites.css">
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="css/tramites.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> <!----===== Boxicons CSS ===== -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
 </head>
-<body>
-    <div class="container-fluid">
+<body class="body_tramites">
+    <div class="container-tramites-fluid">
         <div class="row">
             <?php include("../includes/navbar.php"); ?>
+
+            <script>
+                var loggedIn = sessionStorage.getItem('loggedIn');
+                if (!loggedIn) {
+                    window.location.href = '../index.php'; // Redirigir al index si no está logueado
+                } else {
+                    var usuario = JSON.parse(sessionStorage.getItem("usuario"));
+                    console.log(usuario)
+                    if (usuario.id_usuario_estado != 1) {
+                        window.location.href = '../index.php';
+                    }
+                }
+            </script>
+            
             <div class="tm-main">
                 <div class="tm-section-wrap">
-                    <div class="text-center mb-4">
-                        <h1>Crea un trámite</h1>
+                    <div class="tm-text-primary mb-4"> 
+                        <h2>Crea un trámite</h2>
                     </div>
                     <div class="row">
                         <?php
@@ -57,7 +72,6 @@ $formularios_path = null;
                             echo '    <a href="' . $formularios_path . '?id=' . $id_tramite_tipo . '" class="tramite-card text-decoration-none">';
                             echo '        <div class="tramite-card-body d-flex align-items-center p-3 border rounded">';
                             echo '            <div class="tramite-card-image me-3">';
-                            echo '                <img src="../img/logo.png" alt="Ícono Trámite" class="img-fluid">';
                             echo '            </div>';
                             echo '            <div class="tramite-card-content">';
                             echo '                <div class="tramite-card-title mb-2 h5">' . $descripcion . '</div>';
@@ -77,9 +91,8 @@ $formularios_path = null;
             </div> <!-- .tm-main -->
         </div> <!-- .row -->
     </div > <!-- .container-fluid -->
-    <?php include("../includes/footer.php"); ?>
+    
     <script src="../js/index.js"></script>
-    <script src="../js/navbar.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>
 </html>
