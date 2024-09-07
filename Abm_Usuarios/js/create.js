@@ -1,23 +1,23 @@
 $("#formulario").submit(function (event) {
     event.preventDefault();
 
-    var formData = new FormData();
-    formData.append('id_aviso_tipo', $("#id_aviso_tipo").val());
-    formData.append('id_usuario', $("#id_usuario").val());
-    formData.append('titulo', $("#titulo").val());
-    formData.append('descripcion', $("#descripcion").val());
-    formData.append('fecha_publicacion', $("#fecha_publicacion").val());
-    formData.append('fecha_vencimiento', $("#fecha_vencimiento").val());
-    formData.append('adjunto', $("#adjunto")[0].files[0]);  // archivo
-    formData.append('fijado', $("#fijado").val());
-    formData.append('imagen', $("#imagen")[0].files[0]);
-    formData.append('id_aviso_estado', $("#id_aviso_estado").val());
-
-    for (var pair of formData.entries()) {
-        console.log(pair[0] + ': ' + pair[1]);
+    const usuario = {
+        nombre: $("#nombre").val(),
+        apellido: $("#apellido").val(),
+        password: $("#password").val(),
+        email: $("#email").val(),
+        id_documento_tipo: $("#id_documento_tipo").val(),
+        id_usuario_estado: $("#id_usuario_estado").val(),
+        numero_documento: $("#numero_documento").val(),
+        id_carrera: $("#id_carrera").val(),
+        anio: $("#anio").val(),
+        comision: $("#comision").val(),
+        id_usuario_tipo: $("#id_usuario_tipo").val()
     }
 
-    if (descripcion.value === "" || titulo.value === "" || imagen.value === "" || adjunto.value === "") {
+    if (usuario.nombre == "" || usuario.apellido == "" || usuario.password == "" || usuario.email == "" ||
+        usuario.id_documento_tipo == "" || usuario.id_usuario_estado == "" || usuario.numero_documento == "" ||
+        usuario.id_carrera == "" || usuario.anio == "" || usuario.comision == "" || usuario.id_usuario_tipo == "") {
         Toastify({
             text: "⚠️ Faltan datos por completar ⚠️",
             duration: 1500,
@@ -26,19 +26,19 @@ $("#formulario").submit(function (event) {
                 background: "#c41e1e",
                 color: "#fff"
             }
-        }).showToast()
-    } else{
+        }).showToast();
+    } else {
         $.ajax({
             type: "POST",
-            url: "http://localhost/api/api-Alumnos/cartelera.php",
-            data: formData,
-            processData: false,
-            contentType: false,
+            url: "http://localhost/api/api-Alumnos/usuarios.php",
+            data: JSON.stringify(usuario),
+            contentType: "application/json",
+            dataType: "json",
             success: function (data) {
                 if (data.success == true) {
                     console.log("funciono", data);
                     Swal.fire({
-                        title: "Su aviso fue creado con exito!",
+                        title: "El usuario fue creado con exito!",
                         confirmButtonColor: "#006699",
                         icon: "success",
                         iconColor: "#118911",

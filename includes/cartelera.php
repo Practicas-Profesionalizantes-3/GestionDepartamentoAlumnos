@@ -25,8 +25,8 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
         $mostrar_opciones = $_SESSION['mostrar_opciones_cartelera'];
         if ($mostrar_opciones == "opciones1") {
     ?>
-    <h2 class="tm-text-primary">Centro de Tecnológia e Innovación</h2>
-    <hr class="mb-5">
+            <h2 class="tm-text-primary">Centro de Tecnológia e Innovación</h2>
+            <hr class="mb-5">
     <?php
         }
     }

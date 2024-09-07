@@ -21,7 +21,7 @@ $total_usuarios = count($usuarios);
 $total_pages = ceil($total_usuarios  / $items_per_page);
 
 // Obtener los usuarios  para la página actual
-$current_page_usuarios  = array_slice($usuarios , $offset, $items_per_page);
+$current_page_usuarios  = array_slice($usuarios, $offset, $items_per_page);
 echo "<script>console.log(" . $response . ")</script>";
 ?>
 <!DOCTYPE html>
@@ -40,7 +40,8 @@ echo "<script>console.log(" . $response . ")</script>";
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"> <!-- Toastify CSS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script> <!-- Toastify JS-->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  <!-- SwettAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SwettAlert -->
+    <script src="js/delete.js"></script>
 </head>
 
 <body>
@@ -59,7 +60,7 @@ echo "<script>console.log(" . $response . ")</script>";
             }
         }
     </script>
-    
+
     <div class="listadoAvisos" style="margin-left: 88px;">
         <div class="card-header">
             <h3 class="card-title tm-text-primary">Lista de Usuarios</h3>
@@ -99,7 +100,7 @@ echo "<script>console.log(" . $response . ")</script>";
                                     <td><?php echo $datos['anio']; ?></td>
                                     <td><?php echo $datos['comision']; ?></td>
                                     <td><?php echo $datos['usuario_tipo']; ?></td>
-                                    <td>                                        <a class="btn btn-info" href="Update.php?id_aviso=<?php echo $datos['id_usuario']; ?>" role="button">Editar</a>
+                                    <td> <a class="btn btn-info" href="Update.php?id_usuario=<?php echo $datos['id_usuario']; ?>" role="button">Editar</a>
                                         <a class="btn btn-danger" style="color:white" onclick="eliminarUsuario(<?= $datos['id_usuario']; ?>)" role="button">Eliminar</a>
                                     </td>
                                 </tr>
@@ -132,10 +133,9 @@ echo "<script>console.log(" . $response . ")</script>";
             </ul>
         </nav>
     </div>
-    
+
     <script src="../js/index.js"></script>
     <script src="../js/navbar.js"></script>
-    <script src="js/delete.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>
 
