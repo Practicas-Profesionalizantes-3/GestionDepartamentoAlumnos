@@ -88,46 +88,45 @@ $(document).ready(function () {
       } else {
         var usuario = JSON.parse(sessionStorage.getItem("usuario"));
 
-        // Enviar la solicitud a la API para actualizar la contraseña
-        fetch("http://localhost/api/api-Alumnos/login.php", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
+        $.ajax({
+          type: "PUT",
+          url: "http://localhost/api/api-Alumnos/login.php",
+          data: JSON.stringify({
             id_usuario: usuario.id_usuario,
             current_password: currentPassword,
             password: newPassword,
           }),
-        })
-          .then((response) => {
-            if (response.ok) {
-              return response.json();
-            } else {
-              throw new Error("Error en la actualización");
-            }
-          })
-          .then((data) => {
-            Swal.fire({
-              icon: "success",
-              title: "Contraseña actualizada",
-              text: "Tu contraseña ha sido actualizada con éxito.",
-              confirmButtonText: "Aceptar",
-              confirmButtonColor: "#3085d6",
-            });
+          contentType: "application/json",
+          dataType: "json",
+          success: function (data) {
+            console.log(data)
+            if (data.success == true) {
+              console.log("funciono", data);
+              Swal.fire({
+                icon: "success",
+                title: "Contraseña actualizada",
+                text: "Tu contraseña ha sido actualizada con éxito.",
+                confirmButtonText: "Aceptar",
+                confirmButtonColor: "#3085d6",
+              }).then(() => {
             document.getElementById("formulario").style.display = "none";
             document.getElementById("habilitarCambio").style.display = "block";
-          })
-          .catch((error) => {
-            Swal.fire({
-              icon: "error",
-              title: "Error",
-              text: "Hubo un problema al verificar tu contraseña. Inténtalo nuevamente.",
-              confirmButtonText: "Reintentar",
-              confirmButtonColor: "#d33",
-            });
-            console.error("Hubo un problema con la solicitud:", error);
-          });
+              });
+            } else {
+              Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Hubo un problema al verificar tu contraseña. Inténtalo nuevamente.",
+                confirmButtonText: "Reintentar",
+                confirmButtonColor: "#d33",
+              });
+              console.log(data)
+            }
+          },
+          error: function (errorThrown) {
+            console.log("error", errorThrown);
+          }
+        });
       }
     }
   });
@@ -144,15 +143,16 @@ function cerrarsesion() {
     cancelButtonColor: "#d33",
     cancelButtonText: "cancelar",
     confirmButtonText: "Si, cerrar!"
-}).then((result) => {
+  }).then((result) => {
     if (result.isConfirmed) {
-         // Destruir la sesión
+      // Destruir la sesión
       sessionStorage.removeItem('loggedIn');
       sessionStorage.removeItem('usuario');
 
       // Redirigir al usuario a la página de inicio de sesión
       window.location.href = 'login/index.html';
-  
-  }});
+
+    }
+  });
 
 }

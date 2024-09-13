@@ -3,9 +3,10 @@ $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
 
 $response = file_get_contents($api_url);
 $data = json_decode($response, true);
-$datos = $data;
+$avisos = json_decode($data["data"], true);
+$datos = $avisos;
 $fecha_actual = date('Y-m-d');
-$datos_filtrados = array_filter($data, function ($item) use ($fecha_actual) {
+$datos_filtrados = array_filter($avisos, function ($item) use ($fecha_actual) {
     return ($item['fecha_vencimiento'] >= $fecha_actual) && ($item["estado"] != "Inactivo");
 });
 
