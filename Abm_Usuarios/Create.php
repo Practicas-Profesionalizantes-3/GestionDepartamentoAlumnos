@@ -142,7 +142,7 @@ $data_usuario_tipos = json_decode($response_usuario_tipos, true);
                 foreach ($data_usuario_tipos as $usuario_tipo) {
                 ?>
                   <option value="<?php echo $usuario_tipo["id_usuario_tipo"]; ?>" ;?>
-                    <?php echo $usuario_tipo["descripcion"]; ?>
+                    <?php echo $usuario_tipo["permiso_nombre"]; ?>
                   </option>
                 <?php
                 }

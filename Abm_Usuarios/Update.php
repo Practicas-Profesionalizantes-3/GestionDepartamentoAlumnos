@@ -144,7 +144,7 @@ $data_documento_tipos = json_decode($response_documento_tipos, true);
                 <?php foreach ($data_usuario_tipo as $usuario_tipo) {
                 ?>
                   <option value="<?php echo $usuario_tipo["id_usuario_tipo"]; ?>" <?= $usuario_tipo["id_usuario_tipo"] == $usuario["id_usuario_tipo"] ? 'selected="selected"' : ''; ?>>
-                    <?php echo $usuario_tipo["descripcion"]; ?>
+                    <?php echo $usuario_tipo["permiso_nombre"]; ?>
                   </option>
                 <?php
                 }
