@@ -1,7 +1,3 @@
-
-
-
-
 <!-- Botón para abrir el modal -->
 <button id="openModalBtn" class="btn-perfil" style="display: none;">
     <i class="fa-solid fa-user"></i>
