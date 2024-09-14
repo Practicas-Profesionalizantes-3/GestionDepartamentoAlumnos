@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="scss/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"> <!-- Toastify CSS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script> <!-- Toastify JS-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  <!-- SwettAlert -->
 </head>
 
 <body style="background-image: url(images/4.jpg);">
@@ -21,26 +24,15 @@
             <h2>Restablecer Contraseña</h2>
             <!-- Nuevo contenedor -->
             <div class="form-container mt-5">
-                <form action="PHP-mailer/SendMailPassword.php" signin-form" id="formulario" method="post">
+                <form signin-form" id="formulario" method="post">
                     <div class="form-group">
-                        <input id="username" type="email" class="form-control" placeholder="Email" name="email" required>
+                        <input id="email" type="email" class="form-control" placeholder="Email" name="email" required>
                     </div>
 
                     <div class="form-group mt-4">
                         <button type="submit" name="submit" class="form-control btn btn-primary submit px-3 mt-3">Enviar</button>
                         <button type="button" name="cancelar" class="form-control btn btn-primary submit px-3 mt-2" onclick="window.location.href='index.html'">Cancelar</button>
                     </div>
-
-                    <!-- Mostrar errores o mensaje de éxito -->
-                    <!-- <?php if (!empty($errores)): ?>
-                                            <div class="alert alert-danger" role="alert">
-                                                <?php echo $errores; ?>
-                                            </div>
-                                        <?php elseif (!empty($enviado)): ?>
-                                            <div class="alert alert-success" role="alert">
-                                                <?php echo $enviado; ?>
-                                            </div>
-                                        <?php endif; ?> -->
                 </form>
             </div> <!-- Fin del nuevo contenedor -->
         </div>
@@ -50,7 +42,7 @@
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
-
+    <script src="js/recuperar.js"></script>
 </body>
 
 </html>
