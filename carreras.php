@@ -43,7 +43,7 @@ session_start();
                             <ul class="list-group list-group-flush">
                                 <?php foreach ($data_carreras as $carrera): ?>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <span class="text-dark fw-bold"><?php echo $carrera["descripcion"]; ?></span>
+                                        <span><a href="" class="text-dark fw-bold"><?php echo $carrera["descripcion"]; ?></a></span>
                                         <i class="bi bi-bookmark-star-fill text-primary"></i>
                                     </li>
                                 <?php endforeach; ?>

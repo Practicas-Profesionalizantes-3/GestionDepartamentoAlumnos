@@ -1,16 +1,13 @@
 <?php
 session_start();
 
-// URL de la API para obtener los tipos de trámites
 $api_url_tramites = 'http://localhost/api/api-Alumnos/tramites.php';
 
-// Obtener los datos de la API
 $response = file_get_contents($api_url_tramites);
 $tramites = json_decode($response, true);
 
 $data = $tramites;
 
-// Función para generar el bloque HTML de un trámite
 function generar_tramite_html($datos) {
     $boton_ticket = '';
     if ($datos['estado_tramite'] == 'Pendiente') {
@@ -27,7 +24,7 @@ function generar_tramite_html($datos) {
         </div>
         <div class='info_dpto'>
             <label class='estado_tramites_dpto'>{$datos['estado_tramite']}</label>
-            <input type='text' alt='Avatar' class='avatar_dpto' value='{$datos['usuarioap']} {$datos['usuario']}'>
+            <input type='text' alt='Avatar' class='avatar_dpto' value='{$datos['apellido']} {$datos['nombre']}'>
         </div>
         <p class='fecha_dpto'>{$datos['fecha_creacion']}</p>
             $boton_ticket
@@ -127,8 +124,8 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
 $offset = ($page - 1) * $items_per_page; // Desplazamiento
 
 $tramites_pendientes_paginados = array_slice($tramites_pendientes, $offset, $items_per_page);
-$tramites_en_proceso_paginados = array_slice($tramites_en_proceso, 0, $items_per_page); // Mostrar todos los trámites en Proceso en la página 1
-$tramites_terminados_paginados = array_slice($tramites_terminados, 0, $items_per_page); // Mostrar todos los trámites Terminados en la página 1
+$tramites_en_proceso_paginados = array_slice($tramites_en_proceso, 0, $items_per_page); 
+$tramites_terminados_paginados = array_slice($tramites_terminados, 0, $items_per_page); 
 
 foreach ($estados as $estado => $id_columna) { ?>
     <div class="col-lg-3 col-md-3 col-sm-12" id="<?php echo $id_columna; ?>" ondrop="drop(event)" ondragover="allowDrop(event)">

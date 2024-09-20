@@ -10,14 +10,6 @@ $tramites = json_decode($response, true);
 
 $data = $tramites;
 
-$iniciales = array();
-foreach ($data as $usuario) {
-    $nombre = $usuario['usuario'];
-    $apellido = $usuario['usuarioap'];
-    $inicial_nombre = substr($nombre, 0, 1);
-    $inicial_apellido = substr($apellido, 0, 1);
-    $iniciales = $inicial_nombre . $inicial_apellido;
-}
 
 $items_per_page = 6; // Número de filas por página
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
