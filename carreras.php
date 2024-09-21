@@ -26,7 +26,8 @@ session_start();
 
 <body>
     <!-- Include Perfil -->
-    <?php include("includes/perfil.php"); ?>
+    <?php include("includes/perfil.php"); 
+    include("includes/notificaciones.php");?>
 
     <div class="container-fluid">
         <div class="row">
@@ -43,7 +44,7 @@ session_start();
                             <ul class="list-group list-group-flush">
                                 <?php foreach ($data_carreras as $carrera): ?>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <span><a href="" class="text-dark fw-bold"><?php echo $carrera["descripcion"]; ?></a></span>
+                                        <span><a href="<?php echo $carrera["url"]; ?>" class="text-dark fw-bold"><?php echo $carrera["descripcion"]; ?></a></span>
                                         <i class="bi bi-bookmark-star-fill text-primary"></i>
                                     </li>
                                 <?php endforeach; ?>

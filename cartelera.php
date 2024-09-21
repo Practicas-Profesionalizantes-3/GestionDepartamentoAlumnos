@@ -25,6 +25,7 @@ $data = json_decode($response, true);
     <!-- Include Perfil -->
     <?php
     include("includes/perfil.php");
+    include("includes/notificaciones.php");
     ?>
     <div class="container-fluid">
         <div class="row">
