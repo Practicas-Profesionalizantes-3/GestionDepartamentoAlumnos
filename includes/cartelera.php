@@ -66,33 +66,62 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
         }
     ?>
 
+    
+ <div class="row">
+    <?php if ($datos) : ?>
+        <?php foreach ($datos as $index => $item) : ?>
+            <div class="col-lg-4 tm-col-home mb-4" data-wow-delay="0.1s">
+                <div class="position-relative border-cartelera">
+                    <div class="img-cartelera mb-3">
+                        <img class="img-cartelera-item" src="<?= $item["imagen"] != "" ? "data:image/jpeg;base64," . $item["imagen"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s" ?>" />
+                    </div>
+                    <hr style="width: 50%;" class="d-flex m-auto">
+                    <div class="img-container mt-3">
+                        <div class="overlay">
+                            <div>
+                                <h5 class="mb-3 cartelera-titulo"><?php echo htmlspecialchars($item['titulo']); ?></h5>
+                                <p class="cartelera-desc text-truncate" id="desc-<?php echo $index; ?>">
+                                    <?php 
+                                        if (strlen($item['descripcion']) > 455) {
+                                            echo htmlspecialchars(substr($item['descripcion'], 0, 100)) . "...";
+                                        } else {
+                                            echo htmlspecialchars($item['descripcion']);
+                                        }
+                                    ?>
+                                </p>
 
-    <div class="row">
-        <?php if ($datos) : ?>
-            <?php foreach ($datos as $item) : ?>
-                <div class="col-lg-6 tm-col-home mb-4" data-wow-delay="0.1s">
-                    <div class="position-relative border-cartelera">
-                        <div class="img-cartelera mb-3">
-                            <img class="img-cartelera-item" src="<?= $item["imagen"] != "" ? "data:image/jpeg;base64," . $item["imagen"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s" ?>" />
-                        </div>
-                        <hr style="width: 50%;" class="d-flex m-auto">
-                        <div class="img-container">
-                            <div class="overlay">
-                                <div>
-                                    <h5 class="mb-3 cartelera-titulo"><?php echo htmlspecialchars($item['titulo']); ?></h5>
-                                    <p class="cartelera-desc"><?php echo htmlspecialchars($item['descripcion']); ?></p>
-                                    <div class="fecha-container">
-                                        <p><?php echo htmlspecialchars($item['fecha_publicacion']) ?></p>
-                                    </div>
-                                    <div class="descargar-adjunto">
-                                        <a href="data:application/pdf;base64,<?= $item["adjunto"]; ?>" download="<?= htmlspecialchars($item["titulo"]); ?>">Descargar adjunto</a>
-                                    </div>
+                                <!-- Botón Ver más solo si la descripción tiene más de 45 caracteres -->
+                                <?php if (strlen($item['descripcion']) > 45) : ?>
+                                    <form action="http://localhost/gestiondepartamentoalumnos/includes/aviso.php" method="POST">
+                                        <input type="hidden" name="titulo" value="<?= htmlspecialchars($item['titulo']); ?>">
+                                        <input type="hidden" name="descripcion" value="<?= htmlspecialchars($item['descripcion']); ?>">
+                                        <input type="hidden" name="imagen" value="<?= htmlspecialchars($item['imagen']); ?>">
+                                        <input type="hidden" name="fecha" value="<?= htmlspecialchars($item['fecha_publicacion']); ?>">
+                                        <input type="hidden" name="adjunto" value="<?= htmlspecialchars($item['adjunto']); ?>">
+                                        <button type="submit" class="btn btn-secondary">Ver más</button>
+                                    </form>
+                                <?php endif; ?>
+
+                                <!-- Contenedor para la fecha -->
+                                <div class="fecha-container">
+                                    <p><?php echo htmlspecialchars($item['fecha_publicacion']); ?></p>
+                                </div>
+                                <div class="descargar-adjunto">
+                                    <a href="data:application/pdf;base64,<?= $item["adjunto"]; ?>" download="<?= htmlspecialchars($item["titulo"]); ?>">Descargar adjunto</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    </div> <!--Fin de cartelera.row-->
-</section> <!--Fin de section-->
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</div> <!--Fin de cartelera.row-->
+
+
+
+
+
+
+
+

@@ -307,8 +307,8 @@ select:not([multiple]) {
 
 @media (max-width: 1200px) {
 	.tm-col-home {
-		flex: 0 0 100%;
-		max-width: 100%;
+		flex: 100%;
+		max-width: 50%;
 		padding-right: 15px;
 	}
 
@@ -329,8 +329,22 @@ select:not([multiple]) {
 	
 }
 
+@media (max-width: 850px) {
+	.tm-col-home {
+		margin: 0 auto;
+		flex: 100%;
+		max-width: 80%;
+		padding-right: 15px;
+	}
+}
+
 
 @media (max-width: 700px) {
+	.tm-col-home {
+		flex: 100%;
+		max-width: 100%;
+		padding-right: 15px;
+	}
 	.tm-parallax {
 		position: static;
 		height: 360px;

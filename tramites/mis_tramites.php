@@ -84,9 +84,7 @@ echo "<script>console.log(" . $response . ")</script>";
                     <h2 class="titlulo"><?php echo $datos['tipo_tramite']; ?></h2>
                     <p class="subtitle"><?php echo $datos['descripcion']; ?></p>
                     <div class="actions">
-                        <img src="../img/flechas.jpg" class="img-flecha" alt="" />
-                        <img src="../img/tilde.jpg" class="img-tilde" alt="" />
-                        <label class="responsable"><?php echo $datos['responsable']; ?></label>
+                        <label class="responsable">Responsable: <?php echo $datos['responsable']; ?></label>
                     </div>
                     <div class="info">
                         <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
@@ -98,7 +96,7 @@ echo "<script>console.log(" . $response . ")</script>";
             <?php } ?>
         <?php } ?>
     </div>
-    </div>
+    
 
     <!-- Paginación -->
     <nav>
