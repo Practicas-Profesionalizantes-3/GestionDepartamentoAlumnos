@@ -30,7 +30,6 @@
     <?php 
     include("includes/perfil.php");
     include("includes/notificaciones.php");
-
     ?>
     
     <div class="container-fluid">

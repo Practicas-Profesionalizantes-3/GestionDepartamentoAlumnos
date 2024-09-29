@@ -66,37 +66,37 @@ echo "<script>console.log(" . $response . ")</script>";
             }
         }
     </script>
+    <div class="mb-5 mt-3">
+        <h1 class="tm-text-primary">Mis tramites</h1>
+    </div>
 
-    <div class="listadoAvisos" style="margin-left: 88px;">
-        <div class="card-header">
-            <h1 class="card-title tm-text-primary">Mis Tramites</h1>
-            <a type="buttom" class="btn btn-primary mis-tramites-btn" href="index.php" style="align-items: end;" role="button">Volver</a>
-        </div>
+    <div class="listadoAvisos">
+        <a type="button" class="btn btn-primary btn-volver" href="index.php" role="button">Volver</a>
     </div>
 
     <div class="tm-section-wrap">
-        <?php $contador = 0; ?>
-        <?php foreach ($current_page_tramites as $datos) { ?>
-            <?php if ($contador % 3 == 0) { ?>
-                <div class="row">
+        <div class="row">
+            <?php $contador = 0; ?>
+            <?php foreach ($current_page_tramites as $datos) { ?>
+                <?php if ($contador % 3 == 0) { ?>
+                    <?php } ?>
+                        <div class="col-md-2 container-mis-tramites">
+                            <h2 class="titlulo"><?php echo $datos['tipo_tramite']; ?></h2>
+                            <p class="subtitle"><?php echo $datos['descripcion']; ?></p>
+                            <div class="actions">
+                                <label class="responsable">Responsable: <?php echo $datos['responsable']; ?></label>
+                            </div>
+                            <div class="info">
+                                <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
+                                <label class="estado"><?php echo $datos['fecha_creacion']; ?></label>
+                            </div>
+                        </div>
+                        <?php $contador++;
+                    if ($contador % 3 == 0 || $contador == count($current_page_tramites)) { ?>
                 <?php } ?>
-                <div class="col-md-3 container-mis-tramites">
-                    <h2 class="titlulo"><?php echo $datos['tipo_tramite']; ?></h2>
-                    <p class="subtitle"><?php echo $datos['descripcion']; ?></p>
-                    <div class="actions">
-                        <label class="responsable">Responsable: <?php echo $datos['responsable']; ?></label>
-                    </div>
-                    <div class="info">
-                        <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
-                    </div>
-                </div>
-                <?php $contador++;
-                if ($contador % 3 == 0 || $contador == count($current_page_tramites)) { ?>
-                </div>
             <?php } ?>
-        <?php } ?>
+        </div>
     </div>
-    
 
     <!-- Paginación -->
     <nav>
