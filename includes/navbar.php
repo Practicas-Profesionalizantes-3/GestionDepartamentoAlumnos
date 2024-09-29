@@ -134,4 +134,5 @@
     searchBtn.addEventListener("click", () => {
         sidebar.classList.remove("close");
     })
+    
 </script>

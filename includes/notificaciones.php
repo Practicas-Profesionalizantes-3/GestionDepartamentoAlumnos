@@ -36,7 +36,7 @@
 
 .navbar-nav.ml-auto .nav-item.dropdown {
     margin-right: 5px; /* Ajusta este valor para mover la campanita y el contador a la derecha */
-    margin-top: -12px;
+    margin-top: -10px;
 }
 
 .dropdown-menu-right {
@@ -65,8 +65,12 @@
     // Obtener datos de la API
     $response = file_get_contents($api_url);
     $data = json_decode($response, true);
+    $notificaciones_count = count($data); // Número de notificaciones
 
-    $notifications_count = count($data); // Número de notificaciones
+    $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
+
+    $response = file_get_contents($api_url);
+    $cartelera = json_decode($response, true);
     ?>
 
     <nav class="navbar navbar-expand-lg">
@@ -77,21 +81,21 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-bell"></i>
-                            <span class="badge bg-danger" id="count-label"><?php echo $notifications_count; ?></span>
+                            <span class="badge bg-danger" id="count-label"><?php echo $notificaciones_count; ?></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" id="notificationDropdown" aria-labelledby="notificationsDropdown">
                             <div class="dropdown-divider"></div>
                             <?php
-                            if ($notifications_count > 0) {
-                                foreach ($data as $notification) {
-                                    $notification_id = $notification['id_notificacion'];
-                                    $date_sent = htmlspecialchars($notification['fecha_envio_notificacion']);
-                                    $type = isset($notification['id_aviso']) ? "Aviso" : (isset($notification['id_tramite']) ? "Trámite" : "Desconocido");
+                            if ($notificaciones_count > 0) {
+                                foreach ($data as $notificacion) {
+                                    $notificacion_id = $notificacion['id_notificacion'];
+                                    $date_sent = htmlspecialchars($notificacion['fecha_envio_notificacion']);
+                                    $type = isset($notificacion['id_aviso']) ? "Aviso" : (isset($notificacion['id_tramite']) ? "Trámite" : "Desconocido");
 
                                     // Obtener la descripción
-                                    $description = ($type == "Aviso") ? htmlspecialchars($notification['id_aviso']) : htmlspecialchars($notification['id_tramite']);
+                                    $description = ($type == "Aviso") ? htmlspecialchars($notificacion['id_aviso']) : htmlspecialchars($notificacion['id_tramite']);
 
                                     // Limitar la descripción a 23 caracteres y añadir puntos suspensivos
                                     $max_length = 23;
@@ -109,17 +113,12 @@
 
 
                                     if ($type == "Trámite") {
-                                        echo "<br><a href='http://localhost/gestiondepartamentoalumnos/includes/notificacion.php?id={$notification_id}'>Ver detalle del trámite</a>";
+                                        echo "<br><a href='http://localhost/gestiondepartamentoalumnos/includes/notificacion.php?id={$notificacion_id}'>Ver detalle del trámite</a>";
                                     }
-
                                     if ($type == "Aviso") {
-                                        echo "<br><a href='http://localhost/gestiondepartamentoalumnos/includes/aviso.php?id={$notification_id}'>Ver detalle del trámite</a>";
-                                        // 
-
-                                        echo "</div>";
-                                        echo "<div class='dropdown-divider'></div>";
-                                    } else {
-                                        echo "<span class='dropdown-item text-muted'>No hay notificaciones de hoy</span>";
+                                        $adjunto = isset($notificacion['adjunto']) ? urlencode($notificacion['adjunto']) : '';
+                                     
+                                        echo "<br><a href='http://localhost/gestiondepartamentoalumnos/includes/aviso.php?id={$notificacion['id_notificacion']}&adjunto={$adjunto}'>Ver detalle del aviso</a>";
                                     }
                                 }
                             } ?>

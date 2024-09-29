@@ -29,9 +29,11 @@
     <!-- Include Perfil -->
     <?php 
     include("includes/perfil.php");
-    include("includes/notificaciones.php");
     ?>
-    
+    <!-- En tu página principal -->
+    <?php
+require_once 'includes/notificaciones.php';
+?>
     <div class="container-fluid">
         <div class="row">
             <!-- Include Navbar -->
