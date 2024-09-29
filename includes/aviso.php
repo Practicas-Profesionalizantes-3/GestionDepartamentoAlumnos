@@ -1,10 +1,12 @@
 <?php
 // Obtener los datos enviados por POST
+$aviso_id = isset($_GET['id']) ? $_GET['id'] : null;
 $titulo = isset($_POST['titulo']) ? htmlspecialchars($_POST['titulo']) : 'Sin título';
 $descripcion = isset($_POST['descripcion']) ? htmlspecialchars($_POST['descripcion']) : 'Sin descripción';
 $imagen = isset($_POST['imagen']) && !empty($_POST['imagen']) ? "data:image/jpeg;base64," . $_POST['imagen'] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s";
 $fecha = isset($_POST['fecha']) ? htmlspecialchars($_POST['fecha']) : 'Sin fecha';
 $adjunto = isset($_POST['adjunto']) ? $_POST['adjunto'] : '';
+
 ?>
 
 

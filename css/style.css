@@ -616,6 +616,8 @@ body.dark-theme {
 }
 
 
+/* aviso-completo */
+
 .aviso-completo {
   position: relative; /* Necesario para posicionar la cruz dentro del aviso */
   max-width: 800px;
