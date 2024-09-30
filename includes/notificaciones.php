@@ -59,19 +59,70 @@
 
 <body>
 
-    <?php
-    $api_url = 'http://localhost/api/api-Alumnos/notificaciones.php';
+<?php
+$api_notificaciones_url = 'http://localhost/api/api-Alumnos/notificaciones.php';
+$api_cartelera_url = 'http://localhost/api/api-Alumnos/cartelera.php';
 
-    // Obtener datos de la API
-    $response = file_get_contents($api_url);
-    $data = json_decode($response, true);
-    $notificaciones_count = count($data); // Número de notificaciones
+// Obtener datos de la API de notificaciones
+$response = file_get_contents($api_notificaciones_url);
 
-    $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
+// Verificar que la respuesta no sea falsa o vacía
+if ($response === false || empty($response)) {
+    die("Error: No se pudo obtener la respuesta de la API de notificaciones.");
+}
 
-    $response = file_get_contents($api_url);
-    $cartelera = json_decode($response, true);
-    ?>
+$notificaciones = json_decode($response, true);
+$notificaciones_count = count($notificaciones);
+// Verificar que la decodificación JSON sea exitosa y que $notificaciones sea un array
+if (!is_array($notificaciones)) {
+    die("Error: La respuesta de la API de notificaciones no es un array válido.");
+}
+
+// Recorrer las notificaciones y buscar el id_aviso
+foreach ($notificaciones as $notificacion) {
+    // Verificar que $notificacion sea un array antes de intentar acceder a sus claves
+    if (is_array($notificacion) && isset($notificacion['id_notificacion'])) {
+        $id_notificacion = $notificacion['id_notificacion'];
+        
+        // Si existe el id_aviso en la notificación
+        if (isset($notificacion['id_aviso'])) {
+            $id_aviso = $notificacion['id_aviso'];
+
+            // Obtener los datos de la cartelera para buscar el aviso con el mismo id_aviso
+            $cartelera_response = file_get_contents($api_cartelera_url);
+            
+            // Verificar que la respuesta no sea falsa o vacía
+            if ($cartelera_response === false || empty($cartelera_response)) {
+                die("Error: No se pudo obtener la respuesta de la API de cartelera.");
+            }
+
+            $avisos = json_decode($cartelera_response, true);
+
+            // Verificar que la decodificación JSON sea exitosa y que $avisos sea un array
+            if (!is_array($avisos)) {
+                die("Error: La respuesta de la API de cartelera no es un array válido.");
+            }
+
+            // Recorrer la cartelera para encontrar el aviso correspondiente
+            foreach ($avisos as $aviso) {
+                // Verificar que $aviso sea un array y que tenga un id_aviso válido
+                if (is_array($aviso) && isset($aviso['id_aviso']) && $aviso['id_aviso'] == $id_aviso) {
+                    // Guardar la descripción del aviso en una variable
+                    $descripcion_aviso = $aviso['descripcion'];
+                  
+                    // Aquí podrías usar $descripcion_aviso para mostrarla en tu HTML o hacer otras operaciones
+                    echo "Descripción del aviso encontrado: " . $descripcion_aviso;
+                    break; // Salir del bucle cuando encuentres el aviso
+                }
+            }
+        }
+    } else {
+        echo "Error: Notificación no válida o sin id_notificacion.";
+    }
+}
+?>
+
+
 
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
@@ -88,40 +139,43 @@
                         <div class="dropdown-menu dropdown-menu-right" id="notificationDropdown" aria-labelledby="notificationsDropdown">
                             <div class="dropdown-divider"></div>
                             <?php
-                            if ($notificaciones_count > 0) {
-                                foreach ($data as $notificacion) {
-                                    $notificacion_id = $notificacion['id_notificacion'];
-                                    $date_sent = htmlspecialchars($notificacion['fecha_envio_notificacion']);
-                                    $type = isset($notificacion['id_aviso']) ? "Aviso" : (isset($notificacion['id_tramite']) ? "Trámite" : "Desconocido");
-
-                                    // Obtener la descripción
-                                    $description = ($type == "Aviso") ? htmlspecialchars($notificacion['id_aviso']) : htmlspecialchars($notificacion['id_tramite']);
-
-                                    // Limitar la descripción a 23 caracteres y añadir puntos suspensivos
-                                    $max_length = 23;
-                                    if (strlen($description) > $max_length) {
-                                        $description = substr($description, 0, $max_length) . '...';
-                                    }
-
-                                    echo "<div id='notificationContent'>";
-                                    echo "<i class='fa fa-check' style='color:#41cf2e;'></i>";
-                                    echo "<span class='message-description'>Nueva notificación enviada el: <b>{$date_sent}</b></span>";
-                                    echo "<br>";
-                                    echo "<span class='notification-type'>Tipo: <b>{$type}</b></span>";
-                                    echo "<br>";
-                                    echo "<span class='notification-detail'>Descripción: <b>{$description}</b></span>";
-
-
-                                    if ($type == "Trámite") {
-                                        echo "<br><a href='http://localhost/gestiondepartamentoalumnos/includes/notificacion.php?id={$notificacion_id}'>Ver detalle del trámite</a>";
-                                    }
-                                    if ($type == "Aviso") {
-                                        $adjunto = isset($notificacion['adjunto']) ? urlencode($notificacion['adjunto']) : '';
-                                     
-                                        echo "<br><a href='http://localhost/gestiondepartamentoalumnos/includes/aviso.php?id={$notificacion['id_notificacion']}&adjunto={$adjunto}'>Ver detalle del aviso</a>";
-                                    }
+                          if ($notificaciones_count > 0) {
+                            foreach ($notificaciones as $notificacion) {
+                                $notificacion_id = $notificacion['id_notificacion'];
+                                $date_sent = htmlspecialchars($notificacion['fecha_envio_notificacion']);
+                                $type = isset($notificacion['id_aviso']) ? "Aviso" : (isset($notificacion['id_tramite']) ? "Trámite" : "Desconocido");
+                        
+                                // Obtener la descripción real según el tipo de notificación (Aviso o Trámite)
+                                $description = ($type == "Aviso") ? htmlspecialchars($notificacion['descripcion_aviso']) : htmlspecialchars($notificacion['descripcion_tramite']);
+                        
+                                // Limitar la descripción a 23 caracteres y añadir puntos suspensivos si es necesario
+                                $max_length = 23;
+                                if (strlen($description) > $max_length) {
+                                    $description = substr($description, 0, $max_length) . '...';
                                 }
-                            } ?>
+                        
+                                // Mostrar la notificación
+                                echo "<div id='notificationContent'>";
+                                echo "<i class='fa fa-check' style='color:#41cf2e;'></i>";
+                                echo "<span class='message-description'>Nueva notificación enviada el: <b>{$date_sent}</b></span>";
+                                echo "<br>";
+                                echo "<span class='notification-type'>Tipo: <b>{$type}</b></span>";
+                                echo "<br>";
+                                echo "<span class='notification-detail'>Descripción: <b>{$description}</b></span>";
+                        
+                                // Link para el detalle del trámite o aviso
+                                if ($type == "Trámite") {
+                                    echo "<br><a href='http://localhost/gestiondepartamentoalumnos/includes/notificacion.php?id={$notificacion_id}'>Ver detalle del trámite</a>";
+                                }
+                                if ($type == "Aviso") {
+                                    $adjunto = isset($notificacion['adjunto']) ? urlencode($notificacion['adjunto']) : '';
+                                    echo "<br><a href='http://localhost/gestiondepartamentoalumnos/includes/notificacion.php?id={$notificacion_id}&adjunto={$adjunto}'>Ver detalle del aviso</a>";
+                                }
+                        
+                                echo "</div><br>"; // Separar cada notificación con un salto de línea
+                            }
+                        }
+                        ?>
                         </div>
                     </li>
                 </ul>
