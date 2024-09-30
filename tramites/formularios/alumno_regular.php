@@ -49,14 +49,6 @@ foreach ($tiposTramites as $tipo) {
                     </div>
                     <form class="container mt-5" id="formulario">
                         <div class="mb-3">
-                            <label for="id_usuario_creacion" class="form-label">Nombre y Apellido:</label>
-                            <input type="text" class="form-control" name="id_usuario_creacion" id="id_usuario_creacion" aria-describedby="helpId" placeholder="Nombre" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="dni" class="form-label">DNI:</label>
-                            <input type="number" class="form-control" name="dni" id="dni" aria-describedby="helpId" placeholder="DNI">
-                        </div>
-                        <div class="mb-3">
                             <label for="carrera" class="form-label">Seleccione su Carrera:</label>
                             <select class="form-control" name="carrera" id="carrera">
                             <option value="0">- -</option>
@@ -75,18 +67,20 @@ foreach ($tiposTramites as $tipo) {
                             <option value="2">Turno Tarde</option>
                             <option value="3">Turno Noche</option>
                             </select>
-                        </div> <div class="mb-3">
-                            <label for="email" class="form-label">Ingrese el mail de su cuenta Office 365:</label>
-                            <input type="email" class="form-control" name="email" id="email" aria-describedby="helpId" placeholder="Email">
-                        </div>
+                        </div> 
                         <div class="mb-3">
-                            <label for="fecha_solicitud" class="form-label">Fecha de Solicitud:</label>
-                            <input type="date" class="form-control" name="fecha_solicitud" id="fecha_solicitud" aria-describedby="helpId" placeholder="Fecha de solicitud" required value="<?php $hoy = date("Y-m-d"); echo $hoy; ?>">
+                            <label for="materia" class="form-label">Materia:</label>
+                            <select class="form-control" name="materia" id="materia">
+                            <option value="0">- -</option>
+                            <option value="1"></option>
+                            <option value="2"></option>
+                            <option value="3"></option>
+                            </select>
                         </div>
                         <div class="text-center">
                              <a type="submit" class="btn btn-success" id="enviar-formulario" href="../index.php" role="button">Enviar</a>
                             
-                             <button type="submit" class="btn btn-info" onclick="location.href='../index.php'">Cancelar</button>
+                             <a href="../index.php" class="btn btn-info" >Cancelar</a>
                         </div>
                     </form>
                 </div> <!-- .tm-section-wrap -->

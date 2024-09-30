@@ -1,7 +1,7 @@
-function eliminarAviso(id) {
+function eliminarUsuario(id) {
     Swal.fire({
-        title: "¿Queres eliminar este anuncio?",
-        text: "No podrás revertir esto!",
+        title: "¿Queres eliminar este usuario?",
+        text: "",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -11,8 +11,8 @@ function eliminarAviso(id) {
         if (result.isConfirmed) {
             $.ajax({
                 type: "DELETE",
-                url: "http://localhost/api/api-Alumnos/cartelera.php",
-                data: JSON.stringify({ id_aviso: id }),
+                url: "http://localhost/api/api-Alumnos/usuarios.php",
+                data: JSON.stringify({ id_usuario: id }),
                 contentType: "application/json",
                 dataType: "json",
                 success: function (data) {
@@ -21,7 +21,7 @@ function eliminarAviso(id) {
                         Swal.fire({
                             title: "Eliminado!",
                             confirmButtonColor: "#006699",
-                            text: "Este anuncio ha sido eliminado.",
+                            text: "Este usuario ha sido eliminado.",
                             icon: "success",
                             iconColor: "#118911",
                         }).then(() => {

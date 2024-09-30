@@ -10,14 +10,6 @@ $tramites = json_decode($response, true);
 
 $data = $tramites;
 
-$iniciales = array();
-foreach ($data as $usuario) {
-    $nombre = $usuario['usuario'];
-    $apellido = $usuario['usuarioap'];
-    $inicial_nombre = substr($nombre, 0, 1);
-    $inicial_apellido = substr($apellido, 0, 1);
-    $iniciales = $inicial_nombre . $inicial_apellido;
-}
 
 $items_per_page = 6; // Número de filas por página
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
@@ -74,38 +66,36 @@ echo "<script>console.log(" . $response . ")</script>";
             }
         }
     </script>
+    <div class="mb-5 mt-3">
+        <h1 class="tm-text-primary">Mis tramites</h1>
+    </div>
 
-    <div class="listadoAvisos" style="margin-left: 88px;">
-        <div class="card-header">
-            <h1 class="card-title tm-text-primary">Mis Tramites</h1>
-            <a type="buttom" class="btn btn-primary mis-tramites-btn" href="index.php" style="align-items: end;" role="button">Volver</a>
-        </div>
+    <div class="listadoAvisos">
+        <a type="button" class="btn btn-primary btn-volver" href="index.php" role="button">Volver</a>
     </div>
 
     <div class="tm-section-wrap">
-        <?php $contador = 0; ?>
-        <?php foreach ($current_page_tramites as $datos) { ?>
-            <?php if ($contador % 3 == 0) { ?>
-                <div class="row">
+        <div class="row">
+            <?php $contador = 0; ?>
+            <?php foreach ($current_page_tramites as $datos) { ?>
+                <?php if ($contador % 3 == 0) { ?>
+                    <?php } ?>
+                        <div class="col-md-2 container-mis-tramites">
+                            <h2 class="titlulo"><?php echo $datos['tipo_tramite']; ?></h2>
+                            <p class="subtitle"><?php echo $datos['descripcion']; ?></p>
+                            <div class="actions">
+                                <label class="responsable">Responsable: <?php echo $datos['responsable']; ?></label>
+                            </div>
+                            <div class="info">
+                                <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
+                                <label class="estado"><?php echo $datos['fecha_creacion']; ?></label>
+                            </div>
+                        </div>
+                        <?php $contador++;
+                    if ($contador % 3 == 0 || $contador == count($current_page_tramites)) { ?>
                 <?php } ?>
-                <div class="col-md-3 container-mis-tramites">
-                    <h2 class="titlulo"><?php echo $datos['tipo_tramite']; ?></h2>
-                    <p class="subtitle"><?php echo $datos['descripcion']; ?></p>
-                    <div class="actions">
-                        <img src="../img/flechas.jpg" class="img-flecha" alt="" />
-                        <img src="../img/tilde.jpg" class="img-tilde" alt="" />
-                        <label class="responsable"><?php echo $datos['responsable']; ?></label>
-                    </div>
-                    <div class="info">
-                        <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
-                    </div>
-                </div>
-                <?php $contador++;
-                if ($contador % 3 == 0 || $contador == count($current_page_tramites)) { ?>
-                </div>
             <?php } ?>
-        <?php } ?>
-    </div>
+        </div>
     </div>
 
     <!-- Paginación -->

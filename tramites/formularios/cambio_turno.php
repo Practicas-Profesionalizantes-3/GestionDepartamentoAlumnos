@@ -49,14 +49,6 @@ foreach ($tiposTramites as $tipo) {
                     </div>
                     <form class="container mt-5" id="formulario">
                         <div class="mb-3">
-                            <label for="nombre" class="form-label">Nombre y Apellido:</label>
-                            <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId" placeholder="Nombre" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="dni" class="form-label">DNI:</label>
-                            <input type="number" class="form-control" name="dni" id="dni" aria-describedby="helpId" placeholder="DNI">
-                        </div>
-                        <div class="mb-3">
                             <label for="carrera" class="form-label">Seleccione su Carrera:</label>
                             <select class="form-control" name="carrera" id="carrera">
                             <option value="1">- -</option>
@@ -86,16 +78,12 @@ foreach ($tiposTramites as $tipo) {
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="fecha_solicitud" class="form-label">Fecha de Solicitud:</label>
-                            <input type="date" class="form-control" name="fecha_solicitud" id="fecha_solicitud" aria-describedby="helpId" placeholder="Fecha de solicitud" required value="<?php $hoy = date("Y-m-d"); echo $hoy; ?>">
-                        </div>
-                        <div class="mb-3">
                             <label for="motivo" class="form-label">Motivo:</label>
                             <input type="text" class="form-control" name="motivo" id="motivo" aria-describedby="helpId" placeholder="Motivo" required>
                         </div>
                         <div class="text-center">
-                             <a type="submit" class="btn btn-success" id="enviar-formulario" href="../index.php" role="button">Enviar</a>
-                             <button type="submit" class="btn btn-info" onclick="location.href='../index.php'">Cancelar</button>
+                             <button type="submit" class="btn btn-success" id="enviar-formulario" href="../index.php" role="button">Enviar</button>
+                             <a href="../index.php" class="btn btn-info">Cancelar</a>
                         </div>
                     </form>
                 </div> <!-- .tm-section-wrap -->

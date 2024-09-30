@@ -23,15 +23,16 @@
 
 <body>
     <!-- Include Perfil -->
-    <?php
-    include("includes/perfil.php");
-    ?>
+    <?php include("includes/perfil.php");?>
+    
+    <!-- Notificaciones en tu página principal -->
+    <?php include ("includes/notificaciones.php");?>
+
     <div class="container-fluid">
         <div class="row">
             <!-- Include Navbar -->
-            <?php
-            include("includes/navbar.php");
-            ?>
+            <?php include("includes/navbar.php");?>
+
             <div class="tm-main">
                 <!-- Home section -->
                 <div class="tm-section-wrap">
@@ -66,6 +67,7 @@
     <script src="js/index.js"></script>
     <script src="js/chatbot.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

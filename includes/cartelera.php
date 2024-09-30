@@ -3,9 +3,10 @@ $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
 
 $response = file_get_contents($api_url);
 $data = json_decode($response, true);
-$datos = $data;
+$avisos = json_decode($data["data"], true);
+$datos = $avisos;
 $fecha_actual = date('Y-m-d');
-$datos_filtrados = array_filter($data, function ($item) use ($fecha_actual) {
+$datos_filtrados = array_filter($avisos, function ($item) use ($fecha_actual) {
     return ($item['fecha_vencimiento'] >= $fecha_actual) && ($item["estado"] != "Inactivo");
 });
 
@@ -25,8 +26,8 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
         $mostrar_opciones = $_SESSION['mostrar_opciones_cartelera'];
         if ($mostrar_opciones == "opciones1") {
     ?>
-    <h2 class="tm-text-primary">Centro de Tecnológia e Innovación</h2>
-    <hr class="mb-5">
+            <h2 class="tm-text-primary">Centro de Tecnológia e Innovación</h2>
+            <hr class="mb-5">
     <?php
         }
     }
@@ -65,23 +66,45 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
         }
     ?>
 
-
-    <div class="row">
+    
+    <div class="row justify-content-center">
         <?php if ($datos) : ?>
-            <?php foreach ($datos as $item) : ?>
-                <div class="col-lg-6 tm-col-home mb-4" data-wow-delay="0.1s">
+            <?php foreach ($datos as $index => $item) : ?>
+                <div class="col-lg-5 tm-col-home mb-4" data-wow-delay="0.1s">
                     <div class="position-relative border-cartelera">
                         <div class="img-cartelera mb-3">
                             <img class="img-cartelera-item" src="<?= $item["imagen"] != "" ? "data:image/jpeg;base64," . $item["imagen"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s" ?>" />
                         </div>
                         <hr style="width: 50%;" class="d-flex m-auto">
-                        <div class="img-container">
+                        <div class="img-container mt-3">
                             <div class="overlay">
                                 <div>
                                     <h5 class="mb-3 cartelera-titulo"><?php echo htmlspecialchars($item['titulo']); ?></h5>
-                                    <p class="cartelera-desc"><?php echo htmlspecialchars($item['descripcion']); ?></p>
+                                    <p class="cartelera-desc text-truncate" id="desc-<?php echo $index; ?>">
+                                        <?php 
+                                            if (strlen($item['descripcion']) > 455) {
+                                                echo htmlspecialchars(substr($item['descripcion'], 0, 100)) . "...";
+                                            } else {
+                                                echo htmlspecialchars($item['descripcion']);
+                                            }
+                                        ?>
+                                    </p>
+
+                                    <!-- Botón Ver más solo si la descripción tiene más de 45 caracteres -->
+                                    <?php if (strlen($item['descripcion']) > 45) : ?>
+                                        <form action="http://localhost/gestiondepartamentoalumnos/includes/aviso.php" method="POST">
+                                            <input type="hidden" name="titulo" value="<?= htmlspecialchars($item['titulo']); ?>">
+                                            <input type="hidden" name="descripcion" value="<?= htmlspecialchars($item['descripcion']); ?>">
+                                            <input type="hidden" name="imagen" value="<?= htmlspecialchars($item['imagen']); ?>">
+                                            <input type="hidden" name="fecha" value="<?= htmlspecialchars($item['fecha_publicacion']); ?>">
+                                            <input type="hidden" name="adjunto" value="<?= htmlspecialchars($item['adjunto']); ?>">
+                                            <button type="submit" class="btn btn-secondary">Ver más</button>
+                                        </form>
+                                    <?php endif; ?>
+
+                                    <!-- Contenedor para la fecha -->
                                     <div class="fecha-container">
-                                        <p><?php echo htmlspecialchars($item['fecha_publicacion']) ?></p>
+                                        <p><?php echo htmlspecialchars($item['fecha_publicacion']); ?></p>
                                     </div>
                                     <div class="descargar-adjunto">
                                         <a href="data:application/pdf;base64,<?= $item["adjunto"]; ?>" download="<?= htmlspecialchars($item["titulo"]); ?>">Descargar adjunto</a>
@@ -94,4 +117,11 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
             <?php endforeach; ?>
         <?php endif; ?>
     </div> <!--Fin de cartelera.row-->
-</section> <!--Fin de section-->
+</section> <!--Fin de section-md-->
+
+
+
+
+
+
+
