@@ -169,7 +169,7 @@ foreach ($notificaciones as $notificacion) {
                                 }
                                 if ($type == "Aviso") {
                                     $adjunto = isset($notificacion['adjunto']) ? urlencode($notificacion['adjunto']) : '';
-                                    echo "<br><a href='http://localhost/gestiondepartamentoalumnos/includes/notificacion.php?id={$notificacion_id}&adjunto={$adjunto}'>Ver detalle del aviso</a>";
+                                    echo "<br><a href='http://localhost/gestiondepartamentoalumnos/includes/aviso.php?id={$notificacion_id}&adjunto={$adjunto}'>Ver detalle del aviso</a>";
                                 }
                         
                                 echo "</div><br>"; // Separar cada notificación con un salto de línea

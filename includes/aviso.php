@@ -1,16 +1,22 @@
-
-
-
-
-
 <?php
-// Obtener los datos enviados por POST
 $aviso_id = isset($_GET['id']) ? $_GET['id'] : null;
-$titulo = isset($_POST['titulo']) ? htmlspecialchars($_POST['titulo']) : 'Sin título';
-$descripcion = isset($_POST['descripcion']) ? htmlspecialchars($_POST['descripcion']) : 'Sin descripción';
-$imagen = isset($_POST['imagen']) && !empty($_POST['imagen']) ? "data:image/jpeg;base64," . $_POST['imagen'] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s";
-$fecha = isset($_POST['fecha']) ? htmlspecialchars($_POST['fecha']) : 'Sin fecha';
-$adjunto = isset($_POST['adjunto']) ? $_POST['adjunto'] : '';
+$notificacion_id = isset($_GET['id_notificacion']) ? $_GET['id_notificacion'] : null;
+
+// Inicializar datos por defecto
+
+// Si existe un id_notificacion, obtener datos de la notificación
+if ($notificacion_id) {
+    
+}else{
+    $titulo = isset($_POST['titulo']) ? htmlspecialchars($_POST['titulo']) : 'Sin título';
+    $descripcion = isset($_POST['descripcion']) ? htmlspecialchars($_POST['descripcion']) : 'Sin descripción';
+    $imagen = isset($_POST['imagen']) && !empty($_POST['imagen']) ? "data:image/jpeg;base64," . $_POST['imagen'] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s";
+    $fecha = isset($_POST['fecha']) ? htmlspecialchars($_POST['fecha']) : 'Sin fecha';
+    $adjunto = isset($_POST['adjunto']) ? $_POST['adjunto'] : '';
+}
+
+
+
 ?>
     <title><?= $titulo; ?></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -35,9 +41,20 @@ $adjunto = isset($_POST['adjunto']) ? $_POST['adjunto'] : '';
             </div>
         </div>
     </div>
-    <?php
-        include("footer.php")
-    ?>
+    <footer>
+<div class="container">
+        <div class="row single-footer-widget">
+            <div class="col-md-6 col-sm-7">
+                <span class="text-light">Prohibida la reproducción total ó parcial de imágenes y textos. Todos los derechos reservados.</span>
+            </div>
+            <div class="col-md-6 col-sm-5">
+                <div class="column-right">
+                    <span class="text-light">Política de Privacidad. Términos y condiciones.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
 
