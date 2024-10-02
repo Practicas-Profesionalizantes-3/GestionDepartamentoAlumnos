@@ -22,8 +22,8 @@
                 <!-- Botón para habilitar el formulario de cambio de contraseña -->
                 <a href="#" id="habilitarCambio" class="tm-text-primary">¿Desea cambiar su contraseña?</a>
 
-                 <!-- Botón para habilitar el formulario desea cerrar sesion -->
-                 <a href="#" id="cerrarsesion" onclick="cerrarsesion()" class="tm-text-primary">¿Desea cerrar sesion?</a>
+                <!-- Botón para habilitar el formulario desea cerrar sesion -->
+                <a href="#" id="cerrarsesion" onclick="cerrarsesion()" class="tm-text-primary">¿Desea cerrar sesion?</a>
             </div>
             <!-- Formulario para cambiar contraseña (inicialmente oculto) -->
             <form id="formulario" style="display: none;">

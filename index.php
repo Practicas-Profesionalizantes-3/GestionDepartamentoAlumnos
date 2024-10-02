@@ -42,10 +42,9 @@
                     $_SESSION['mostrar_opciones_cartelera'] = 'opciones1';
                     include("includes/cartelera.php")
                     ?>
+                    
                     <!-- Include Contacto -->
-                    <?php
-                    include("includes/contacto.php")
-                    ?>
+                    <?php include("includes/contacto.php")?>
                 </div> <!-- .tm-section-wrap -->
             </div> <!-- .tm-main -->
         </div> <!-- .row -->
@@ -57,6 +56,7 @@
 
     <script src="js/perfil.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/notificaciones.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5Pil2tXdHhjTvQ9lQS6yIiwnyF3vухQ9Etqkibi1DwYLPSAOxocnipl" crossorigin="anonymous"></script>

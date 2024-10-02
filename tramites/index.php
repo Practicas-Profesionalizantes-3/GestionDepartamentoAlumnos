@@ -45,19 +45,6 @@ $formularios_path = null;
     <!-- Include del navbar -->
     <?php include("../includes/navbar.php"); ?>
 
-    <script>
-        // Validación del estado de inicio de sesión y redirección si no está logueado
-        var loggedIn = sessionStorage.getItem('loggedIn');
-        if (!loggedIn) {
-            window.location.href = '../index.php'; // Redirige al index si no está logueado
-        } else {
-            var usuario = JSON.parse(sessionStorage.getItem("usuario"));
-            if (usuario.id_usuario_estado != 1) {
-                window.location.href = '../index.php'; // Redirige si el usuario no está activo
-            }
-        }
-    </script>
-            
     <div class="mb-5 mt-3"> 
         <h1 class="tm-text-primary">Crea un trámite</h1>
     </div>
@@ -100,6 +87,7 @@ $formularios_path = null;
         </div>
     </div> <!-- .tm-section-wrap -->
     
+    <script src="js/validar.js"></script>
     <script src="../js/index.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>
