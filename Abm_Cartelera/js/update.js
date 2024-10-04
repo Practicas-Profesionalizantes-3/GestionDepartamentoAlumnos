@@ -28,7 +28,7 @@ $("#formulario").submit(async function (event) {
         id_aviso_estado: $("#id_aviso_estado").val()
     };
 
-    if (!aviso.titulo || !aviso.descripcion || !aviso.imagen || !aviso.adjunto) {
+    if (!aviso.titulo || !aviso.descripcion) {
         Toastify({
             text: "⚠️ Faltan datos por completar ⚠️",
             duration: 1500,

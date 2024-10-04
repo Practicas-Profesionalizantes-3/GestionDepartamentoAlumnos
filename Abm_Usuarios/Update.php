@@ -2,7 +2,8 @@
 $api_url = 'http://localhost/api/api-Alumnos/usuarios.php';
 
 $response = file_get_contents($api_url);
-$data = json_decode($response, true);
+$datas = json_decode($response, true);
+$data = $datas["data"];
 $usuarios = $data;
 
 $id_usuario_editar = $_GET['id_usuario'];
