@@ -1,16 +1,10 @@
 <?php
 $api_url = 'http://localhost/api/api-Alumnos/notificaciones.php';
-
-// Obtener datos de la API
 $response = file_get_contents($api_url);
 $data = json_decode($response, true);
-$notificaciones_count = count($data); // Número de notificaciones
+$notificaciones_count = count($data);
 
-$api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
-$response = file_get_contents($api_url);
-$cartelera = json_decode($response, true);
 ?>
-
 
 <div class="navbar navbar-expand-lg" id="notificaciones">
     <div class="container-fluid">
@@ -33,16 +27,21 @@ $cartelera = json_decode($response, true);
                                 $date_sent = htmlspecialchars($notificacion['fecha_envio_notificacion']);
                                 $type = isset($notificacion['id_aviso']) ? "Aviso" : (isset($notificacion['id_tramite']) ? "Trámite" : "Desconocido");
 
-                                // Ajuste de la descripción según el tipo de notificación
+                                // Mostrar la descripción adecuada dependiendo del tipo
                                 if ($type == "Aviso") {
-                                    $descripcion = isset($notificacion['descripcion_aviso']) ? htmlspecialchars($notificacion['descripcion_aviso']) : "Descripción no disponible.";
+                                    $descripcion = isset($notificacion['descripcion_aviso']) ? htmlspecialchars($notificacion['descripcion_aviso']) : 'Sin descripción';
+                                    $id_relacionado = $notificacion['id_aviso'];  // usar el id_aviso
+                                    $href = 'http://localhost/gestiondepartamentoalumnos/includes/aviso.php?id=' . $id_relacionado;
                                 } elseif ($type == "Trámite") {
-                                    $descripcion = isset($notificacion['descripcion_tramite']) ? htmlspecialchars($notificacion['descripcion_tramite']) : "Descripción no disponible.";
+                                    $descripcion = isset($notificacion['descripcion_tramite']) ? htmlspecialchars($notificacion['descripcion_tramite']) : 'Sin descripción';
+                                    $id_relacionado = $notificacion['id_tramite'];  // usar el id_tramite
+                                    $href = 'http://localhost/gestiondepartamentoalumnos/tramites/detalle_tramite.php?id=' . $id_relacionado;
                                 } else {
-                                    $descripcion = "Descripción no disponible.";
+                                    $descripcion = 'Notificación desconocida';
+                                    $href = '#';
                                 }
 
-                                // Limitar la longitud de la descripción si es muy larga
+                                // Limitar la longitud de la descripción
                                 $max_length = 23;
                                 if (strlen($descripcion) > $max_length) {
                                     $descripcion = substr($descripcion, 0, $max_length) . '...';
@@ -53,12 +52,7 @@ $cartelera = json_decode($response, true);
                                     <span class='message-description'>Nueva notificación enviada el: <b><?php echo $date_sent; ?></b></span><br>
                                     <span class='notification-type'>Tipo: <b><?php echo $type; ?></b></span><br>
                                     <span class='notification-detail'>Descripción: <b><?php echo $descripcion; ?></b></span>
-                                    <?php if ($type == "Trámite"): ?>
-                                        <br><a href='http://localhost/gestiondepartamentoalumnos/includes/notificacion.php?id=<?php echo $notificacion_id; ?>' style="color: blue;">Ver detalle del trámite</a>
-                                    <?php endif; ?>
-                                    <?php if ($type == "Aviso"): ?>
-                                        <br><a href='http://localhost/gestiondepartamentoalumnos/detalle.php?id=<?php echo $notificacion_id; ?>' style="color: blue;">Ver detalle del aviso</a>
-                                    <?php endif; ?>
+                                    <br><a href='<?php echo $href; ?>' style="color: blue;">Ver detalle</a>
                                 </div>
                             <?php endforeach; ?>
                         <?php endif; ?>
