@@ -1,0 +1,97 @@
+//Crear Anuncio (POST)
+{
+    
+    "titulo"  :"titulo",
+    "descripcion" : "descripcion",
+    "imagen" : "imagen",
+    "fechaDesde" : "fechaDesde",
+    "fechaHasta" : "fechaHasta",
+    "carrera" : "carrera",
+    "anio" : "anio",
+    "comision" : "comision",
+    "estado" : "estado"
+}
+
+//Modificar Anuncio (PUT)
+{
+    "id": 1,
+    "titulo"  :"titulo",
+    "descripcion" : "descripcion",
+    "imagen" : "imagen",
+    "fechaDesde" : "fechaDesde",
+    "fechaHasta" : "fechaHasta",
+    "carrera" : "carrera",
+    "anio" : "anio",
+    "comision" : "comision",
+    "estado" : "estado"
+}
+
+//Eliminar Anuncio
+{
+    "id" : 1,
+}
+
+----------------------------------
+
+//Alta de usuario (POST)
+{
+    "nombre": "Juan",
+    "apellido": "Pérez",
+    "email": "juan@example.com",
+    "password": "password"
+}
+
+//Modificar usuario (PUT)
+{
+    "id": 1,
+    "nombre": "Juan",
+    "apellido": "Gómez",
+    "email": "juan@example.com"
+}
+
+//Eliminar usuario (DELETE)
+{
+    "id": 1
+}
+
+--------------------------------------
+
+//Alta de notificacion (POST)
+{
+    "tipo_notificacion": "Urgente",
+    "descripcion": "Se le informa que debe presentarse a Departamento de Alumnos"
+}
+
+//Modificar notificacion (PUT)
+{
+    "id":1,
+    "tipo_notificacion": "Urgente",
+    "descripcion": "No hay clases"
+}
+
+//Eliminar notificacion (DELETE)
+{
+    "id": 1
+}
+
+---------------------------------
+
+
+//Alta de Tramite (POST)
+{
+    "tipo_tramite" : "tipo_tramite",
+    "descripcion" : "descripcion",
+    "estado" : "estado"
+}
+//Modificar Tramite (PUT)
+{
+    "id": 1,
+    "tipo_tramite" : "tipo_tramite",
+    "descripcion" : "descripcion",
+    "estado" : "estado"
+}
+
+//Eliminar Tramite (DELETE)
+{
+    "id": 1
+}
