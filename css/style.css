@@ -1,9 +1,21 @@
+
+
+
+
 /* Estilos de cartelera */
+.row {
+  flex-wrap: wrap; /* Permite que los elementos se ajusten en varias filas */
+}
+
+.col-lg-4.tm-col-home {
+  padding: 0 10px; /* Agrega un padding lateral de 10px */
+  width: calc(20% - 20px) !important; /* Ajusta el ancho para que entren 3 anuncios por fila, pero un poco más anchos */
+}
 
 .img-container {
     position: relative;
     overflow: hidden;
-    height: 350px;
+    height: 250px;
 }
 
 .overlay {
@@ -21,6 +33,8 @@
     justify-content: center;
     text-align: center;
     box-sizing: border-box;
+    padding-bottom: 10px;
+    
 }
 .border-cartelera{
   padding: 10px;
@@ -28,6 +42,10 @@
   border: 2px solid rgba(102, 102, 102, 0.317) ;
   border-radius: 8px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  width: 80%;
+  height: 100%;
+  margin: 20px; /* Agrega un margen de 10px */
+  width: 100%; /* Ajusta el ancho para que se adapte al ancho del padre */
 }
 
 .img-cartelera{
@@ -45,8 +63,11 @@
 }
 
 .cartelera-desc{
+  border-bottom: 1px solid #ccc;
     font-size: 25px;
 }
+
+
 
 @media (max-width: 700px) {
 	.cartelera-titulo{
@@ -482,7 +503,7 @@ body.dark-theme {
 .modal {
   display: none; /* Oculto por defecto */
   position: fixed; /* Fijo */
-  z-index: 1; /* Sobre otros elementos */
+  z-index: 1000; /* Sobre otros elementos */
   left: 0;
   top: 0;
   margin-left: 88px;
