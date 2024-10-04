@@ -29,11 +29,11 @@ $notificaciones_count = count($data);
 
                                 // Mostrar la descripción adecuada dependiendo del tipo
                                 if ($type == "Aviso") {
-                                    $descripcion = isset($notificacion['descripcion_aviso']) ? htmlspecialchars($notificacion['descripcion_aviso']) : 'Sin descripción';
+                                    $descripcion = isset($notificacion['id_aviso_descripcion']) ? htmlspecialchars($notificacion['id_aviso_descripcion']) : 'Sin descripción';
                                     $id_relacionado = $notificacion['id_aviso'];  // usar el id_aviso
                                     $href = 'http://localhost/gestiondepartamentoalumnos/includes/aviso.php?id=' . $id_relacionado;
                                 } elseif ($type == "Trámite") {
-                                    $descripcion = isset($notificacion['descripcion_tramite']) ? htmlspecialchars($notificacion['descripcion_tramite']) : 'Sin descripción';
+                                    $descripcion = isset($notificacion['id_tramite_descripcion']) ? htmlspecialchars($notificacion['id_tramite_descripcion']) : 'Sin descripción';
                                     $id_relacionado = $notificacion['id_tramite'];  // usar el id_tramite
                                     $href = 'http://localhost/gestiondepartamentoalumnos/tramites/detalle_tramite.php?id=' . $id_relacionado;
                                 } else {

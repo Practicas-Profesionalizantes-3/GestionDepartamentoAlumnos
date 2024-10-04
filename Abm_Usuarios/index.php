@@ -2,8 +2,8 @@
 $api_url = 'http://localhost/api/api-Alumnos/usuarios.php';
 
 $response = file_get_contents($api_url);
-$data = json_decode($response, true);
-
+$datas = json_decode($response, true);
+$data = $datas["data"];
 usort($data, function ($a, $b) {
     return $a['id_usuario'] - $b['id_usuario'];
 });
@@ -101,7 +101,7 @@ echo "<script>console.log(" . $response . ")</script>";
                                     <td><?php echo $datos['comision']; ?></td>
                                     <td><?php echo $datos['usuario_tipo']; ?></td>
                                     <td> <a class="btn btn-info" href="Update.php?id_usuario=<?php echo $datos['id_usuario']; ?>" role="button">Editar</a>
-                                        <a class="btn btn-danger" style="color:white" onclick="eliminarUsuario(<?= $datos['id_usuario']; ?>)" role="button">Eliminar</a>
+                                        <a class="btn btn-danger" <?=$datos["usuario_estado"] == "Inactivo" ? "hidden" : "" ?> style="color:white" onclick="eliminarUsuario(<?= $datos['id_usuario']; ?>)" role="button">Eliminar</a>
                                     </td>
                                 </tr>
                             <?php } ?>

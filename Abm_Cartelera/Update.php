@@ -3,7 +3,7 @@ $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
 
 $response = file_get_contents($api_url);
 $data = json_decode($response, true);
-$avisos = $data;
+$avisos = $data["data"];
 
 $id_aviso_editar = $_GET['id_aviso'];
 $aviso = null;

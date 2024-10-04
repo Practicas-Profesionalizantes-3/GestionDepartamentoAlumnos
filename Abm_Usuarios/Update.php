@@ -2,7 +2,11 @@
 $api_url = 'http://localhost/api/api-Alumnos/usuarios.php';
 
 $response = file_get_contents($api_url);
-$data = json_decode($response, true);
+echo "<script>
+  console.log(" . json_encode($response) . ")
+</script>";
+$datas = json_decode($response, true);
+$data = $datas["data"];
 $usuarios = $data;
 
 $id_usuario_editar = $_GET['id_usuario'];
@@ -13,9 +17,6 @@ foreach ($usuarios as $usuario_temp) {
     break;
   }
 }
-echo "<script>
-  console.log(" . json_encode($usuario) . ")
-</script>";
 
 $combo_carreras_url = "http://localhost/api/api-Alumnos/carreras.php";
 $response_carreras = file_get_contents($combo_carreras_url);
@@ -144,7 +145,7 @@ $data_documento_tipos = json_decode($response_documento_tipos, true);
                 <?php foreach ($data_usuario_tipo as $usuario_tipo) {
                 ?>
                   <option value="<?php echo $usuario_tipo["id_usuario_tipo"]; ?>" <?= $usuario_tipo["id_usuario_tipo"] == $usuario["id_usuario_tipo"] ? 'selected="selected"' : ''; ?>>
-                    <?php echo $usuario_tipo["permiso_nombre"]; ?>
+                    <?php echo $usuario_tipo["descripcion"]; ?>
                   </option>
                 <?php
                 }

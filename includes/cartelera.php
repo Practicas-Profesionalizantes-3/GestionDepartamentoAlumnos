@@ -3,7 +3,7 @@ $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
 
 $response = file_get_contents($api_url);
 $data = json_decode($response, true);
-$avisos = json_decode($data["data"], true);
+$avisos = $data["data"];
 $datos = $avisos;
 $fecha_actual = date('Y-m-d');
 $datos_filtrados = array_filter($avisos, function ($item) use ($fecha_actual) {

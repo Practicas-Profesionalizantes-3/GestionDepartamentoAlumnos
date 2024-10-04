@@ -2,8 +2,8 @@
 $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
 
 $response = file_get_contents($api_url);
-$data = json_decode($response, true);
-
+$datas = json_decode($response, true);
+$data = $datas['data'];
 usort($data, function ($a, $b) {
     return $a['id_aviso'] - $b['id_aviso'];
 });
