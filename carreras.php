@@ -28,6 +28,9 @@ session_start();
     <!-- Include Perfil -->
     <?php include("includes/perfil.php"); ?>
 
+    <?php include("includes/notificaciones.php"); ?>
+
+
     <div class="container-fluid">
         <div class="row">
             <!-- Include Navbar -->
@@ -78,6 +81,8 @@ session_start();
     
     <script src="js/perfil.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/notificaciones.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>
 

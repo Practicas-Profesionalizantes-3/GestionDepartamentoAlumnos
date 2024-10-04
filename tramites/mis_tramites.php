@@ -11,7 +11,7 @@ $tramites = json_decode($response, true);
 $data = $tramites;
 
 
-$items_per_page = 6; // Número de filas por página
+$items_per_page = 4; // Número de filas por página
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
 $offset = ($page - 1) * $items_per_page; // Desplazamiento
 
@@ -49,23 +49,9 @@ echo "<script>console.log(" . $response . ")</script>";
 </head>
 
 <body>
-
     <!-- Include del Navbar -->
-    <?php
-    include("../includes/navbar.php");
-    ?>
-    <script>
-        var loggedIn = sessionStorage.getItem('loggedIn');
-        if (!loggedIn) {
-            window.location.href = '../index.php'; // Redirigir al index si no está logueado
-        } else {
-            var usuario = JSON.parse(sessionStorage.getItem("usuario"));
-            console.log(usuario)
-            if (usuario.id_usuario_estado != 1) {
-                window.location.href = '../index.php';
-            }
-        }
-    </script>
+    <?php include("../includes/navbar.php"); ?>
+
     <div class="mb-5 mt-3">
         <h1 class="tm-text-primary">Mis tramites</h1>
     </div>
@@ -75,29 +61,31 @@ echo "<script>console.log(" . $response . ")</script>";
     </div>
 
     <div class="tm-section-wrap">
-        <div class="row">
-            <?php $contador = 0; ?>
-            <?php foreach ($current_page_tramites as $datos) { ?>
-                <?php if ($contador % 3 == 0) { ?>
-                    <?php } ?>
-                        <div class="col-md-2 container-mis-tramites">
-                            <h2 class="titlulo"><?php echo $datos['tipo_tramite']; ?></h2>
-                            <p class="subtitle"><?php echo $datos['descripcion']; ?></p>
-                            <div class="actions">
-                                <label class="responsable">Responsable: <?php echo $datos['responsable']; ?></label>
-                            </div>
-                            <div class="info">
-                                <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
-                                <label class="estado"><?php echo $datos['fecha_creacion']; ?></label>
-                            </div>
-                        </div>
-                        <?php $contador++;
-                    if ($contador % 3 == 0 || $contador == count($current_page_tramites)) { ?>
-                <?php } ?>
-            <?php } ?>
-        </div>
+    <div class="row">
+        <?php foreach ($current_page_tramites as $datos) { ?>
+            <div class="col-md-2 container-mis-tramites">
+                <h2 class="titulo"><?php echo $datos['tipo_tramite']; ?></h2>
+                <p class="subtitle"><?php echo $datos['descripcion']; ?></p>
+                <div class="actions">
+                    <label class="responsable">Responsable: <?php echo $datos['responsable']; ?></label>
+                </div>
+                <div class="info">
+                    <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
+                    <label class="estado"><?php echo $datos['fecha_creacion']; ?></label>
+                </div>
+                <div class="text-center mt-auto"> <!-- Cambié mt-2 a mt-auto -->
+                    <a href="detalle_tramite.php?id=<?php echo $datos['id_tramite']; ?>" class="btn btn-info">Ver completo</a>
+                </div>
+            </div>
+        <?php } ?>
     </div>
+</div>
 
+
+
+
+
+    
     <!-- Paginación -->
     <nav>
         <ul class="pagination justify-content-center mt-3">
@@ -122,6 +110,16 @@ echo "<script>console.log(" . $response . ")</script>";
     </nav>
 
 
+    <script>
+        function verTramite(datos) {
+            // Almacenar los datos del trámite en sessionStorage
+            sessionStorage.setItem('tramiteDetalle', JSON.stringify(datos));
+            // Redirigir a la página de detalle
+            window.location.href = 'detalle_tramite.php';
+        }
+    </script>
+    
+    <script src="js/validar.js"></script>
     <script src="../js/index.js"></script>
     <script src="js/delete.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>

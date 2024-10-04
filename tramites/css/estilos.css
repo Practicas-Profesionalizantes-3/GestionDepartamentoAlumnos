@@ -32,9 +32,13 @@
   border: #034b78 2px solid;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin: 15px;
   transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column; /* Esto asegura que los elementos se apilen verticalmente */
+  justify-content: space-between; /* Esto empuja el botón hacia abajo */
+  height: 350px; /* Establece una altura fija para todas las tarjetas */
+  padding: 20px; /* Mantén el padding para el contenido interno */
+  margin: 15px; /* Mantén un margen alrededor de cada tarjeta */
 }
 
 .container-mis-tramites:hover {

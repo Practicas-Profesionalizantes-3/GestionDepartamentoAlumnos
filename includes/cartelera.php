@@ -67,10 +67,10 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
     ?>
 
     
- <div class="row">
+ <div class="row justify-content-center">
     <?php if ($datos) : ?>
         <?php foreach ($datos as $index => $item) : ?>
-            <div class="col-lg-4 tm-col-home mb-4" data-wow-delay="0.1s">
+            <div class="col-lg-5 tm-col-home mb-4" data-wow-delay="0.1s">
                 <div class="position-relative border-cartelera">
                     <div class="img-cartelera mb-3">
                         <img class="img-cartelera-item" src="<?= $item["imagen"] != "" ? "data:image/jpeg;base64," . $item["imagen"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s" ?>" />
