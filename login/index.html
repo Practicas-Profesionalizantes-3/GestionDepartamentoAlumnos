@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <title>Instituto Tecnológico Beltran</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="scss/style.css">
+</head>
+
+<body class="">
+    <section class="ftco-section">
+        <div class="login-wrap p-0">
+            <div class="overflow-hidden">
+                <img src="../img/nuevologo.png" alt="Logo" class="login-wrap-img">
+            </div>
+            <hr class="mb-5">
+            <h2>Acceso al Campus</h2>
+            <!-- The Modal -->
+            <div id="myModal" class="modalSuccess">
+                <!-- Modal content -->
+                <div class="modalSuccess-content">
+                    <div class="modalSuccess-body">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Nuevo contenedor -->
+            <div class="form-container mt-5">
+                <form class="signin-form" id="formulario">
+                    <div class="form-group">
+                        <input id="username" type="text" class="form-control" placeholder="Email"
+                            required autocomplete="">
+                    </div>
+                    <div class="form-group">
+                        <input id="password" type="password" class="form-control" placeholder="Password"
+                            required>
+                        <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"
+                            style="cursor: pointer;"></span>
+                    </div>
+                    <div class="form-group mt-4">
+                        <button type="submit" class="form-control btn btn-primary submit px-3">Entrar</button>
+                        <label class="message-error" id="errorMessage"></label>
+                    </div>
+                    <div class="form-group d-block float-right">
+                        <div>
+                            <a href="recuperar.php">¿Olvidaste la Contraseña?</a>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <a href="../index.php">Volver</a>
+                        </div>
+                    </div>
+                </form>
+            </div> <!-- Fin del nuevo contenedor -->
+        </div>
+    </section>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="index.js"></script>
+
+</body>
+</html>
