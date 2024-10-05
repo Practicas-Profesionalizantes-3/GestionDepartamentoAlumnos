@@ -5,7 +5,7 @@ $data = json_decode($response, true);
 $notificaciones_count = count($data);
 
 ?>
-
+ 
 <div class="navbar navbar-expand-lg" id="notificaciones">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,11 +31,11 @@ $notificaciones_count = count($data);
                                 if ($type == "Aviso") {
                                     $descripcion = isset($notificacion['id_aviso_descripcion']) ? htmlspecialchars($notificacion['id_aviso_descripcion']) : 'Sin descripción';
                                     $id_relacionado = $notificacion['id_aviso'];  // usar el id_aviso
-                                    $href = 'http://localhost/gestiondepartamentoalumnos/includes/aviso.php?id=' . $id_relacionado;
+                                    $href = 'http://localhost/gestiondepartamentoalumnos/detalle.php?id=' . $id_relacionado;
                                 } elseif ($type == "Trámite") {
                                     $descripcion = isset($notificacion['id_tramite_descripcion']) ? htmlspecialchars($notificacion['id_tramite_descripcion']) : 'Sin descripción';
                                     $id_relacionado = $notificacion['id_tramite'];  // usar el id_tramite
-                                    $href = 'http://localhost/gestiondepartamentoalumnos/tramites/detalle_tramite.php?id=' . $id_relacionado;
+                                    $href = 'http://localhost/gestiondepartamentoalumnos/includes/notificacion.php?id=' . $id_relacionado;
                                 } else {
                                     $descripcion = 'Notificación desconocida';
                                     $href = '#';

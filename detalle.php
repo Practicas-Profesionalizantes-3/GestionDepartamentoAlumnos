@@ -1,6 +1,6 @@
 <?php
 $aviso_id = isset($_GET['id']) ? $_GET['id'] : null;
-print_r($aviso_id);
+
 
 // Inicializar datos por defecto
 $titulo = 'Sin título';
@@ -17,14 +17,13 @@ if ($aviso_id) {
     
     // Verificar si se obtuvo una respuesta
     if ($response !== false) {
-        $data = json_decode($response, true, 512, JSON_OBJECT_AS_ARRAY);
+        $data = json_decode($response, true);
         
         if (isset($data['data'])) {
-            $datos = json_decode($data['data'], true);
+            $datos = $data['data'];
             if (is_array($datos)) {
                 foreach ($datos as $anuncio) {
-                    if($anuncio['id_aviso'] == $aviso_id){
-                        $id_aviso = $anuncio['id_aviso'];
+                    if ($anuncio['id_aviso'] == $aviso_id) {
                         $titulo = $anuncio['titulo'];
                         $descripcion = $anuncio['descripcion'];
                         $fecha = $anuncio['fecha_publicacion'];
@@ -34,7 +33,11 @@ if ($aviso_id) {
                     }
                 }
             }
+        } else {
+            echo "No se encontraron datos en la respuesta de la API.";
         }
+    } else {
+        echo "No se pudo obtener la respuesta de la API.";
     }
 }
 
@@ -43,7 +46,7 @@ if ($aviso_id) {
     ?>
     <html>
     <head>
-        <title><?= $titulo; ?></title>
+        <title><?= htmlspecialchars($titulo); ?></title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
@@ -52,17 +55,17 @@ if ($aviso_id) {
             <div class="aviso-completo">
                 <a href="javascript:void(0);" onclick="window.history.back();" class="volver">&times;</a>
 
-                <h1 class="mb-3"><?= $titulo; ?></h1>
-                <img class="img-aviso" <?=  $imagen; ?>
-                <p class="descripcion-completa"><?= $descripcion; ?></p>
+                <h1 class="mb-3"><?= htmlspecialchars($titulo); ?></h1>
+                <img class="img-aviso" <?= $imagen; ?>  
+                <p class="descripcion-completa"><?= htmlspecialchars($descripcion); ?></p>
 
                 <div class="fecha-descarga-container">
                     <?php if (!empty($adjunto)) : ?>
                         <div class="descargar-adjunto">
-                            <a href="data:application/pdf;base64,<?= $adjunto; ?>" download="<?= $titulo; ?>" class="btn btn-primary">Descargar adjunto</a>
+                            <a href="data:application/pdf;base64,<?= $adjunto; ?>" download="<?= htmlspecialchars($titulo); ?>" class="btn btn-primary">Descargar adjunto</a>
                         </div>
                     <?php endif; ?>
-                    <p class="fecha"><?= $fecha; ?></p>
+                    <p class="fecha"><?= htmlspecialchars($fecha); ?></p>
                 </div>
             </div>
         </div>
