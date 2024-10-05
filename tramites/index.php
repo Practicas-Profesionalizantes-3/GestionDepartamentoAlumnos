@@ -50,7 +50,7 @@ $formularios_path = null;
     </div>
 
     <!-- Botón de "Mis Trámites" -->
-    <div class="listadoAvisos">
+    <div class="listadoAvisos" id="mistramites">
         <a class="btn btn-primary mis-tramites-btn" href="mis_tramites.php" role="button">Mis Trámites</a>
     </div>
 
@@ -89,6 +89,7 @@ $formularios_path = null;
     </div> <!-- .tm-section-wrap -->
     
     <script src="js/validar.js"></script>
+    <script src="../js/navbar.js"></script>
     <script src="../js/index.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>

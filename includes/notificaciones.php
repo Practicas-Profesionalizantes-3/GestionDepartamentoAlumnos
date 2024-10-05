@@ -2,8 +2,13 @@
 $api_url = 'http://localhost/api/api-Alumnos/notificaciones.php';
 $response = file_get_contents($api_url);
 $data = json_decode($response, true);
-$notificaciones_count = count($data);
 
+// Filtrar las notificaciones no leídas (estado 4)
+$notificaciones_no_leidas = array_filter($data, function($notificacion) {
+    return isset($notificacion['id_notificacion_estado']) && $notificacion['id_notificacion_estado'] == 4;
+});
+
+$notificaciones_count = count($notificaciones_no_leidas);
 ?>
 
 <div class="navbar navbar-expand-lg" id="notificaciones">
@@ -21,7 +26,7 @@ $notificaciones_count = count($data);
                     <div class="dropdown-menu dropdown-menu-right" id="notificationDropdown" aria-labelledby="notificationsDropdown">
                         <div class="dropdown-divider"></div>
                         <?php if ($notificaciones_count > 0): ?>
-                            <?php foreach ($data as $notificacion): ?>
+                            <?php foreach ($notificaciones_no_leidas as $notificacion): ?>
                                 <?php
                                 $notificacion_id = $notificacion['id_notificacion'];
                                 $date_sent = htmlspecialchars($notificacion['fecha_envio_notificacion']);
@@ -31,11 +36,13 @@ $notificaciones_count = count($data);
                                 if ($type == "Aviso") {
                                     $descripcion = isset($notificacion['id_aviso_descripcion']) ? htmlspecialchars($notificacion['id_aviso_descripcion']) : 'Sin descripción';
                                     $id_relacionado = $notificacion['id_aviso'];  // usar el id_aviso
-                                    $href = 'http://localhost/gestiondepartamentoalumnos/includes/aviso.php?id=' . $id_relacionado;
+                                    // Enlace para marcar como leída y redirigir al aviso
+                                    $href = 'http://localhost/gestiondepartamentoalumnos/includes/marcar_leida.php?id=' . $notificacion_id . '&tipo=aviso';
                                 } elseif ($type == "Trámite") {
                                     $descripcion = isset($notificacion['id_tramite_descripcion']) ? htmlspecialchars($notificacion['id_tramite_descripcion']) : 'Sin descripción';
                                     $id_relacionado = $notificacion['id_tramite'];  // usar el id_tramite
-                                    $href = 'http://localhost/gestiondepartamentoalumnos/tramites/detalle_tramite.php?id=' . $id_relacionado;
+                                    // Enlace para marcar como leída y redirigir al trámite
+                                    $href = 'http://localhost/gestiondepartamentoalumnos/includes/marcar_leida.php?id=' . $notificacion_id . '&tipo=tramite';
                                 } else {
                                     $descripcion = 'Notificación desconocida';
                                     $href = '#';
@@ -55,6 +62,8 @@ $notificaciones_count = count($data);
                                     <br><a href='<?php echo $href; ?>' style="color: blue;">Ver detalle</a>
                                 </div>
                             <?php endforeach; ?>
+                        <?php else: ?>
+                            <span class="dropdown-item">No hay notificaciones no leídas</span>
                         <?php endif; ?>
                     </div>
                 </li>
@@ -62,3 +71,4 @@ $notificaciones_count = count($data);
         </div>
     </div>
 </div>
+

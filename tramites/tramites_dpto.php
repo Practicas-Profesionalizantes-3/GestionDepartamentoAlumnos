@@ -99,7 +99,7 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
     <div class="listadoAvisos" style="margin-left: 88px;">
         <div class="card-header">
             <h1 class="card-title tm-text-primary">Tramites</h1>
-            <a type="button" class="btn btn-primary mis-tramites-btn" href="index.php" style="align-items: end;" role="button">Volver</a>
+            <a type="button" class="btn btn-primary mis-tramites-btn" href="../index.php" style="align-items: end;" role="button">Volver</a>
         </div>
     </div>
 
@@ -173,8 +173,11 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
         </ul>
     </nav>
 
+    <script src="js/validar-dpto.js"></script>
+    <script src="../js/navbar.js"></script>
+    <script src="js/tramites_dpto.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-2ZgB5pIitCCgtFJG9/ft6wG/OCDyMZ5IiL5RMBE0tLzQwq2B1Z+2zBXVQW43QDA+" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-OgVRvuATP8GCmZ7uC4Wx6M0kE7yDpyW0N4qU1nL8/BkpwZ5pP29B4tD9cWsP7e8h" crossorigin="anonymous"></script>
-    <script src="js/tramites_dpto.js"></script>
+    <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>
 </html>
