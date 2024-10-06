@@ -1,4 +1,4 @@
-<?php
+<?php 
 $aviso_id = isset($_GET['id']) ? $_GET['id'] : null;
 
 

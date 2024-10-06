@@ -5,7 +5,7 @@ $data = json_decode($response, true);
 $notificaciones_count = count($data);
 
 ?>
- 
+
 <div class="navbar navbar-expand-lg" id="notificaciones">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
