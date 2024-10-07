@@ -1,6 +1,6 @@
 <?php 
 $aviso_id = isset($_GET['id']) ? $_GET['id'] : null;
-
+ 
 
 // Inicializar datos por defecto
 $titulo = 'Sin título';
