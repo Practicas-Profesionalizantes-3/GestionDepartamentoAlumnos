@@ -1,5 +1,5 @@
 <?php
-$aviso_id = isset($_POST['id']) ? intval($_POST['id']) : null;
+$aviso_id = isset($_GET['id']) ? intval($_GET['id']) : null;
 
 if ($aviso_id) {
     // Llamar a la API para obtener los datos del aviso
@@ -10,7 +10,7 @@ if ($aviso_id) {
     // Verifica si la respuesta fue exitosa y extrae los datos
     if ($aviso_data && $aviso_data['success'] === true) {
         // Convertir el JSON en la clave "data" a un array
-        $data = $aviso_data['data'];
+        $data = json_decode($aviso_data['data'], true);
 
         // Verifica si se obtuvieron datos
         if (!empty($data)) {

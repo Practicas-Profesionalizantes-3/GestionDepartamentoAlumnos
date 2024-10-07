@@ -93,7 +93,6 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
                                 <!-- Botón Ver más solo si la descripción tiene más de 45 caracteres -->
                                 <?php if (strlen($item['descripcion']) > 45) : ?>
                                     <form action="http://localhost/gestiondepartamentoalumnos/includes/aviso.php" method="POST">
-                                        <input type="hidden" name="id" value="<?= htmlspecialchars($item['id_aviso']); ?>">
                                         <input type="hidden" name="titulo" value="<?= htmlspecialchars($item['titulo']); ?>">
                                         <input type="hidden" name="descripcion" value="<?= htmlspecialchars($item['descripcion']); ?>">
                                         <input type="hidden" name="imagen" value="<?= htmlspecialchars($item['imagen']); ?>">

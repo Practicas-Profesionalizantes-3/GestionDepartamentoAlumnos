@@ -53,7 +53,8 @@ $data = json_decode($response, true);
     
     <script src="js/perfil.js"></script>
     <script src="js/index.js"></script>
-    <script src="js/notificaciones.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/navbar.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>

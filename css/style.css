@@ -663,6 +663,7 @@ p {
   white-space: normal; /* Evita que el texto se salga si es muy largo */
 }
 
+ 
 /* Notificaciones  */
 .navbar{
   display: none;
@@ -717,10 +718,4 @@ p {
 .notificationContent a:hover {
   color: #25507f;
   text-decoration: underline;
-}
-
-
-.read-notification {
-  background-color: #dcebf4;  /* Color gris claro para las notificaciones leídas */
-  color: #6c757d;  /* Color de texto gris oscuro */
 }
