@@ -61,25 +61,25 @@ echo "<script>console.log(" . $response . ")</script>";
     </div>
 
     <div class="tm-section-wrap">
-        <div class="row justify-content-center">
-            <?php foreach ($current_page_tramites as $datos) { ?>
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 container-mis-tramites">
-                    <h2 class="titulo"><?php echo $datos['tipo_tramite']; ?></h2>
-                    <p class="subtitle"><?php echo $datos['descripcion']; ?></p>
-                    <div class="actions">
-                        <label class="responsable">Responsable: <?php echo $datos['responsable']; ?></label>
-                    </div>
-                    <div class="info">
-                        <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
-                        <label class="estado"><?php echo $datos['fecha_creacion']; ?></label>
-                    </div>
-                    <div class="text-center mt-auto"> <!-- Cambié mt-2 a mt-auto -->
-                        <a href="detalle_tramite.php?id=<?php echo $datos['id_tramite']; ?>" class="btn btn-info">Ver completo</a>
-                    </div>
+    <div class="row">
+        <?php foreach ($current_page_tramites as $datos) { ?>
+            <div class="col-md-2 container-mis-tramites">
+                <h2 class="titulo"><?php echo $datos['tipo_tramite']; ?></h2>
+                <p class="subtitle"><?php echo $datos['descripcion']; ?></p>
+                <div class="actions">
+                    <label class="responsable">Responsable: <?php echo $datos['responsable']; ?></label>
                 </div>
-            <?php } ?>
-        </div>
+                <div class="info">
+                    <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
+                    <label class="estado"><?php echo $datos['fecha_creacion']; ?></label>
+                </div>
+                <div class="text-center mt-auto"> <!-- Cambié mt-2 a mt-auto -->
+                    <a href="detalle_tramite.php?id=<?php echo $datos['id_tramite']; ?>" class="btn btn-info">Ver completo</a>
+                </div>
+            </div>
+        <?php } ?>
     </div>
+</div>
 
 
 
@@ -120,7 +120,6 @@ echo "<script>console.log(" . $response . ")</script>";
     </script>
     
     <script src="js/validar.js"></script>
-    <script src="../js/navbar.js"></script>
     <script src="../js/index.js"></script>
     <script src="js/delete.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>

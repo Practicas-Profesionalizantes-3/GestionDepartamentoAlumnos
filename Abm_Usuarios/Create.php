@@ -157,7 +157,6 @@ $data_usuario_tipos = json_decode($response_usuario_tipos, true);
   </div>
   
   <script src="../js/index.js"></script>
-  <script src="../js/navbar.js"></script>
   <script src="js/create.js"></script>
   <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
   <script src="js/jquery.min.js"></script>

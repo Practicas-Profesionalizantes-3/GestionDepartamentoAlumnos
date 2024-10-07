@@ -1,5 +1,5 @@
 <?php
-$aviso_id = isset($_GET['id']) ? intval($_GET['id']) : null;
+$aviso_id = isset($_POST['id']) ? intval($_POST['id']) : null;
 
 if ($aviso_id) {
     // Llamar a la API para obtener los datos del aviso
@@ -10,7 +10,7 @@ if ($aviso_id) {
     // Verifica si la respuesta fue exitosa y extrae los datos
     if ($aviso_data && $aviso_data['success'] === true) {
         // Convertir el JSON en la clave "data" a un array
-        $data = json_decode($aviso_data['data'], true);
+        $data = $aviso_data['data'];
 
         // Verifica si se obtuvieron datos
         if (!empty($data)) {
@@ -53,6 +53,7 @@ if ($aviso_id) {
     <title><?= $titulo; ?></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../tramites/css/estilos.css">
 </head>
 <body>
     <div class="container mt-5">
@@ -74,18 +75,18 @@ if ($aviso_id) {
         </div>
     </div>
     <footer>
-        <div class="container">
-            <div class="row single-footer-widget">
-                <div class="col-md-6 col-sm-7">
-                    <span class="text-light">Prohibida la reproducción total ó parcial de imágenes y textos. Todos los derechos reservados.</span>
-                </div>
-                <div class="col-md-6 col-sm-5">
-                    <div class="column-right">
-                        <span class="text-light">Política de Privacidad. Términos y condiciones.</span>
-                    </div>
+<div class="container">
+        <div class="row single-footer-widget">
+            <div class="col-md-6 col-sm-7">
+                <span class="text-light">Prohibida la reproducción total ó parcial de imágenes y textos. Todos los derechos reservados.</span>
+            </div>
+            <div class="col-md-6 col-sm-5">
+                <div class="column-right">
+                    <span class="text-light">Política de Privacidad. Términos y condiciones.</span>
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
 </body>
 </html>
