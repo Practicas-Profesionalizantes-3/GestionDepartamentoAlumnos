@@ -33,6 +33,7 @@ outline: none;
 }
 
 .tramite-card-body {
+    min-height: 125px;
     background-color: #fff;
     border-radius: 12px; /* Bordes redondeados */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */

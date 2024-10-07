@@ -47,7 +47,7 @@ $(document).ready(function () {
     var usuario = JSON.parse(sessionStorage.getItem("usuario"));
     if (usuario.id_usuario_estado === 1) {
       $("#openModalBtn").show();
-      
+
       // Mostrar los datos del usuario en el modal
       $("#bienvenida").text("¡Hola " + usuario.nombre + "!");
       $("#nombre").text(usuario.nombre);

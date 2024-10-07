@@ -50,44 +50,46 @@ $formularios_path = null;
     </div>
 
     <!-- Botón de "Mis Trámites" -->
-    <div class="listadoAvisos">
+    <div class="listadoAvisos" id="mistramites">
         <a class="btn btn-primary mis-tramites-btn" href="mis_tramites.php" role="button">Mis Trámites</a>
     </div>
 
     <div class="tm-section-wrap">
-        <div class="row">
-            <?php
-            // Mostrar tarjetas de trámites disponibles
-            if (isset($tipos_tramites) && is_array($tipos_tramites)) {
-                foreach ($tipos_tramites as $tipo) {
-                    $id_tramite_tipo = htmlspecialchars($tipo['id_tramite_tipo']);
-                    $descripcion = htmlspecialchars($tipo['descripcion']);
-                    
-                    // Verificar si existe un formulario para este tipo de trámite
-                    if (array_key_exists($id_tramite_tipo, $formularios)) {
-                        $formularios_path = $formularios[$id_tramite_tipo];
+    <div class="row">
+        <?php
+        // Mostrar tarjetas de trámites disponibles
+        if (isset($tipos_tramites) && is_array($tipos_tramites)) {
+            foreach ($tipos_tramites as $tipo) {
+                $id_tramite_tipo = htmlspecialchars($tipo['id_tramite_tipo']);
+                $descripcion = htmlspecialchars($tipo['descripcion']);
+                
+                // Verificar si existe un formulario para este tipo de trámite
+                if (array_key_exists($id_tramite_tipo, $formularios)) {
+                    $formularios_path = $formularios[$id_tramite_tipo];
 
-                        // Generar el HTML para cada tarjeta de trámite
-                        echo '<div class="col-12 col-sm-6 col-md-4 col-lg-2 mb-4">';
-                        echo '    <a href="' . $formularios_path . '?id=' . $id_tramite_tipo . '" class="tramite-card text-decoration-none">';
-                        echo '        <div class="tramite-card-body d-flex align-items-center p-3 border rounded">';
-                        echo '            <div class="tramite-card-content">';
-                        echo '                <div class="tramite-card-title mb-2 h5">' . $descripcion . '</div>';
-                        echo '                <div class="tramite-card-description">Aquí puedes crear un trámite de tipo ' . $descripcion . '.</div>';
-                        echo '            </div>';
-                        echo '        </div>';
-                        echo '    </a>';
-                        echo '</div>';
-                    }
+                    // Generar el HTML para cada tarjeta de trámite
+                    echo '<div class="col-12 col-sm-6 col-md-4 col-lg-2 mb-4">';
+                    echo '    <a href="' . $formularios_path . '?id=' . $id_tramite_tipo . '" class="tramite-card text-decoration-none h-100">';
+                    echo '        <div class="tramite-card-body d-flex flex-column justify-content-start align-items-center p-3 border rounded">';
+                    echo '            <div class="tramite-card-content">';
+                    echo '                <div class="tramite-card-title mb-2 h5">' . $descripcion . '</div>';
+                    echo '                <div class="tramite-card-description">Aquí puedes crear un trámite de tipo ' . $descripcion . '.</div>';
+                    echo '            </div>';
+                    echo '        </div>';
+                    echo '    </a>';
+                    echo '</div>';
                 }
-            } else {
-                echo '<p>No se encontraron tipos de trámites.</p>';
             }
-            ?>
-        </div>
+        } else {
+            echo '<p>No se encontraron tipos de trámites.</p>';
+        }
+        ?>
+    </div>
+</div>
     </div> <!-- .tm-section-wrap -->
     
     <script src="js/validar.js"></script>
+    <script src="../js/navbar.js"></script>
     <script src="../js/index.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>

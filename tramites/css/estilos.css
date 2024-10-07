@@ -32,9 +32,13 @@
   border: #034b78 2px solid;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin: 15px;
   transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column; /* Esto asegura que los elementos se apilen verticalmente */
+  justify-content: space-between; /* Esto empuja el botón hacia abajo */
+  height: 350px; /* Establece una altura fija para todas las tarjetas */
+  padding: 20px; /* Mantén el padding para el contenido interno */
+  margin: 15px; /* Mantén un margen alrededor de cada tarjeta */
 }
 
 .container-mis-tramites:hover {
@@ -81,218 +85,112 @@
   font-weight: 600;
 }
 
-
-
-
-
-/*Tramites Dpto*/
-
-.container_tramites_dpto {
-  margin-top: 20px;
-  margin-left: -5px;
-  margin-right: -30px;
-  width: 420px;
-  height: 350px;
-  background-color: white;
-  border: 1px solid #ccc;
+/* Contenedor de cada columna */
+.div-estado {
+  background-color: #d7d7d7;
   padding: 20px;
-  margin: 40px auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  border-radius: 20px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-  
-    /* Add some basic styling to make the tramites draggable */
-    cursor: move;
-    z-index: 100;
-    position: relative;
-}
-
-.titlulo_tramites_dpto {
-margin-bottom: 40px;
-}
-
-.subtitle_tramites_dpto {
-  color: #888;
-  font-size: 14px;
-  text-align: center;
-  padding: 5px;
-  margin-top: -15px;
-}
-
-.actions-tramites_dpto {
-  display: flex;
-  gap: 10px;
-  position: relative;
-  top: -10px;
-}
-
-.img-flecha_tramites_dpto {
-  width: 80px;
-}
-
-.img-tilde_tramites_dpto {
-  border-radius: 30px;
-  width: 15%;
-  height: 60%;
-  margin-top: 16px;
-  margin-left: -6px;
-}
-
-.responsable_tramites_dpto {
-  margin-top: 15px;
-  margin-left: -2px;
-  width: 300px;
-  height: 50px;
-  padding: 10px;
-  border-radius: 30px;
-  background-image: linear-gradient(to right, #98d9f3, #034b78);
-  color: #ffffff;
-  text-align: center;
-  font-weight: bolder;
-  font-size: 18px;
-}
-
-.info_dpto {
-  display: flex;
-  gap: 10px;
-  margin-top: 90px;
-  position: relative;
-  top: -75px;
-}
-
-.number {
-  font-weight: bold;
-}
-
-.avatar_dpto {
-  margin-left: 5px;
-  font-size: 20px;
-  width: 190px;
-  height: 50px;
-  border-radius: 30px;
-  background-color: #162b40;
-  color: white;
-  padding: 10px;
-}
-
-.estado_tramites_dpto {
-  margin-left: -10px;
-  margin-bottom: 20px;
-  width: 200px;
-  height: 50px;
-  border-radius: 30px;
-  font-size: 25px;
-  color: #ffffff;
-  text-align: center;
-  background-image: linear-gradient(to right, #98d9f3, #034b78);
-  border: 3px solid #000000; /* borde naranja */
-}
-
-.btn-modal {
-  margin-left: 250px;
-  margin-top: -50px;
-  width: 120px;
-  height: 50px;
-  font-weight: bolder;
-  border-radius: 20px;
-}
-
-.fecha_dpto {
- margin-top: -50px; 
-}
- 
-/*columnas*/
-
-.tm-section-wrap .col-lg-3{
-  background-color: #dfdbdb;  /* Establecemos un fondo gris para las columnas */
-  margin: 10px;  /* Establecemos un margen para separar las columnas */
-  border-radius: 10px;   /* Borde redondeado para dar un toque visual */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  /* Sombra para dar profundidad */
-  
-}
-
-.tm-section-wrap .col-lg-4 h2 {
-  margin-bottom: 18px;   /* Centramos los títulos */
-  font-weight: bold;
-}
-
-.row {
-  margin-left: 200px;
-  width: 1800px;
-}
-
-.col-lg-3 {
-  padding: 10px;    /* Add some basic styling to make the columns droppable */
-  border: 1px solid #ccc;
+  margin: 10px;
   border-radius: 10px;
-  background-color: #f0f0f0;
-  min-height: 600px;    /* Set a minimum height for the columns */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.estado-tramite {
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
 }
 
-/*modal*/
-
-.modal-content{
-  margin-top: 100px;
-  margin-left: -50px;
-  width: auto;
-  height: auto;
-
+/* Contenedores de trámites */
+.container_tramites_dpto {
+  padding: 15px;
+  background-color: #f8f8fc;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  margin-bottom: 15px;
+  cursor: grab;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.container_tramites_dpto:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.alumno {
+/* Título de trámites */
+.titlulo_tramites_dpto {
+  font-size: 1.5rem;
   font-weight: bold;
   color: #333;
 }
 
-.modal-descripcion {
-  font-size: 25px;
+/* Descripción de trámites */
+.subtitle_tramites_dpto {
+  font-size: 1rem;
+  color: #373737;
+  margin: 10px 0;
+}
+
+/* Responsable */
+.responsable_tramites_dpto {
+  font-size: 0.9rem;
+  color: #4a4a4a;
+  font-style: italic;
+}
+
+/* Estado de trámites */
+.estado_tramites_dpto {
+  font-size: 0.85rem;
+  color: #545493;
+  display: inline-block;
+}
+
+/* Avatar */
+.avatar_dpto {
+  border: none;
+  font-size: 0.9rem;
   text-align: center;
-  margin-top: 30px;
 }
 
-.responsable {
-  font-weight: bold;
-  color: #666;
-  background: none;
-  text-align: left;
-  margin-left: 0;
+/* Fecha */
+.fecha_dpto {
+  font-size: 0.8rem;
+  color: #505050;
+  margin-top: 10px;
+}
+.info_fecha{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.btn-imprimir{
+  margin: 10px 0px;
+  height: 10%;
+}
+/* Efectos de arrastre */
+.container_tramites_dpto.dragging {
+  opacity: 0.5;
+  border: 2px dashed #4a4a72;
+}
+
+/* Estilos para los trámites pendientes */
+.container_tramites_dpto.pendiente {
+  border-left: 4px solid #ffc107;
+}
+
+/* Estilos para los trámites en proceso */
+.container_tramites_dpto.en-proceso {
+  border-left: 4px solid #17a2b8;
+}
+
+/* Estilos para los trámites completados */
+.container_tramites_dpto.completado {
+  border-left: 4px solid #28a745;
 }
 
 
-
-
-
-
-@media print {
-  
-  /* Mostrar solo el ticket */
-  .modal-content {
-    visibility: visible;
-    position: absolute;
-    left: 0;
-    top: 0;
+/* Respuesta a tamaños pequeños */
+@media (max-width: 768px) {
+  .container_tramites_dpto {
+      font-size: 0.9rem;
+      padding: 10px;
   }
-  
-  /* Ajustar el tamaño del ticket para que quepa en una sola hoja */
-  .modal-content {
-    width: 100%;
-    height: 400px;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Ocultar el botón de imprimir */
-  #imprimirPantalla {
-    visibility: hidden;
-  }
-  
-  /* Ocultar el navbar */
-  .navbar {
-    display: none;
-  }
-
-  
 }
-
