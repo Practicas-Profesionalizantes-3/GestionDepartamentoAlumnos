@@ -120,7 +120,6 @@ echo "<script>console.log(" . $response . ")</script>";
     </script>
     
     <script src="js/validar.js"></script>
-    <script src="../js/navbar.js"></script>
     <script src="../js/index.js"></script>
     <script src="js/delete.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>

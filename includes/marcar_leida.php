@@ -1,49 +1,50 @@
 <?php
 if (isset($_GET['id']) && isset($_GET['tipo'])) {
-    $id_notificacion = (int)$_GET['id']; // Asegúrate de que sea un entero
-    $tipo = $_GET['tipo'];
+    $id_notificacion = intval($_GET['id']);
+    $tipo_notificacion = $_GET['tipo']; // 'aviso' o 'tramite'
 
+    // URL de la API para actualizar el estado de la notificación
     $api_url = 'http://localhost/api/api-Alumnos/notificaciones.php';
-    $data = [
+
+    // Crear los datos para enviar en la solicitud POST
+    $data = array(
         'id_notificacion' => $id_notificacion,
-        'id_notificacion_estado' => 3 // Estado como leída
-    ];
+        'id_notificacion_estado' => 3 // Estado de "leída"
+    );
 
-    $payload = json_encode($data);
-    var_dump($payload); // Muestra el payload para depuración
-
+    // Iniciar la solicitud cURL
     $ch = curl_init($api_url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST'); // Método POST
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 
-    $result = curl_exec($ch);
+    // Ejecutar la solicitud
+    $response = curl_exec($ch);
+    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-    if (curl_errno($ch)) {
-        echo 'Error en la solicitud cURL: ' . curl_error($ch);
+    // Verificar si la solicitud fue exitosa
+    if ($http_code == 200) {
+        // Redirigir a la página correspondiente (aviso o trámite)
+        if ($tipo_notificacion == 'aviso') {
+            header("Location: detalle.php?id=" . $id_notificacion);
+        } elseif ($tipo_notificacion == 'tramite') {
+            header("Location: notificacion.php?id=" . $id_notificacion);
+        }
     } else {
-        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        if ($http_code >= 400) {
-            echo 'Error en la API, código HTTP: ' . $http_code;
-        } else {
-            $response = json_decode($result, true);
-            var_dump($response);
-        }
+        echo "Error al actualizar el estado de la notificación. Código de respuesta: " . $http_code;
     }
 
+    // Cerrar cURL
     curl_close($ch);
-
-    if ($http_code < 400) {
-        if ($tipo == 'aviso') {
-            header("Location: aviso.php?id=" . $id_notificacion);
-        } elseif ($tipo == 'tramite') {
-            header("Location: tramite.php?id=" . $id_notificacion);
-        } else {
-            header("Location: index.php");
-        }
-    }
 } else {
-    echo "ID o tipo no proporcionados correctamente.";
+    echo "ID de notificación o tipo no proporcionado.";
 }
+?>
 
+
+
+header("Location: http://localhost/gestiondepartamentoalumnos/detalle.php?=" . $id_notificacion);
+
+
+header("Location: http://localhost/gestiondepartamentoalumnos/includes/notificacion.php?id=1?id=" . $id_notificacion);
