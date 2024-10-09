@@ -51,8 +51,7 @@ foreach ($tiposTramites as $tipo) {
                         <div class="mb-3">
                             <label for="carrera" class="form-label">Seleccione su Carrera:</label>
                             <select class="form-control" name="carrera" id="carrera">
-                            <option value="0">- -</option>
-                            <option value="1">Ingenieria Informatica</option>
+                            <option value="1" selected>Ingenieria Informatica</option>
                             <option value="2">Medicina</option>
                             <option value="3">Derecho</option>
                             <option value="4">Administracion de Empresas</option>
@@ -62,8 +61,7 @@ foreach ($tiposTramites as $tipo) {
                         <div class="mb-3">
                             <label for="turno" class="form-label">Seleccione su Turno:</label>
                             <select class="form-control" name="turno" id="turno">
-                            <option value="0">- -</option>
-                            <option value="1">Turno Mañana</option>
+                            <option value="1" selected>Turno Mañana</option>
                             <option value="2">Turno Tarde</option>
                             <option value="3">Turno Noche</option>
                             </select>
@@ -71,17 +69,17 @@ foreach ($tiposTramites as $tipo) {
                         <div class="mb-3">
                             <label for="materia" class="form-label">Materia:</label>
                             <select class="form-control" name="materia" id="materia">
-                            <option value="0">- -</option>
-                            <option value="1"></option>
-                            <option value="2"></option>
-                            <option value="3"></option>
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
                             </select>
                         </div>
                         <div class="text-center">
-                             <a type="submit" class="btn btn-success" id="enviar-formulario" href="../index.php" role="button">Enviar</a>
+                             <button type="submit" class="btn btn-success" id="enviar-formulario">Enviar</button>
                             
                              <a href="../index.php" class="btn btn-info" >Cancelar</a>
                         </div>
+                        <input type="text" readonly hidden value="1" id="id_tramite_tipo" />
                     </form>
                 </div> <!-- .tm-section-wrap -->
             </div> <!-- .tm-main -->
@@ -93,7 +91,9 @@ foreach ($tiposTramites as $tipo) {
 
     <script src="../../js/index.js"></script>
     <script src="../../js/navbar.js"></script>
-    <script src="js/create.js"></script>
+    <script src="../js/create.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  <!-- SwettAlert -->
 </body>
 </html>

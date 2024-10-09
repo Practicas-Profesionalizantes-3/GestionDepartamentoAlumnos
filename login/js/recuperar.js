@@ -22,7 +22,7 @@ $("#formulario").submit(function (event) {
             data: usuario,
             success: function (data) {
                 if (data.success == true) {
-                    const idUsuario = JSON.parse(data.data)[0].id_usuario;
+                    const idUsuario = JSON.parse(data.data[0].id_usuario);
                     $.ajax({
                         type: "GET",
                         url: "http://localhost/api/api-Alumnos/MailSender/SendMail.php",
