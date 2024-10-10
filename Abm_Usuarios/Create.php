@@ -1,8 +1,4 @@
 <?php
-// $combo_usuarios_url = "http://localhost/api/api-Alumnos/usuarios.php";
-// $response_usuarios = file_get_contents($combo_usuarios_url);
-// $data_usuarios = json_decode($response_usuarios, true);
-
 //API - DOCUMENTO_TIPOS
 $combo_documento_tipos_url = "http://localhost/api/api-Alumnos/documento_tipos.php";
 $response_documento_tipos = file_get_contents($combo_documento_tipos_url);
@@ -100,6 +96,10 @@ $data_usuario_tipos = json_decode($response_usuario_tipos, true);
             </select>
           </div>
           <div class="mb-3">
+            <label for="numero_documento" class="form-label">Numero de Documento:</label>
+            <input type="text" class="form-control" name="numero_documento" id="numero_documento" aria-describedby="helpId" placeholder="Numero de Documento">
+          </div>
+          <div class="mb-3">
             <label for="id_usuario_estado" class="form-label">Estado de Usuario:</label>
             <select class="form-control" name="id_usuario_estado" id="id_usuario_estado">
               <?php
@@ -112,10 +112,6 @@ $data_usuario_tipos = json_decode($response_usuario_tipos, true);
                 }
               ?>
             </select>
-          </div>
-          <div class="mb-3">
-            <label for="numero_documento" class="form-label">Numero de Documento:</label>
-            <input type="text" class="form-control" name="numero_documento" id="numero_documento" aria-describedby="helpId" placeholder="Numero de Documento">
           </div>
           <div class="mb-3">
             <label for="id_carrera" class="form-label">Carrera:</label>

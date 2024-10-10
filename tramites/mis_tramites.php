@@ -10,7 +10,8 @@ $tramites = json_decode($response, true);
 
 $data = $tramites;
 
-$items_per_page = 5; // Número de filas por página
+
+$items_per_page = 4; // Número de filas por página
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
 $offset = ($page - 1) * $items_per_page; // Desplazamiento
 
@@ -39,6 +40,7 @@ echo "<script>console.log(" . $response . ")</script>";
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/templatemo-upright.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/estilos.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> <!----===== Boxicons CSS ===== -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"> <!-- Toastify CSS -->
@@ -47,85 +49,38 @@ echo "<script>console.log(" . $response . ")</script>";
 </head>
 
 <body>
-    <?php
-    include("../includes/navbar.php");
-    ?>
-    <script>
-        var loggedIn = sessionStorage.getItem('loggedIn');
-        if (!loggedIn) {
-            window.location.href = '../index.php'; // Redirigir al index si no está logueado
-        } else {
-            var usuario = JSON.parse(sessionStorage.getItem("usuario"));
-            console.log(usuario)
-            if (usuario.id_usuario_estado != 1) {
-                window.location.href = '../index.php';
-            }
-        }
-    </script>
- <style>
-         body {
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            max-width: 1350px; /* Ancho máximo del contenedor */
-            
-            margin: 60px auto 80px; /* Margen superior e inferior de 40px y centrado horizontalmente */
-            padding: 20px; /* Paddings de 20px */
-            background-color: #fff; /* Fondo blanco */
-            border: 1px solid #ddd; /* Borde gris claro */
-            border-radius: 20px; /* Borde redondeado de 10px */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra leve */
-        }
-        input[type="text"] {
-            border-radius: 20px; /* Borde redondeado */
-            margin: 10px; /* Agregué un margen de 10px entre inputs */
-            padding: 20px;
-            width: 30%; /* Ancho de los inputs */
-            margin-left: 30px; /* Agregué un margen izquierdo de 20px */
-            display: inline-block; /* Mostrar inputs en línea */
-            text-align: center; /* Centrar las letras */
-          }
-        .procesando {
-            background-color: yellow; /* Fondo amarillo */
-            color: white; /* Letras blancas */
-            border: 4px solid darkorange; /* Borde amarillo oscuro */
-            font-size: 20px; /* Tamaño de la letra */
-            font-weight: bold;
-        }
-        .detalles {
-            background-color: white; /* Fondo blanco */
-            color: black; /* Letras negras */
-            border: 4px solid black; /* Borde negro */
-            font-size: 18px; /* Tamaño de la letra */
+    <!-- Include del Navbar -->
+    <?php include("../includes/navbar.php"); ?>
 
-        }
-        .usuario-responsable {
-            background-color: black; /* Fondo negro */
-            color: white; /* Letras blancas */
-            border: 4px solid black; /* Borde negro */
-            font-size: 17px; /* Tamaño de la letra */
-            font-weight: bold;
-          }
+    <div class="mb-5 mt-3">
+        <h1 class="tm-text-primary">Mis tramites</h1>
+    </div>
 
-    </style>
-    <div class="listadoAvisos" style="margin-left: 88px;">
-        <div class="card-header">
-            <h1 class="card-title tm-text-primary">Mis Tramites</h1>
-            <a type="buttom" class="btn btn-primary mis-tramites-btn" href="index.php" style="align-items: end;" role="button">Volver</a>
+    <div class="listadoAvisos">
+        <a type="button" class="btn btn-primary btn-volver" href="index.php" role="button">Volver</a>
+    </div>
+
+    <div class="tm-section-wrap">
+        <div class="row justify-content-center">
+            <?php foreach ($current_page_tramites as $datos) { ?>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 container-mis-tramites">
+                    <h2 class="titulo"><?php echo $datos['tipo_tramite']; ?></h2>
+                    <p class="subtitle"><?php echo $datos['descripcion']; ?></p>
+                    <div class="actions">
+                        <label class="responsable">Responsable: <?php echo $datos['responsable']; ?></label>
+                    </div>
+                    <div class="info">
+                        <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
+                        <label class="estado"><?php echo $datos['fecha_creacion']; ?></label>
+                    </div>
+                    <div class="text-center mt-auto"> <!-- Cambié mt-2 a mt-auto -->
+                        <a href="detalle_tramite.php?id=<?php echo $datos['id_tramite']; ?>" class="btn btn-info">Ver completo</a>
+                    </div>
+                </div>
+            <?php } ?>
         </div>
     </div>
-    <?php foreach ($data as $tramite) : ?>
-    <div class="container" style="width: 80%; margin: 20px auto;">
-        <div style="display: flex; align-items: center;">
-          <div style="display: flex; flex-direction: column; margin: 10px;">
-            <span style="font-weight: bold; font-size: 18px;"><?php print_r ($tramite['tipo_tramite']); ?></span>
-            <span style="margin-left: 50px; margin-top: 20px;"><?php print_r ($tramite['descripcion']); ?></span>
-        </div>
-          <input type="text" id="procesando" class="procesando" placeholder=<?php print_r ($tramite['estado_tramite']); ?>>
-          <input type="text" id="usuario-responsable" class="usuario-responsable" placeholder=<?php print_r ($tramite['responsable']); ?>>
-        </div>
-    </div>
-    <?php endforeach; ?>
+
     <!-- Paginación -->
     <nav>
         <ul class="pagination justify-content-center mt-3">
@@ -149,9 +104,18 @@ echo "<script>console.log(" . $response . ")</script>";
         </ul>
     </nav>
 
-
-    <script src="../js/index.js"></script>
+    <script>
+        function verTramite(datos) {
+            // Almacenar los datos del trámite en sessionStorage
+            sessionStorage.setItem('tramiteDetalle', JSON.stringify(datos));
+            // Redirigir a la página de detalle
+            window.location.href = 'detalle_tramite.php';
+        }
+    </script>
+    
+    <script src="js/validar.js"></script>
     <script src="../js/navbar.js"></script>
+    <script src="../js/index.js"></script>
     <script src="js/delete.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>

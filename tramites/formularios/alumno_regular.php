@@ -37,11 +37,12 @@ foreach ($tiposTramites as $tipo) {
     <link rel="stylesheet" href="../../css/templatemo-upright.css">
     <link rel="stylesheet" href="../../css/style.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
-            <?php include('../../includes/navbar.php'); ?>
+            <?php include '../../includes/navbar.php'; ?>
             <div class="tm-main">
                 <div class="tm-section-wrap mt-3 border-dark">
                     <div class="text-center mb-4">
@@ -49,18 +50,9 @@ foreach ($tiposTramites as $tipo) {
                     </div>
                     <form class="container mt-5" id="formulario">
                         <div class="mb-3">
-                            <label for="id_usuario_creacion" class="form-label">Nombre y Apellido:</label>
-                            <input type="text" class="form-control" name="id_usuario_creacion" id="id_usuario_creacion" aria-describedby="helpId" placeholder="Nombre" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="dni" class="form-label">DNI:</label>
-                            <input type="number" class="form-control" name="dni" id="dni" aria-describedby="helpId" placeholder="DNI">
-                        </div>
-                        <div class="mb-3">
                             <label for="carrera" class="form-label">Seleccione su Carrera:</label>
                             <select class="form-control" name="carrera" id="carrera">
-                            <option value="0">- -</option>
-                            <option value="1">Ingenieria Informatica</option>
+                            <option value="1" selected>Ingenieria Informatica</option>
                             <option value="2">Medicina</option>
                             <option value="3">Derecho</option>
                             <option value="4">Administracion de Empresas</option>
@@ -70,24 +62,25 @@ foreach ($tiposTramites as $tipo) {
                         <div class="mb-3">
                             <label for="turno" class="form-label">Seleccione su Turno:</label>
                             <select class="form-control" name="turno" id="turno">
-                            <option value="0">- -</option>
-                            <option value="1">Turno Mañana</option>
+                            <option value="1" selected>Turno Mañana</option>
                             <option value="2">Turno Tarde</option>
                             <option value="3">Turno Noche</option>
                             </select>
-                        </div> <div class="mb-3">
-                            <label for="email" class="form-label">Ingrese el mail de su cuenta Office 365:</label>
-                            <input type="email" class="form-control" name="email" id="email" aria-describedby="helpId" placeholder="Email">
-                        </div>
+                        </div> 
                         <div class="mb-3">
-                            <label for="fecha_solicitud" class="form-label">Fecha de Solicitud:</label>
-                            <input type="date" class="form-control" name="fecha_solicitud" id="fecha_solicitud" aria-describedby="helpId" placeholder="Fecha de solicitud" required value="<?php $hoy = date("Y-m-d"); echo $hoy; ?>">
+                            <label for="materia" class="form-label">Materia:</label>
+                            <select class="form-control" name="materia" id="materia">
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            </select>
                         </div>
                         <div class="text-center">
-                             <a type="submit" class="btn btn-success" id="enviar-formulario" href="../index.php" role="button">Enviar</a>
+                             <button type="submit" class="btn btn-success" id="enviar-formulario">Enviar</button>
                             
-                             <button type="submit" class="btn btn-info" onclick="location.href='../index.php'">Cancelar</button>
+                             <a href="../index.php" class="btn btn-info" >Cancelar</a>
                         </div>
+                        <input type="text" readonly hidden value="1" id="id_tramite_tipo" />
                     </form>
                 </div> <!-- .tm-section-wrap -->
             </div> <!-- .tm-main -->
@@ -99,7 +92,9 @@ foreach ($tiposTramites as $tipo) {
 
     <script src="../../js/index.js"></script>
     <script src="../../js/navbar.js"></script>
-    <script src="js/create.js"></script>
+    <script src="../js/create.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  <!-- SwettAlert -->
 </body>
 </html>
