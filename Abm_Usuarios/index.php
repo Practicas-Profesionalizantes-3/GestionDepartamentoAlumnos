@@ -64,7 +64,7 @@ echo "<script>console.log(" . $response . ")</script>";
     <div class="listadoAvisos" style="margin-left: 88px;">
         <div class="card-header">
             <h3 class="card-title tm-text-primary">Lista de Usuarios</h3>
-            <a class="btn btn-primary mt-2 mr-2" href="Create.php" role="button">Agregar usuario</a>
+            <a class="btn btn-primary mt-2 mr-2" href="Create.php" role="button">Crear usuario</a>
         </div>
         <div style="display:flex;justify-content:center; align-items:center;">
             <div class="bg-light" style="width: 90%; border: 4px solid #64bded; border-radius: 8px">
