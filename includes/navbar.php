@@ -1,35 +1,3 @@
-<head>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
-    <script>
-        // Verificar sesión con JavaScript
-        var loggedIn = sessionStorage.getItem('loggedIn');
-
-        $(document).ready(function() {
-            if (loggedIn !== 'true') {
-                // Si no está logueado, mostrar botón de inicio de sesión
-                $('#texto').text('Campus');
-                $('#loginButton').attr('href', 'login/index.html');
-            } else {
-                // Si está logueado, mostrar botón de cerrar sesión
-                var usuario = JSON.parse(sessionStorage.getItem("usuario"));
-                if (usuario.id_usuario_estado == 1) {
-                    $("#crear_aviso").show();
-                    $("#crear_usuario").show();
-                }
-                $('#texto').text('Cerrar sesión');
-                $('#loginButton').on('click', function(e) {
-
-                    // Destruir la sesión
-                    sessionStorage.removeItem('loggedIn');
-                    sessionStorage.removeItem('usuario');
-
-                    // Redirigir al usuario a la página de inicio de sesión
-                    window.location.href = 'login/index.html';
-                });
-            }
-        });
-    </script>
-</head>
 
 <nav class="sidebar close">
     <header class="header-image">
@@ -73,7 +41,7 @@
                 </a>
             </li>
             <li class="search-box">
-                <a href="/gestiondepartamentoalumnos/tramites">
+                <a href="javascript:void(0);" id="mis_tramites">
                     <i class='icon fas fa-envelope'></i>
                     <span class="text nav-text">Tramites</span>
                 </a>
@@ -93,13 +61,13 @@
             <li class="search-box" style="display: none;" id="crear_aviso">
                 <a href="/gestiondepartamentoalumnos/Abm_Cartelera/index.php">
                     <i class='bx bx-add-to-queue icon'></i>
-                    <span class="text nav-text">Crear anuncio</span>
+                    <span class="text nav-text">Listar anuncios</span>
                 </a>
             </li>
             <li class="search-box" style="display: none;" id="crear_usuario">
                 <a href="/gestiondepartamentoalumnos/Abm_Usuarios/index.php">
                     <i class="fa-solid fa-user-plus icon"></i>
-                    <span class="text nav-text">Crear usuario</span>
+                    <span class="text nav-text">Listar usuarios</span>
                 </a>
             </li>
             <li class="search-box">
@@ -119,20 +87,3 @@
         </div>
     </div>
 </nav>
-
-<script>
-    //Esto funciona para abrir y cerrar el navbar
-    const body = document.querySelector('body'),
-        sidebar = body.querySelector('nav'),
-        toggle = body.querySelector(".toggle"),
-        searchBtn = body.querySelector(".search-box"),
-        //   modeSwitch = body.querySelector(".toggle-switch"),
-        modeText = body.querySelector(".mode-text");
-    toggle.addEventListener("click", () => {
-        sidebar.classList.toggle("close");
-    })
-    searchBtn.addEventListener("click", () => {
-        sidebar.classList.remove("close");
-    })
-    
-</script>
