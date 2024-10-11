@@ -34,8 +34,8 @@
                     <span class="text nav-text">Carreras</span>
                 </a>
             </li>
-            <li class="search-box">
-                <a href="/gestiondepartamentoalumnos/tramites">
+            <li class="search-box" style="display: none;" id="tramites_li">
+                <a href="javascript:void(0);" id="mis_tramites">
                     <i class='icon fas fa-envelope'></i>
                     <span class="text nav-text">Tramites</span>
                 </a>
