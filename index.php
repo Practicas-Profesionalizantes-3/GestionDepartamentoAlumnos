@@ -1,6 +1,4 @@
-<?php
-  session_start();
-?>
+<?php session_start();?>
 
 <!DOCTYPE html>
 <br lang="es">
@@ -15,7 +13,6 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/templatemo-upright.css">
     <link rel="stylesheet" href="css/style.css">
-    
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> <!----===== Boxicons CSS ===== -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"> <!-- Toastify CSS -->
@@ -24,23 +21,19 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script> <!-- Toastify JS-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  <!-- SwettAlert -->
 </head>
-</head>
 
 <body>
     <!-- Include Perfil -->
-    <?php 
-    include("includes/perfil.php");
-    ?>
-    <!-- En tu página principal -->
-    <?php
-require_once 'includes/notificaciones.php';
-?>
+    <?php include("includes/perfil.php");?>
+
+    <!-- Include notificaciones -->
+    <?php include("includes/notificaciones.php");?>
+
     <div class="container-fluid">
         <div class="row">
             <!-- Include Navbar -->
-            <?php
-            include("includes/navbar.php");
-            ?>
+            <?php include("includes/navbar.php");?>
+            
             <div class="tm-main">
                 <!-- Home section -->
                 <div class="tm-section-wrap">
@@ -50,17 +43,14 @@ require_once 'includes/notificaciones.php';
                     include("includes/cartelera.php")
                     ?>
                     <!-- Include Contacto -->
-                    <?php
-                    include("includes/contacto.php")
-                    ?>
+                    <?php include("includes/contacto.php")?>
                 </div> <!-- .tm-section-wrap -->
             </div> <!-- .tm-main -->
         </div> <!-- .row -->
     </div> <!-- .container-fluid -->
+
     <!-- Include Footer -->
-    <?php
-        include("includes/footer.php")
-    ?>
+    <?php include("includes/footer.php")?>
 
     <script src="js/perfil.js"></script>
     <script src="js/index.js"></script>
@@ -71,5 +61,4 @@ require_once 'includes/notificaciones.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0J9d9n00bu9XR4GQ6fhY7xQpfPtcp7tF" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </body>
-
 </html>

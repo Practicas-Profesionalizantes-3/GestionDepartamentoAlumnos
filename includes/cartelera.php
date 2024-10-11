@@ -70,7 +70,7 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
  <div class="row justify-content-center">
     <?php if ($datos) : ?>
         <?php foreach ($datos as $index => $item) : ?>
-            <div class="col-lg-5 tm-col-home mb-4" data-wow-delay="0.1s">
+            <div class="col-lg-4 tm-col-home mb-4" data-wow-delay="0.1s">
                 <div class="position-relative border-cartelera">
                     <div class="img-cartelera mb-3">
                         <img class="img-cartelera-item" src="<?= $item["imagen"] != "" ? "data:image/jpeg;base64," . $item["imagen"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s" ?>" />
@@ -93,6 +93,7 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
                                 <!-- Botón Ver más solo si la descripción tiene más de 45 caracteres -->
                                 <?php if (strlen($item['descripcion']) > 45) : ?>
                                     <form action="http://localhost/gestiondepartamentoalumnos/includes/aviso.php" method="POST">
+                                        <input type="hidden" name="id" value="<?= htmlspecialchars($item['id_aviso']); ?>">
                                         <input type="hidden" name="titulo" value="<?= htmlspecialchars($item['titulo']); ?>">
                                         <input type="hidden" name="descripcion" value="<?= htmlspecialchars($item['descripcion']); ?>">
                                         <input type="hidden" name="imagen" value="<?= htmlspecialchars($item['imagen']); ?>">
@@ -106,9 +107,12 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
                                 <div class="fecha-container">
                                     <p><?php echo htmlspecialchars($item['fecha_publicacion']); ?></p>
                                 </div>
-                                <div class="descargar-adjunto">
-                                    <a href="data:application/pdf;base64,<?= $item["adjunto"]; ?>" download="<?= htmlspecialchars($item["titulo"]); ?>">Descargar adjunto</a>
-                                </div>
+
+                                <?php if (!empty($item["adjunto"])) : ?>
+                                    <div class="descargar-adjunto">
+                                        <a href="data:application/pdf;base64,<?= $item["adjunto"]; ?>" download="<?= htmlspecialchars($item["titulo"]); ?>">Descargar adjunto</a>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>

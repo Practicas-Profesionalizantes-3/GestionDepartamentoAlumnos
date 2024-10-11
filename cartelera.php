@@ -23,17 +23,16 @@ $data = json_decode($response, true);
 
 <body>
     <!-- Include Perfil -->
-    <?php
-    include("includes/perfil.php");
-    ?>
+    <?php include("includes/perfil.php");?>
 
-<?php include("includes/notificaciones.php"); ?>
+    <!-- Include notificaciones -->
+    <?php include("includes/notificaciones.php");?>
+
     <div class="container-fluid">
         <div class="row">
             <!-- Include Navbar -->
-            <?php
-                include("includes/navbar.php");
-            ?>
+            <?php include("includes/navbar.php");?>
+            
             <div class="tm-main">
                 <!-- Home section -->
                 <div class="tm-section-wrap">
@@ -46,14 +45,12 @@ $data = json_decode($response, true);
             </div> <!-- .tm-main -->
         </div> <!-- .row -->
     </div> <!-- .container-fluid -->
+
     <!-- Include Footer -->
-    <?php
-        include("includes/footer.php")
-    ?>
+    <?php include("includes/footer.php")?>
     
     <script src="js/perfil.js"></script>
     <script src="js/index.js"></script>
-    <script src="js/chatbot.js"></script>
     <script src="js/navbar.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>

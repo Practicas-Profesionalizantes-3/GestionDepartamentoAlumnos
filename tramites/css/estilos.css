@@ -45,7 +45,10 @@
   transform: translateY(-10px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-
+.sin-tramites{
+  margin-left: -88px;
+  color: rgb(169, 49, 49);
+}
 .titlulo {
   font-family: 'Kumbh Sans', sans-serif;
   font-size: 1.5rem;

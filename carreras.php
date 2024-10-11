@@ -28,8 +28,8 @@ session_start();
     <!-- Include Perfil -->
     <?php include("includes/perfil.php"); ?>
 
-    <?php include("includes/notificaciones.php"); ?>
-
+    <!-- Include notificaciones -->
+    <?php include("includes/notificaciones.php");?>
 
     <div class="container-fluid">
         <div class="row">

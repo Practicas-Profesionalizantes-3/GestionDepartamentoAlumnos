@@ -1,6 +1,5 @@
-<?php 
+<?php
 $aviso_id = isset($_GET['id']) ? $_GET['id'] : null;
- 
 
 // Inicializar datos por defecto
 $titulo = 'Sin título';
@@ -9,7 +8,7 @@ $imagen = "sin imagen"; // Imagen por defecto
 $fecha = 'Sin fecha';
 $adjunto = '';
 
-// Si existe un id_notificacion, obtener datos de la API
+// Si existe un aviso_id, obtener datos de la API
 if ($aviso_id) {
     // Obtener el registro de la notificación
     $url = "http://localhost/api/api-Alumnos/cartelera.php?id_notificacion=" . urlencode($aviso_id);
@@ -19,18 +18,15 @@ if ($aviso_id) {
     if ($response !== false) {
         $data = json_decode($response, true);
         
-        if (isset($data['data'])) {
-            $datos = $data['data'];
-            if (is_array($datos)) {
-                foreach ($datos as $anuncio) {
-                    if ($anuncio['id_aviso'] == $aviso_id) {
-                        $titulo = $anuncio['titulo'];
-                        $descripcion = $anuncio['descripcion'];
-                        $fecha = $anuncio['fecha_publicacion'];
-                        $imagen_base64 = $anuncio['imagen'];
-                        $imagen = "<img src='data:image/jpeg;base64," . $imagen_base64 . "' alt='Imagen'>";
-                        $adjunto = $anuncio['adjunto'];
-                    }
+        if (isset($data['data']) && is_array($data['data'])) {
+            foreach ($data['data'] as $anuncio) {
+                if ($anuncio['id_aviso'] == $aviso_id) {
+                    $titulo = htmlspecialchars($anuncio['titulo']);
+                    $descripcion = htmlspecialchars($anuncio['descripcion']);
+                    $fecha = htmlspecialchars($anuncio['fecha_publicacion']);
+                    $imagen_base64 = $anuncio['imagen'];
+                    $imagen = "<img src='data:image/jpeg;base64," . $imagen_base64 . "' alt='Imagen' class='img-aviso'>";
+                    $adjunto = $anuncio['adjunto'];
                 }
             }
         } else {
@@ -43,48 +39,50 @@ if ($aviso_id) {
 
 // Mostrar el aviso dependiendo del ID
 if ($aviso_id) {
-    ?>
-    <html>
+?>
+    <html lang="es">
     <head>
-        <title><?= htmlspecialchars($titulo); ?></title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><?= $titulo; ?></title>
+        <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> <!----===== Boxicons CSS ===== -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
     </head>
     <body>
-        <div class="container mt-5">
-            <div class="aviso-completo">
-                <a href="javascript:void(0);" onclick="window.history.back();" class="volver">&times;</a>
+        <!-- Include Navbar -->
+        <?php include("includes/navbar.php");?>
 
-                <h1 class="mb-3"><?= htmlspecialchars($titulo); ?></h1>
-                <img class="img-aviso" <?= $imagen; ?>  
-                <p class="descripcion-completa"><?= htmlspecialchars($descripcion); ?></p>
+        <div class="container mt-5">
+            <div class="aviso-completo bg-light">
+                <a href="javascript:void(0);" onclick="window.history.back();" class="volver">&times;</a>
+                <h1 class="mb-3 text-center" style="color: black;"><?= $titulo; ?></h1>
+                <?= $imagen; ?>
+                <p class="descripcion-completa" style="color: black;"><?= $descripcion; ?></p>
 
                 <div class="fecha-descarga-container">
-                    <?php if (!empty($adjunto)) : ?>
+                    <?php if (!empty($adjunto)): ?>
                         <div class="descargar-adjunto">
-                            <a href="data:application/pdf;base64,<?= $adjunto; ?>" download="<?= htmlspecialchars($titulo); ?>" class="btn btn-primary">Descargar adjunto</a>
+                            <a href="data:application/pdf;base64,<?= $adjunto; ?>" download="<?= $titulo; ?>" class="btn btn-primary">Descargar adjunto</a>
                         </div>
                     <?php endif; ?>
-                    <p class="fecha"><?= htmlspecialchars($fecha); ?></p>
+                    <p class="fecha"><?= $fecha; ?></p>
                 </div>
             </div>
         </div>
-        <footer>
-        <div class="container">
-        <div class="row single-footer-widget">
-            <div class="col-md-6 col-sm-7">
-                <span class="text-light">Prohibida la reproducción total ó parcial de imágenes y textos. Todos los derechos reservados.</span>
-            </div>
-            <div class="col-md-6 col-sm-5">
-                <div class="column-right">
-                    <span class="text-light">Política de Privacidad. Términos y condiciones.</span>
-                </div>
-            </div>
-        </div>
-     </div>
-    </footer>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5Pil2tXdHhjTvQ9lQS6yIiwnyF3vухQ9Etqkibi1DwYLPSAOxocnipl" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0J9d9n00bu9XR4GQ6fhY7xQpfPtcp7tF" crossorigin="anonymous"></script>
+        <script src="js/index.js"></script>
+        <script src="js/navbar.js"></script>
+        <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
     </body>
     </html>
-    <?php
+<?php
 }
 ?>
