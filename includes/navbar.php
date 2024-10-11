@@ -23,12 +23,6 @@
                 </a>
             </li>
             <li class="search-box">
-                <a>
-                    <i class='icon fas fa-calendar'></i>
-                    <span class="text nav-text">Calendario</span>
-                </a>
-            </li>
-            <li class="search-box">
                 <a href="/gestiondepartamentoalumnos/cartelera.php">
                     <i class='bx bxs-news icon'></i>
                     <span class="text nav-text">Cartelera</span>
@@ -41,21 +35,9 @@
                 </a>
             </li>
             <li class="search-box">
-                <a href="javascript:void(0);" id="mis_tramites">
+                <a href="/gestiondepartamentoalumnos/tramites">
                     <i class='icon fas fa-envelope'></i>
                     <span class="text nav-text">Tramites</span>
-                </a>
-            </li>
-            <li class="search-box">
-                <a>
-                    <i class='icon fas fa-bell'></i>
-                    <span class="text nav-text">Notificaciones</span>
-                </a>
-            </li>
-            <li class="search-box">
-                <a href="/gestiondepartamentoalumnos/chatbot.php">
-                    <i class='icon fas fa-comments'></i>
-                    <span class="text nav-text">Chat</span>
                 </a>
             </li>
             <li class="search-box" style="display: none;" id="crear_aviso">

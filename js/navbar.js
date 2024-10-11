@@ -6,12 +6,13 @@ $(document).ready(function() {
     
     if (loggedIn === 'true') {
         var usuario = JSON.parse(sessionStorage.getItem("usuario"));
-        $("#notificaciones").show();
-
+        $("#tramites_li").show();
         // Mostrar opciones adicionales según el tipo de usuario
         if (usuario.id_usuario_tipo == 1 || usuario.id_usuario_tipo == 3) {
             $("#crear_aviso").show();
             $("#crear_usuario").show();
+        } else if(usuario.id_usuario_tipo == 2){
+            $("#notificaciones").show();
         }
         
         // Manejar redirección según el tipo de usuario al hacer clic en 'Mis Trámites'
