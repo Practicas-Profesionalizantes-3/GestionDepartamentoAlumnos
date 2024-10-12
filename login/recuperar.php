@@ -26,7 +26,7 @@
             <div class="form-container mt-5">
                 <form signin-form" id="formulario" method="post">
                     <div class="form-group">
-                        <input id="email" type="email" class="form-control" placeholder="Email" name="email" required>
+                        <input id="email" type="email" class="form-control" placeholder="Correo Electronico" name="email" required>
                     </div>
 
                     <div class="form-group mt-4">
