@@ -39,7 +39,7 @@ $data = json_decode($response, true);
                     <!-- Include Cartelera -->
                     <?php
                         $_SESSION['mostrar_opciones_cartelera'] = 'opciones2';
-                        include("includes/cartelera.php")
+                        include("includes/cartelera.php");
                     ?>
                 </div> <!-- .tm-section-wrap -->
             </div> <!-- .tm-main -->
