@@ -4,12 +4,16 @@ session_start();
 // URL de la API para obtener los tipos de trámites
 $api_url_tramites = 'http://localhost/api/api-Alumnos/tramites.php';
 
+// Inicializamos la variable de datos en caso de que no haya respuesta válida de la API
+$data = [];
+
 // Obtener los datos de la API
-$response = file_get_contents($api_url_tramites);
-$tramites = json_decode($response, true);
+$response = @file_get_contents($api_url_tramites); // Usar @ para suprimir errores de advertencia
 
-$data = $tramites;
-
+// Verificamos si la respuesta no es falsa (indica error en la conexión o fallo en la API)
+if ($response !== false) {
+    // Intentamos decodificar el JSON
+    $tramites = json_decode($response, true);
 
 $items_per_page = 4; // Número de filas por página
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
@@ -23,13 +27,10 @@ $total_pages = ceil($total_tramites / $items_per_page);
 
 // Obtener los tramites para la página actual
 $current_page_tramites = array_slice($data, $offset, $items_per_page);
-echo "<script>console.log(" . $response . ")</script>";
-
 ?>
 
 
 <!DOCTYPE html>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,7 +43,7 @@ echo "<script>console.log(" . $response . ")</script>";
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="css/estilos.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> <!----===== Boxicons CSS ===== -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"> <!-- Toastify CSS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script> <!-- Toastify JS-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SwettAlert -->

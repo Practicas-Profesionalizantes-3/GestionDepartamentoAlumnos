@@ -4,11 +4,15 @@ session_start();
 // URL de la API para obtener los tipos de trámites
 $api_url_tramites = 'http://localhost/api/api-Alumnos/tramites.php';
 
-// Obtener los datos de la API
-$response = file_get_contents($api_url_tramites);
-$tramites = json_decode($response, true);
+// Inicializar la variable de tramites
+$data = [];
 
-$data = $tramites;
+// Obtener los datos de la API
+$response = @file_get_contents($api_url_tramites); // Añadimos @ para evitar warnings si hay fallo
+
+// Verificar si la respuesta es válida
+if ($response !== false) {
+    $tramites = json_decode($response, true);
 
 
 function generar_tramite_html($datos) {
@@ -33,7 +37,6 @@ function generar_tramite_html($datos) {
     </div>";
 }
 
-
 $items_per_page = 100; // Número de filas por página
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
 $offset = ($page - 1) * $items_per_page; // Desplazamiento
@@ -48,7 +51,6 @@ $total_pages = ceil($total_tramites / $items_per_page);
 $current_page_tramites = array_slice($data, $offset, $items_per_page);
 
 ?>
-
 <!DOCTYPE html>
 <head>
     
