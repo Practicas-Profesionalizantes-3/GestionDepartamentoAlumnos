@@ -120,5 +120,3 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
     <script src="js/delete.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>
-
-</html>
