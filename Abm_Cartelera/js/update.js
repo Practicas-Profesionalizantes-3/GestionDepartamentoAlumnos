@@ -19,9 +19,10 @@ $("#formulario").submit(async function (event) {
         imagenBase64 = $("#imagen").data("existing"); // Obtener el valor existente
     }
 
-    const fechaVencimiento = $("#fecha_vencimiento").val();
-    const horaVencimiento = $("#hora_vencimiento").val(); // Capturando la hora
+    // Obtener la hora actual de Buenos Aires usando moment-timezone
+    const fechaModificacionBuenosAires = moment().tz("America/Argentina/Buenos_Aires").format('DD-MM-YYYY HH:mm:ss');
 
+    const fechaVencimiento = $("#fecha_vencimiento").val(); // Capturando la fecha de vencimiento sin hora
 
     const aviso = {
         id_aviso: $("#id_aviso").val(),
@@ -30,7 +31,8 @@ $("#formulario").submit(async function (event) {
         titulo: $("#titulo").val(),
         descripcion: $("#descripcion").val(),
         fecha_publicacion: $("#fecha_publicacion").val(),
-        fecha_vencimiento: `${fechaVencimiento} ${horaVencimiento}:00`,
+        fecha_modificacion: fechaModificacionBuenosAires, // Agregar la hora de modificación
+        fecha_vencimiento: `${fechaVencimiento}`, // Solo incluir la fecha sin hora
         adjunto: adjuntoBase64,
         fijado: $("#fijado").val(),
         imagen: imagenBase64,
@@ -60,7 +62,7 @@ $("#formulario").submit(async function (event) {
                 if (data.success == true) {
                     console.log("funciono", data);
                     Swal.fire({
-                        title: "Su aviso fue modificado con exito!",
+                        title: "Su aviso fue modificado con éxito!",
                         confirmButtonColor: "#006699",
                         icon: "success",
                         iconColor: "#118911",

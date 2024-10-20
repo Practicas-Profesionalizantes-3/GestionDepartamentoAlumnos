@@ -219,6 +219,7 @@ if (!$aviso) {
 
   <script src="../js/navbar.js"></script>
   <script src="js/update.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data.min.js"></script>
   <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
   <script src="js/jquery.min.js"></script>
   <script src="js/popper.js"></script>
