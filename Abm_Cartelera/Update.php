@@ -1,6 +1,7 @@
 <?php
 $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
-
+date_default_timezone_set('America/Buenos_Aires');
+$hoy = date("Y-m-d");
 $response = file_get_contents($api_url);
 $data = json_decode($response, true);
 $avisos = $data["data"];
@@ -61,6 +62,59 @@ if (!$aviso) {
         window.location.href = '../index.php';
       }
     }
+
+    // Lógica para manejar las fechas
+    $(document).ready(function() {
+    // Asignar la fecha actual del aviso
+    $('#fecha_publicacion').val(<?php echo json_encode($aviso['fecha_publicacion']); ?>);
+
+    $('#fecha_publicacion').on('input', function() {
+        var selectedDate = $(this).val();
+        var hoy = new Date().toISOString().split('T')[0]; // Obtener la fecha de hoy
+        
+        if (selectedDate < hoy) {
+            $('#fechaError').show(); // Mostrar el mensaje de error
+            $(this).val(<?php echo json_encode($aviso['fecha_publicacion']); ?>); // Restablecer al valor anterior
+            
+            // Ocultar el mensaje después de 2 segundos
+            setTimeout(function() {
+                $('#fechaError').hide();
+            }, 2000);
+        } else {
+            $('#fechaError').hide(); // Ocultar el mensaje de error
+        }
+    });
+
+    $('#fecha_publicacion').on('change', function() {
+        var fechaPublicacion = $(this).val() + "T00:00"; // Asumiendo que la hora inicial es 00:00
+        $('#fecha_vencimiento').attr('min', fechaPublicacion); // Establecer el mínimo para fecha de vencimiento
+
+        // Validar fecha de vencimiento
+        if ($('#fecha_vencimiento').val() && $('#fecha_vencimiento').val() < fechaPublicacion) {
+            $('#fecha_vencimiento').val(fechaPublicacion); // Restablecer a la fecha mínima
+        }
+    });
+
+    $('#fecha_vencimiento').on('change', function() {
+        var fechaPublicacion = $('#fecha_publicacion').val() + "T00:00"; // Obtener la fecha de publicación
+        var fechaVencimiento = $(this).val();
+
+        // Mostrar error si la fecha de vencimiento es anterior a la fecha de publicación
+        if (fechaVencimiento < fechaPublicacion) {
+            $('#fechaVencimientoError').show(); // Mostrar el mensaje de error
+            $(this).val(fechaPublicacion); // Restablecer a la fecha mínima
+            
+            // Ocultar el mensaje después de 2 segundos
+            setTimeout(function() {
+                $('#fechaVencimientoError').hide();
+            }, 2000);
+        } else {
+            $('#fechaVencimientoError').hide(); // Ocultar el mensaje de error
+        }
+    });
+});
+
+</script>
   </script>
   <div class="container">
     <div class="card">
@@ -103,17 +157,27 @@ if (!$aviso) {
               <label for="descripcion" class="form-label">Descripcion:</label>
               <input type="text" class="form-control" value="<?php echo $aviso['descripcion']; ?>" name="descripcion" id="descripcion" aria-describedby="helpId" placeholder="Descripcion">
             </div>
-            <div class="mb-3">
-              <label for="fecha_publicacion" class="form-label">Fecha de publicacion:</label>
-              <input type="date" class="form-control" value="<?php echo $aviso['fecha_publicacion']; ?>" name="fecha_publicacion" id="fecha_publicacion" aria-describedby="helpId" placeholder="Fecha de publicacion">
+            <div class="mb-3"> 
+                <label for="fecha_publicacion" class="form-label">Fecha de publicación:</label>
+                <input type="date" class="form-control" value="<?php echo $aviso['fecha_publicacion']; ?>" name="fecha_publicacion" id="fecha_publicacion" aria-describedby="helpId" placeholder="Fecha de publicación" data-publicacion-pasada="<?= $fecha_publicacion_pasada ? 'true' : 'false' ?>">
+                <div id="fechaError" class="text-danger" style="display:none;">La nueva fecha de publicación no debe ser anterior a la fecha actual.</div>
             </div>
             <div class="mb-3">
-              <label for="fecha_vencimiento" class="form-label">Fecha de vencimiento:</label>
-              <input type="date" class="form-control" value="<?php echo $aviso['fecha_vencimiento']; ?>" name="fecha_vencimiento" id="fecha_vencimiento" aria-describedby="helpId" placeholder="Fecha de vencimiento">
-            </div>
-            <div class="mb-3">
-              <label for="adjunto" class="form-label">Adjunto:</label>
-              <input type="file" accept=".pdf" class="form-control" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto">
+                <label for="fecha_vencimiento" class="form-label">Fecha de vencimiento:</label>
+                <input type="datetime-local" class="form-control" value="<?php echo date('Y-m-d\TH:i', strtotime($aviso['fecha_vencimiento'])); ?>" name="fecha_vencimiento" id="fecha_vencimiento" placeholder="Fecha de vencimiento">
+                <div id="fechaVencimientoError" class="text-danger" style="display:none;">La fecha de vencimiento no puede ser anterior a la fecha de publicación.</div>
+              </div>
+            <div class="mb-3">    
+                <label for="adjunto" class="form-label">Adjunto:</label>
+                <div class="file-containerX">
+                    <input type="file" accept=".pdf" class="form-control" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto" data-existing="<?= $aviso['adjunto'] ?? ''; ?>">
+                    <button type="button" id="eliminar-pdf" class="btn-iconX">
+                        <i class="bi bi-x"></i>
+                    </button>
+                    <?php if ($aviso["adjunto"] != "") { ?>
+                        <a href="data:application/pdf;base64,<?= $aviso["adjunto"]; ?>" download="<?= htmlspecialchars($aviso["titulo"]); ?>" class="download-link">Descargar adjunto</a>
+                    <?php } ?>
+                </div>
             </div>
             <div class="mb-3">
               <label for="fijado" class="form-label">Fijado:</label>
@@ -121,11 +185,22 @@ if (!$aviso) {
                 <option value="0" <?= $aviso["fijado"] == "0" ? 'selected="selected"' : "" ?>>No</option>
                 <option value="1" <?= $aviso["fijado"] == "1" ? 'selected="selected"' : "" ?>>Si</option>
               </select>
-            </div>
+            </div>          
             <div class="mb-3">
-              <label for="imagen" class="form-label">Imagen:</label>
-              <input type="file" accept="image/png, image/jpeg" class="form-control" name="imagen" id="imagen" placeholder="Imagen" aria-describedby="fileHelpId" >
+                <label for="imagen" class="form-label">Imagen:</label>
+                <div class="file-containerX">
+                    <input type="file" accept="image/jpeg, image/png" class="form-control" name="imagen" id="imagen" placeholder="Imagen" aria-describedby="fileHelpId" data-existing="<?= $aviso['imagen'] ?? ''; ?>">
+                    <button type="button" id="eliminar-imagen" class="btn-iconX">
+                        <i class="bi bi-x"></i>
+                    </button>
+                    
+                    <?php if ($aviso["imagen"] != "") { ?>
+                        <a href="data:image/jpeg;base64,<?= $aviso["imagen"]; ?>" download="<?= htmlspecialchars($aviso["titulo"]) . '.jpg'; ?>">Descargar imagen</a>
+                    <?php } else { ?>
+                    <?php } ?>
+                </div>
             </div>
+
             <div class="mb-3">
               <label for="id_aviso_estado" class="form-label">Estado del aviso:</label>
               <select class="form-control" name="id_aviso_estado" id="id_aviso_estado">
@@ -135,7 +210,7 @@ if (!$aviso) {
             </div>
             <input type="text" value="<?= $aviso["id_usuario"] ?>" name="id_usuario" id="id_usuario" readonly hidden />
             <button type="submit" class="btn btn-success">Modificar</button>
-            <button type="submit" class="btn btn-info" onclick="location.href='index.php'">Cancelar</button>
+            <button type="button" class="btn btn-info" onclick="location.href='index.php'">Cancelar</button>
           </form>
         <?php } ?>
       </div>

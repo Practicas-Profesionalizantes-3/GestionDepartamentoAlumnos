@@ -2,6 +2,8 @@
 $combo_aviso_tipo_url = "http://localhost/api/api-Alumnos/aviso_tipo.php";
 $response_aviso_tipos = file_get_contents($combo_aviso_tipo_url);
 $data_aviso_tipos = json_decode($response_aviso_tipos, true);
+date_default_timezone_set('America/Buenos_Aires'); 
+$hoy = date("Y-m-d");
 ?>
 <?php ?>
 
@@ -28,7 +30,7 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
   <script>
     var loggedIn = sessionStorage.getItem('loggedIn');
     if (!loggedIn) {
-      window.location.href = '../index.php'; // Redirigir al index si no está logueado
+      window.location.href = '../index.php'; 
     } else {
       var usuario = JSON.parse(sessionStorage.getItem("usuario"));
       console.log(usuario)
@@ -39,8 +41,23 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
 
     $(document).ready(function() {
       var usuario = JSON.parse(sessionStorage.getItem("usuario"));
-      $("#nombre").val(usuario.nombre + " " + usuario.apellido); // Establecer el valor del campo id_usuario
+      $("#nombre").val(usuario.nombre + " " + usuario.apellido); 
       $("#id_usuario").val(usuario.id_usuario);
+      $("#eliminar-pdf").click(function() {      
+        $("#adjunto").val(""); 
+      });
+
+      $("#eliminar-imagen").click(function() {
+        $("#imagen").val(""); 
+      });
+
+      $('#fecha_publicacion').on('change', function() { 
+          var fechaPublicacion = $(this).val() + "T00:00"; // Asumiendo que la hora inicial es 00:00
+          $('#fecha_vencimiento').attr('min', fechaPublicacion);
+          if ($('#fecha_vencimiento').val() && $('#fecha_vencimiento').val() < fechaPublicacion) {
+              $('#fecha_vencimiento').val(fechaPublicacion); 
+          }
+      });
     });
   </script>
 
@@ -85,16 +102,26 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
             <input type="text" class="form-control" name="descripcion" id="descripcion" aria-describedby="helpId" placeholder="Descripcion">
           </div>
           <div class="mb-3">
-            <label for="fecha_publicacion" class="form-label">Fecha de Publicacion:</label>
-            <input type="date" class="form-control" name="fecha_publicacion" id="fecha_publicacion" aria-describedby="helpId" placeholder="Fecha de Publicacion" required value="<?php $hoy = date("Y-m-d"); echo $hoy; ?>">
+              <label for="fecha_publicacion" class="form-label">Fecha de Publicacion:</label>
+              <input type="date" class="form-control" name="fecha_publicacion" id="fecha_publicacion" 
+                    aria-describedby="helpId" placeholder="Fecha de Publicacion" required 
+                    min="<?php echo $hoy; ?>" value="<?php echo $hoy; ?>">            
           </div>
           <div class="mb-3">
-            <label for="fecha_vencimiento" class="form-label">Fecha de Vencimiento:</label>
-            <input type="date" class="form-control" name="fecha_vencimiento" id="fecha_vencimiento" aria-describedby="helpId" placeholder="Fecha de Vencimiento" required value="<?php $hoy = date("Y-m-d"); echo $hoy; ?>">
+              <label for="fecha_vencimiento" class="form-label">Fecha y Hora de Vencimiento:</label>
+              <input type="datetime-local" class="form-control" name="fecha_vencimiento" id="fecha_vencimiento" 
+                    aria-describedby="helpId" placeholder="Fecha y Hora de Vencimiento" required 
+                    min="<?php echo date('Y-m-d\TH:i'); ?>" 
+                    value="<?php echo date('Y-m-d\TH:i'); ?>">
           </div>
-          <div class="mb-3">
-            <label for="adjunto" class="form-label">Adjunto:</label>
-            <input type="file" accept=".pdf" class="form-control" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto">
+          <div class="mb-3">      
+          <label for="adjunto" class="form-label">Adjunto:</label>
+            <div class="file-containerX">
+              <input type="file" accept=".pdf" class="form-control" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto">
+              <button type="button" id="eliminar-pdf" class="btn-iconX">
+                <i class="bi bi-x"></i>
+              </button>
+            </div>
           </div>
           <div class="mb-3">
             <label for="fijado" class="form-label">Fijado:</label>
@@ -103,9 +130,14 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
               <option value="1">Si</option>
             </select>
           </div>
-          <div class="mb-3">
+          <div class="mb-3">            
             <label for="imagen" class="form-label">Imagen:</label>
-            <input type="file" accept="image/jpeg, image/png" class="form-control" name="imagen" id="imagen" placeholder="Imagen" aria-describedby="fileHelpId">
+            <div class="file-containerX">
+              <input type="file" accept="image/jpeg, image/png" class="form-control" name="imagen" id="imagen" placeholder="Imagen" aria-describedby="fileHelpId">
+              <button type="button" id="eliminar-imagen" class="btn-iconX">
+                <i class="bi bi-x"></i>
+              </button>
+            </div>
           </div>
           <div class="mb-3">
             <label for="id_aviso_estado" class="form-label">Estado del aviso:</label>
@@ -116,7 +148,7 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
           </div>
 
           <button type="submit" class="btn btn-success" id="agregar-anuncio">Agregar</button>
-          <button type="submit" class="btn btn-info" onclick="location.href='index.php'">Cancelar</button>
+          <button type="button" class="btn btn-info" onclick="location.href='index.php'">Cancelar</button>
         </form>
       </div>
       <div class="card-footer text-muted">

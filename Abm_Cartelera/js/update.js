@@ -6,13 +6,22 @@ $("#formulario").submit(async function (event) {
     let adjuntoBase64 = "";
     let imagenBase64 = "";
 
+    // Convertir a base64 solo si hay archivos nuevos
     if (adjuntoFile) {
         adjuntoBase64 = await toBase64(adjuntoFile);
+    } else {
+        adjuntoBase64 = $("#adjunto").data("existing"); // Obtener el valor existente
     }
 
     if (imagenFile) {
         imagenBase64 = await toBase64(imagenFile);
+    } else {
+        imagenBase64 = $("#imagen").data("existing"); // Obtener el valor existente
     }
+
+    const fechaVencimiento = $("#fecha_vencimiento").val();
+    const horaVencimiento = $("#hora_vencimiento").val(); // Capturando la hora
+
 
     const aviso = {
         id_aviso: $("#id_aviso").val(),
@@ -21,24 +30,25 @@ $("#formulario").submit(async function (event) {
         titulo: $("#titulo").val(),
         descripcion: $("#descripcion").val(),
         fecha_publicacion: $("#fecha_publicacion").val(),
-        fecha_vencimiento: $("#fecha_vencimiento").val(),
+        fecha_vencimiento: `${fechaVencimiento} ${horaVencimiento}:00`,
         adjunto: adjuntoBase64,
         fijado: $("#fijado").val(),
         imagen: imagenBase64,
         id_aviso_estado: $("#id_aviso_estado").val()
     };
 
-    if (!aviso.titulo || !aviso.descripcion || !aviso.imagen || !aviso.adjunto) {
+    // Validar solo los campos obligatorios
+    if (!aviso.titulo || !aviso.descripcion) {
         Toastify({
-            text: "⚠️ Faltan datos por completar ⚠️",
+            text: "⚠️ Faltan datos obligatorios por completar ⚠️",
             duration: 1500,
             gravity: "top",
             style: {
                 background: "#c41e1e",
                 color: "#fff"
             }
-        }).showToast()
-    } else{
+        }).showToast();
+    } else {
         $.ajax({
             type: "PUT",
             url: "http://localhost/api/api-Alumnos/cartelera.php",
@@ -46,7 +56,7 @@ $("#formulario").submit(async function (event) {
             contentType: "application/json",
             dataType: "json",
             success: function (data) {
-                console.log(data)
+                console.log(data);
                 if (data.success == true) {
                     console.log("funciono", data);
                     Swal.fire({
@@ -66,6 +76,7 @@ $("#formulario").submit(async function (event) {
             }
         });
     }
+
     function toBase64(file) {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();

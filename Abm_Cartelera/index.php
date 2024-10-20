@@ -1,44 +1,44 @@
 <?php
 $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
+$response = @file_get_contents($api_url);
 
-$response = file_get_contents($api_url);
-
-if ($response) {
-    $datas = json_decode($response, true);
-    if (isset($datas['data'])) {
-        $data = $datas['data'];
-        usort($data, function ($a, $b) {
-            return $a['id_aviso'] - $b['id_aviso'];
-        });
-
-        $avisos = $data;
-
-        $items_per_page = 5; // Número de filas por página
-        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
-        $offset = ($page - 1) * $items_per_page; // Desplazamiento
-
-        // Obtener el total de avisos
-        $total_avisos = count($avisos);
-
-        // Calcular el total de páginas
-        $total_pages = ceil($total_avisos / $items_per_page);
-
-        // Obtener los avisos para la página actual
-        $current_page_avisos = array_slice($avisos, $offset, $items_per_page);
-        echo "<script>console.log(" . json_encode($datas) . ")</script>";
-    } else {
-        echo "No se encontraron avisos en la API.";
-        $current_page_avisos = [];
-        $total_pages = 1;
-    }
+// Verifica si la respuesta es falsa (error)
+if ($response === FALSE) {
+    error_log("Error al llamar a la API: $api_url");
+    $datas = ['data' => []]; // Inicializa con un array vacío para evitar errores más adelante
 } else {
-    echo "Error al obtener la respuesta de la API.";
-    $current_page_avisos = [];
-    $total_pages = 1;
+    $datas = json_decode($response, true);
 }
+
+$data = isset($datas['data']) && is_array($datas['data']) ? $datas['data'] : [];
+
+// Ordenar los datos solo si no está vacío
+if (!empty($data)) {
+    usort($data, function ($a, $b) {
+        return $a['id_aviso'] - $b['id_aviso'];
+    });
+} else {
+    error_log("No hay avisos disponibles");
+}
+
+$avisos = $data;
+
+$items_per_page = 5; // Número de filas por página
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
+$offset = ($page - 1) * $items_per_page; // Desplazamiento
+
+// Obtener el total de avisos
+$total_avisos = count($avisos);
+
+// Calcular el total de páginas
+$total_pages = ceil($total_avisos / $items_per_page);
+
+// Obtener los avisos para la página actual
+$current_page_avisos = array_slice($avisos, $offset, $items_per_page);
+echo "<script>console.log(" . json_encode($datas) . ")</script>";
 ?>
+
 <!DOCTYPE html>
-<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -50,11 +50,11 @@ if ($response) {
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/templatemo-upright.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> <!----===== Boxicons CSS ===== -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"> <!-- Toastify CSS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script> <!-- Toastify JS-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  <!-- SwettAlert -->
 </head>
 
 <body>
@@ -73,7 +73,7 @@ if ($response) {
             }
         }
     </script>
-
+    
     <div class="listadoAvisos" style="margin-left: 88px;">
         <div class="card-header">
             <h3 class="card-title tm-text-primary">Lista de Avisos</h3>
@@ -107,25 +107,22 @@ if ($response) {
                                     <td><?php echo $datos['id_usuario']; ?></td>
                                     <td><?php echo $datos['titulo']; ?></td>
                                     <td><?php echo $datos['descripcion']; ?></td>
-                                    <td><?php echo date('d-m-Y H:i', strtotime($datos['fecha_publicacion'])); ?></td> <!-- Formato de fecha y hora -->
-                                    <td><?php echo date('d-m-Y', strtotime($datos['fecha_vencimiento'])); ?></td> <!-- Formato de fecha y hora -->
-                                    <td>
-                                        <?php if ($datos["adjunto"] != "") { ?>
-                                            <a href="data:application/pdf;base64,<?= $datos["adjunto"]; ?>" download="<?= htmlspecialchars($datos["titulo"]); ?>">Descargar adjunto</a>
-                                        <?php } else { ?>
-                                            No
+                                    <td><?php echo $datos['fecha_publicacion']; ?></td>
+                                    <td><?php echo $datos['fecha_vencimiento']; ?></td>
+                                    <td><?php if($datos["adjunto"] != ""){ ?>
+                                    <a href="data:application/pdf;base64,<?= $datos["adjunto"]; ?>" download="<?= htmlspecialchars($datos["titulo"]); ?>">Descargar adjunto</a>
+                                    <?php } else {?>
+                                        No
                                         <?php } ?>
                                     </td>
                                     <td><?php echo $datos['fijado']; ?></td>
-                                    <td>
-                                        <img width="70" src="<?= $datos["imagen"] != "" ? "data:image/jpeg;base64," . $datos["imagen"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s" ?>" />
-                                    </td>
+                                    <td><img width="70" src="<?= $datos["imagen"] != "" ? "data:image/jpeg;base64," . $datos["imagen"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s" ?>" /></td>
                                     <td><?php echo $datos['estado']; ?></td>
                                     <td>
                                         <a class="btn btn-info" href="Update.php?id_aviso=<?php echo $datos['id_aviso']; ?>" role="button">Editar</a>
-                                        <?php if ($datos["estado"] != "Inactivo") { ?>
-                                            <a class="btn btn-danger" style="color:white" onclick="eliminarAviso(<?= $datos['id_aviso']; ?>)" role="button">Eliminar</a>
-                                        <?php } ?>
+                                        <?php
+                                        if ($datos["estado"] != "Inactivo") { ?>
+                                            <a class="btn btn-danger" style="color:white" onclick="eliminarAviso(<?= $datos['id_aviso']; ?>)" role="button">Eliminar</a><?php } ?>
                                     </td>
                                 </tr>
                             <?php } ?>
