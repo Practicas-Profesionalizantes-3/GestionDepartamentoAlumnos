@@ -8,13 +8,11 @@ function drag(ev) {
 }
 
 var columna;
-
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     var tramite = document.getElementById(data);
     columna = ev.target.id;
-    
 
     // Determinar el nuevo estado basado en la columna
     var estado = "";
@@ -44,11 +42,24 @@ function drop(ev) {
             ev.target.appendChild(tramite);
             tramite.classList.add("dragged");
 
-            // Actualizar la página para reflejar los cambios
-            location.reload(); // Esto recargará la página y reflejará los cambios en la base de datos
+            // Actualizar el estado visual del trámite
+            tramite.classList.remove('pendiente', 'en-proceso', 'terminado'); // Eliminar clases anteriores
+            tramite.classList.add(columna); // Agregar la nueva clase
+
+            // Opcional: Actualizar la etiqueta del estado en el HTML
+            var estadoLabel = tramite.querySelector('.estado_tramites_dpto');
+            if (estadoLabel) {
+                estadoLabel.textContent = "Estado: " + columna.charAt(0).toUpperCase() + columna.slice(1).replace("-", " ");
+            }
+
+            console.log(`Trámite ${idTramite} movido a ${columna}`); // Log del movimiento
+
+            // Recargar la página para reflejar los cambios
+            location.reload();
         })
         .catch(error => console.error(error));
 }
+
 
 // Función para actualizar el estado del trámite en la API
 function actualizarEstadoTramite(idTramite, estado) {
@@ -81,8 +92,8 @@ function registrarMovimientoTramite(idTramite, estado) {
         body: JSON.stringify({
             id_tramite: idTramite,
             fecha_movimiento: new Date().toISOString().split('T')[0], // Fecha en formato YYYY-MM-DD
-            id_usuario: usuario.id_usuario, // Aquí puedes usar `usuario.id_usuario` si lo tienes disponible
-            observacion: "Cambio de estado a "+columna, // Observación
+            id_usuario: usuario.id_usuario, // Asegúrate de que esto esté definido
+            observacion: "Cambio de estado a " + columna, // Observación
             id_estado_tramite: estado
         })
     })
@@ -90,10 +101,13 @@ function registrarMovimientoTramite(idTramite, estado) {
         if (response.ok) {
             return response.json();
         } else {
-            throw new Error('Error en el registro del movimiento');
+            return response.text().then(text => { // Captura el texto de respuesta
+                throw new Error(`Error en el registro del movimiento: ${text}`);
+            });
         }
     });
 }
+
 
 // Evento para remover la clase 'dragged' cuando el elemento es soltado
 document.addEventListener("dragend", function(event) {

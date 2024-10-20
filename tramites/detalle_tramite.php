@@ -16,80 +16,93 @@
 </head>
 <body>
 
-    <?php
-    // Verificar si se recibió el ID de la notificación
-    if (isset($_GET['id'])) {
-        $id_notificacion = intval($_GET['id']);
-        
-        // URL de la API para obtener los detalles del trámite según el ID de la notificación
-        $api_tramite_url = 'http://localhost/api/api-Alumnos/tramites.php?id_notificacion=' . $id_notificacion;
+<?php
+// Habilitar la visualización de errores
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-        // Obtener datos de la API de trámites
-        $response = file_get_contents($api_tramite_url);
-        
-        // Verificar que la respuesta no sea falsa o vacía
-        if ($response === false || empty($response)) {
-            die("Error: No se pudo obtener la respuesta de la API de trámites.");
-        }
-        
-        $tramites = json_decode($response, true);
+// Ajustar la zona horaria
+date_default_timezone_set('America/Argentina/Buenos_Aires');
 
-        // Verificar que la decodificación JSON sea exitosa y que los datos no estén vacíos
-        if (!is_array($tramites) || empty($tramites)) {
-            die("Error: La respuesta de la API de trámites no es válida.");
+// Obtener la fecha y hora actual en Buenos Aires
+$fecha_actual = new DateTime();
+$fecha_actual_formateada = $fecha_actual->format('d/m/Y H:i');
+
+// Verificar si se recibió el ID de la notificación
+if (isset($_GET['id'])) {
+    $id_notificacion = intval($_GET['id']);
+    
+    // URL de la API para obtener los detalles del trámite según el ID de la notificación
+    $api_tramite_url = 'http://localhost/api/api-Alumnos/tramites.php?id_notificacion=' . $id_notificacion;
+
+    // Obtener datos de la API de trámites
+    $response = file_get_contents($api_tramite_url);
+    
+    // Verificar que la respuesta no sea falsa o vacía
+    if ($response === false || empty($response)) {
+        die("Error: No se pudo obtener la respuesta de la API de trámites.");
+    }
+    
+    $tramites = json_decode($response, true);
+
+    // Verificar que la decodificación JSON sea exitosa y que los datos no estén vacíos
+    if (!is_array($tramites) || empty($tramites)) {
+        die("Error: La respuesta de la API de trámites no es válida.");
+    }
+    
+    // Buscar el trámite que coincida con el ID de notificación
+    $tramite_encontrado = null;
+    foreach ($tramites as $tramite) {
+        if ($tramite['id_tramite'] == $id_notificacion) {
+            $tramite_encontrado = $tramite;
+            break;
         }
+    }
+
+    // Verificar si se encontró el trámite
+    if ($tramite_encontrado) {
+        // Asignar los valores del trámite encontrado a variables
+        $titulo = htmlspecialchars($tramite_encontrado['tipo_tramite']);
+        $descripcion = htmlspecialchars($tramite_encontrado['descripcion']);
+        $fecha_creacion = htmlspecialchars($tramite_encontrado['fecha_creacion']);
+        $estado_tramite = htmlspecialchars($tramite_encontrado['estado_tramite']);
+        $adjunto = isset($tramite_encontrado['adjunto']) ? $tramite_encontrado['adjunto'] : null;
         
-        // Buscar el trámite que coincida con el ID de notificación
-        $tramite_encontrado = null;
-        foreach ($tramites as $tramite) {
-            if ($tramite['id_tramite'] == $id_notificacion) {
-                $tramite_encontrado = $tramite;
+        // Formatear la fecha y hora
+        $fecha_obj = new DateTime($fecha_creacion);
+        $fecha_formateada = $fecha_obj->format('d/m/Y H:i');
+
+        // Clase CSS del estado
+        $estado_clase = "";
+        switch ($estado_tramite) {
+            case "Pendiente":
+                $estado_clase = "estado-pendiente";
                 break;
-            }
-        }
-
-        // Verificar si se encontró el trámite
-        if ($tramite_encontrado) {
-            // Asignar los valores del trámite encontrado a variables
-            $titulo = htmlspecialchars($tramite_encontrado['tipo_tramite']);
-            $descripcion = htmlspecialchars($tramite_encontrado['descripcion']);
-            $fecha_creacion = htmlspecialchars($tramite_encontrado['fecha_creacion']);
-            $estado_tramite = htmlspecialchars($tramite_encontrado['estado_tramite']);
-            $adjunto = isset($tramite_encontrado['adjunto']) ? $tramite_encontrado['adjunto'] : null;
-            
-            // Formatear la fecha y hora
-            $fecha_obj = new DateTime($fecha_creacion);
-            $fecha_formateada = $fecha_obj->format('d/m/Y H:i');
-
-            // Clase CSS del estado
-            $estado_clase = "";
-            switch ($estado_tramite) {
-                case "Pendiente":
-                    $estado_clase = "estado-pendiente";
-                    break;
-                case "En Proceso":
-                    $estado_clase = "estado-proceso";
-                    break;
-                case "Completado":
-                    $estado_clase = "estado-completado";
-                    break;
-            }
-        } else {
-            die("Error: No se encontró un trámite con ese ID.");
-        }
-
-        // Lógica para obtener los movimientos del trámite
-        $api_movimientos_url = 'http://localhost/api/api-Alumnos/tramite_movimientos.php?id_tramite=' . $tramite_encontrado['id_tramite'];
-        $movimientos_response = file_get_contents($api_movimientos_url);
-        $movimientos = json_decode($movimientos_response, true);
-
-        if (!is_array($movimientos) || empty($movimientos)) {
-            $movimientos = []; // Si no hay movimientos, inicializar como un array vacío
+            case "En Proceso":
+                $estado_clase = "estado-proceso";
+                break;
+            case "Completado":
+                $estado_clase = "estado-completado";
+                break;
         }
     } else {
-        die("Error: No se recibió el ID de la notificación.");
+        die("Error: No se encontró un trámite con ese ID.");
     }
-    ?>
+
+    // Lógica para obtener los movimientos del trámite
+    $api_movimientos_url = 'http://localhost/api/api-Alumnos/tramite_movimientos.php?id_tramite=' . $tramite_encontrado['id_tramite'];
+    $movimientos_response = file_get_contents($api_movimientos_url);
+    $movimientos = json_decode($movimientos_response, true);
+
+    if (!is_array($movimientos) || empty($movimientos)) {
+        $movimientos = []; // Si no hay movimientos, inicializar como un array vacío
+    }
+} else {
+    die("Error: No se recibió el ID de la notificación.");
+}
+?>
+
     <!-- Include Navbar -->
     <?php include("../includes/navbar.php");?>
 
@@ -109,32 +122,25 @@
                     <a href="" id="adjunto-link" class="btn btn-primary btn-download" download>Descargar Adjunto</a>
                 </div>
                 <h5 class="mt-4">Movimientos del Trámite:</h5>
-             
+           
 <ul id="movimientos-list" class="list-group">
     <?php if (!empty($movimientos)): ?>
-        <?php 
-        // Comenzar a mostrar desde el segundo registro
-        $movimientos = array_slice($movimientos, 1); // Elimina el primer registro
-        ?>
-        <?php if (empty($movimientos)): ?>
-            <li class="list-group-item">No hay movimientos registrados para este trámite.</li>
-        <?php else: ?>
-            <?php foreach ($movimientos as $movimiento): ?>
-                <?php
-                // Formatear la fecha y hora
-                $fecha_movimiento_obj = new DateTime($movimiento['fecha_movimiento']);
-                $fecha_movimiento_formateada = $fecha_movimiento_obj->format('d/m/Y H:i');
-                ?>
-                <li class="list-group-item">
-                    <strong>Fecha:</strong> <?php echo htmlspecialchars($fecha_movimiento_formateada); ?> - 
-                    <strong>Observación:</strong> <?php echo htmlspecialchars($movimiento['observacion']); ?> - 
-                </li>
-            <?php endforeach; ?>
-        <?php endif; ?>
+        <?php foreach ($movimientos as $movimiento): ?>
+            <?php
+            // Formatear la fecha y hora
+            $fecha_movimiento_obj = new DateTime($movimiento['fecha_movimiento']);
+            $fecha_movimiento_formateada = $fecha_movimiento_obj->format('d/m/Y H:i');
+            ?>
+            <li class="list-group-item">
+                <strong>Fecha:</strong> <?php echo htmlspecialchars($fecha_movimiento_formateada); ?> - 
+                <strong>Observación:</strong> <?php echo htmlspecialchars($movimiento['observacion']); ?> - 
+            </li>
+        <?php endforeach; ?>
     <?php else: ?>
         <li class="list-group-item">No hay movimientos registrados para este trámite.</li>
     <?php endif; ?>
 </ul>
+
 
 
 
