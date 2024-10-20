@@ -122,7 +122,6 @@ if (isset($_GET['id'])) {
                     <a href="" id="adjunto-link" class="btn btn-primary btn-download" download>Descargar Adjunto</a>
                 </div>
                 <h5 class="mt-4">Movimientos del Trámite:</h5>
-           
 <ul id="movimientos-list" class="list-group">
     <?php if (!empty($movimientos)): ?>
         <?php foreach ($movimientos as $movimiento): ?>
@@ -140,6 +139,11 @@ if (isset($_GET['id'])) {
         <li class="list-group-item">No hay movimientos registrados para este trámite.</li>
     <?php endif; ?>
 </ul>
+
+<!-- Agregar el botón de redirección -->
+<div class="mt-3">
+    <a href="mis_tramites.php" class="btn btn-secondary">Volver a Mis Trámites</a>
+</div>
 
 
 
