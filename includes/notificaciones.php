@@ -3,7 +3,7 @@ $api_url = 'http://localhost/api/api-Alumnos/notificaciones.php';
 $response = file_get_contents($api_url);
 $data = json_decode($response, true);
 
-// Filtrar solo las notificaciones no leídas (id_notificacion_estado != 3) para el contador
+// Filtrar solo las notificaciones no leídas (id_notificacion_estado != 3) para la lista
 $notificaciones_no_leidas = array_filter($data, function($notificacion) {
     return $notificacion['id_notificacion_estado'] != 3;
 });
@@ -27,16 +27,12 @@ $notificaciones_count = count($notificaciones_no_leidas);
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" id="notificationDropdown" aria-labelledby="notificationsDropdown" style="max-height: 500px; overflow-y: auto;">
                         <div class="dropdown-divider"></div>
-                        <?php if (count($data) > 0): ?>
-                            <?php foreach ($data as $notificacion): ?>
+                        <?php if (count($notificaciones_no_leidas) > 0): ?>
+                            <?php foreach ($notificaciones_no_leidas as $notificacion): ?>
                                 <?php
                                 $notificacion_id = $notificacion['id_notificacion'];
                                 $date_sent = htmlspecialchars($notificacion['fecha_envio_notificacion']);
                                 $type = isset($notificacion['id_aviso']) ? "Aviso" : (isset($notificacion['id_tramite']) ? "Trámite" : "Desconocido");
-
-                                // Verificar el estado de la notificación
-                                $estado = $notificacion['id_notificacion_estado'];
-                                $readClass = $estado == 3 ? 'read-notification' : '';  // Clase CSS si está leída
 
                                 // Mostrar la descripción adecuada dependiendo del tipo
                                 if ($type == "Aviso") {
@@ -58,7 +54,7 @@ $notificaciones_count = count($notificaciones_no_leidas);
                                     $descripcion = substr($descripcion, 0, $max_length) . '...';
                                 }
                                 ?>
-                                <div class="notificationContent <?php echo $readClass; ?>">  <!-- Añadimos la clase de leída -->
+                                <div class="notificationContent">
                                     <i class='fa fa-check' style='color:#41cf2e;'></i>
                                     <span class='message-description'>Notificación enviada el: <b><?php echo $date_sent; ?></b></span><br>
                                     <span class='notification-type'>Tipo: <b><?php echo $type; ?></b></span><br>
@@ -74,77 +70,73 @@ $notificaciones_count = count($notificaciones_no_leidas);
     </div>
 </div>
 
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const notificationLinks = document.querySelectorAll('.mark-as-read');
-        
-        notificationLinks.forEach(function(link) {
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
-                
-                const notificacionId = this.getAttribute('data-id');  // Obtener el id_notificacion
-                const href = this.getAttribute('href');
-                
-                // Verificar si el id_notificacion se obtiene correctamente
-                console.log("ID de notificación:", notificacionId);
-                
-                // Obtener el estado actual de la notificación
-                const isRead = this.closest('.notificationContent').classList.contains('read-notification');
-                
-                // Si la notificación no está leída, marcarla como leída
-                if (!isRead) {
-                    const postData = {
-                        id_notificacion: notificacionId,
-                        id_notificacion_estado: 3  // Marcar como leído
-                    };
+    const notificationLinks = document.querySelectorAll('.mark-as-read');
+    
+    notificationLinks.forEach(function(link) {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            
+            const notificacionId = this.getAttribute('data-id');  // Obtener el id_notificacion
+            const href = this.getAttribute('href');
+            
+            // Verificar si el id_notificacion se obtiene correctamente
+            console.log("ID de notificación:", notificacionId);
+            
+            const postData = {
+                id_notificacion: notificacionId,
+                id_notificacion_estado: 3  // Cambiar el estado a 3
+            };
 
-                    fetch('http://localhost/api/api-Alumnos/notificaciones.php', {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(postData)  // Enviar los datos como JSON
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.error) {
-                            console.error('Error en la API:', data.error);
-                        } else {
-                            console.log('Respuesta de la API:', data);
-                            // Marcar la notificación como leída en el frontend
-                            this.closest('.notificationContent').classList.add('read-notification');
-                            // Actualizar el contador de notificaciones
-                            actualizarContadorNotificaciones();
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error en la solicitud:', error);
-                    });
-                }
-                
-                // Redirigir al detalle de la notificación, independientemente de su estado
-                window.location.href = href;  
-            });
-        });
-    });
-
-    function actualizarContadorNotificaciones() {
-        fetch('http://localhost/api/api-Alumnos/notificaciones.php')
+            fetch('http://localhost/api/api-Alumnos/notificaciones.php', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(postData)  // Enviar los datos como JSON
+            })
             .then(response => response.json())
             .then(data => {
-                // Filtrar solo las notificaciones no leídas
-                const notificaciones_no_leidas = data.filter(notificacion => notificacion.id_notificacion_estado != 3);
-                const notificaciones_count = notificaciones_no_leidas.length;
-
-                // Actualizar el contador en la interfaz
-                document.getElementById('count-label').textContent = notificaciones_count;
+                if (data.error) {
+                    console.error('Error en la API:', data.error);
+                } else {
+                    console.log('Respuesta de la API:', data);
+                    // Eliminar la notificación del DOM
+                    this.closest('.notificationContent').remove();
+                    // Actualizar el contador de notificaciones
+                    actualizarContadorNotificaciones();
+                }
             })
             .catch(error => {
-                console.error('Error al obtener notificaciones:', error);
+                console.error('Error en la solicitud:', error);
             });
-    }
 
-    // Actualizar el contador de notificaciones cada 5 segundos
-    setInterval(actualizarContadorNotificaciones, 5000);  // 5000 ms = 5 segundos
+            // Redirigir al detalle de la notificación
+            window.location.href = href;  
+        });
+    });
+});
+
+function actualizarContadorNotificaciones() {
+    fetch('http://localhost/api/api-Alumnos/notificaciones.php')
+        .then(response => response.json())
+        .then(data => {
+            // Filtrar solo las notificaciones no leídas
+            const notificaciones_no_leidas = data.filter(notificacion => notificacion.id_notificacion_estado != 3);
+            const notificaciones_count = notificaciones_no_leidas.length;
+
+            // Actualizar el contador en la interfaz
+            document.getElementById('count-label').textContent = notificaciones_count;
+        })
+        .catch(error => {
+            console.error('Error al obtener notificaciones:', error);
+        });
+}
+
+// Actualizar el contador de notificaciones cada 5 segundos
+setInterval(actualizarContadorNotificaciones, 5000);  // 5000 ms = 5 segundos
+
 
 </script>

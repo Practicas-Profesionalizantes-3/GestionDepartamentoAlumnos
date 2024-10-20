@@ -105,9 +105,8 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
 
                                 <!-- Contenedor para la fecha -->
                                 <div class="fecha-container">
-                                    <p><?php echo htmlspecialchars($item['fecha_publicacion']); ?></p>
+                                    <p><?php echo date('d-m-Y H:i', strtotime($item['fecha_publicacion'])); ?></p>                               
                                 </div>
-
                                 <?php if (!empty($item["adjunto"])) : ?>
                                     <div class="descargar-adjunto">
                                         <a href="data:application/pdf;base64,<?= $item["adjunto"]; ?>" download="<?= htmlspecialchars($item["titulo"]); ?>">Descargar adjunto</a>

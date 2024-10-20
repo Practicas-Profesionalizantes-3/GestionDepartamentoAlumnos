@@ -77,6 +77,15 @@
         } else {
             die("Error: No se encontró un trámite con ese ID.");
         }
+
+        // Lógica para obtener los movimientos del trámite
+        $api_movimientos_url = 'http://localhost/api/api-Alumnos/tramite_movimientos.php?id_tramite=' . $tramite_encontrado['id_tramite'];
+        $movimientos_response = file_get_contents($api_movimientos_url);
+        $movimientos = json_decode($movimientos_response, true);
+
+        if (!is_array($movimientos) || empty($movimientos)) {
+            $movimientos = []; // Si no hay movimientos, inicializar como un array vacío
+        }
     } else {
         die("Error: No se recibió el ID de la notificación.");
     }
@@ -99,6 +108,38 @@
                 <div id="adjunto-section" style="display: none;">
                     <a href="" id="adjunto-link" class="btn btn-primary btn-download" download>Descargar Adjunto</a>
                 </div>
+                <h5 class="mt-4">Movimientos del Trámite:</h5>
+             
+<ul id="movimientos-list" class="list-group">
+    <?php if (!empty($movimientos)): ?>
+        <?php 
+        // Comenzar a mostrar desde el segundo registro
+        $movimientos = array_slice($movimientos, 1); // Elimina el primer registro
+        ?>
+        <?php if (empty($movimientos)): ?>
+            <li class="list-group-item">No hay movimientos registrados para este trámite.</li>
+        <?php else: ?>
+            <?php foreach ($movimientos as $movimiento): ?>
+                <?php
+                // Formatear la fecha y hora
+                $fecha_movimiento_obj = new DateTime($movimiento['fecha_movimiento']);
+                $fecha_movimiento_formateada = $fecha_movimiento_obj->format('d/m/Y H:i');
+                ?>
+                <li class="list-group-item">
+                    <strong>Fecha:</strong> <?php echo htmlspecialchars($fecha_movimiento_formateada); ?> - 
+                    <strong>Observación:</strong> <?php echo htmlspecialchars($movimiento['observacion']); ?> - 
+                </li>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    <?php else: ?>
+        <li class="list-group-item">No hay movimientos registrados para este trámite.</li>
+    <?php endif; ?>
+</ul>
+
+
+
+
+
             </div>
         </div>
     </div>
