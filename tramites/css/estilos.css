@@ -45,7 +45,10 @@
   transform: translateY(-10px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-
+.sin-tramites{
+  margin-left: -88px;
+  color: rgb(169, 49, 49);
+}
 .titlulo {
   font-family: 'Kumbh Sans', sans-serif;
   font-size: 1.5rem;
@@ -124,7 +127,7 @@
 
 /* Descripción de trámites */
 .subtitle_tramites_dpto {
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: #373737;
   margin: 10px 0;
 }
@@ -138,7 +141,7 @@
 
 /* Estado de trámites */
 .estado_tramites_dpto {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #545493;
   display: inline-block;
 }
@@ -152,19 +155,33 @@
 
 /* Fecha */
 .fecha_dpto {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: #505050;
-  margin-top: 10px;
 }
-.info_fecha{
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
+.comentarios{
+  font-size: 0.9rem;
+  max-width: 100%; /* Ajusta el ancho máximo según sea necesario */
+  overflow: hidden; /* Oculta el desbordamiento */
+  white-space: nowrap; /* Evita el salto de línea */
+  text-overflow: ellipsis; /* Agrega '...' al final si hay un desbordamiento */
 }
-.btn-imprimir{
-  margin: 10px 0px;
-  height: 10%;
+
+/* Btn-comentar */
+.btn-comentar{
+  color: white;
+  background-color: #3a627b;
 }
+
+.btn-comentar:hover{
+  color: white;
+  background-color: #2e5e7d;
+}
+
+.btn-comentar:focus{
+  color: white;
+  background-color: #307caf;
+}
+
 /* Efectos de arrastre */
 .container_tramites_dpto.dragging {
   opacity: 0.5;

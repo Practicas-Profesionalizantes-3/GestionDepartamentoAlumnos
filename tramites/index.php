@@ -18,6 +18,26 @@ $formularios = array(
     6 => 'formularios/examen_final_libre.php',
 );
 
+$formularios_descripcion = array(
+    1 => 'Solicita el certificado de alumno regular, necesario para trámites externos.',
+    2 => 'Justifica inasistencias con la documentación correspondiente.',
+    3 => 'Solicita constancia de examen indicando la materia y calificación.',
+    4 => 'Solicita cambio de turno por motivos personales o laborales.',
+    5 => 'Asiste como oyente a una materia para reforzar conocimientos.',
+    6 => 'Inscríbete en un examen final en condición de libre.',
+);
+
+
+// Asociar IDs de trámites con sus íconos correspondientes
+$iconos = array(
+    1 => 'bxs-graduation', // Alumno regular
+    2 => 'bxs-calendar-exclamation', // Justificar inasistencia
+    3 => 'bxs-book-alt', // Constancia de examen
+    4 => 'bxs-time-five', // Cambio de turno
+    5 => 'bxs-user-circle', // Figura oyente
+    6 => 'bxs-pencil', // Examen final libre
+);
+
 $formularios_path = null;
 ?>
 
@@ -55,37 +75,38 @@ $formularios_path = null;
     </div>
 
     <div class="tm-section-wrap">
-    <div class="row">
-        <?php
-        // Mostrar tarjetas de trámites disponibles
-        if (isset($tipos_tramites) && is_array($tipos_tramites)) {
-            foreach ($tipos_tramites as $tipo) {
-                $id_tramite_tipo = htmlspecialchars($tipo['id_tramite_tipo']);
-                $descripcion = htmlspecialchars($tipo['descripcion']);
-                
-                // Verificar si existe un formulario para este tipo de trámite
-                if (array_key_exists($id_tramite_tipo, $formularios)) {
-                    $formularios_path = $formularios[$id_tramite_tipo];
-
-                    // Generar el HTML para cada tarjeta de trámite
-                    echo '<div class="col-12 col-sm-6 col-md-4 col-lg-2 mb-4">';
-                    echo '    <a href="' . $formularios_path . '?id=' . $id_tramite_tipo . '" class="tramite-card text-decoration-none h-100">';
-                    echo '        <div class="tramite-card-body d-flex flex-column justify-content-start align-items-center p-3 border rounded">';
-                    echo '            <div class="tramite-card-content">';
-                    echo '                <div class="tramite-card-title mb-2 h5">' . $descripcion . '</div>';
-                    echo '                <div class="tramite-card-description">Aquí puedes crear un trámite de tipo ' . $descripcion . '.</div>';
-                    echo '            </div>';
-                    echo '        </div>';
-                    echo '    </a>';
-                    echo '</div>';
+        <div class="row">
+            <?php
+            // Mostrar tarjetas de trámites disponibles
+            if (isset($tipos_tramites) && is_array($tipos_tramites)) {
+                foreach ($tipos_tramites as $tipo) {
+                    $id_tramite_tipo = htmlspecialchars($tipo['id_tramite_tipo']);
+                    $descripcion = htmlspecialchars($tipo['descripcion']);
+                    
+                    // Verificar si existe un formulario para este tipo de trámite
+                    if (array_key_exists($id_tramite_tipo, $formularios)) {
+                        $formularios_path = $formularios[$id_tramite_tipo];
+                        $descripcion_formulario = isset($formularios_descripcion[$id_tramite_tipo]) ? $formularios_descripcion[$id_tramite_tipo] : 'Descripción no disponible';
+                        $icono = isset($iconos[$id_tramite_tipo]) ? $iconos[$id_tramite_tipo] : 'bxs-file'; // Icono por defecto
+                        
+                        // Generar el HTML para cada tarjeta de trámite
+                        echo '<div class="col-12 col-sm-6 col-md-4 col-lg-2 mb-4">';
+                        echo '    <a href="' . $formularios_path . '?id=' . $id_tramite_tipo . '" class="tramite-card text-decoration-none h-100">';
+                        echo '        <div class="tramite-card-body d-flex flex-column justify-content-start align-items-center p-3 border rounded">';
+                        echo '            <div class="tramite-card-content">';
+                        echo '                <div class="tramite-card-title mb-2 h5">'.'<i class="bx ' . $icono . ' "></i>' .' '.$descripcion . '</div>';
+                        echo '                <div class="tramite-card-description">' . $descripcion_formulario . '</div>';
+                        echo '            </div>';
+                        echo '        </div>';
+                        echo '    </a>';
+                        echo '</div>';
+                    }
                 }
+            } else {
+                echo '<p>No se encontraron tipos de trámites.</p>';
             }
-        } else {
-            echo '<p>No se encontraron tipos de trámites.</p>';
-        }
-        ?>
-    </div>
-</div>
+            ?>
+        </div> <!-- .row -->
     </div> <!-- .tm-section-wrap -->
     
     <script src="js/validar.js"></script>

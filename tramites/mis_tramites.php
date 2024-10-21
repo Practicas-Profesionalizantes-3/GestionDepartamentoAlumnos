@@ -15,6 +15,19 @@ if ($response !== false) {
     // Intentamos decodificar el JSON
     $tramites = json_decode($response, true);
 
+    // Verificamos si la decodificación fue exitosa y los datos son un array
+    if (json_last_error() === JSON_ERROR_NONE && is_array($tramites)) {
+        $data = $tramites; // Si todo está bien, asignamos los trámites a la variable $data
+    } else {
+        // Mostrar un mensaje de error si hay problemas con el JSON
+        echo "<script>console.error('Error al decodificar el JSON');</script>";
+    }
+} else {
+    // Mostrar un mensaje de error si no se puede obtener respuesta de la API
+    echo "<script>console.error('No se pudo obtener datos de la API');</script>";
+}
+
+// Si no hay datos, $data seguirá siendo un array vacío
 $items_per_page = 4; // Número de filas por página
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
 $offset = ($page - 1) * $items_per_page; // Desplazamiento
@@ -54,7 +67,7 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
     <?php include("../includes/navbar.php"); ?>
 
     <div class="mb-5 mt-3">
-        <h1 class="tm-text-primary">Mis tramites</h1>
+        <h1 class="tm-text-primary">Mis trámites</h1>
     </div>
 
     <div class="listadoAvisos">
@@ -63,21 +76,27 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
 
     <div class="tm-section-wrap">
         <div class="row justify-content-center">
-            <?php foreach ($current_page_tramites as $datos) { ?>
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 container-mis-tramites">
-                    <h2 class="titulo"><?php echo $datos['tipo_tramite']; ?></h2>
-                    <p class="subtitle"><?php echo $datos['descripcion']; ?></p>
-                    <div class="actions">
-                        <label class="responsable">Responsable: <?php echo $datos['responsable']; ?></label>
-                    </div>
-                    <div class="info">
-                        <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
-                        <label class="estado"><?php echo $datos['fecha_creacion']; ?></label>
-                    </div>
-                    <div class="text-center mt-auto"> <!-- Cambié mt-2 a mt-auto -->
-                        <a href="detalle_tramite.php?id=<?php echo $datos['id_tramite']; ?>" class="btn btn-info">Ver completo</a>
-                    </div>
+            <?php if (empty($current_page_tramites)) { ?>
+                <div class="tm-text-primary sin-tramites" role="alert">
+                    Sin trámites disponibles.
                 </div>
+            <?php } else { ?>
+                <?php foreach ($current_page_tramites as $datos) { ?>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 container-mis-tramites">
+                        <h2 class="titulo"><?php echo $datos['tipo_tramite']; ?></h2>
+                        <p class="subtitle"><?php echo $datos['descripcion']; ?></p>
+                        <div class="actions">
+                            <label class="responsable">Responsable: <?php echo $datos['responsable']; ?></label>
+                        </div>
+                        <div class="info">
+                            <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
+                            <label class="estado"><?php echo date('d-m-Y H:i', strtotime($datos['fecha_creacion'])); ?></label>
+                        </div>
+                        <div class="text-center mt-auto">
+                            <a href="detalle_tramite.php?id=<?php echo $datos['id_tramite']; ?>" class="btn btn-info">Ver completo</a>
+                        </div>
+                    </div>
+                <?php } ?>
             <?php } ?>
         </div>
     </div>
@@ -113,10 +132,12 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
             window.location.href = 'detalle_tramite.php';
         }
     </script>
-    
+
     <script src="js/validar.js"></script>
     <script src="../js/navbar.js"></script>
     <script src="../js/index.js"></script>
     <script src="js/delete.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>
+
+</html>

@@ -75,7 +75,7 @@ if (isset($_GET['id'])) {
                             <label for="materia" class="form-label">Materia:</label>
                             <select class="form-control" name="materia" id="materia">
                                 <option value="1" selected></option>
-                                <option value="1"></option>
+                                <option value="1">Ingles I</option>
                                 <option value="2"></option>
                             </select>
                         </div>

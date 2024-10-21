@@ -1,65 +1,108 @@
-$("#formulario").submit(function (event) {
-    event.preventDefault();
+$(document).ready(function() {
+    var usuario = JSON.parse(sessionStorage.getItem("usuario"));
+    $("#nombre").val(usuario.nombre + " " + usuario.apellido); // Establecer el valor del campo id_usuario
+    $("#id_usuario").val(usuario.id_usuario);
 
-    var formData = new FormData();
-    formData.append('id_aviso_tipo', $("#id_aviso_tipo").val());
-    formData.append('id_usuario', $("#id_usuario").val());
-    formData.append('titulo', $("#titulo").val());
-    formData.append('descripcion', $("#descripcion").val());
-    formData.append('fecha_publicacion', $("#fecha_publicacion").val());
-    formData.append('fecha_vencimiento', $("#fecha_vencimiento").val());
-    formData.append('adjunto', $("#adjunto")[0].files[0]);  // archivo
-    formData.append('fijado', $("#fijado").val());
-    formData.append('imagen', $("#imagen")[0].files[0]);
-    formData.append('id_aviso_estado', $("#id_aviso_estado").val());
+    // Evento para el botón Cancelar
+    $("#cancelar-anuncio").click(function() {
+        // Redirigir a la página deseada
+        window.location.href = 'index.php';
+    });
 
-    $.ajax({
-        type: "POST",
-        url: "http://localhost/api/api-Alumnos/cartelera.php",
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function (data) {
-            if (data.success == true) {
-                var avisoId = data.id_aviso; // Suponiendo que devuelves el ID del aviso creado
-                console.log("Aviso creado con éxito, ID: " + avisoId);
+    $("#formulario").submit(function(event) {
+        event.preventDefault();
 
-                // Ahora crea la notificación
-                var notificacionData = {
-                    id_aviso: avisoId,  // ID del aviso recién creado
-                    id_notificacion_tipo: 1,  // Tipo de notificación que corresponda (puedes personalizar)
-                    id_notificacion_estado: 1,  // Estado de la notificación (no leída, etc.)
-                    fecha_envio_notificacion: new Date().toISOString()  // Fecha de la notificación actual
-                };
-
-                $.ajax({
-                    type: "POST",
-                    url: "http://localhost/api/api-Alumnos/notificaciones.php",
-                    data: JSON.stringify(notificacionData),
-                    contentType: "application/json",
-                    success: function (notificacionResponse) {
-                        console.log("Notificación creada: ", notificacionResponse);
-
-                        Swal.fire({
-                            title: "Su aviso y notificación fueron creados con éxito!",
-                            confirmButtonColor: "#006699",
-                            icon: "success",
-                            iconColor: "#118911",
-                        }).then(() => {
-                            location.href = "index.php";
-                        });
-                    },
-                    error: function (error) {
-                        console.log("Error al crear la notificación", error);
-                    }
-                });
-
-            } else {
-                console.log("Error al crear aviso: ", data);
-            }
-        },
-        error: function (errorThrown) {
-            console.log("Error en la creación del aviso", errorThrown);
+        // Validar que los campos requeridos no estén vacíos
+        if ($("#titulo").val() === "" || $("#descripcion").val() === "" || $("#fecha_vencimiento").val() === "" || $("#imagen").val() === "") {
+            Swal.fire({
+                title: "Error",
+                text: "Por favor, complete todos los campos requeridos.",
+                icon: "error",
+                confirmButtonColor: "#006699"
+            });
+            return;
         }
+
+        // Obtener la fecha de vencimiento y la fecha de hoy
+        var fechaVencimiento = new Date($("#fecha_vencimiento").val());
+        var hoy = new Date(); // Fecha actual
+
+        // Asegurarse de que la hora no afecte la comparación
+        hoy.setHours(0, 0, 0, 0); // Establecer la hora a medianoche
+        fechaVencimiento.setHours(0, 0, 0, ); // Establecer la hora a medianoche para la fecha de vencimiento
+
+        // Validar que la fecha de vencimiento sea mayor o igual a la fecha de hoy
+        if (fechaVencimiento < hoy) {
+            Swal.fire({
+                title: "Error",
+                text: "La fecha de vencimiento debe ser mayor a la de hoy.",
+                icon: "error",
+                confirmButtonColor: "#006699"
+            });
+            return;
+        }
+
+        var formData = new FormData(this); // Captura todos los datos del formulario
+
+        // Crear el aviso
+        $.ajax({
+            type: "POST",
+            url: "http://localhost/api/api-Alumnos/cartelera.php",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                if (data.success) {
+                    var avisoId = data.id_aviso; // Suponiendo que devuelves el ID del aviso creado
+
+                    // Crear la notificación
+                    var notificacionData = {
+                        id_aviso: avisoId,
+                        id_notificacion_tipo: 3,
+                        id_notificacion_estado: 4,
+                        fecha_envio_notificacion: new Date().toISOString()
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost/api/api-Alumnos/notificaciones.php",
+                        data: JSON.stringify(notificacionData),
+                        contentType: "application/json",
+                        success: function(notificacionResponse) {
+                            Swal.fire({
+                                title: "Su aviso y notificación fueron creados con éxito!",
+                                icon: "success",
+                                confirmButtonColor: "#006699",
+                            }).then(() => {
+                                location.href = "index.php";
+                            });
+                        },
+                        error: function(error) {
+                            Swal.fire({
+                                title: "Error",
+                                text: "No se pudo crear la notificación. Intente nuevamente.",
+                                icon: "error",
+                                confirmButtonColor: "#006699"
+                            });
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        title: "Error",
+                        text: "No se pudo crear el aviso. Intente nuevamente.",
+                        icon: "error",
+                        confirmButtonColor: "#006699"
+                    });
+                }
+            },
+            error: function() {
+                Swal.fire({
+                    title: "Error",
+                    text: "Ocurrió un error al crear el aviso. Intente nuevamente.",
+                    icon: "error",
+                    confirmButtonColor: "#006699"
+                });
+            }
+        });
     });
 });

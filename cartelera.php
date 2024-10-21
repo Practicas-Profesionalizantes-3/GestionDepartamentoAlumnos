@@ -1,7 +1,7 @@
 <?php
 $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
 
-$response = file_get_contents($api_url);
+$response = @file_get_contents($api_url);
 $data = json_decode($response, true);
 ?>
 <!DOCTYPE html>
@@ -19,6 +19,11 @@ $data = json_decode($response, true);
     <link rel="stylesheet" href="css/style.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> <!----===== Boxicons CSS ===== -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"> <!-- Toastify CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script> <!-- Toastify JS-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  <!-- SwettAlert -->
 </head>
 
 <body>
@@ -39,7 +44,7 @@ $data = json_decode($response, true);
                     <!-- Include Cartelera -->
                     <?php
                         $_SESSION['mostrar_opciones_cartelera'] = 'opciones2';
-                        include("includes/cartelera.php");
+                        include("includes/cartelera.php")
                     ?>
                 </div> <!-- .tm-section-wrap -->
             </div> <!-- .tm-main -->
