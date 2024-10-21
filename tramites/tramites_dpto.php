@@ -33,16 +33,26 @@ function generar_tramite_html($datos) {
     <div class='container_tramites_dpto {$clase_estado}' draggable='true' ondragstart='drag(event)' id='tramite-{$datos['id_tramite']}'>
         <h4 class='titlulo_tramites_dpto'>{$datos['tipo_tramite']}</h4>
         <p class='subtitle_tramites_dpto'>{$datos['descripcion']}</p>
-        <div class='actions-tramites_dpto mb-2'>
+        <div class='actions-tramites_dpto'>
             <label class='responsable_tramites_dpto'>Responsable: {$datos['responsable']}</label>
         </div>
-        <div class='info_dpto d-flex justify-content-between'>
+        <div class='d-flex justify-content-between'>
             <label class='estado_tramites_dpto'>Estado: {$datos['estado_tramite']}</label>
             <label class='avatar_dpto'>Usuario: {$datos['nombre']} {$datos['apellido']}</label>
         </div>
-        <div class='info_fecha'>
-            <p class='fecha_dpto'>{$datos['fecha_creacion']}</p>
-            <button class='btn btn-secondary btn-imprimir' onclick='imprimirTarjeta({$datos['id_tramite']})'>Imprimir</button>
+        <div class='d-flex justify-content-between'>
+            <label class='comentarios'>Comentarios: {$datos['comentarios']}</label>
+        </div>
+        <div class='d-flex justify-content-between'>
+            <p class='fecha_dpto'>" . date('d-m-Y H:i', strtotime($datos['fecha_creacion'])) . "</p>
+        </div>
+        <div class='d-flex justify-content-between align-items-center'>
+            <div>
+                <button class='btn btn-comentar' onclick='comentarTramite({$datos['id_tramite']}); return false;'>💬 Comentar</button>
+            </div>
+            <div>
+                <button class='btn btn-secondary' onclick='imprimirTarjeta({$datos['id_tramite']})'>🖨️ Imprimir</button>
+            </div>
         </div>
     </div>";
 }
@@ -92,6 +102,37 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
         <a type="button" class="btn btn-primary btn-volver" href="index.php" role="button">Volver</a>
     </div>
 
+    <div class="buscador">
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <div class="d-flex justify-content-center align-items-center mb-5">
+                <div class="input-group" style="max-width: 600px;">
+                    <input class="form-control barra" type="text" id="search-input" name="search-input" placeholder="Buscar tramites por tipos de tramites, nombre o apellido del alumno">
+                    <button type="submit" name="buscar" class="btn btn-primary btn-primary-buscar">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <?php
+        if (isset($_POST['buscar'])) {
+            $search_term = strtolower($_POST['search-input']); // Convertir el término de búsqueda a minúsculas
+        
+            // Filtrar los trámites que coincidan con el término de búsqueda en 'tipo_tramite', 'nombre' o 'apellido'
+            $data = array_filter($data, function ($item) use ($search_term) {
+                // Convertir los textos a minúsculas para hacer la comparación
+                return strpos(strtolower($item['tipo_tramite']), $search_term) !== false ||
+                       strpos(strtolower($item['nombre']), $search_term) !== false ||
+                       strpos(strtolower($item['apellido']), $search_term) !== false;
+            });
+        }
+        
+        // Obtener los tramites para la página actual después de aplicar el filtro (si corresponde)
+        $current_page_tramites = array_slice($data, $offset, $items_per_page);
+        
+    ?>
+
     <div class="tm-section-wrap ">
         <div class="row justify-content-center ">
             <?php 
@@ -115,7 +156,6 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
                     
                     // Mostrar el mensaje si no hay trámites
                     if (!$hay_tramites) {
-                        
                         echo "<p>No hay trámites ". strtolower($estado) . ".</p>";
                     }
                     ?>
@@ -146,7 +186,9 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
             <?php endif; ?>
         </ul>
     </nav>
-
+    
+    
+    <script src="js/tramite_comentarios.js"></script>
     <script src="js/tramites_dpto.js"></script>
     <script src="../js/index.js"></script>
     <script src="../js/navbar.js"></script>

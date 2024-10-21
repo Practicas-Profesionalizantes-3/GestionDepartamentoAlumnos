@@ -4,7 +4,9 @@ $(document).ready(function () {
     .getElementById("habilitarCambio")
     .addEventListener("click", function () {
       document.getElementById("formulario").style.display = "block";
+      document.getElementById("cerrarsesion").style.display = "none";
       this.style.display = "none";
+      cerrarsesion
     });
 
   document
@@ -12,6 +14,7 @@ $(document).ready(function () {
     .addEventListener("click", function () {
       document.getElementById("formulario").style.display = "none";
       document.getElementById("habilitarCambio").style.display = "block";
+      document.getElementById("cerrarsesion").style.display = "block";
     });
 
   // Modal variables
@@ -38,7 +41,10 @@ $(document).ready(function () {
 
   // Cierra el modal cuando se presiona el botón cancelar
   document.getElementById("cancelarCambioBtn").onclick = function () {
-    modal.style.display = "none";
+    // Limpiar los campos del formulario
+    document.getElementById("current_password").value = "";
+    document.getElementById("new_password").value = "";
+    document.getElementById("confirm_password").value = "";
   };
 
   var loggedIn = sessionStorage.getItem("loggedIn");
@@ -99,9 +105,8 @@ $(document).ready(function () {
           contentType: "application/json",
           dataType: "json",
           success: function (data) {
-            console.log(data)
-            if (data.success == true) {
-              console.log("funciono", data);
+            console.log(data);
+            if (data.success) {
               Swal.fire({
                 icon: "success",
                 title: "Contraseña actualizada",
@@ -109,24 +114,37 @@ $(document).ready(function () {
                 confirmButtonText: "Aceptar",
                 confirmButtonColor: "#3085d6",
               }).then(() => {
-            document.getElementById("formulario").style.display = "none";
-            document.getElementById("habilitarCambio").style.display = "block";
+                document.getElementById("formulario").style.display = "none";
+                document.getElementById("habilitarCambio").style.display = "block";
+                document.getElementById("cerrarsesion").style.display = "block";
+                // Limpiar los campos del formulario
+                document.getElementById("current_password").value = "";
+                document.getElementById("new_password").value = "";
+                document.getElementById("confirm_password").value = "";
               });
             } else {
+              // Mostrar el mensaje de error devuelto por el servidor
               Swal.fire({
                 icon: "error",
                 title: "Error",
-                text: "Hubo un problema al verificar tu contraseña. Inténtalo nuevamente.",
+                text: data.error || "Hubo un problema al actualizar tu contraseña. Inténtalo nuevamente.",
                 confirmButtonText: "Reintentar",
                 confirmButtonColor: "#d33",
               });
-              console.log(data)
+              console.log(data);
             }
           },
           error: function (errorThrown) {
             console.log("error", errorThrown);
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "Hubo un error en la comunicación con el servidor. Inténtalo nuevamente.",
+              confirmButtonText: "Reintentar",
+              confirmButtonColor: "#d33",
+            });
           }
-        });
+        });        
       }
     }
   });
@@ -137,7 +155,7 @@ function cerrarsesion() {
   Swal.fire({
     title: "Cerrar sesión",
     text: "¿Estás seguro de que deseas cerrar sesión?",
-    icon: "Danger",
+    icon: "question",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",

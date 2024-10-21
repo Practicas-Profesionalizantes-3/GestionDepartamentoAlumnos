@@ -77,7 +77,7 @@ if ($aviso_id) {
                         <a href="data:application/pdf;base64,<?= $adjunto; ?>" download="<?= $titulo; ?>" class="btn btn-primary">Descargar adjunto</a>
                     </div>
                 <?php endif; ?>
-                <p class="fecha"><?= $fecha; ?></p>
+                <p class="fecha"><?= date('d-m-Y H:i', strtotime($fecha)); ?></p>
             </div>
         </div>
     </div>
