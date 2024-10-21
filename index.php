@@ -23,6 +23,7 @@
 </head>
 
 <body>
+    
     <!-- Include Perfil -->
     <?php include("includes/perfil.php");?>
 

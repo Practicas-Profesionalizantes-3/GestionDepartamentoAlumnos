@@ -474,7 +474,6 @@ body.dark-theme {
   color: rgb(0, 0, 0);
 }
 
-/* ESTILOS DEL ICONO DE PERFIL */
 /* Estilos para el modal */
 .modal {
   display: none; /* Oculto por defecto */
@@ -537,17 +536,26 @@ body.dark-theme {
 #perfil p {
   margin: 10px 0;
 }
-.btn-perfil{
+.btn-perfil {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
+  top: 20px; /* Ajusta la distancia del borde superior */
+  right: 20px; /* Ajusta la distancia del borde derecho */
+  background-color: #4b5158; /* Color de fondo */
+  color: white; /* Color del ícono */
+  border: none; /* Sin borde */
   width: 38px;
   height: 38px;
-  border-radius: 20px;
-  border: 2px solid #006699; /* Color del borde */
-	box-shadow: 0 0 10px #006699, 0 0 20px #006699; /* Efecto de neón */
+  border-radius: 50%; /* Redondear el botón */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  transition: background-color 0.3s, transform 0.3s; /* Transiciones suaves */
+  z-index: 1000; /* Asegurarse de que esté encima de otros elementos */
 }
+
+.btn-perfil:hover {
+  background-color: #181a1b; /* Color al pasar el mouse */
+  transform: translateY(-2px); /* Efecto de elevación */
+}
+
 
 /*perfil*/
 .form-botones{

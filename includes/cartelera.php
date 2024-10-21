@@ -1,16 +1,36 @@
 <?php
 $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
 
-$response = file_get_contents($api_url);
-$data = json_decode($response, true);
-$avisos = $data["data"];
+// Intentar obtener el contenido de la API
+$response = @file_get_contents($api_url);
+
+// Verificar si la respuesta es válida y se pudo decodificar correctamente
+if ($response !== false) {
+    $data = json_decode($response, true);
+
+    // Verificar que la decodificación JSON fue exitosa y que la estructura contiene 'data'
+    if (json_last_error() === JSON_ERROR_NONE && isset($data["data"])) {
+        $avisos = $data["data"];
+    } else {
+        // Si hay un error en la decodificación o no existe 'data', inicializar $avisos como un arreglo vacío
+        $avisos = [];
+    }
+} else {
+    // Si no se pudo obtener la respuesta de la API, inicializar $avisos como un arreglo vacío
+    $avisos = [];
+}
+
 $datos = $avisos;
 $fecha_actual = date('Y-m-d');
+
+// Filtrar los datos según la fecha de vencimiento y el estado
 $datos_filtrados = array_filter($avisos, function ($item) use ($fecha_actual) {
     return ($item['fecha_vencimiento'] >= $fecha_actual) && ($item["estado"] != "Inactivo");
 });
 
 $datos = $datos_filtrados;
+
+// Verificar si hay opciones en la sesión para limitar el número de avisos mostrados
 if (isset($_SESSION['mostrar_opciones_cartelera'])) {
     $mostrar_opciones = $_SESSION['mostrar_opciones_cartelera'];
     if ($mostrar_opciones == "opciones1") {

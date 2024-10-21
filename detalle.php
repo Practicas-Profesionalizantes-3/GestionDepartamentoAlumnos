@@ -52,6 +52,7 @@ if ($aviso_id) {
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> <!----===== Boxicons CSS ===== -->
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
+        
     </head>
     <body>
         <!-- Include Navbar -->
@@ -70,7 +71,7 @@ if ($aviso_id) {
                             <a href="data:application/pdf;base64,<?= $adjunto; ?>" download="<?= $titulo; ?>" class="btn btn-primary">Descargar adjunto</a>
                         </div>
                     <?php endif; ?>
-                    <p class="fecha"><?= $fecha; ?></p>
+                    <p class="fecha"><?= date('d-m-Y H:i', strtotime($fecha)); ?></p>
                 </div>
             </div>
         </div>

@@ -107,8 +107,8 @@ echo "<script>console.log(" . json_encode($datas) . ")</script>";
                                     <td><?php echo $datos['id_usuario']; ?></td>
                                     <td><?php echo $datos['titulo']; ?></td>
                                     <td><?php echo $datos['descripcion']; ?></td>
-                                    <td><?php echo $datos['fecha_publicacion']; ?></td>
-                                    <td><?php echo $datos['fecha_vencimiento']; ?></td>
+                                    <td><?php echo date('d-m-Y H:i', strtotime($datos['fecha_publicacion'])); ?></td>
+                                    <td><?php echo date('d-m-Y', strtotime($datos['fecha_vencimiento'])); ?></td>
                                     <td><?php if($datos["adjunto"] != ""){ ?>
                                     <a href="data:application/pdf;base64,<?= $datos["adjunto"]; ?>" download="<?= htmlspecialchars($datos["titulo"]); ?>">Descargar adjunto</a>
                                     <?php } else {?>

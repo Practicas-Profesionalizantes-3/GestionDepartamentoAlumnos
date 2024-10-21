@@ -16,5 +16,3 @@ if (tramiteDetalle) {
 } else {
     document.getElementById('tramite-detalle').innerHTML = '<p>No se encontraron datos del trámite.</p>';
 }
-
-

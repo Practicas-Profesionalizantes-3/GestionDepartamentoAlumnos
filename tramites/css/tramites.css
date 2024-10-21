@@ -25,38 +25,44 @@ outline: none;
 
 
 /* Estilos para las tarjetas */
+/* tramites.css */
 .tramite-card {
-    display: block;
-    color: #333;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-decoration: none;
+    width: 100%;
+    height: 250px; /* Altura fija para todas las tarjetas */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.tramite-card:hover {
+    transform: scale(1.05);
 }
 
 .tramite-card-body {
-    min-height: 125px;
-    background-color: #fff;
-    border-radius: 12px; /* Bordes redondeados */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 1rem;
 }
 
-.tramite-card:hover .tramite-card-body {
-    transform: translateY(-8px); /* Efecto de elevación en hover */
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15); /* Sombra más marcada en hover */
-}
-
-/* Título de la tarjeta */
 .tramite-card-title {
-    color: #2c3e50; /* Color azul para destacar */
+    font-size: 1.2rem;
     font-weight: bold;
+    margin-bottom: 0.5rem;
 }
 
-/* Descripción de la tarjeta */
 .tramite-card-description {
-    color: #666;
     font-size: 0.9rem;
+    color: #555;
 }
+
 
 /* Espacios entre las tarjetas */
 .col-12 {

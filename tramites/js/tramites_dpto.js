@@ -63,14 +63,15 @@ function drop(ev) {
 
 // Función para actualizar el estado del trámite en la API
 function actualizarEstadoTramite(idTramite, estado) {
-    return fetch('http://localhost/api/api-Alumnos/tramites.php', {
+    return fetch('http://localhost/api/api-Alumnos/tramite_responsables.php', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             id_tramite: idTramite,
-            id_estado_tramite: estado
+            id_estado_tramite: estado,
+            id_usuario_responsable: usuario.id_usuario
         })
     })
     .then(response => {

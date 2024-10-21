@@ -90,7 +90,7 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
                         </div>
                         <div class="info">
                             <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
-                            <label class="estado"><?php echo $datos['fecha_creacion']; ?></label>
+                            <label class="estado"><?php echo date('d-m-Y H:i', strtotime($datos['fecha_creacion'])); ?></label>
                         </div>
                         <div class="text-center mt-auto">
                             <a href="detalle_tramite.php?id=<?php echo $datos['id_tramite']; ?>" class="btn btn-info">Ver completo</a>

@@ -157,11 +157,6 @@ if (!$aviso) {
               <label for="descripcion" class="form-label">Descripcion:</label>
               <input type="text" class="form-control" value="<?php echo $aviso['descripcion']; ?>" name="descripcion" id="descripcion" aria-describedby="helpId" placeholder="Descripcion">
             </div>
-            <div class="mb-3"> 
-                <label for="fecha_publicacion" class="form-label">Fecha de publicación:</label>
-                <input type="date" class="form-control" value="<?php echo $aviso['fecha_publicacion']; ?>" name="fecha_publicacion" id="fecha_publicacion" aria-describedby="helpId" placeholder="Fecha de publicación" data-publicacion-pasada="<?= $fecha_publicacion_pasada ? 'true' : 'false' ?>">
-                <div id="fechaError" class="text-danger" style="display:none;">La nueva fecha de publicación no debe ser anterior a la fecha actual.</div>
-            </div>
             <div class="mb-3">
                 <label for="fecha_vencimiento" class="form-label">Fecha de vencimiento:</label>
                 <input type="datetime-local" class="form-control" value="<?php echo date('Y-m-d\TH:i', strtotime($aviso['fecha_vencimiento'])); ?>" name="fecha_vencimiento" id="fecha_vencimiento" placeholder="Fecha de vencimiento">
@@ -209,8 +204,10 @@ if (!$aviso) {
               </select>
             </div>
             <input type="text" value="<?= $aviso["id_usuario"] ?>" name="id_usuario" id="id_usuario" readonly hidden />
-            <button type="submit" class="btn btn-success">Modificar</button>
-            <button type="button" class="btn btn-info" onclick="location.href='index.php'">Cancelar</button>
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-success mr-2" id="agregar-anuncio">Moficar</button>
+              <button type="button" class="btn btn-info  ml-2" id="cancelar-anuncio">Cancelar</button>
+            </div>
           </form>
         <?php } ?>
       </div>
@@ -219,7 +216,7 @@ if (!$aviso) {
 
   <script src="../js/navbar.js"></script>
   <script src="js/update.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data.min.js"></script>
+  <script src="../js/index.js"></script>
   <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
   <script src="js/jquery.min.js"></script>
   <script src="js/popper.js"></script>

@@ -1,16 +1,39 @@
 <?php
 $api_url = 'http://localhost/api/api-Alumnos/notificaciones.php';
-$response = file_get_contents($api_url);
-$data = json_decode($response, true);
 
-// Filtrar solo las notificaciones no leídas (id_notificacion_estado != 3) para la lista
-$notificaciones_no_leidas = array_filter($data, function($notificacion) {
-    return $notificacion['id_notificacion_estado'] != 3;
-});
+// Inicializar variables
+$notificaciones_no_leidas = [];
+$notificaciones_count = 0;
 
-// Contar solo las notificaciones no leídas
-$notificaciones_count = count($notificaciones_no_leidas);
+// Obtener respuesta de la API
+$response = @file_get_contents($api_url);
+
+// Verificar si la respuesta fue exitosa
+if ($response !== false) {
+    // Decodificar la respuesta JSON
+    $data = json_decode($response, true);
+
+    // Verificar si se decodificó correctamente
+    if (json_last_error() === JSON_ERROR_NONE) {
+        // Filtrar solo las notificaciones no leídas (id_notificacion_estado != 3) para la lista
+        $notificaciones_no_leidas = array_filter($data, function($notificacion) {
+            return isset($notificacion['id_notificacion_estado']) && $notificacion['id_notificacion_estado'] != 3;
+        });
+
+        // Contar solo las notificaciones no leídas
+        $notificaciones_count = count($notificaciones_no_leidas);
+    } else {
+        // Manejar error de decodificación JSON
+        error_log('Error al decodificar JSON: ' . json_last_error_msg());
+    }
+} else {
+    // Manejar error al obtener la respuesta
+    error_log('Error al obtener datos de la API: ' . error_get_last()['message']);
+}
+
+// Aquí puedes usar las variables $notificaciones_no_leidas y $notificaciones_count
 ?>
+
 
 <div class="navbar navbar-expand-lg" id="notificaciones">
     <div class="container-fluid">
@@ -20,7 +43,7 @@ $notificaciones_count = count($notificaciones_no_leidas);
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-bell"></i>
                         <!-- Mostrar el número de notificaciones no leídas -->
                         <span class="badge bg-danger" id="count-label"><?php echo $notificaciones_count; ?></span>
@@ -65,7 +88,11 @@ $notificaciones_count = count($notificaciones_no_leidas);
                                     <br><a href='<?php echo $href; ?>' class="mark-as-read" data-id="<?php echo $notificacion_id; ?>" style="color: blue;">Ver detalle</a>
                                 </div>
                             <?php endforeach; ?>
-                        <?php endif; ?>
+                            <?php else: ?>
+                                <div class="notificationContent">
+                                    <span>No hay notificaciones.</span>
+                                </div>
+                            <?php endif; ?>
                     </div>
                 </li>
             </ul>
