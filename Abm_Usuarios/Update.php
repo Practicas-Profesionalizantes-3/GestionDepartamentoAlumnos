@@ -153,8 +153,11 @@ $data_documento_tipos = json_decode($response_documento_tipos, true);
               </select>
             </div>
             <input type="text" value="<?= $usuario["id_usuario"] ?>" name="id_usuario" id="id_usuario" readonly hidden />
-            <button type="submit" class="btn btn-success">Modificar</button>
-            <button type="submit" class="btn btn-info" onclick="location.href='index.php'">Cancelar</button>
+            
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-success mr-2">Modificar</button>
+              <button type="submit" class="btn btn-info ml-2" onclick="location.href='index.php'">Cancelar</button>
+            </div>
           </form>
         <?php } ?>
       </div>
