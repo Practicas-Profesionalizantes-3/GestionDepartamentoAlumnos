@@ -46,7 +46,10 @@
   display: inline-block; /* Asegura que se trate como un bloque en línea */
 }
 
-
+.fecha-container {
+  font-size: 18px;
+  font-weight: bolder;
+}
 
 .descripcion-container {
   overflow: hidden;
