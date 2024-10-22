@@ -1,9 +1,61 @@
 /* Estilos de cartelera */
 
+.expanded {
+  height: auto !important;
+  overflow: visible !important;
+  transition: height 0.3s ease-in-out; /* Transición suave para el cambio de altura */
+  /* Ajusta el min-height según sea necesario */
+  min-height: 400px;
+  max-height: 1200px;
+}
+
+/* Asegúrate de que otros estilos no anulen estos */
+.position-relative.border-cartelera.expanded {
+  height: auto !important;
+}
+
+.expanded .img-container {
+  /* Estilos para cuando la imagen se expande */
+  height: auto;
+}
+
+/* boton eliminar pdf e img*/
+.btn-iconX {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: #d30d0d;/* Color rojo de Bootstrap */
+  border-radius: 50%;
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.btn-iconX:hover {
+  background-color: #fe0000; /* Rojo más oscuro en hover */
+}
+.file-containerX {
+  display: flex;
+  align-items: center;
+}
+.download-link {
+  margin-left: 10px; /* Ajusta el valor según sea necesario */
+  display: inline-block; /* Asegura que se trate como un bloque en línea */
+}
+
+
+
+.descripcion-container {
+  overflow: hidden;
+}
+
 .img-container {
     position: relative;
     overflow: hidden;
-    height: 250px;
+    height: 230px;
 }
 
 .overlay {
@@ -19,6 +71,14 @@
     text-align: center;
     box-sizing: border-box;
 }
+.border-cartelera{
+  padding: 10px;
+  background: rgb(255, 255, 255);
+  border: 2px solid rgba(102, 102, 102, 0.317) ;
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
 .border-cartelera{
   padding: 10px;
   background: rgb(255, 255, 255);

@@ -1,4 +1,41 @@
 <?php
+
+$api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
+
+// Intentar obtener el contenido de la API
+$response = @file_get_contents($api_url);
+
+// Verificar si la respuesta es válida y se pudo decodificar correctamente
+if ($response !== false) {
+    $data = json_decode($response, true);
+
+    // Verificar que la decodificación JSON fue exitosa y que la estructura contiene 'data'
+    if (json_last_error() === JSON_ERROR_NONE && isset($data["data"])) {
+        $avisos = $data["data"];
+    } else {
+        // Si hay un error en la decodificación o no existe 'data', inicializar $avisos como un arreglo vacío
+        $avisos = [];
+    }
+} else {
+    // Si no se pudo obtener la respuesta de la API, inicializar $avisos como un arreglo vacío
+    $avisos = [];
+}
+
+$datos = $avisos;
+$fecha_actual = date('Y-m-d');
+
+// Filtrar los datos según la fecha de vencimiento y el estado
+$datos_filtrados = array_filter($avisos, function ($item) use ($fecha_actual) {
+    return ($item['fecha_vencimiento'] >= $fecha_actual) && ($item["estado"] != 2);
+});
+
+$datos = $datos_filtrados;
+
+
+
+
+
+
 $api_url = 'http://localhost/api/api-Alumnos/notificaciones.php';
 
 // Inicializar variables
@@ -20,6 +57,11 @@ if ($response !== false) {
             return isset($notificacion['id_notificacion_estado']) && $notificacion['id_notificacion_estado'] != 3;
         });
 
+        // Ordenar las notificaciones por fecha de envío, de más reciente a más antigua
+        usort($notificaciones_no_leidas, function($a, $b) {
+            return strtotime($b['fecha_envio_notificacion']) - strtotime($a['fecha_envio_notificacion']);
+        });
+
         // Contar solo las notificaciones no leídas
         $notificaciones_count = count($notificaciones_no_leidas);
     } else {
@@ -31,7 +73,8 @@ if ($response !== false) {
     error_log('Error al obtener datos de la API: ' . error_get_last()['message']);
 }
 
-// Aquí puedes usar las variables $notificaciones_no_leidas y $notificaciones_count
+
+
 ?>
 
 

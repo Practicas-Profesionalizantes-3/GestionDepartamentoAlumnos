@@ -149,8 +149,12 @@ $data_usuario_tipos = json_decode($response_usuario_tipos, true);
               ?>
             </select>
           </div>
-          <button type="submit" class="btn btn-success" id="agregar-usuario">Agregar</button>
-          <button type="submit" class="btn btn-info" onclick="location.href='index.php'">Cancelar</button>
+
+          <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-success mr-2" id="agregar-usuario">Agregar</button>
+            <button type="submit" class="btn btn-info  ml-2" onclick="location.href='index.php'">Cancelar</button>
+          </div>
+
         </form>
       </div>
     </div>
