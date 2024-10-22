@@ -1,12 +1,25 @@
 <?php
 $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
+$response = @file_get_contents($api_url);
 
-$response = file_get_contents($api_url);
-$datas = json_decode($response, true);
-$data = $datas['data'];
-usort($data, function ($a, $b) {
-    return $a['id_aviso'] - $b['id_aviso'];
-});
+// Verifica si la respuesta es falsa (error)
+if ($response === FALSE) {
+    error_log("Error al llamar a la API: $api_url");
+    $datas = ['data' => []]; // Inicializa con un array vacío para evitar errores más adelante
+} else {
+    $datas = json_decode($response, true);
+}
+
+$data = isset($datas['data']) && is_array($datas['data']) ? $datas['data'] : [];
+
+// Ordenar los datos solo si no está vacío
+if (!empty($data)) {
+    usort($data, function ($a, $b) {
+        return $a['id_aviso'] - $b['id_aviso'];
+    });
+} else {
+    error_log("No hay avisos disponibles");
+}
 
 $avisos = $data;
 
@@ -22,8 +35,9 @@ $total_pages = ceil($total_avisos / $items_per_page);
 
 // Obtener los avisos para la página actual
 $current_page_avisos = array_slice($avisos, $offset, $items_per_page);
-echo "<script>console.log(" . $response . ")</script>";
+echo "<script>console.log(" . json_encode($datas) . ")</script>";
 ?>
+
 <!DOCTYPE html>
 
 <head>
@@ -144,6 +158,8 @@ echo "<script>console.log(" . $response . ")</script>";
     <script src="../js/navbar.js"></script>
     <script src="js/delete.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data.min.js"></script>
+
 </body>
 
 </html>

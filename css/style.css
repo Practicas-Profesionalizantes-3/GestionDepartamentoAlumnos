@@ -727,8 +727,29 @@ p {
   text-decoration: underline;
 }
 
-
-.read-notification {
-  background-color: #dcebf4;  /* Color gris claro para las notificaciones leídas */
-  color: #6c757d;  /* Color de texto gris oscuro */
+/* boton eliminar pdf e img*/
+.btn-iconX {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: auto;/* Color rojo de Bootstrap */
+  border-radius: 50%;
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.btn-iconX:hover {
+  background-color: #a4a4ae; /* Rojo más oscuro en hover */
+}
+.file-containerX {
+  display: flex;
+  align-items: center;
+}
+.download-link {
+  margin-left: 10px; /* Ajusta el valor según sea necesario */
+  display: inline-block; /* Asegura que se trate como un bloque en línea */
 }
