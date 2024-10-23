@@ -1,31 +1,24 @@
 <?php
 $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
 
-// Intentar obtener el contenido de la API
-$response = @file_get_contents($api_url);
-
-// Verificar si la respuesta es válida y se pudo decodificar correctamente
-if ($response !== false) {
-    $data = json_decode($response, true);
-
-    // Verificar que la decodificación JSON fue exitosa y que la estructura contiene 'data'
-    if (json_last_error() === JSON_ERROR_NONE && isset($data["data"])) {
-        $avisos = $data["data"];
-    } else {
-        // Si hay un error en la decodificación o no existe 'data', inicializar $avisos como un arreglo vacío
-        $avisos = [];
-    }
-} else {
-    // Si no se pudo obtener la respuesta de la API, inicializar $avisos como un arreglo vacío
-    $avisos = [];
-}
-
-$datos = $avisos;
+$response = file_get_contents($api_url);
+$data = json_decode($response, true);
+$avisos = $data["data"];
 $fecha_actual = date('Y-m-d');
 
 // Filtrar los datos según la fecha de vencimiento y el estado
 $datos_filtrados = array_filter($avisos, function ($item) use ($fecha_actual) {
     return ($item['fecha_vencimiento'] >= $fecha_actual) && ($item["estado"] != "Inactivo");
+});
+
+// Ordenar los anuncios: primero por si están fijados (fijados primero), luego por fecha de publicación (más recientes primero)
+usort($datos_filtrados, function ($a, $b) {
+    if ($a['fijado'] == $b['fijado']) {
+        // Si ambos tienen el mismo estado de fijado, ordenar por fecha de publicación
+        return strtotime($b['fecha_publicacion']) - strtotime($a['fecha_publicacion']);
+    }
+    // Ordenar los fijados (1) antes que los no fijados (0)
+    return $b['fijado'] - $a['fijado'];
 });
 
 $datos = $datos_filtrados;
@@ -34,52 +27,65 @@ $datos = $datos_filtrados;
 if (isset($_SESSION['mostrar_opciones_cartelera'])) {
     $mostrar_opciones = $_SESSION['mostrar_opciones_cartelera'];
     if ($mostrar_opciones == "opciones1") {
-        $datos_filtrados = array_slice($datos_filtrados, 0, 4);
+        $datos_filtrados = array_slice($datos_filtrados, 0, 3);
         $datos = $datos_filtrados;
     }
 }
 ?>
 
+
+
 <section class="container-md">
     <?php
-    if (isset($_SESSION['mostrar_opciones_cartelera'])) {
-        $mostrar_opciones = $_SESSION['mostrar_opciones_cartelera'];
-        if ($mostrar_opciones == "opciones1") {
-    ?>
-            <h2 class="tm-text-primary">Centro de Tecnológia e Innovación</h2>
-            <hr class="mb-5">
-    <?php
+        if (isset($_SESSION['mostrar_opciones_cartelera'])) {
+            $mostrar_opciones = $_SESSION['mostrar_opciones_cartelera'];
+            if ($mostrar_opciones == "opciones1") {
+        ?>
+                <h2 class="tm-text-primary">Centro de Tecnológia e Innovación</h2>
+                <hr class="mb-5">
+        <?php
+            }
         }
-    }
     ?>
+
     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
         <h2 class="mb-5"><span class="tm-text-primary">Cartelera de Alumnos - Noticias & Novedades</span></h2>
     </div>
 
-    <div class="buscador">
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-            <div class="d-flex justify-content-center align-items-center mb-5">
-                <div class="input-group" style="max-width: 600px;">
-                    <input class="form-control barra" type="text" id="search-input" name="search-input" placeholder="Buscar anuncio por título o descripción...">
-                    <button type="submit" name="buscar" class="btn btn-primary btn-primary-buscar">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
+
+
 
     <?php
-    if (isset($_POST['buscar'])) {
-        $search_term = strtolower($_POST['search-input']);
+        if (isset($_SESSION['mostrar_opciones_cartelera'])) {
+            $mostrar_opciones = $_SESSION['mostrar_opciones_cartelera'];
+            if ($mostrar_opciones == "opciones2") {
+            ?>
+                <div class="buscador">
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                        <div class="d-flex justify-content-center align-items-center mb-5">
+                            <div class="input-group" style="max-width: 600px;">
+                                <input class="form-control barra" type="text" id="search-input" name="search-input" placeholder="Buscar anuncio por título o descripción...">
+                                <button type="submit" name="buscar" class="btn btn-primary btn-primary-buscar">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            <?php
+            }
+        }
 
-        $datos_filtrados = array_filter($datos, function ($item) use ($search_term) {
-            return strpos(strtolower($item['titulo']), $search_term) !== false ||
-                strpos(strtolower($item['descripcion']), $search_term) !== false;
-        });
-
-        $datos = $datos_filtrados;
-    }
+        if (isset($_POST['buscar'])) {
+            $search_term = strtolower($_POST['search-input']);
+    
+            $datos_filtrados = array_filter($datos, function ($item) use ($search_term) {
+                return strpos(strtolower($item['titulo']), $search_term) !== false ||
+                    strpos(strtolower($item['descripcion']), $search_term) !== false;
+            });
+    
+            $datos = $datos_filtrados;
+        }
     ?>
 
     <div class="row justify-content-center">
@@ -135,30 +141,4 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
-
-    <script>
-        function toggleDescription(index) {
-            var card = document.getElementById('cartelera-' + index);
-            var desc = document.getElementById('desc-' + index);
-            var fullDesc = document.getElementById('full-desc-' + index);
-            var btn = document.getElementById('toggle-btn-' + index);
-            var descargarAdjunto = document.getElementById('descargar-adjunto-' + index);
-            var imgContainer = card.querySelector('.img-container'); // Find the img-container element
-
-            if (card.classList.contains('expanded')) {
-                card.classList.remove('expanded');
-                imgContainer.classList.remove('expanded'); // Remove expanded class from img-container
-                fullDesc.style.display = 'none';
-                desc.style.display = 'block';
-                btn.innerText = 'Ver Más';
-                descargarAdjunto.style.display = 'none';
-            } else {
-                card.classList.add('expanded');
-                imgContainer.classList.add('expanded'); // Add expanded class to img-container
-                fullDesc.style.display = 'block';
-                desc.style.display = 'none';
-                btn.innerText = 'Ver Menos';
-                descargarAdjunto.style.display = 'block';
-            }
-        }
-    </script>
+</section>

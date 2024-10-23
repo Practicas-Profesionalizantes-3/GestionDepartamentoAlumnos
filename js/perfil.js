@@ -168,7 +168,7 @@ function cerrarsesion() {
       sessionStorage.removeItem('usuario');
 
       // Redirigir al usuario a la página de inicio de sesión
-      window.location.href = 'login/index.html';
+      window.location.href = '../../GestionDepartamentoAlumnos/login/index.html';
 
     }
   });

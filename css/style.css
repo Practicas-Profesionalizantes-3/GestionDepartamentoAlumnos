@@ -1,5 +1,4 @@
 /* Estilos de cartelera */
-
 .expanded {
   height: auto !important;
   overflow: visible !important;
@@ -44,11 +43,6 @@
 .download-link {
   margin-left: 10px; /* Ajusta el valor según sea necesario */
   display: inline-block; /* Asegura que se trate como un bloque en línea */
-}
-
-.fecha-container {
-  font-size: 18px;
-  font-weight: bolder;
 }
 
 .descripcion-container {
@@ -118,6 +112,7 @@
 	
 }
 
+
 /* Nuevos estilos del navbar */
 /* Google Font Import - Poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
@@ -175,7 +170,7 @@ body.dark {
   padding-bottom: 42px;
   background: var(--sidebar-color);
   transition: var(--tran-05);
-  z-index: 100;
+  z-index: 1000;
 }
 .sidebar.close {
   width: 88px;
@@ -188,7 +183,7 @@ body.dark {
   list-style: none;
   display: flex;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 10px;  
 }
 
 .sidebar header .image,
@@ -437,82 +432,6 @@ body.dark .home .text {
   color: var(--text-color);
 }
 
-/* chat bot */
-
-.chatbot-padre {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 800px;
-  margin: 0;
-}
-
-.chatbot-container {
-  width: 400px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-.chatbot-header {
-  background-color: #007bff;
-  color: white;
-  text-align: center;
-  padding: 10px;
-}
-
-.chatbot-body {
-  padding: 20px;
-  height: 300px;
-  overflow-y: auto;
-}
-
-.chatbot-message {
-  background-color: #e9ecef;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
-
-.chatbot-message.bot {
-  background-color: #e9ecef;
-  text-align: left;
-}
-
-.chatbot-message.user {
-  background-color: #007bff;
-  color: white;
-  text-align: right;
-  margin-left: auto;
-}
-
-.chatbot-footer {
-  display: flex;
-  border-top: 1px solid #ccc;
-  padding: 10px;
-}
-
-.chatbot-footer input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-  margin-right: 10px;
-  outline: none;
-}
-
-.chatbot-footer button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
 /* Tema Claro (por defecto) */
 body {
   background-color: white;
@@ -549,7 +468,7 @@ body.dark-theme {
   width: calc(100% - 88px); /* Ancho completo */
   height: 100%; /* Alto completo */
   overflow: auto; /* Hacer scroll si es necesario */
-  background-color: rgba(0,0,0,0.4); /* Fondo oscuro con transparencia */
+  background-color: rgba(0, 0, 00, 0.4); /* Fondo oscuro con transparencia */
 }
 
 .modal-content {
@@ -599,6 +518,7 @@ body.dark-theme {
 #perfil p {
   margin: 10px 0;
 }
+
 .btn-perfil {
   position: fixed;
   top: 20px; /* Ajusta la distancia del borde superior */
@@ -714,9 +634,7 @@ body.dark-theme {
   color: #888;
   text-align: right; /* Alinea la fecha a la derecha */
 }
-.descargar-adjunto {
-  margin-right: auto;
-}
+
 .volver {
 position: absolute;
 top: 0px; /* Ajusta este valor para subir la cruz */
