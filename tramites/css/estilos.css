@@ -2,6 +2,7 @@
 .listadoAvisos{
   margin-left: 88px;
 }
+
 .btn-volver {
   background-color: #2c3e50; /* Un tono oscuro y elegante */
   color: white;
@@ -13,19 +14,18 @@
   letter-spacing: 1px;
   transition: background-color 0.3s ease, transform 0.3s ease;
   position: absolute;
-  right: 20px; /* Posición hacia la derecha */
-  top: 20px;  /* Posición hacia arriba */
+  right: 138px; /* Posición hacia la derecha */
+  top: 0px;  /* Posición hacia arriba */
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-}
-
-.btn-volver:hover {
+  }
+.btn-volver:hover  {
   background-color: #1a242f; /* Oscurecimiento suave en hover */
   transform: translateY(-3px); /* Efecto de elevación */
-}
-
-.btn-volver:focus {
+  }
+  
+  .btn-volver:focus {
   outline: none;
-}
+  }
 
 .container-mis-tramites {
   background-color: #ffffff;

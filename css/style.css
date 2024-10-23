@@ -1,5 +1,4 @@
 /* Estilos de cartelera */
-
 .expanded {
   height: auto !important;
   overflow: visible !important;
@@ -45,8 +44,6 @@
   margin-left: 10px; /* Ajusta el valor según sea necesario */
   display: inline-block; /* Asegura que se trate como un bloque en línea */
 }
-
-
 
 .descripcion-container {
   overflow: hidden;
@@ -115,6 +112,7 @@
 	
 }
 
+
 /* Nuevos estilos del navbar */
 /* Google Font Import - Poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
@@ -172,7 +170,7 @@ body.dark {
   padding-bottom: 42px;
   background: var(--sidebar-color);
   transition: var(--tran-05);
-  z-index: 100;
+  z-index: 1000;
 }
 .sidebar.close {
   width: 88px;
@@ -185,7 +183,7 @@ body.dark {
   list-style: none;
   display: flex;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 10px;  
 }
 
 .sidebar header .image,
@@ -434,82 +432,6 @@ body.dark .home .text {
   color: var(--text-color);
 }
 
-/* chat bot */
-
-.chatbot-padre {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 800px;
-  margin: 0;
-}
-
-.chatbot-container {
-  width: 400px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-.chatbot-header {
-  background-color: #007bff;
-  color: white;
-  text-align: center;
-  padding: 10px;
-}
-
-.chatbot-body {
-  padding: 20px;
-  height: 300px;
-  overflow-y: auto;
-}
-
-.chatbot-message {
-  background-color: #e9ecef;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
-
-.chatbot-message.bot {
-  background-color: #e9ecef;
-  text-align: left;
-}
-
-.chatbot-message.user {
-  background-color: #007bff;
-  color: white;
-  text-align: right;
-  margin-left: auto;
-}
-
-.chatbot-footer {
-  display: flex;
-  border-top: 1px solid #ccc;
-  padding: 10px;
-}
-
-.chatbot-footer input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-  margin-right: 10px;
-  outline: none;
-}
-
-.chatbot-footer button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
 /* Tema Claro (por defecto) */
 body {
   background-color: white;
@@ -547,7 +469,7 @@ body.dark-theme {
   width: calc(100% - 88px); /* Ancho completo */
   height: 100%; /* Alto completo */
   overflow: auto; /* Hacer scroll si es necesario */
-  background-color: rgba(0,0,0,0.4); /* Fondo oscuro con transparencia */
+  background-color: rgba(0, 0, 00, 0.4); /* Fondo oscuro con transparencia */
 }
 
 .modal-content {
@@ -597,17 +519,27 @@ body.dark-theme {
 #perfil p {
   margin: 10px 0;
 }
-.btn-perfil{
+
+.btn-perfil {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
+  top: 20px; /* Ajusta la distancia del borde superior */
+  right: 20px; /* Ajusta la distancia del borde derecho */
+  background-color: #4b5158; /* Color de fondo */
+  color: white; /* Color del ícono */
+  border: none; /* Sin borde */
   width: 38px;
   height: 38px;
-  border-radius: 20px;
-  border: 2px solid #006699; /* Color del borde */
-	box-shadow: 0 0 10px #006699, 0 0 20px #006699; /* Efecto de neón */
+  border-radius: 50%; /* Redondear el botón */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  transition: background-color 0.3s, transform 0.3s; /* Transiciones suaves */
+  z-index: 1000; /* Asegurarse de que esté encima de otros elementos */
 }
+
+.btn-perfil:hover {
+  background-color: #181a1b; /* Color al pasar el mouse */
+  transform: translateY(-2px); /* Efecto de elevación */
+}
+
 
 /*perfil*/
 .form-botones{
@@ -703,9 +635,7 @@ body.dark-theme {
   color: #888;
   text-align: right; /* Alinea la fecha a la derecha */
 }
-.descargar-adjunto {
-  margin-right: auto;
-}
+
 .volver {
 position: absolute;
 top: 0px; /* Ajusta este valor para subir la cruz */

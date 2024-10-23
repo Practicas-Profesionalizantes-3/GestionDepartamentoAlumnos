@@ -32,11 +32,8 @@ a:hover {
 }
 
 .btn-primary {
-	padding: 12px 50px;
-	border-radius: 0;
+	border: none;
 	background: #006699;
-	font-size: 1.2rem;
-	border: 0;
 }
 
 .btn-primary:hover {

@@ -52,9 +52,12 @@ $data_usuario_tipos = json_decode($response_usuario_tipos, true);
     }
   </script>
 
-  <?php
-  include("../includes/navbar.php");
-  ?>
+  <!-- Include Perfil -->
+  <?php include("../includes/perfil.php");?>
+    
+  <!-- Include Navbar -->
+  <?php include("../includes/navbar.php");?>
+
 
   <div class="container">
     <div class="card">
@@ -162,6 +165,7 @@ $data_usuario_tipos = json_decode($response_usuario_tipos, true);
   
   <script src="../js/index.js"></script>
   <script src="js/create.js"></script>
+  
   <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
   <script src="js/jquery.min.js"></script>
   <script src="js/popper.js"></script>
