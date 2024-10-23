@@ -53,7 +53,6 @@ if ($aviso_id) {
     <title><?= $titulo; ?></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../tramites/css/estilos.css">
 </head>
 <body>
     <div class="container mt-5">
@@ -75,18 +74,18 @@ if ($aviso_id) {
         </div>
     </div>
     <footer>
-<div class="container">
-        <div class="row single-footer-widget">
-            <div class="col-md-6 col-sm-7">
-                <span class="text-light">Prohibida la reproducción total ó parcial de imágenes y textos. Todos los derechos reservados.</span>
-            </div>
-            <div class="col-md-6 col-sm-5">
-                <div class="column-right">
-                    <span class="text-light">Política de Privacidad. Términos y condiciones.</span>
+        <div class="container">
+            <div class="row single-footer-widget">
+                <div class="col-md-6 col-sm-7">
+                    <span class="text-light">Prohibida la reproducción total ó parcial de imágenes y textos. Todos los derechos reservados.</span>
+                </div>
+                <div class="col-md-6 col-sm-5">
+                    <div class="column-right">
+                        <span class="text-light">Política de Privacidad. Términos y condiciones.</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 </body>
 </html>

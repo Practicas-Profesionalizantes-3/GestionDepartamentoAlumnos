@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle del Trámite</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/estilos.css">
     
 
 <?php
@@ -14,7 +14,7 @@ if (isset($_GET['id'])) {
     $id_notificacion = intval($_GET['id']);
     
     // URL de la API para obtener los detalles del trámite según el id de la notificación
-    $api_tramite_url = 'http://localhost/api/api-Alumnos/tramites.php?id_notificacion=' . $id_notificacion;
+    $api_tramite_url = 'http://localhost/api/api-Alumnos/tramites.php?id_tramite=' . $id_notificacion;
 
     // Obtener datos de la API de trámites
     $response = file_get_contents($api_tramite_url);
@@ -85,8 +85,8 @@ if (isset($_GET['id'])) {
             <p class="card-text">Fecha de Creación: <span id="fecha-tramite"></span></p>
             <p class="card-text">Estado del Trámite: <span id="estado-tramite" class="estado"></span></p>
 
-            <div id="adjunto-section" style="display: none;">
-                <a href="" id="adjunto-link" class="btn btn-primary btn-download" download>Descargar Adjunto</a>
+            <div id="adjunto-section" >
+                <a id="adjunto-link" class="btn btn-primary btn-download" >Descargar Adjunto</a>
             </div>
         </div>
     </div>

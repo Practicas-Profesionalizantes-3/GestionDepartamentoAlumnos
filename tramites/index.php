@@ -90,7 +90,6 @@ $formularios_path = null;
     
     <script src="js/validar.js"></script>
     <script src="../js/index.js"></script>
-    <script src="../js/navbar.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  <!-- SwettAlert -->
 </body>

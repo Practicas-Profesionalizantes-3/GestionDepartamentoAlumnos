@@ -38,8 +38,6 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="../../css/templatemo-upright.css">
     <link rel="stylesheet" href="../../css/style.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
-
 </head>
 
 <body>
@@ -53,13 +51,9 @@ if (isset($_GET['id'])) {
                     </div>
                     <form class="container mt-5" id="formulario">
                         <div class="mb-3">
-                            <label for="carrera" class="form-label">Seleccione su Carrera:</label>
+                            <label for="carrera" class="form-label">Carrera:</label>
                             <select class="form-control" name="carrera" id="carrera">
-                                <option value="1" selected>Ingenieria Informatica</option>
-                                <option value="1">Medicina</option>
-                                <option value="2">Derecho</option>
-                                <option value="2">Administracion de Empresas</option>
-                                <option value="2">Tecnicatura en Radiologia</option>
+                                <option value="1" id="carreraTexto"></option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -101,6 +95,7 @@ if (isset($_GET['id'])) {
     <script src="../../js/index.js"></script>
     <script src="../../js/navbar.js"></script>
     <script src="../js/create.js"></script>
+    <script src="../js/materias.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  <!-- SwettAlert -->

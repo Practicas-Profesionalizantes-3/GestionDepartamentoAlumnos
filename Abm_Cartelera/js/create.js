@@ -13,53 +13,45 @@ $("#formulario").submit(function (event) {
     formData.append('imagen', $("#imagen")[0].files[0]);
     formData.append('id_aviso_estado', $("#id_aviso_estado").val());
 
-    $.ajax({
-        type: "POST",
-        url: "http://localhost/api/api-Alumnos/cartelera.php",
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function (data) {
-            if (data.success == true) {
-                var avisoId = data.id_aviso; // Suponiendo que devuelves el ID del aviso creado
-                console.log("Aviso creado con éxito, ID: " + avisoId);
+    for (var pair of formData.entries()) {
+        console.log(pair[0] + ': ' + pair[1]);
+    }
 
-                // Ahora crea la notificación
-                var notificacionData = {
-                    id_aviso: avisoId,  // ID del aviso recién creado
-                    id_notificacion_tipo: 1,  // Tipo de notificación que corresponda (puedes personalizar)
-                    id_notificacion_estado: 1,  // Estado de la notificación (no leída, etc.)
-                    fecha_envio_notificacion: new Date().toISOString()  // Fecha de la notificación actual
-                };
-
-                $.ajax({
-                    type: "POST",
-                    url: "http://localhost/api/api-Alumnos/notificaciones.php",
-                    data: JSON.stringify(notificacionData),
-                    contentType: "application/json",
-                    success: function (notificacionResponse) {
-                        console.log("Notificación creada: ", notificacionResponse);
-
-                        Swal.fire({
-                            title: "Su aviso y notificación fueron creados con éxito!",
-                            confirmButtonColor: "#006699",
-                            icon: "success",
-                            iconColor: "#118911",
-                        }).then(() => {
-                            location.href = "index.php";
-                        });
-                    },
-                    error: function (error) {
-                        console.log("Error al crear la notificación", error);
-                    }
-                });
-
-            } else {
-                console.log("Error al crear aviso: ", data);
+    if (descripcion.value === "" || titulo.value === "" || imagen.value === "" || adjunto.value === "") {
+        Toastify({
+            text: "⚠️ Faltan datos por completar ⚠️",
+            duration: 1500,
+            gravity: "top",
+            style: {
+                background: "#c41e1e",
+                color: "#fff"
             }
-        },
-        error: function (errorThrown) {
-            console.log("Error en la creación del aviso", errorThrown);
-        }
-    });
+        }).showToast()
+    } else{
+        $.ajax({
+            type: "POST",
+            url: "http://localhost/api/api-Alumnos/cartelera.php",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                if (data.success == true) {
+                    console.log("funciono", data);
+                    Swal.fire({
+                        title: "Su aviso fue creado con exito!",
+                        confirmButtonColor: "#006699",
+                        icon: "success",
+                        iconColor: "#118911",
+                    }).then(() => {
+                        location.href = "index.php";
+                    });
+                } else {
+                    console.log("no funciono", data);
+                }
+            },
+            error: function (errorThrown) {
+                console.log("error", errorThrown);
+            }
+        });
+    }
 });

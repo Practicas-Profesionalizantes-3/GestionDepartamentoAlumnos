@@ -121,25 +121,7 @@ $notificaciones_count = count($notificaciones_no_leidas);
         });
     });
 });
-    function actualizarContadorNotificaciones() {
-        fetch('http://localhost/api/api-Alumnos/notificaciones.php')
-            .then(response => response.json())
-            .then(data => {
-                // Filtrar solo las notificaciones no leídas
-                const notificaciones_no_leidas = data.filter(notificacion => notificacion.id_notificacion_estado != 3);
-                const notificaciones_count = notificaciones_no_leidas.length;
 
-                // Actualizar el contador en la interfaz
-                document.getElementById('count-label').textContent = notificaciones_count;
-                    })
-                    .catch(error => {
-                        console.error('Error al obtener notificaciones:', error);
-                    });
-            }
-
-            // Actualizar el contador de notificaciones cada 5 segundos
-            setInterval(actualizarContadorNotificaciones, 5000);  // 5000 ms = 5 segundos
- 
 </script>
 </body>
 </html>

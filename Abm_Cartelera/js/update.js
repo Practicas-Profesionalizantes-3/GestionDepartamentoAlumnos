@@ -30,7 +30,7 @@ $("#formulario").submit(async function (event) {
 
     if (!aviso.titulo || !aviso.descripcion || !aviso.imagen || !aviso.adjunto) {
         Toastify({
-            text: "⚠️ Faltan Datos Obligatorios por Completar ⚠️",
+            text: "⚠️ Faltan datos por completar ⚠️",
             duration: 1500,
             gravity: "top",
             style: {
