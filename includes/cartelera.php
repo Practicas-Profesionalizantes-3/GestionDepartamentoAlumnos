@@ -5,6 +5,8 @@ $response = file_get_contents($api_url);
 $data = json_decode($response, true);
 $avisos = $data["data"];
 $fecha_actual = date('Y-m-d');
+
+// Filtrar los datos según la fecha de vencimiento y el estado
 $datos_filtrados = array_filter($avisos, function ($item) use ($fecha_actual) {
     return ($item['fecha_vencimiento'] >= $fecha_actual) && ($item["estado"] != "Inactivo");
 });
@@ -20,6 +22,8 @@ usort($datos_filtrados, function ($a, $b) {
 });
 
 $datos = $datos_filtrados;
+
+// Verificar si hay opciones en la sesión para limitar el número de avisos mostrados
 if (isset($_SESSION['mostrar_opciones_cartelera'])) {
     $mostrar_opciones = $_SESSION['mostrar_opciones_cartelera'];
     if ($mostrar_opciones == "opciones1") {

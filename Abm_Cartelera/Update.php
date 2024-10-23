@@ -62,59 +62,6 @@ if (!$aviso) {
         window.location.href = '../index.php';
       }
     }
-
-    // Lógica para manejar las fechas
-    $(document).ready(function() {
-    // Asignar la fecha actual del aviso
-    $('#fecha_publicacion').val(<?php echo json_encode($aviso['fecha_publicacion']); ?>);
-
-    $('#fecha_publicacion').on('input', function() {
-        var selectedDate = $(this).val();
-        var hoy = new Date().toISOString().split('T')[0]; // Obtener la fecha de hoy
-        
-        if (selectedDate < hoy) {
-            $('#fechaError').show(); // Mostrar el mensaje de error
-            $(this).val(<?php echo json_encode($aviso['fecha_publicacion']); ?>); // Restablecer al valor anterior
-            
-            // Ocultar el mensaje después de 2 segundos
-            setTimeout(function() {
-                $('#fechaError').hide();
-            }, 2000);
-        } else {
-            $('#fechaError').hide(); // Ocultar el mensaje de error
-        }
-    });
-
-    $('#fecha_publicacion').on('change', function() {
-        var fechaPublicacion = $(this).val() + "T00:00"; // Asumiendo que la hora inicial es 00:00
-        $('#fecha_vencimiento').attr('min', fechaPublicacion); // Establecer el mínimo para fecha de vencimiento
-
-        // Validar fecha de vencimiento
-        if ($('#fecha_vencimiento').val() && $('#fecha_vencimiento').val() < fechaPublicacion) {
-            $('#fecha_vencimiento').val(fechaPublicacion); // Restablecer a la fecha mínima
-        }
-    });
-
-    $('#fecha_vencimiento').on('change', function() {
-        var fechaPublicacion = $('#fecha_publicacion').val() + "T00:00"; // Obtener la fecha de publicación
-        var fechaVencimiento = $(this).val();
-
-        // Mostrar error si la fecha de vencimiento es anterior a la fecha de publicación
-        if (fechaVencimiento < fechaPublicacion) {
-            $('#fechaVencimientoError').show(); // Mostrar el mensaje de error
-            $(this).val(fechaPublicacion); // Restablecer a la fecha mínima
-            
-            // Ocultar el mensaje después de 2 segundos
-            setTimeout(function() {
-                $('#fechaVencimientoError').hide();
-            }, 2000);
-        } else {
-            $('#fechaVencimientoError').hide(); // Ocultar el mensaje de error
-        }
-    });
-});
-
-</script>
   </script>
 
   <div class="container">
@@ -179,7 +126,7 @@ if (!$aviso) {
                 <option value="0" <?= $aviso["fijado"] == "0" ? 'selected="selected"' : "" ?>>No</option>
                 <option value="1" <?= $aviso["fijado"] == "1" ? 'selected="selected"' : "" ?>>Si</option>
               </select>
-            </div>          
+            </div>
             <div class="mb-3">
                 <label for="imagen" class="form-label">Imagen:</label>
                 <div class="file-containerX">

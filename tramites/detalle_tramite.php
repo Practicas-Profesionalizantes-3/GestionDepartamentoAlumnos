@@ -151,35 +151,7 @@ if (isset($_GET['id'])) {
                 <div class="mt-3 d-flex justify-content-center">
                     <a href="mis_tramites.php" class="btn btn-secondary">Volver a Mis Trámites</a>
                 </div>
-                <h5 class="mt-4">Movimientos del Trámite:</h5>
-<ul id="movimientos-list" class="list-group">
-    <?php if (!empty($movimientos)): ?>
-        <?php foreach ($movimientos as $movimiento): ?>
-            <?php
-            // Formatear la fecha y hora
-            $fecha_movimiento_obj = new DateTime($movimiento['fecha_movimiento']);
-            $fecha_movimiento_formateada = $fecha_movimiento_obj->format('d/m/Y H:i');
-            ?>
-            <li class="list-group-item">
-                <strong>Fecha:</strong> <?php echo htmlspecialchars($fecha_movimiento_formateada); ?> - 
-                <strong>Observación:</strong> <?php echo htmlspecialchars($movimiento['observacion']); ?> - 
-            </li>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <li class="list-group-item">No hay movimientos registrados para este trámite.</li>
-    <?php endif; ?>
-</ul>
-
-<!-- Agregar el botón de redirección -->
-<div class="mt-3">
-    <a href="mis_tramites.php" class="btn btn-secondary">Volver a Mis Trámites</a>
-</div>
-
-
-
-
-
-
+>>>>>>> c740dfbe7338aa7cdbf9b77157722a7e7be360fd
             </div>
         </div>
     </div>
