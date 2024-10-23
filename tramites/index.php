@@ -18,6 +18,26 @@ $formularios = array(
     6 => 'formularios/examen_final_libre.php',
 );
 
+$formularios_descripcion = array(
+    1 => 'Solicita el certificado de alumno regular, necesario para trámites externos.',
+    2 => 'Justifica inasistencias con la documentación correspondiente.',
+    3 => 'Solicita constancia de examen indicando la materia y calificación.',
+    4 => 'Solicita cambio de turno por motivos personales o laborales.',
+    5 => 'Asiste como oyente a una materia para reforzar conocimientos.',
+    6 => 'Inscríbete en un examen final en condición de libre.',
+);
+
+
+// Asociar IDs de trámites con sus íconos correspondientes
+$iconos = array(
+    1 => 'bxs-graduation', // Alumno regular
+    2 => 'bxs-calendar-exclamation', // Justificar inasistencia
+    3 => 'bxs-book-alt', // Constancia de examen
+    4 => 'bxs-time-five', // Cambio de turno
+    5 => 'bxs-user-circle', // Figura oyente
+    6 => 'bxs-pencil', // Examen final libre
+);
+
 $formularios_path = null;
 ?>
 
@@ -36,62 +56,85 @@ $formularios_path = null;
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="css/tramites.css">
     <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet"> <!-- Boxicons CSS -->
-    
-    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"> <!-- Toastify CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script> <!-- Toastify JS-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  <!-- SwettAlert -->
 </head>
 <body>
-    
-    <!-- Include del navbar -->
-    <?php include("../includes/navbar.php"); ?>
+    <!-- Include Perfil -->
+    <?php include("../includes/perfil.php");?>
 
-    <div class="mb-5 mt-3"> 
-        <h1 class="tm-text-primary">Crea un trámite</h1>
-    </div>
+    <!-- Include notificaciones -->
+    <?php include("../includes/notificaciones.php");?>
 
-    <!-- Botón de "Mis Trámites" -->
-    <div class="listadoAvisos">
-        <a class="btn btn-primary mis-tramites-btn" href="mis_tramites.php" role="button">Mis Trámites</a>
-    </div>
+        
+    <div class="container-fluid">
+        <div class="row">           
+            <!-- Include del navbar -->
+            <?php include("../includes/navbar.php"); ?>
+            
+            <div class="tm-main">
+                <!-- Home section -->
+                <div class="tm-section-wrap">
+                    <!-- Titulo -->
+                    <div class="mb-5 mt-3"> 
+                        <h1 class="tm-text-primary">Crea un trámite</h1>
+                    </div>
 
-    <div class="tm-section-wrap">
-    <div class="row">
-        <?php
-        // Mostrar tarjetas de trámites disponibles
-        if (isset($tipos_tramites) && is_array($tipos_tramites)) {
-            foreach ($tipos_tramites as $tipo) {
-                $id_tramite_tipo = htmlspecialchars($tipo['id_tramite_tipo']);
-                $descripcion = htmlspecialchars($tipo['descripcion']);
-                
-                // Verificar si existe un formulario para este tipo de trámite
-                if (array_key_exists($id_tramite_tipo, $formularios)) {
-                    $formularios_path = $formularios[$id_tramite_tipo];
+                    <!-- Botón de "Mis Trámites" -->
+                    <div class="listadoAvisos">
+                        <a class="btn btn-primary mis-tramites-btn" href="mis_tramites.php" role="button">Mis Trámites</a>
+                    </div>
 
-                    // Generar el HTML para cada tarjeta de trámite
-                    echo '<div class="col-12 col-sm-6 col-md-4 col-lg-2 mb-4">';
-                    echo '    <a href="' . $formularios_path . '?id=' . $id_tramite_tipo . '" class="tramite-card text-decoration-none h-100">';
-                    echo '        <div class="tramite-card-body d-flex flex-column justify-content-start align-items-center p-3 border rounded">';
-                    echo '            <div class="tramite-card-content">';
-                    echo '                <div class="tramite-card-title mb-2 h5">' . $descripcion . '</div>';
-                    echo '                <div class="tramite-card-description">Aquí puedes crear un trámite de tipo ' . $descripcion . '.</div>';
-                    echo '            </div>';
-                    echo '        </div>';
-                    echo '    </a>';
-                    echo '</div>';
-                }
-            }
-        } else {
-            echo '<p>No se encontraron tipos de trámites.</p>';
-        }
-        ?>
-    </div>
-</div>
-    </div> <!-- .tm-section-wrap -->
-    
+                    <div class="row justify-content-center">
+                        <?php
+                            // Mostrar tarjetas de trámites disponibles
+                            if (isset($tipos_tramites) && is_array($tipos_tramites)) {
+                                foreach ($tipos_tramites as $tipo) {
+                                    $id_tramite_tipo = htmlspecialchars($tipo['id_tramite_tipo']);
+                                    $descripcion = htmlspecialchars($tipo['descripcion']);
+                                    
+                                    // Verificar si existe un formulario para este tipo de trámite
+                                    if (array_key_exists($id_tramite_tipo, $formularios)) {
+                                        $formularios_path = $formularios[$id_tramite_tipo];
+                                        $descripcion_formulario = isset($formularios_descripcion[$id_tramite_tipo]) ? $formularios_descripcion[$id_tramite_tipo] : 'Descripción no disponible';
+                                        $icono = isset($iconos[$id_tramite_tipo]) ? $iconos[$id_tramite_tipo] : 'bxs-file'; // Icono por defecto
+                                        
+                                        // Generar el HTML para cada tarjeta de trámite
+                                        echo '<div class="col-12 col-sm-6 col-md-4 col-lg-2 mb-4">'; // Ajustar columnas para diferentes tamaños de pantalla
+                                        echo '    <a href="' . $formularios_path . '?id=' . $id_tramite_tipo . '" class="tramite-card text-decoration-none h-100">';
+                                        echo '        <div class="tramite-card-body d-flex flex-column justify-content-start align-items-center p-3 border rounded">';
+                                        echo '            <div class="tramite-card-content">';
+                                        echo '                <div class="tramite-card-title mb-2 h5">'.'<i class="bx ' . $icono . ' "></i>' .' '.$descripcion . '</div>';
+                                        echo '                <div class="tramite-card-description">' . $descripcion_formulario . '</div>';
+                                        echo '            </div>';
+                                        echo '        </div>';
+                                        echo '    </a>';
+                                        echo '</div>';
+                                    }
+                                }
+                            } else {
+                                echo '<p>No se encontraron tipos de trámites.</p>';
+                            }
+                        ?>
+                    </div> <!-- .row card--> 
+                </div> <!-- .tm-section-wrap -->
+            </div> <!-- .tm-main -->
+        </div> <!-- .row -->
+    </div> <!-- .container-fluid -->
+
     <script src="js/validar.js"></script>
     <script src="../js/index.js"></script>
     <script src="../js/navbar.js"></script>
+    <script src="../js/perfil.js"></script>
+    <script src="../js/notificaciones.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  <!-- SwettAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5Pil2tXdHhjTvQ9lQS6yIiwnyF3vухQ9Etqkibi1DwYLPSAOxocnipl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0J9d9n00bu9XR4GQ6fhY7xQpfPtcp7tF" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </body>
 </html>

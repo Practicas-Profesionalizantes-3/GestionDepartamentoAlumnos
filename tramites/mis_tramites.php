@@ -63,66 +63,79 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
 </head>
 
 <body>
-    <!-- Include del Navbar -->
-    <?php include("../includes/navbar.php"); ?>
+    <!-- Include Perfil -->
+    <?php include("../includes/perfil.php");?>
 
-    <div class="mb-5 mt-3">
-        <h1 class="tm-text-primary">Mis trámites</h1>
-    </div>
+    <!-- Include notificaciones -->
+    <?php include("../includes/notificaciones.php");?>
 
-    <div class="listadoAvisos">
-        <a type="button" class="btn btn-primary btn-volver" href="index.php" role="button">Volver</a>
-    </div>
-
-    <div class="tm-section-wrap">
-        <div class="row justify-content-center">
-            <?php if (empty($current_page_tramites)) { ?>
-                <div class="tm-text-primary sin-tramites" role="alert">
-                    Sin trámites disponibles.
-                </div>
-            <?php } else { ?>
-                <?php foreach ($current_page_tramites as $datos) { ?>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 container-mis-tramites">
-                        <h2 class="titulo"><?php echo $datos['tipo_tramite']; ?></h2>
-                        <p class="subtitle"><?php echo $datos['descripcion']; ?></p>
-                        <div class="actions">
-                            <label class="responsable">Responsable: <?php echo $datos['responsable']; ?></label>
-                        </div>
-                        <div class="info">
-                            <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
-                            <label class="estado"><?php echo $datos['fecha_creacion']; ?></label>
-                        </div>
-                        <div class="text-center mt-auto">
-                            <a href="detalle_tramite.php?id=<?php echo $datos['id_tramite']; ?>" class="btn btn-info">Ver completo</a>
-                        </div>
+        
+    <div class="container-fluid">
+        <div class="row">           
+            <!-- Include del navbar -->
+            <?php include("../includes/navbar.php"); ?>
+            
+            <div class="tm-main">
+                <!-- Home section -->
+                <div class="tm-section-wrap">
+                    <div class="mb-5 mt-3">
+                        <h1 class="tm-text-primary">Mis trámites</h1>
                     </div>
-                <?php } ?>
-            <?php } ?>
-        </div>
-    </div>
 
-    <!-- Paginación -->
-    <nav>
-        <ul class="pagination justify-content-center mt-3">
-            <?php if ($page > 1) : ?>
-                <li class="page-item">
-                    <a class="page-link" href="?page=<?php echo $page - 1; ?>">Anterior</a>
-                </li>
-            <?php endif; ?>
+                    <div class="listadoAvisos">
+                        <a type="button" class="btn btn-primary btn-volver" href="index.php" role="button">Volver</a>
+                    </div>
 
-            <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-                <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
-                    <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                </li>
-            <?php endfor; ?>
 
-            <?php if ($page < $total_pages) : ?>
-                <li class="page-item">
-                    <a class="page-link" href="?page=<?php echo $page + 1; ?>">Siguiente</a>
-                </li>
-            <?php endif; ?>
-        </ul>
-    </nav>
+                    <div class="row justify-content-center">
+                        <?php if (empty($current_page_tramites)) { ?>
+                            <div class="tm-text-primary sin-tramites" role="alert">
+                                Sin trámites disponibles.
+                            </div>
+                        <?php } else { ?>
+                            <?php foreach ($current_page_tramites as $datos) { ?>
+                                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 container-mis-tramites">
+                                    <h2 class="titulo"><?php echo $datos['tipo_tramite']; ?></h2>
+                                    <p class="subtitle"><?php echo $datos['descripcion']; ?></p>
+                                    <div class="actions">
+                                        <label class="responsable">Responsable: <?php echo $datos['responsable']; ?></label>
+                                    </div>
+                                    <div class="info">
+                                        <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
+                                        <label class="estado"><?php echo date('d-m-Y H:i', strtotime($datos['fecha_creacion'])); ?></label>
+                                    </div>
+                                    <div class="text-center mt-auto">
+                                        <a href="detalle_tramite.php?id=<?php echo $datos['id_tramite']; ?>" class="btn btn-info">Ver completo</a>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        <?php } ?>
+                    </div> <!-- .row card-->                 
+                    <!-- Paginación -->
+                    <nav>
+                        <ul class="pagination justify-content-center mt-3">
+                            <?php if ($page > 1) : ?>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=<?php echo $page - 1; ?>">Anterior</a>
+                                </li>
+                            <?php endif; ?>
+                            <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+                                <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
+                                    <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                </li>
+                            <?php endfor; ?>
+                            <?php if ($page < $total_pages) : ?>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=<?php echo $page + 1; ?>">Siguiente</a>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
+                    </nav>
+                </div>
+                </div> <!-- .tm-section-wrap -->
+            </div> <!-- .tm-main -->
+        </div> <!-- .row -->
+    </div> <!-- .container-fluid -->
 
     <script>
         function verTramite(datos) {
@@ -134,10 +147,15 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
     </script>
 
     <script src="js/validar.js"></script>
-    <script src="../js/navbar.js"></script>
     <script src="../js/index.js"></script>
-    <script src="js/delete.js"></script>
+    <script src="../js/navbar.js"></script>
+    <script src="../js/perfil.js"></script>
+    <script src="../js/notificaciones.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5Pil2tXdHhjTvQ9lQS6yIiwnyF3vухQ9Etqkibi1DwYLPSAOxocnipl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0J9d9n00bu9XR4GQ6fhY7xQpfPtcp7tF" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="js/delete.js"></script>
 </body>
-
 </html>

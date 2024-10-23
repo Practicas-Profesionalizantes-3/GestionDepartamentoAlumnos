@@ -18,12 +18,14 @@
                 <p class="text-truncate"><strong>Email:</strong> <span id="email"></span></p>
                 <p class="text-truncate"><strong>Password:</strong> <span id="password"></span></p>
                 <p><strong>Número de Documento:</strong> <span id="numero_documento"></span></p>
-    
-                <!-- Botón para habilitar el formulario de cambio de contraseña -->
-                <a href="#" id="habilitarCambio" class="tm-text-primary">¿Desea cambiar su contraseña?</a>
 
-                 <!-- Botón para habilitar el formulario desea cerrar sesion -->
-                 <a href="#" id="cerrarsesion" onclick="cerrarsesion()" class="tm-text-primary">¿Desea cerrar sesion?</a>
+                <div class="d-flex justify-content-center">
+                    <!-- Botón para habilitar el formulario de cambio de contraseña -->
+                    <a href="#" id="habilitarCambio" class="tm-text-primary">¿Desea cambiar su contraseña?</a>
+    
+                     <!-- Botón para habilitar el formulario desea cerrar sesion -->
+                     <a href="#" id="cerrarsesion" onclick="cerrarsesion()" class="ml-2 tm-text-primary">¿Desea cerrar sesion?</a>
+                </div>
             </div>
             <!-- Formulario para cambiar contraseña (inicialmente oculto) -->
             <form id="formulario" style="display: none;">

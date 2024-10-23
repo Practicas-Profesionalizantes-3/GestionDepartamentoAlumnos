@@ -49,9 +49,9 @@ if (!$aviso) {
   </head>
 
 <body>
-  <?php
-  include("../includes/navbar.php");
-  ?>
+  <!-- Include de Navbar  -->
+  <?php include("../includes/navbar.php"); ?>
+
   <script>
     var loggedIn = sessionStorage.getItem('loggedIn');
     if (!loggedIn) {
@@ -116,9 +116,9 @@ if (!$aviso) {
 
 </script>
   </script>
+
   <div class="container">
     <div class="card">
-
       <div class="card-header">
         Editar anuncio
       </div>
@@ -157,24 +157,18 @@ if (!$aviso) {
               <label for="descripcion" class="form-label">Descripcion:</label>
               <input type="text" class="form-control" value="<?php echo $aviso['descripcion']; ?>" name="descripcion" id="descripcion" aria-describedby="helpId" placeholder="Descripcion">
             </div>
-            <div class="mb-3"> 
-                <label for="fecha_publicacion" class="form-label">Fecha de publicación:</label>
-                <input type="date" class="form-control" value="<?php echo $aviso['fecha_publicacion']; ?>" name="fecha_publicacion" id="fecha_publicacion" aria-describedby="helpId" placeholder="Fecha de publicación" data-publicacion-pasada="<?= $fecha_publicacion_pasada ? 'true' : 'false' ?>">
-                <div id="fechaError" class="text-danger" style="display:none;">La nueva fecha de publicación no debe ser anterior a la fecha actual.</div>
-            </div>
             <div class="mb-3">
-                <label for="fecha_vencimiento" class="form-label">Fecha de vencimiento:</label>
-                <input type="datetime-local" class="form-control" value="<?php echo date('Y-m-d\TH:i', strtotime($aviso['fecha_vencimiento'])); ?>" name="fecha_vencimiento" id="fecha_vencimiento" placeholder="Fecha de vencimiento">
-                <div id="fechaVencimientoError" class="text-danger" style="display:none;">La fecha de vencimiento no puede ser anterior a la fecha de publicación.</div>
-              </div>
+              <label for="fecha_vencimiento" class="form-label">Fecha de vencimiento:</label>
+              <input type="date" class="form-control" value="<?php echo $aviso['fecha_vencimiento']; ?>" name="fecha_vencimiento" id="fecha_vencimiento" aria-describedby="helpId" placeholder="Fecha de vencimiento">
+            </div>
             <div class="mb-3">    
                 <label for="adjunto" class="form-label">Adjunto:</label>
                 <div class="file-containerX">
                     <input type="file" accept=".pdf" class="form-control" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto" data-existing="<?= $aviso['adjunto'] ?? ''; ?>">
-                    <button type="button" id="eliminar-pdf" class="btn-iconX">
-                        <i class="bi bi-x"></i>
-                    </button>
                     <?php if ($aviso["adjunto"] != "") { ?>
+                      <button type="button" id="eliminar-pdf" class="btn-iconX">
+                          <i class="bi bi-x"></i>
+                      </button>
                         <a href="data:application/pdf;base64,<?= $aviso["adjunto"]; ?>" download="<?= htmlspecialchars($aviso["titulo"]); ?>" class="download-link">Descargar adjunto</a>
                     <?php } ?>
                 </div>
@@ -190,11 +184,10 @@ if (!$aviso) {
                 <label for="imagen" class="form-label">Imagen:</label>
                 <div class="file-containerX">
                     <input type="file" accept="image/jpeg, image/png" class="form-control" name="imagen" id="imagen" placeholder="Imagen" aria-describedby="fileHelpId" data-existing="<?= $aviso['imagen'] ?? ''; ?>">
-                    <button type="button" id="eliminar-imagen" class="btn-iconX">
-                        <i class="bi bi-x"></i>
-                    </button>
-                    
                     <?php if ($aviso["imagen"] != "") { ?>
+                      <button type="button" id="eliminar-imagen" class="btn-iconX">
+                          <i class="bi bi-x"></i>
+                      </button>
                         <a href="data:image/jpeg;base64,<?= $aviso["imagen"]; ?>" download="<?= htmlspecialchars($aviso["titulo"]) . '.jpg'; ?>">Descargar imagen</a>
                     <?php } else { ?>
                     <?php } ?>
@@ -209,8 +202,10 @@ if (!$aviso) {
               </select>
             </div>
             <input type="text" value="<?= $aviso["id_usuario"] ?>" name="id_usuario" id="id_usuario" readonly hidden />
-            <button type="submit" class="btn btn-success">Modificar</button>
-            <button type="button" class="btn btn-info" onclick="location.href='index.php'">Cancelar</button>
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-success mr-2" id="agregar-anuncio">Moficar</button>
+              <button type="button" class="btn btn-info  ml-2" id="cancelar-anuncio">Cancelar</button>
+            </div>
           </form>
         <?php } ?>
       </div>
@@ -219,7 +214,7 @@ if (!$aviso) {
 
   <script src="../js/navbar.js"></script>
   <script src="js/update.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data.min.js"></script>
+  <script src="../js/index.js"></script>
   <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
   <script src="js/jquery.min.js"></script>
   <script src="js/popper.js"></script>
