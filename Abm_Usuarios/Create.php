@@ -39,25 +39,8 @@ $data_usuario_tipos = json_decode($response_usuario_tipos, true);
 </head>
 
 <body>
-  <script>
-    var loggedIn = sessionStorage.getItem('loggedIn');
-    if (!loggedIn) {
-      window.location.href = '../index.php'; // Redirigir al index si no está logueado
-    } else {
-      var usuario = JSON.parse(sessionStorage.getItem("usuario"));
-      console.log(usuario)
-      if (usuario.id_usuario_estado != 1) {
-        window.location.href = '../index.php';
-      }
-    }
-  </script>
-
-  <!-- Include Perfil -->
-  <?php include("../includes/perfil.php");?>
-    
   <!-- Include Navbar -->
   <?php include("../includes/navbar.php");?>
-
 
   <div class="container">
     <div class="card">
@@ -67,7 +50,7 @@ $data_usuario_tipos = json_decode($response_usuario_tipos, true);
       </div>
       <div class="card-body">
 
-        <form id="formulario">
+        <form id="formulario-create">
           <div class="mb-3">
             <label for="nombre" class="form-label">Nombre:</label>
             <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId" placeholder="Nombre">
@@ -155,20 +138,20 @@ $data_usuario_tipos = json_decode($response_usuario_tipos, true);
 
           <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-success mr-2" id="agregar-usuario">Agregar</button>
-            <button type="submit" class="btn btn-info  ml-2" onclick="location.href='index.php'">Cancelar</button>
+            <button type="button" class="btn btn-info  ml-2" onclick="location.href='index.php'">Cancelar</button>
           </div>
-
         </form>
       </div>
     </div>
   </div>
   
   <script src="../js/index.js"></script>
+  <script src="../js/navbar.js"></script>
+  <script src="../js/validar.js"></script>
   <script src="js/create.js"></script>
-  
-  <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
   <script src="js/jquery.min.js"></script>
   <script src="js/popper.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/main.js"></script>
+  <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>

@@ -1,4 +1,4 @@
-$("#formulario").submit(function (event) {
+$("#formulario-create").submit(function (event) {
     event.preventDefault();
 
     const usuario = {
@@ -15,6 +15,9 @@ $("#formulario").submit(function (event) {
         id_usuario_tipo: $("#id_usuario_tipo").val()
     }
 
+    // Expresión regular para validar la contraseña
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
     // Validación de campos vacíos
     if (usuario.nombre == "" || usuario.apellido == "" || usuario.password == "" || usuario.email == "" ||
         usuario.id_documento_tipo == "" || usuario.id_usuario_estado == "" || usuario.numero_documento == "" ||
@@ -25,6 +28,16 @@ $("#formulario").submit(function (event) {
             title: '¡Faltan datos por completar!',
             text: 'Por favor, completa todos los campos requeridos.',
             icon: 'warning',
+            confirmButtonColor: '#006699',
+            confirmButtonText: 'Aceptar',
+        });
+    } 
+    // Validación de la contraseña
+    else if (!passwordRegex.test(usuario.password)) {
+        Swal.fire({
+            title: 'Contraseña inválida',
+            text: 'La contraseña debe tener al menos 8 caracteres, incluir una letra mayúscula y un número.',
+            icon: 'error',
             confirmButtonColor: '#006699',
             confirmButtonText: 'Aceptar',
         });

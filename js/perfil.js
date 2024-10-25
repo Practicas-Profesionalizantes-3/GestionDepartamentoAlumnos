@@ -3,7 +3,7 @@ $(document).ready(function () {
   document
     .getElementById("habilitarCambio")
     .addEventListener("click", function () {
-      document.getElementById("formulario").style.display = "block";
+      document.getElementById("formulario-perfil").style.display = "block";
       document.getElementById("cerrarsesion").style.display = "none";
       this.style.display = "none";
       cerrarsesion
@@ -12,7 +12,7 @@ $(document).ready(function () {
   document
     .getElementById("cancelarCambioBtn")
     .addEventListener("click", function () {
-      document.getElementById("formulario").style.display = "none";
+      document.getElementById("formulario-perfil").style.display = "none";
       document.getElementById("habilitarCambio").style.display = "block";
       document.getElementById("cerrarsesion").style.display = "block";
     });
@@ -41,7 +41,7 @@ $(document).ready(function () {
 
   // Cierra el modal cuando se presiona el botón cancelar
   document.getElementById("cancelarCambioBtn").onclick = function () {
-    // Limpiar los campos del formulario
+    // Limpiar los campos del formulario-perfil
     document.getElementById("current_password").value = "";
     document.getElementById("new_password").value = "";
     document.getElementById("confirm_password").value = "";
@@ -64,9 +64,9 @@ $(document).ready(function () {
     }
   }
 
-  // Manejar el envío del formulario para cambiar la contraseña
-  $("#formulario").on("submit", function (event) {
-    event.preventDefault(); // Evitar que el formulario se envíe de manera tradicional
+  // Manejar el envío del formulario-perfil para cambiar la contraseña
+  $("#formulario-perfil").on("submit", function (event) {
+    event.preventDefault(); // Evitar que el formulario-perfil se envíe de manera tradicional
 
     var newPassword = $("#new_password").val();
     var confirmPassword = $("#confirm_password").val();
@@ -114,10 +114,10 @@ $(document).ready(function () {
                 confirmButtonText: "Aceptar",
                 confirmButtonColor: "#3085d6",
               }).then(() => {
-                document.getElementById("formulario").style.display = "none";
+                document.getElementById("formulario-perfil").style.display = "none";
                 document.getElementById("habilitarCambio").style.display = "block";
                 document.getElementById("cerrarsesion").style.display = "block";
-                // Limpiar los campos del formulario
+                // Limpiar los campos del formulario-perfil
                 document.getElementById("current_password").value = "";
                 document.getElementById("new_password").value = "";
                 document.getElementById("confirm_password").value = "";

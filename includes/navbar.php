@@ -52,12 +52,6 @@
                     <span class="text nav-text">Listar usuarios</span>
                 </a>
             </li>
-            <li class="search-box">
-                <a href="javascript:void(0);" id="theme-toggle">
-                    <i class='icon fas fa-adjust'></i>
-                    <span class="text nav-text">Cambiar Tema</span>
-                </a>
-            </li>
         </div>
         <div class="bottom-content">
             <li class="search-box">

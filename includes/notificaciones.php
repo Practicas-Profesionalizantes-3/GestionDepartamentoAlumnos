@@ -67,9 +67,6 @@ if ($response !== false) {
     // Manejar error al obtener la respuesta
     error_log('Error al obtener datos de la API: ' . error_get_last()['message']);
 }
-
-
-
 ?>
 
 <div class="navbar navbar-expand-lg" id="notificaciones">
@@ -80,10 +77,12 @@ if ($response !== false) {
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-bell"></i>
-                        <!-- Mostrar el número de notificaciones no leídas -->
-                        <span class="badge bg-danger" id="count-label"><?php echo $notificaciones_count; ?></span>
+                    <a class="nav-link icon-notificaciones" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa-solid fa-bell icon-campana"></i>
+                        <!-- Mostrar el número de notificaciones no leídas solo si hay notificaciones -->
+                        <?php if ($notificaciones_count > 0): ?>
+                            <span class="badge bg-danger" id="count-label"><?php echo $notificaciones_count; ?></span>
+                        <?php endif; ?>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" id="notificationDropdown" aria-labelledby="notificationsDropdown" style="max-height: 500px; overflow-y: auto;">
                         <div class="dropdown-divider"></div>
@@ -120,8 +119,8 @@ if ($response !== false) {
                                 ?>
                                 <div class="notificationContent">
                                     <i class='fa fa-check' style='color:#41cf2e;'></i>
-                                    <span class='message-description'>Notificación enviada el: <b><?php echo $formatted_date; ?></b></span><br>
-                                    <span class='notification-detail'>Descripción: <b><?php echo $descrip; ?></b></span>
+                                    <span class='message-description'><b><?php echo $formatted_date; ?></b></span><br>
+                                    <span class='notification-detail'><b><?php echo $descrip; ?></b></span>
                                     <br><a href='<?php echo $href; ?>' class="mark-as-read" data-id="<?php echo $notificacion_id; ?>" style="color: blue;">Ver detalle</a>
                                 </div>
                             <?php endforeach; ?>

@@ -66,6 +66,7 @@ echo "<script>console.log(" . json_encode($datas) . ")</script>";
     <!-- Include Navbar -->
     <?php include("../includes/navbar.php");?>
 
+<<<<<<< HEAD
 
     <script>
         var loggedIn = sessionStorage.getItem('loggedIn');
@@ -79,6 +80,8 @@ echo "<script>console.log(" . json_encode($datas) . ")</script>";
             }
         }
     </script>
+=======
+>>>>>>> e39c28f36b2ec4ec3a34e5ad8765b0b1c0eea07e
     
     <div class="listadoAvisos" style="margin-left: 88px;">
         <div class="card-header">

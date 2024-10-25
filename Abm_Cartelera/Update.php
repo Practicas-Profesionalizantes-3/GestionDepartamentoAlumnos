@@ -52,6 +52,7 @@ if (!$aviso) {
   <!-- Include de Navbar  -->
   <?php include("../includes/navbar.php"); ?>
 
+<<<<<<< HEAD
   <script>
     var loggedIn = sessionStorage.getItem('loggedIn');
     if (!loggedIn) {
@@ -64,6 +65,8 @@ if (!$aviso) {
     }
   </script>
 
+=======
+>>>>>>> e39c28f36b2ec4ec3a34e5ad8765b0b1c0eea07e
   <div class="container">
     <div class="card">
       <div class="card-header">
@@ -160,11 +163,12 @@ if (!$aviso) {
   </div>
 
   <script src="../js/navbar.js"></script>
-  <script src="js/update.js"></script>
   <script src="../js/index.js"></script>
-  <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
+  <script src="../js/validar.js"></script>
+  <script src="js/update.js"></script>
   <script src="js/jquery.min.js"></script>
   <script src="js/popper.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/main.js"></script>
+  <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>
