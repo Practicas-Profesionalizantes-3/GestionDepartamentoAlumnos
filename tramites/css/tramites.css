@@ -9,8 +9,8 @@ text-transform: uppercase;
 letter-spacing: 1px;
 transition: background-color 0.3s ease, transform 0.3s ease;
 position: absolute;
-right: 20px; /* Posición hacia la derecha */
-top: 20px;  /* Posición hacia arriba */
+right: 138px; /* Posición hacia la derecha */
+top: 0px;  /* Posición hacia arriba */
 box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
 
@@ -23,77 +23,62 @@ transform: translateY(-3px); /* Efecto de elevación */
 outline: none;
 }
 
-
-/* Estilos para las tarjetas */
 /* tramites.css */
 .tramite-card {
-    width: 100%;
-    height: 250px; /* Altura fija para todas las tarjetas */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    display: block;
     text-align: center;
-    transition: transform 0.3s ease;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .tramite-card:hover {
-    transform: scale(1.05);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .tramite-card-body {
+    padding: 1.5rem;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
-    padding: 1rem;
 }
 
 .tramite-card-title {
     font-size: 1.2rem;
-    font-weight: bold;
+    font-weight: 700;
+    color: #333;
     margin-bottom: 0.5rem;
 }
 
 .tramite-card-description {
     font-size: 0.9rem;
-    color: #555;
-}
-
-
-/* Espacios entre las tarjetas */
-.col-12 {
-    margin-bottom: 20px;
+    color: #666;
+    margin-top: 0.5rem;
 }
 
 /* Responsividad */
-@media (max-width: 768px) {
-    .tramite-card-body {
-        padding: 1rem;
-    }
-
-    .tramite-card-title {
-        font-size: 1.2rem;
-    }
-
-    .tramite-card-description {
-        font-size: 0.85rem;
+@media (max-width: 576px) {
+    .col-lg-2 {
+        flex: 0 0 100%;
+        max-width: 100%;
     }
 }
 
-@media (max-width: 576px) {
-    .tramite-card-body {
-        padding: 0.75rem;
+@media (min-width: 576px) and (max-width: 768px) {
+    .col-lg-2 {
+        flex: 0 0 50%;
+        max-width: 50%;
     }
+}
 
-    .tramite-card-title {
-        font-size: 1.1rem;
-    }
-
-    .tramite-card-description {
-        font-size: 0.8rem;
+@media (min-width: 768px) and (max-width: 992px) {
+    .col-lg-2 {
+        flex: 0 0 33.33%;
+        max-width: 33.33%;
     }
 }

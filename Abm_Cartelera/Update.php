@@ -1,6 +1,7 @@
 <?php
 $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
-
+date_default_timezone_set('America/Buenos_Aires');
+$hoy = date("Y-m-d");
 $response = file_get_contents($api_url);
 $data = json_decode($response, true);
 $avisos = $data["data"];
@@ -48,23 +49,11 @@ if (!$aviso) {
   </head>
 
 <body>
-  <?php
-  include("../includes/navbar.php");
-  ?>
-  <script>
-    var loggedIn = sessionStorage.getItem('loggedIn');
-    if (!loggedIn) {
-      window.location.href = '../index.php'; // Redirigir al index si no está logueado
-    } else {
-      var usuario = JSON.parse(sessionStorage.getItem("usuario"));
-      if (usuario.id_usuario_estado != 1) {
-        window.location.href = '../index.php';
-      }
-    }
-  </script>
+  <!-- Include de Navbar  -->
+  <?php include("../includes/navbar.php"); ?>
+
   <div class="container">
     <div class="card">
-
       <div class="card-header">
         Editar anuncio
       </div>
@@ -107,9 +96,17 @@ if (!$aviso) {
               <label for="fecha_vencimiento" class="form-label">Fecha de vencimiento:</label>
               <input type="date" class="form-control" value="<?php echo $aviso['fecha_vencimiento']; ?>" name="fecha_vencimiento" id="fecha_vencimiento" aria-describedby="helpId" placeholder="Fecha de vencimiento">
             </div>
-            <div class="mb-3">
-              <label for="adjunto" class="form-label">Adjunto:</label>
-              <input type="file" accept=".pdf" class="form-control" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto">
+            <div class="mb-3">    
+                <label for="adjunto" class="form-label">Adjunto:</label>
+                <div class="file-containerX">
+                    <input type="file" accept=".pdf" class="form-control" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto" data-existing="<?= $aviso['adjunto'] ?? ''; ?>">
+                    <?php if ($aviso["adjunto"] != "") { ?>
+                      <button type="button" id="eliminar-pdf" class="btn-iconX">
+                          <i class="bi bi-x"></i>
+                      </button>
+                        <a href="data:application/pdf;base64,<?= $aviso["adjunto"]; ?>" download="<?= htmlspecialchars($aviso["titulo"]); ?>" class="download-link">Descargar adjunto</a>
+                    <?php } ?>
+                </div>
             </div>
             <div class="mb-3">
               <label for="fijado" class="form-label">Fijado:</label>
@@ -119,9 +116,19 @@ if (!$aviso) {
               </select>
             </div>
             <div class="mb-3">
-              <label for="imagen" class="form-label">Imagen:</label>
-              <input type="file" accept="image/png, image/jpeg" class="form-control" name="imagen" id="imagen" placeholder="Imagen" aria-describedby="fileHelpId" >
+                <label for="imagen" class="form-label">Imagen:</label>
+                <div class="file-containerX">
+                    <input type="file" accept="image/jpeg, image/png" class="form-control" name="imagen" id="imagen" placeholder="Imagen" aria-describedby="fileHelpId" data-existing="<?= $aviso['imagen'] ?? ''; ?>">
+                    <?php if ($aviso["imagen"] != "") { ?>
+                      <button type="button" id="eliminar-imagen" class="btn-iconX">
+                          <i class="bi bi-x"></i>
+                      </button>
+                        <a href="data:image/jpeg;base64,<?= $aviso["imagen"]; ?>" download="<?= htmlspecialchars($aviso["titulo"]) . '.jpg'; ?>">Descargar imagen</a>
+                    <?php } else { ?>
+                    <?php } ?>
+                </div>
             </div>
+
             <div class="mb-3">
               <label for="id_aviso_estado" class="form-label">Estado del aviso:</label>
               <select class="form-control" name="id_aviso_estado" id="id_aviso_estado">
@@ -141,11 +148,12 @@ if (!$aviso) {
   </div>
 
   <script src="../js/navbar.js"></script>
-  <script src="js/update.js"></script>
   <script src="../js/index.js"></script>
-  <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
+  <script src="../js/validar.js"></script>
+  <script src="js/update.js"></script>
   <script src="js/jquery.min.js"></script>
   <script src="js/popper.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/main.js"></script>
+  <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>

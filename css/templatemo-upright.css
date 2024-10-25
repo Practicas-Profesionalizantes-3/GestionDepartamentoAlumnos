@@ -32,11 +32,8 @@ a:hover {
 }
 
 .btn-primary {
-	padding: 12px 50px;
-	border-radius: 0;
+	border: none;
 	background: #006699;
-	font-size: 1.2rem;
-	border: 0;
 }
 
 .btn-primary:hover {
@@ -241,25 +238,6 @@ hr {
 
 .form-group {
 	margin-bottom: 25px;
-}
-
-select.form-control {
-	border-radius: 0;
-}
-
-select.form-control option {
-	height: 30px;
-}
-
-select:not([multiple]) {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	background-position: right 15px center;
-	background-repeat: no-repeat;
-	background-image: url(../img/select-arrow.png);
-	padding: 14px 20px;
-	padding-right: 20px;
-	color: #666;
 }
 
 .mapouter {

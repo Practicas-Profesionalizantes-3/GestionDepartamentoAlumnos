@@ -1,12 +1,25 @@
 <?php
 $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
+$response = @file_get_contents($api_url);
 
-$response = file_get_contents($api_url);
-$datas = json_decode($response, true);
-$data = $datas['data'];
-usort($data, function ($a, $b) {
-    return $a['id_aviso'] - $b['id_aviso'];
-});
+// Verifica si la respuesta es falsa (error)
+if ($response === FALSE) {
+    error_log("Error al llamar a la API: $api_url");
+    $datas = ['data' => []]; // Inicializa con un array vacío para evitar errores más adelante
+} else {
+    $datas = json_decode($response, true);
+}
+
+$data = isset($datas['data']) && is_array($datas['data']) ? $datas['data'] : [];
+
+// Ordenar los datos solo si no está vacío
+if (!empty($data)) {
+    usort($data, function ($a, $b) {
+        return $a['id_aviso'] - $b['id_aviso'];
+    });
+} else {
+    error_log("No hay avisos disponibles");
+}
 
 $avisos = $data;
 
@@ -22,8 +35,9 @@ $total_pages = ceil($total_avisos / $items_per_page);
 
 // Obtener los avisos para la página actual
 $current_page_avisos = array_slice($avisos, $offset, $items_per_page);
-echo "<script>console.log(" . $response . ")</script>";
+echo "<script>console.log(" . json_encode($datas) . ")</script>";
 ?>
+
 <!DOCTYPE html>
 
 <head>
@@ -39,26 +53,19 @@ echo "<script>console.log(" . $response . ")</script>";
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> <!----===== Boxicons CSS ===== -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"> <!-- Toastify CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script> <!-- Toastify JS-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  <!-- SwettAlert -->
 </head>
 
 <body>
-    <?php
-    include("../includes/navbar.php");
-    ?>
-    <script>
-        var loggedIn = sessionStorage.getItem('loggedIn');
-        if (!loggedIn) {
-            window.location.href = '../index.php'; // Redirigir al index si no está logueado
-        } else {
-            var usuario = JSON.parse(sessionStorage.getItem("usuario"));
-            console.log(usuario)
-            if (usuario.id_usuario_estado != 1) {
-                window.location.href = '../index.php';
-            }
-        }
-    </script>
+    <!-- Include Perfil -->
+    <?php include("../includes/perfil.php");?>
+    
+    <!-- Include Navbar -->
+    <?php include("../includes/navbar.php");?>
+
     
     <div class="listadoAvisos" style="margin-left: 88px;">
         <div class="card-header">
@@ -139,9 +146,11 @@ echo "<script>console.log(" . $response . ")</script>";
                 <?php endif; ?>
             </ul>
         </nav>
+        
     </div>
     <script src="../js/index.js"></script>
     <script src="../js/navbar.js"></script>
+    <script src="../js/perfil.js"></script>
     <script src="js/delete.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>

@@ -29,7 +29,6 @@ $(document).ready(function() {
             id_usuario: $("#id_usuario").val(),
             titulo: $("#titulo").val(),
             descripcion: $("#descripcion").val(),
-
             fecha_vencimiento: $("#fecha_vencimiento").val(),
             adjunto: adjuntoBase64,
             fijado: $("#fijado").val(),
