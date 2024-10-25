@@ -28,7 +28,7 @@
                 </div>
             </div>
             <!-- Formulario para cambiar contraseña (inicialmente oculto) -->
-            <form id="formulario" style="display: none;">
+            <form id="formulario-perfil" style="display: none;">
                 <div class="modal-header">
                     <h4 class="tm-text-primary m-auto">Modificar Contraseña</h4>
                 </div>

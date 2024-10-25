@@ -44,9 +44,8 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
         });
     </script>
 
-    <?php
-    include("../includes/navbar.php");
-    ?>
+    <!-- Include Navbar -->
+    <?php include("../includes/navbar.php");?>
 
     <div class="container">
         <div class="card">
@@ -115,14 +114,14 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
         </div>
     </div>
 
-    <script src="js/create.js"></script>
     <script src="../js/navbar.js"></script>
     <script src="../js/index.js"></script>
-    <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
+    <script src="js/create.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

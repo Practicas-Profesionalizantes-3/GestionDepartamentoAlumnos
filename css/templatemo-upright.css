@@ -240,25 +240,6 @@ hr {
 	margin-bottom: 25px;
 }
 
-select.form-control {
-	border-radius: 0;
-}
-
-select.form-control option {
-	height: 30px;
-}
-
-select:not([multiple]) {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	background-position: right 15px center;
-	background-repeat: no-repeat;
-	background-image: url(../img/select-arrow.png);
-	padding: 14px 20px;
-	padding-right: 20px;
-	color: #666;
-}
-
 .mapouter {
 	position: relative;
 	height: 360px;

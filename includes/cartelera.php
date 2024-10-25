@@ -1,13 +1,14 @@
 <?php
 $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
 
-$response = file_get_contents($api_url);
+$response = @file_get_contents($api_url);
 $data = json_decode($response, true);
-$avisos = $data["data"];
+$avisos = $data["data"] ?? []; // Manejar el caso en que 'data' no exista
 $fecha_actual = date('Y-m-d');
 $datos_filtrados = array_filter($avisos, function ($item) use ($fecha_actual) {
     return ($item['fecha_vencimiento'] >= $fecha_actual) && ($item["estado"] != "Inactivo");
 });
+
 
 // Ordenar los anuncios: primero por si están fijados (fijados primero), luego por fecha de publicación (más recientes primero)
 usort($datos_filtrados, function ($a, $b) {
@@ -18,6 +19,9 @@ usort($datos_filtrados, function ($a, $b) {
     // Ordenar los fijados (1) antes que los no fijados (0)
     return $b['fijado'] - $a['fijado'];
 });
+
+echo "<script>console.log(".json_encode($datos_filtrados).")</script>";
+
 
 $datos = $datos_filtrados;
 if (isset($_SESSION['mostrar_opciones_cartelera'])) {
@@ -48,11 +52,8 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
         <h2 class="mb-5"><span class="tm-text-primary">Cartelera de Alumnos - Noticias & Novedades</span></h2>
     </div>
 
-
-
-
     <?php
-        if (isset($_SESSION['mostrar_opciones_cartelera'])) {
+        if (!empty($datos) && isset($_SESSION['mostrar_opciones_cartelera'])) {
             $mostrar_opciones = $_SESSION['mostrar_opciones_cartelera'];
             if ($mostrar_opciones == "opciones2") {
             ?>
@@ -135,6 +136,10 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
                     </div>
                 </div>
             <?php endforeach; ?>
+        <?php else : ?>
+            <!-- Mostrar mensaje si no hay avisos -->
+            <h3 class="text-center mt-3 mb-5">No hay avisos nuevos para mostrar</h3>
         <?php endif; ?>
     </div>
 </section>
+

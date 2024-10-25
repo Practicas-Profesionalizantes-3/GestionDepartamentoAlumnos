@@ -50,23 +50,11 @@ $data_documento_tipos = json_decode($response_documento_tipos, true);
 </head>
 
 <body>
-  <?php
-  include("../includes/navbar.php");
-  ?>
-  <script>
-    var loggedIn = sessionStorage.getItem('loggedIn');
-    if (!loggedIn) {
-      window.location.href = '../index.php'; // Redirigir al index si no está logueado
-    } else {
-      var usuario = JSON.parse(sessionStorage.getItem("usuario"));
-      if (usuario.id_usuario_estado != 1) {
-        window.location.href = '../index.php';
-      }
-    }
-  </script>
+  <!-- Include Navbar -->
+  <?php include("../includes/navbar.php");?>
+
   <div class="container">
     <div class="card">
-
       <div class="card-header">
         Editar usuario
       </div>
@@ -156,7 +144,7 @@ $data_documento_tipos = json_decode($response_documento_tipos, true);
             
             <div class="d-flex justify-content-center">
               <button type="submit" class="btn btn-success mr-2">Modificar</button>
-              <button type="submit" class="btn btn-info ml-2" onclick="location.href='index.php'">Cancelar</button>
+              <button type="button" class="btn btn-info ml-2" onclick="location.href='index.php'">Cancelar</button>
             </div>
           </form>
         <?php } ?>
@@ -167,9 +155,9 @@ $data_documento_tipos = json_decode($response_documento_tipos, true);
   <script src="../js/index.js"></script>
   <script src="../js/navbar.js"></script>
   <script src="js/update.js"></script>
-  <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
   <script src="js/jquery.min.js"></script>
   <script src="js/popper.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/main.js"></script>
+  <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
 </body>

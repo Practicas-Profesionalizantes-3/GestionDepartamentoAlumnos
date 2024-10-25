@@ -89,7 +89,7 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
 
                     <div class="row justify-content-center">
                         <?php if (empty($current_page_tramites)) { ?>
-                            <div class="tm-text-primary sin-tramites" role="alert">
+                            <div class="sin-tramites text-center" role="alert">
                                 Sin trámites disponibles.
                             </div>
                         <?php } else { ?>
