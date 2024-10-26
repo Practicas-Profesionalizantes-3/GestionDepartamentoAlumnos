@@ -7,6 +7,7 @@ $(document).ready(function() {
     if (loggedIn === 'true') {
         var usuario = JSON.parse(sessionStorage.getItem("usuario"));
         $("#tramites_li").show();
+        $("#acceso-siu").show();
         // Mostrar opciones adicionales según el tipo de usuario
         if (usuario.id_usuario_tipo == 1 || usuario.id_usuario_tipo == 3) {
             $("#crear_aviso").show();

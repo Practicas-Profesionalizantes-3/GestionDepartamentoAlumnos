@@ -52,6 +52,12 @@
                     <span class="text nav-text">Listar usuarios</span>
                 </a>
             </li>
+            <li class="search-box" style="display: none;" id="acceso-siu">
+                <a href="https://siu.ibeltran.com.ar/autogestion/">
+                    <i class="fa-solid fa-fingerprint icon"></i>
+                    <span class="text nav-text">Siu Guarani</span>
+                </a>
+            </li>
         </div>
         <div class="bottom-content">
             <li class="search-box">
