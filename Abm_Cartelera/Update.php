@@ -118,11 +118,8 @@ if (!$aviso) {
             <div class="mb-3">
                 <label for="imagen" class="form-label">Imagen:</label>
                 <div class="file-containerX">
-                    <input type="file" accept="image/jpeg, image/png" class="form-control" name="imagen" id="imagen" placeholder="Imagen" aria-describedby="fileHelpId" data-existing="<?= $aviso['imagen'] ?? ''; ?>">
+                    <input type="file" accept="image/jpeg, image/png" class="form-control mr-2" name="imagen" id="imagen" placeholder="Imagen" aria-describedby="fileHelpId" data-existing="<?= $aviso['imagen'] ?? ''; ?>">
                     <?php if ($aviso["imagen"] != "") { ?>
-                      <button type="button" id="eliminar-imagen" class="btn-iconX">
-                          <i class="bi bi-x"></i>
-                      </button>
                         <a href="data:image/jpeg;base64,<?= $aviso["imagen"]; ?>" download="<?= htmlspecialchars($aviso["titulo"]) . '.jpg'; ?>">Descargar imagen</a>
                     <?php } else { ?>
                     <?php } ?>

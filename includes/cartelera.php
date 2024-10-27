@@ -90,13 +90,16 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
             <?php foreach ($datos as $index => $item) : ?>
                 <div class="col-lg-4 tm-col-home mb-4" data-wow-delay="0.1s">
                     <div class="position-relative border-cartelera" id="cartelera-<?php echo $index; ?>">
+                        <?php echo $item['fijado'] == 1 ? '<i class="fas fa-thumbtack icon-fijado" title="Fijado"></i>' : '' ;?>
                         <div class="img-cartelera mb-3">
                             <img class="img-cartelera-item" src="<?= $item["imagen"] != "" ? "data:image/jpeg;base64," . $item["imagen"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s" ?>" />
                         </div>
                         <hr style="width: 50%;" class="d-flex m-auto">
                         <div class="img-container mt-3">
                             <div class="overlay">
-                                <h5 class="mb-3 cartelera-titulo"><?php echo htmlspecialchars($item['titulo']); ?></h5>
+                                <h5 class="mb-3 cartelera-titulo">
+                                    <?php echo htmlspecialchars($item['titulo']); ?>
+                                </h5>
 
                                 <!-- Contenedor de descripción -->
                                 <div class="descripcion-container">

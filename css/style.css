@@ -94,6 +94,13 @@
   height: 100%;
 }
 
+.icon-fijado{
+  position: absolute;
+  font-size: 20px;
+  margin: 2px 0px 0px 2px;
+  color: #000204;
+}
+
 .cartelera-titulo{
     font-size: 25px;
 }
@@ -690,7 +697,6 @@ p {
 .li-carreras {
   border-radius: 8px;
   padding: 1rem;
-  margin-bottom: 0.10rem;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
@@ -700,7 +706,7 @@ p {
 }
 
 .li-carreras i {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 /* Links de carreras */
