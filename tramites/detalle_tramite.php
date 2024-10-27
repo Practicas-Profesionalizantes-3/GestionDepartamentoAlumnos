@@ -1,11 +1,10 @@
-
 <?php
 // Ajustar la zona horaria
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 
 // Obtener la fecha y hora actual en Buenos Aires
 $fecha_actual = new DateTime();
-$fecha_actual_formateada = $fecha_actual->format('d/m/Y H:i');
+$fecha_actual_formateada = $fecha_actual->format('d \-\ m \-\ Y  H:i');
 
 // Verificar si se recibió el ID de la notificación
 if (isset($_GET['id'])) {
@@ -45,12 +44,15 @@ if (isset($_GET['id'])) {
         $descripcion = htmlspecialchars($tramite_encontrado['descripcion']);
         $fecha_creacion = htmlspecialchars($tramite_encontrado['fecha_creacion']);
         $estado_tramite = htmlspecialchars($tramite_encontrado['estado_tramite']);
-        $comentarios_tramite = htmlspecialchars($tramite_encontrado['comentarios']);
-        $adjunto = isset($tramite_encontrado['adjunto']) ? $tramite_encontrado['adjunto'] : null;
         
+        // Obtener el nombre y apellido del responsable
+        $nombre_responsable = htmlspecialchars($tramite_encontrado['apellido']);
+        $apellido_responsable = htmlspecialchars($tramite_encontrado['nombre']);
+        $comentarios_tramite = htmlspecialchars($tramite_encontrado['comentarios']);
+
         // Formatear la fecha y hora
         $fecha_obj = new DateTime($fecha_creacion);
-        $fecha_formateada = $fecha_obj->format('d/m/Y H:i');
+        $fecha_formateada = $fecha_obj->format('d \-\ m \-\ Y'); // Formato día, mes y año
 
         // Clase CSS del estado
         $estado_clase = "";
@@ -65,17 +67,36 @@ if (isset($_GET['id'])) {
                 $estado_clase = "estado-completado";
                 break;
         }
+        
+        $adjunto = isset($tramite_encontrado['adjunto']) ? $tramite_encontrado['adjunto'] : null;
+
+        // Lógica para obtener los movimientos del trámite
+        $api_movimientos_url = 'http://localhost/api/api-Alumnos/tramite_movimientos.php?id_tramite=' . $tramite_encontrado['id_tramite'];
+        $movimientos_response = @file_get_contents($api_movimientos_url);
+        $movimientos = json_decode($movimientos_response, true);
+
+        if (!is_array($movimientos) || empty($movimientos)) {
+            $movimientos = []; // Si no hay movimientos, inicializar como un array vacío
+        }
+
+        
+
+        // Ordenar movimientos por fecha
+        usort($movimientos, function ($a, $b) {
+            return strtotime($b['fecha_movimiento']) - strtotime($a['fecha_movimiento']); // Ordenar de más reciente a más antiguo
+        });
+
+        // Lógica para obtener los comentarios del trámite
+        $api_comentarios_url = 'http://localhost/api/api-Alumnos/tramite_comentarios.php?id_tramite=' . $tramite_encontrado['id_tramite'];
+        $comentarios_response = @file_get_contents($api_comentarios_url);
+        $comentarios = json_decode($comentarios_response, true);
+
+        if (!is_array($comentarios) || empty($comentarios)) {
+            $comentarios = []; // Si no hay comentarios, inicializar como un array vacío
+        }
+
     } else {
         die("Error: No se encontró un trámite con ese ID.");
-    }
-
-    // Lógica para obtener los movimientos del trámite
-    $api_movimientos_url = 'http://localhost/api/api-Alumnos/tramite_movimientos.php?id_tramite=' . $tramite_encontrado['id_tramite'];
-    $movimientos_response = @file_get_contents($api_movimientos_url);
-    $movimientos = json_decode($movimientos_response, true);
-
-    if (!is_array($movimientos) || empty($movimientos)) {
-        $movimientos = []; // Si no hay movimientos, inicializar como un array vacío
     }
 } else {
     die("Error: No se recibió el ID de la notificación.");
@@ -95,7 +116,7 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="css/style.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> <!----===== Boxicons CSS ===== -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"> <!-- Toastify CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
@@ -113,8 +134,6 @@ if (isset($_GET['id'])) {
     <!-- Include Navbar -->
     <?php include("../includes/navbar.php");?>
 
-
-
     <div class="container">
         <div class="card">
             <div class="card-header">
@@ -122,39 +141,36 @@ if (isset($_GET['id'])) {
                 <button class="close-btn" onclick="window.history.back();">&times;</button>
             </div>
             <div class="card-body">
-                <h5 class="card-title" style="color: black;">Título: <span id="titulo-tramite"></span></h5>
-                <p class="card-text">Descripción: <span id="descripcion-tramite"></span></p>
-                <p class="card-text">Fecha de Creación: <span id="fecha-tramite"></span></p>
-                <p class="card-text">Estado del Trámite: <span id="estado-tramite" class="estado"></span></p>
-                <p class="card-text">Comentarios: <span id="comentario-tramite"></span></p>
-                <p class="card-text">Movimientos del Trámite: </p>
-                
-                <ul id="movimientos-list" class="list-group">
-                    <?php if (!empty($movimientos)): ?>
-                        <?php foreach ($movimientos as $movimiento): ?>
-                            <?php
-                            // Formatear la fecha y hora
-                            $fecha_movimiento_obj = new DateTime($movimiento['fecha_movimiento']);
-                            $fecha_movimiento_formateada = $fecha_movimiento_obj->format('d/m/Y H:i');
-                            ?>
-                            <li class="list-group-item">
-                                <strong>Fecha:</strong> <?php echo htmlspecialchars($fecha_movimiento_formateada); ?> - 
-                                <strong>Observación:</strong> <?php echo htmlspecialchars($movimiento['observacion']); ?>
-                            </li>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <li class="list-group-item">No hay movimientos registrados para este trámite.</li>
-                    <?php endif; ?>
+                <h5 class="card-title">Título: <?php echo $titulo; ?></h5>
+                <p class="card-text"><?php echo $descripcion; ?></p>
+                <p class="card-text">Fecha de creación: <?php echo $fecha_formateada; ?></p>
+                <p class="card-text">Estado: <span class="<?php echo $estado_clase; ?>"><?php echo $estado_tramite; ?></span></p>
+                <?php if ($adjunto): ?>
+                    <p class="card-text">Adjunto: <a href="<?php echo $adjunto; ?>" target="_blank">Ver archivo</a></p>
+                <?php endif; ?>
+                <h6>Movimientos del Trámite:</h6>
+                <ul class="list-group mb-3">
+                    <?php foreach ($movimientos as $movimiento): ?>
+                        <li class="list-group-item">
+                            <strong><?php echo date('d/m/Y H:i', strtotime($movimiento['fecha_movimiento'])); ?></strong> - <?php echo $movimiento['observacion']; ?>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
-
-                <!-- Agregar el botón de redirección -->
-                <div class="mt-3 d-flex justify-content-center">
-                    <a href="mis_tramites.php" class="btn btn-secondary">Volver a Mis Trámites</a>
-                </div>
->>>>>>> c740dfbe7338aa7cdbf9b77157722a7e7be360fd
+                <h6>Comentarios:</h6>
+                <ul class="list-group mb-3">
+                    <?php foreach ($comentarios as $comentario): ?>
+                        <li class="list-group-item">
+                            <strong><?php echo date('d/m/Y H:i', strtotime($comentario['fecha_creacion'])); ?></strong> - <?php echo htmlspecialchars($comentario['comentarios']); ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
             </div>
         </div>
     </div>
+
+</body>
+</html>
+
 
     <script src="../js/index.js"></script>
     <script src="../js/navbar.js"></script>

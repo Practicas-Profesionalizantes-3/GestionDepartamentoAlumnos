@@ -1,16 +1,11 @@
-
-/* Estilos generales para notificaciones/tramites*/
 html, body {
   height: 100%;
   margin: 0;
-  padding: 0;
-  font-family: 'Arial', sans-serif;
-  background-color: #f5f5f5;
-}
-
-body {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+  font-family: 'Arial', sans-serif;
 }
 
 .container {
@@ -18,84 +13,109 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin: 40px 0;
 }
 
+/* Estilos de la tarjeta */
 .card {
   position: relative;
   width: 100%;
   max-width: 700px;
+  border: 1px solid #25b6d0;
+  border-radius: 0.5rem;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-  border-radius: 15px;
-  border: none;
 }
 
 .card-header {
-  background-color: #007bff;
+  background-color: #25b6d0;
   color: white;
-  font-size: 1.75rem;
-  text-align: center;
-  padding: 20px;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  position: relative;
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 20px;
   font-size: 1.5rem;
   color: white;
-  cursor: pointer;
   background: none;
   border: none;
+  cursor: pointer;
 }
 
 .card-body {
   background-color: white;
   padding: 40px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
 }
 
 .card-title {
-  font-size: 1.5rem;
+  color: #333;
+  font-family: 'Kumbh Sans', Arial, sans-serif;
   font-weight: bold;
-  margin-bottom: 20px;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
 }
 
 .card-text {
-  font-size: 1.25rem;
-  color: #333;
-  margin-bottom: 15px;
+  color: #555;
+  font-family: 'Kumbh Sans', Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
+/* Estado de los trámites */
 .estado {
-  display: inline-block;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 1.1rem;
   font-weight: bold;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
 }
 
-/* Diferentes colores para el estado del trámite */
 .estado-pendiente {
   background-color: #ffc107;
-  color: #856404;
+  color: #212529;
 }
 
 .estado-proceso {
   background-color: #17a2b8;
-  color: #0c5460;
+  color: white;
 }
 
 .estado-completado {
   background-color: #28a745;
-  color: #fff;
+  color: white;
 }
 
+/* Comentarios de estado */
+.comentario-pendiente, .comentario-proceso, .comentario-completado {
+  color: white;
+  font-weight: bold;
+}
+
+.comentario-pendiente {
+  background-color: #ffc107;
+}
+
+.comentario-proceso {
+  background-color: #17a2b8;
+}
+
+.comentario-completado {
+  background-color: #28a745;
+}
+
+/* Estilo del nombre del responsable */
+.nombre-responsable {
+  color: #2980b9;
+  font-weight: bold;
+}
+
+/* Botón de descarga */
 .btn-download {
   margin-top: 25px;
   background-color: #007bff;
@@ -105,8 +125,27 @@ body {
   border-radius: 8px;
   text-decoration: none;
   font-size: 1.2rem;
+  display: inline-block;
+  text-align: center;
 }
 
 .btn-download:hover {
   background-color: #0056b3;
+  color: white;
+}
+
+/* Estilo personalizado para el botón "Volver a Mis Trámites" */
+.btn-secondary {
+  background-color: #25b6d0 !important; /* Color de fondo */
+  color: white !important; /* Color de texto */
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.btn-secondary:hover {
+  background-color: #1e94ab !important; /* Color más oscuro al pasar el mouse */
+  color: white !important;
 }

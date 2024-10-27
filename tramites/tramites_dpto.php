@@ -17,8 +17,16 @@ if ($response !== false) {
     // Verificar si el JSON se decodificó correctamente y es un array
     if (json_last_error() === JSON_ERROR_NONE && is_array($tramites)) {
         $data = $tramites;
+
+        // Aplicar la lógica de subconsulta para obtener los trámites con la fecha de creación más reciente
+        $data = array_filter($data, function ($item) use ($data) {
+            return $item['fecha_creacion'] === max(array_column(array_filter($data, function ($t) use ($item) {
+                return $t['id_tramite'] === $item['id_tramite'];
+            }), 'fecha_creacion'));
+        });
     }
 }
+
 // Función para generar el HTML del trámite
 function generar_tramite_html($datos) {
     // Verificar si todas las claves necesarias están presentes
@@ -29,6 +37,7 @@ function generar_tramite_html($datos) {
     // Clase de color basada en el estado del trámite
     $clase_estado = strtolower(str_replace(' ', '-', $datos['estado_tramite'])); // Reemplazar espacios por guiones
 
+   
     return "
     <div class='container_tramites_dpto {$clase_estado}' draggable='true' ondragstart='drag(event)' id='tramite-{$datos['id_tramite']}'>
         <h4 class='titlulo_tramites_dpto'>{$datos['tipo_tramite']}</h4>

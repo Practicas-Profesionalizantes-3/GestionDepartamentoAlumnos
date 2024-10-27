@@ -42,7 +42,6 @@ $total_pages = ceil($total_tramites / $items_per_page);
 $current_page_tramites = array_slice($data, $offset, $items_per_page);
 ?>
 
-
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -98,7 +97,7 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
                                     <h2 class="titulo"><?php echo $datos['tipo_tramite']; ?></h2>
                                     <p class="subtitle"><?php echo $datos['descripcion']; ?></p>
                                     <div class="actions">
-                                        <label class="responsable">Responsable: <?php echo $datos['responsable']; ?></label>
+                                        <label class="responsable">Responsable: <?php echo $datos['apellido'] . ' ' . $datos['nombre']; ?></label>
                                     </div>
                                     <div class="info">
                                         <label class="estado"><?php echo $datos['estado_tramite']; ?></label>
@@ -156,6 +155,6 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5Pil2tXdHhjTvQ9lQS6yIiwnyF3vухQ9Etqkibi1DwYLPSAOxocnipl" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0J9d9n00bu9XR4GQ6fhY7xQpfPtcp7tF" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="js/delete.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 </html>
