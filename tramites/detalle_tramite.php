@@ -149,13 +149,30 @@ if (isset($_GET['id'])) {
                     <p class="card-text">Adjunto: <a href="<?php echo $adjunto; ?>" target="_blank">Ver archivo</a></p>
                 <?php endif; ?>
                 <h6>Movimientos del Trámite:</h6>
-                <ul class="list-group mb-3">
-                    <?php foreach ($movimientos as $movimiento): ?>
-                        <li class="list-group-item">
-                            <strong><?php echo date('d/m/Y H:i', strtotime($movimiento['fecha_movimiento'])); ?></strong> - <?php echo $movimiento['observacion']; ?>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
+<ul class="list-group mb-3">
+    <?php foreach ($movimientos as $movimiento): ?>
+        <?php 
+            // Determinar la clase CSS según la observación
+            $estado_clase = "";
+        switch ($estado_tramite) {
+            case "Pendiente":
+                $estado_clase = "estado-pendiente";
+                break;
+            case "En Proceso":
+                $estado_clase = "estado-proceso";
+                break;
+            case "Completado":
+                $estado_clase = "estado-completado";
+                break;
+        }
+        ?>
+        <li class="list-group-item">
+            <strong><?php echo date('d/m/Y H:i', strtotime($movimiento['fecha_movimiento'])); ?></strong> - 
+            <span class="<?php echo $estado_clase; ?>"><?php echo $movimiento['observacion']; ?></span>
+        </li>
+    <?php endforeach; ?>
+</ul>
+
                 <h6>Comentarios:</h6>
                 <ul class="list-group mb-3">
                     <?php foreach ($comentarios as $comentario): ?>
