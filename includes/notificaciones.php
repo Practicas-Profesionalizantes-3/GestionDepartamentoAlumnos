@@ -1,72 +1,95 @@
 <?php
+    // Establecer la zona horaria a la de Argentina
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
 
-$api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
+    // Función para calcular el tiempo transcurrido
+    function tiempo_transcurrido($fecha_envio) {
+        $fecha_envio = new DateTime($fecha_envio);
+        $fecha_actual = new DateTime(); // Utilizará la zona horaria configurada
+        $diferencia = $fecha_actual->diff($fecha_envio);
 
-// Intentar obtener el contenido de la API
-$response = @file_get_contents($api_url);
+        if ($diferencia->y > 0) {
+            return $diferencia->y . ' año(s) atrás';
+        } elseif ($diferencia->m > 0) {
+            return $diferencia->m . ' mes(es) atrás';
+        } elseif ($diferencia->d > 0) {
+            return $diferencia->d . ' día(s) atrás';
+        } elseif ($diferencia->h > 0) {
+            return $diferencia->h . ' hora(s) atrás';
+        } elseif ($diferencia->i > 0) {
+            return $diferencia->i . ' minuto(s) atrás';
+        } else {
+            return $diferencia->s . ' segundo(s) atrás';
+        }
+    }
 
-// Verificar si la respuesta es válida y se pudo decodificar correctamente
-if ($response !== false) {
-    $data = json_decode($response, true);
+    $api_url = 'http://localhost/api/api-Alumnos/cartelera.php';
 
-    // Verificar que la decodificación JSON fue exitosa y que la estructura contiene 'data'
-    if (json_last_error() === JSON_ERROR_NONE && isset($data["data"])) {
-        $avisos = $data["data"];
+    // Intentar obtener el contenido de la API
+    $response = @file_get_contents($api_url);
+
+    // Verificar si la respuesta es válida y se pudo decodificar correctamente
+    if ($response !== false) {
+        $data = json_decode($response, true);
+
+        // Verificar que la decodificación JSON fue exitosa y que la estructura contiene 'data'
+        if (json_last_error() === JSON_ERROR_NONE && isset($data["data"])) {
+            $avisos = $data["data"];
+        } else {
+            // Si hay un error en la decodificación o no existe 'data', inicializar $avisos como un arreglo vacío
+            $avisos = [];
+        }
     } else {
-        // Si hay un error en la decodificación o no existe 'data', inicializar $avisos como un arreglo vacío
+        // Si no se pudo obtener la respuesta de la API, inicializar $avisos como un arreglo vacío
         $avisos = [];
     }
-} else {
-    // Si no se pudo obtener la respuesta de la API, inicializar $avisos como un arreglo vacío
-    $avisos = [];
-}
 
-$datos = $avisos;
-$fecha_actual = date('Y-m-d');
+    $datos = $avisos;
+    $fecha_actual = date('Y-m-d');
 
-// Filtrar los datos según la fecha de vencimiento y el estado
-$datos_filtrados = array_filter($avisos, function ($item) use ($fecha_actual) {
-    return ($item['fecha_vencimiento'] >= $fecha_actual) && ($item["estado"] != 2);
-});
+    // Filtrar los datos según la fecha de vencimiento y el estado
+    $datos_filtrados = array_filter($avisos, function ($item) use ($fecha_actual) {
+        return ($item['fecha_vencimiento'] >= $fecha_actual) && ($item["estado"] != 2);
+    });
 
-$datos = $datos_filtrados;
+    $datos = $datos_filtrados;
 
-$api_url = 'http://localhost/api/api-Alumnos/notificaciones.php';
+    $api_url = 'http://localhost/api/api-Alumnos/notificaciones.php';
 
-// Inicializar variables
-$notificaciones_no_leidas = [];
-$notificaciones_count = 0;
+    // Inicializar variables
+    $notificaciones_no_leidas = [];
+    $notificaciones_count = 0;
 
-// Obtener respuesta de la API
-$response = @file_get_contents($api_url);
+    // Obtener respuesta de la API
+    $response = @file_get_contents($api_url);
 
-// Verificar si la respuesta fue exitosa
-if ($response !== false) {
-    // Decodificar la respuesta JSON
-    $data = json_decode($response, true);
+    // Verificar si la respuesta fue exitosa
+    if ($response !== false) {
+        // Decodificar la respuesta JSON
+        $data = json_decode($response, true);
 
-    // Verificar si se decodificó correctamente
-    if (json_last_error() === JSON_ERROR_NONE) {
-        // Filtrar solo las notificaciones no leídas (id_notificacion_estado != 3) para la lista
-        $notificaciones_no_leidas = array_filter($data, function($notificacion) {
-            return isset($notificacion['id_notificacion_estado']) && $notificacion['id_notificacion_estado'] != 3;
-        });
+        // Verificar si se decodificó correctamente
+        if (json_last_error() === JSON_ERROR_NONE) {
+            // Filtrar solo las notificaciones no leídas (id_notificacion_estado != 3) para la lista
+            $notificaciones_no_leidas = array_filter($data, function($notificacion) {
+                return isset($notificacion['id_notificacion_estado']) && $notificacion['id_notificacion_estado'] != 3;
+            });
 
-        // Ordenar las notificaciones por fecha de envío, de más reciente a más antigua
-        usort($notificaciones_no_leidas, function($a, $b) {
-            return strtotime($b['fecha_envio_notificacion']) - strtotime($a['fecha_envio_notificacion']);
-        });
+            // Ordenar las notificaciones por fecha de envío, de más reciente a más antigua
+            usort($notificaciones_no_leidas, function($a, $b) {
+                return strtotime($b['fecha_envio_notificacion']) - strtotime($a['fecha_envio_notificacion']);
+            });
 
-        // Contar solo las notificaciones no leídas
-        $notificaciones_count = count($notificaciones_no_leidas);
+            // Contar solo las notificaciones no leídas
+            $notificaciones_count = count($notificaciones_no_leidas);
+        } else {
+            // Manejar error de decodificación JSON
+            error_log('Error al decodificar JSON: ' . json_last_error_msg());
+        }
     } else {
-        // Manejar error de decodificación JSON
-        error_log('Error al decodificar JSON: ' . json_last_error_msg());
+        // Manejar error al obtener la respuesta
+        error_log('Error al obtener datos de la API: ' . error_get_last()['message']);
     }
-} else {
-    // Manejar error al obtener la respuesta
-    error_log('Error al obtener datos de la API: ' . error_get_last()['message']);
-}
 ?>
 
 <div class="navbar navbar-expand-lg" id="notificaciones">
@@ -90,10 +113,8 @@ if ($response !== false) {
                             <?php foreach ($notificaciones_no_leidas as $notificacion): ?>
                                 <?php
                                 $notificacion_id = $notificacion['id_notificacion'];
-                                
-                                // Convertir la fecha a un objeto DateTime y formatear
-                                $date_sent = new DateTime($notificacion['fecha_envio_notificacion']);
-                                $formatted_date = $date_sent->format('d/m/Y H:i'); // Formato: día/mes/año horas:minutos
+                                $fecha_envio = $notificacion['fecha_envio_notificacion'];
+                                $tiempo_transcurrido = tiempo_transcurrido($fecha_envio);
                                 
                                 $type = isset($notificacion['id_aviso']) ? "Aviso" : (isset($notificacion['id_tramite']) ? "Trámite" : "Desconocido");
 
@@ -112,14 +133,14 @@ if ($response !== false) {
                                 }
 
                                 // Limitar la longitud de la descripción
-                                $max_length = 23;
+                                $max_length = 30;
                                 if (strlen($descrip) > $max_length) {
                                     $descrip = substr($descrip, 0, $max_length) . '...';
                                 }
                                 ?>
                                 <div class="notificationContent">
                                     <i class='fa fa-check' style='color:#41cf2e;'></i>
-                                    <span class='message-description'><b><?php echo $formatted_date; ?></b></span><br>
+                                    <span class='message-description'><b><?php echo $tiempo_transcurrido; ?></b></span><br>
                                     <span class='notification-detail'><b><?php echo $descrip; ?></b></span>
                                     <br><a href='<?php echo $href; ?>' class="mark-as-read" data-id="<?php echo $notificacion_id; ?>" style="color: blue;">Ver detalle</a>
                                 </div>

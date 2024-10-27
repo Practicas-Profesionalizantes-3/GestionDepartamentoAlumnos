@@ -80,7 +80,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="fecha_vencimiento" class="form-label">Fecha de Vencimiento:</label>
-                        <input type="date" class="form-control" name="fecha_vencimiento" id="fecha_vencimiento" aria-describedby="helpId" placeholder="Fecha de Vencimiento" required value="<?php $hoy = date("Y-m-d", strtotime("+1 day")); echo $hoy; ?>">
+                        <input type="date" class="form-control" name="fecha_vencimiento" id="fecha_vencimiento" aria-describedby="helpId" placeholder="Fecha de Vencimiento" required value="<?php date_default_timezone_set('America/Argentina/Buenos_Aires'); $hoy = date('Y-m-d', strtotime('+1 day')); echo $hoy; ?>">
                     </div>
                     <div class="mb-3">
                         <label for="adjunto" class="form-label">Adjunto:</label>

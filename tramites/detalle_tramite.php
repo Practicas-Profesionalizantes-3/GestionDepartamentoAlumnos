@@ -112,52 +112,55 @@ if (isset($_GET['id'])) {
     <!-- Include Navbar -->
     <?php include("../includes/navbar.php");?>
 
+    <div class="container-fluid mt-5 mb-5">
+        <div class="row mt-5 mb-5">
+            <div class="tm-main mt-5 mb-5">
+                <!-- Home section -->
+                <div class="tm-section-wrap">
+                    <div class="container">
+                        <div class="card">
+                            <div class="card-header bg-info">
+                                Detalles del Trámite
+                                <button class="close-btn" onclick="window.history.back();">&times;</button>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title" style="color: black;">Título: <span id="titulo-tramite"></span></h5>
+                                <p class="card-text">Descripción: <span id="descripcion-tramite"></span></p>
+                                <p class="card-text">Fecha de Creación: <span id="fecha-tramite"></span></p>
+                                <p class="card-text">Estado del Trámite: <span id="estado-tramite" class="estado"></span></p>
+                                <p class="card-text">Comentarios: <span id="comentario-tramite"></span></p>
+                                <p class="card-text">Movimientos del Trámite: </p>
+                                <ul id="movimientos-list" class="list-group">
+                                    <?php if (!empty($movimientos)): ?>
+                                        <?php foreach ($movimientos as $movimiento): ?>
+                                            <?php
+                                            // Formatear la fecha y hora
+                                            $fecha_movimiento_obj = new DateTime($movimiento['fecha_movimiento']);
+                                            $fecha_movimiento_formateada = $fecha_movimiento_obj->format('d/m/Y H:i');
+                                            ?>
+                                            <li class="list-group-item">
+                                                <strong>Fecha:</strong> <?php echo htmlspecialchars($fecha_movimiento_formateada); ?> - 
+                                                <strong>Observación:</strong> <?php echo htmlspecialchars($movimiento['observacion']); ?>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <li class="list-group-item">No hay movimientos registrados para este trámite.</li>
+                                    <?php endif; ?>
+                                </ul>
+                                <!-- Mostrar botón de descarga si el adjunto existe -->
+                                <?php if ($adjunto): ?>
+                                    <div class="d-flex justify-content-end mt-3">
+                                        <a id="download-link" href="#" class="btn btn-primary">Descargar Adjunto</a>
+                                    </div>
+                                <?php endif; ?>
 
-
-    <div class="container">
-        <div class="card">
-            <div class="card-header bg-info">
-                Detalles del Trámite
-                <button class="close-btn" onclick="window.history.back();">&times;</button>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title" style="color: black;">Título: <span id="titulo-tramite"></span></h5>
-                <p class="card-text">Descripción: <span id="descripcion-tramite"></span></p>
-                <p class="card-text">Fecha de Creación: <span id="fecha-tramite"></span></p>
-                <p class="card-text">Estado del Trámite: <span id="estado-tramite" class="estado"></span></p>
-                <p class="card-text">Comentarios: <span id="comentario-tramite"></span></p>
-                <p class="card-text">Movimientos del Trámite: </p>
-                <ul id="movimientos-list" class="list-group">
-                    <?php if (!empty($movimientos)): ?>
-                        <?php foreach ($movimientos as $movimiento): ?>
-                            <?php
-                            // Formatear la fecha y hora
-                            $fecha_movimiento_obj = new DateTime($movimiento['fecha_movimiento']);
-                            $fecha_movimiento_formateada = $fecha_movimiento_obj->format('d/m/Y H:i');
-                            ?>
-                            <li class="list-group-item">
-                                <strong>Fecha:</strong> <?php echo htmlspecialchars($fecha_movimiento_formateada); ?> - 
-                                <strong>Observación:</strong> <?php echo htmlspecialchars($movimiento['observacion']); ?>
-                            </li>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <li class="list-group-item">No hay movimientos registrados para este trámite.</li>
-                    <?php endif; ?>
-                </ul>
-                <!-- Mostrar botón de descarga si el adjunto existe -->
-                <?php if ($adjunto): ?>
-                    <div class="d-flex justify-content-end mt-3">
-                        <a id="download-link" href="#" class="btn btn-primary">Descargar Adjunto</a>
+                                <!-- Agregar el botón de redirección -->
+                                <div class="mt-3 d-flex justify-content-center">
+                                    <a href="mis_tramites.php" class="btn btn-secondary">Volver</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                <?php endif; ?>
-
-                <!-- Agregar el botón de redirección -->
-                <div class="mt-3 d-flex justify-content-center">
-                    <a href="mis_tramites.php" class="btn btn-secondary">Volver</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script src="../js/index.js"></script>
     <script src="../js/navbar.js"></script>
