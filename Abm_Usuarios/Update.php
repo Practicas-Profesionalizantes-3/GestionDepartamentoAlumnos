@@ -154,6 +154,7 @@ $data_documento_tipos = json_decode($response_documento_tipos, true);
 
   <script src="../js/index.js"></script>
   <script src="../js/navbar.js"></script>
+  <script src="../js/validar.js"></script>
   <script src="js/update.js"></script>
   <script src="js/jquery.min.js"></script>
   <script src="js/popper.js"></script>

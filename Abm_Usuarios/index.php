@@ -1,28 +1,28 @@
 <?php
-$api_url = 'http://localhost/api/api-Alumnos/usuarios.php';
+    $api_url = 'http://localhost/api/api-Alumnos/usuarios.php';
 
-$response = file_get_contents($api_url);
-$datas = json_decode($response, true);
-$data = $datas["data"];
-usort($data, function ($a, $b) {
-    return $a['id_usuario'] - $b['id_usuario'];
-});
+    $response = file_get_contents($api_url);
+    $datas = json_decode($response, true);
+    $data = $datas["data"];
+    usort($data, function ($a, $b) {
+        return $a['id_usuario'] - $b['id_usuario'];
+    });
 
-$usuarios = $data;
+    $usuarios = $data;
 
-$items_per_page = 5; // Número de filas por página
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
-$offset = ($page - 1) * $items_per_page; // Desplazamiento
+    $items_per_page = 5; // Número de filas por página
+    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
+    $offset = ($page - 1) * $items_per_page; // Desplazamiento
 
-// Obtener el total de usuarios 
-$total_usuarios = count($usuarios);
+    // Obtener el total de usuarios 
+    $total_usuarios = count($usuarios);
 
-// Calcular el total de páginas
-$total_pages = ceil($total_usuarios  / $items_per_page);
+    // Calcular el total de páginas
+    $total_pages = ceil($total_usuarios  / $items_per_page);
 
-// Obtener los usuarios  para la página actual
-$current_page_usuarios  = array_slice($usuarios, $offset, $items_per_page);
-echo "<script>console.log(" . $response . ")</script>";
+    // Obtener los usuarios  para la página actual
+    $current_page_usuarios  = array_slice($usuarios, $offset, $items_per_page);
+    echo "<script>console.log(" . $response . ")</script>";
 ?>
 <!DOCTYPE html>
 

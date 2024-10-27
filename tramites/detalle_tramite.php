@@ -46,7 +46,7 @@ if (isset($_GET['id'])) {
         $fecha_creacion = htmlspecialchars($tramite_encontrado['fecha_creacion']);
         $estado_tramite = htmlspecialchars($tramite_encontrado['estado_tramite']);
         $comentarios_tramite = htmlspecialchars($tramite_encontrado['comentarios']);
-        $adjunto = isset($tramite_encontrado['adjunto']) ? $tramite_encontrado['adjunto'] : null;
+        $adjunto = isset($tramite_encontrado['archivo']) ? $tramite_encontrado['archivo'] : null;
         
         // Formatear la fecha y hora
         $fecha_obj = new DateTime($fecha_creacion);
@@ -86,10 +86,11 @@ if (isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalle del Trámite</title>
+    <title>Detalle del trámite - <?php echo $titulo; ?></title>
     <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="shortcut icon" href="../img/logo-fav.png" type="image/x-icon"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/templatemo-upright.css">
     <link rel="stylesheet" href="../css/style.css">
@@ -97,8 +98,6 @@ if (isset($_GET['id'])) {
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> <!----===== Boxicons CSS ===== -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"> <!-- Toastify CSS -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script> <!-- Toastify JS-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  <!-- SwettAlert -->
 </head>
@@ -117,7 +116,7 @@ if (isset($_GET['id'])) {
 
     <div class="container">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header bg-info">
                 Detalles del Trámite
                 <button class="close-btn" onclick="window.history.back();">&times;</button>
             </div>
@@ -128,7 +127,6 @@ if (isset($_GET['id'])) {
                 <p class="card-text">Estado del Trámite: <span id="estado-tramite" class="estado"></span></p>
                 <p class="card-text">Comentarios: <span id="comentario-tramite"></span></p>
                 <p class="card-text">Movimientos del Trámite: </p>
-                
                 <ul id="movimientos-list" class="list-group">
                     <?php if (!empty($movimientos)): ?>
                         <?php foreach ($movimientos as $movimiento): ?>
@@ -146,10 +144,16 @@ if (isset($_GET['id'])) {
                         <li class="list-group-item">No hay movimientos registrados para este trámite.</li>
                     <?php endif; ?>
                 </ul>
+                <!-- Mostrar botón de descarga si el adjunto existe -->
+                <?php if ($adjunto): ?>
+                    <div class="d-flex justify-content-end mt-3">
+                        <a id="download-link" href="#" class="btn btn-primary">Descargar Adjunto</a>
+                    </div>
+                <?php endif; ?>
 
                 <!-- Agregar el botón de redirección -->
                 <div class="mt-3 d-flex justify-content-center">
-                    <a href="mis_tramites.php" class="btn btn-secondary">Volver a Mis Trámites</a>
+                    <a href="mis_tramites.php" class="btn btn-secondary">Volver</a>
                 </div>
             </div>
         </div>
@@ -159,11 +163,10 @@ if (isset($_GET['id'])) {
     <script src="../js/navbar.js"></script>
     <script src="../js/perfil.js"></script>
     <script src="../js/notificaciones.js"></script>
-    <script src="js/tramite.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="js/validar.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <script>
         // Mostrar los datos del trámite en el frontend
@@ -174,11 +177,12 @@ if (isset($_GET['id'])) {
         document.getElementById("estado-tramite").innerText = "<?php echo $estado_tramite; ?>";
         document.getElementById("estado-tramite").classList.add("<?php echo $estado_clase; ?>");
 
-        // Si hay un archivo adjunto, mostrar el botón de descarga
+        // Si hay un archivo adjunto, configurar el enlace para la descarga
         <?php if ($adjunto): ?>
-            document.getElementById("adjunto-section").style.display = "block";
-            document.getElementById("adjunto-link").href = "http://localhost/uploads/<?php echo urlencode($adjunto); ?>";
+            document.getElementById("download-link").href = "data:image/jpeg;base64,<?php echo $adjunto; ?>";
+            document.getElementById("download-link").download = "archivo_adjunto";
         <?php endif; ?>
     </script>
+
 </body>
 </html>

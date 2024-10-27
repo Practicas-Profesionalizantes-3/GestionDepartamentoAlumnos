@@ -41,15 +41,15 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
             $mostrar_opciones = $_SESSION['mostrar_opciones_cartelera'];
             if ($mostrar_opciones == "opciones1") {
         ?>
-                <h2 class="tm-text-primary">Centro de Tecnológia e Innovación</h2>
-                <hr class="mb-5">
+            <h2 class="tm-text-primary mt-3">Centro de Tecnológia e Innovación</h2>
+            <hr class="mb-2">
         <?php
             }
         }
     ?>
 
     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-        <h2 class="mb-5"><span class="tm-text-primary">Cartelera de Alumnos - Noticias & Novedades</span></h2>
+        <h2 class="mb-5 mt-3"><span class="tm-text-primary">Cartelera de Alumnos - Noticias & Novedades</span></h2>
     </div>
 
     <?php

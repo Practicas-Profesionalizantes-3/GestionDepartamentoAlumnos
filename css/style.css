@@ -150,15 +150,6 @@ body {
   color: #fff;
 }
 
-body.dark {
-  --body-color: #18191a;
-  --sidebar-color: #242526;
-  --primary-color: #3a3b3c;
-  --primary-color-light: #3a3b3c;
-  --toggle-color: #fff;
-  --text-color: #ccc;
-}
-
 /* ===== Sidebar ===== */
 .sidebar {
   position: fixed;
@@ -277,10 +268,6 @@ header .image-text .profession {
   transition: var(--tran-05);
 }
 
-body.dark .sidebar header .toggle {
-  color: var(--text-color);
-}
-
 .sidebar.close .toggle {
   transform: translateY(-50%) rotate(0deg);
 }
@@ -328,10 +315,6 @@ body.dark .sidebar header .toggle {
 .sidebar li a:hover .text {
   color: var(--sidebar-color);
 }
-body.dark .sidebar li a:hover .icon,
-body.dark .sidebar li a:hover .text {
-  color: var(--text-color);
-}
 
 .sidebar .menu-bar {
   height: calc(100% - 55px);
@@ -359,12 +342,6 @@ body.dark .sidebar li a:hover .text {
   position: absolute;
 }
 .mode .sun-moon i.sun {
-  opacity: 0;
-}
-body.dark .mode .sun-moon i.sun {
-  opacity: 1;
-}
-body.dark .mode .sun-moon i.moon {
   opacity: 0;
 }
 
@@ -402,10 +379,6 @@ body.dark .mode .sun-moon i.moon {
   transition: var(--tran-04);
 }
 
-body.dark .switch::before {
-  left: 20px;
-}
-
 .home {
   position: absolute;
   top: 0;
@@ -428,12 +401,10 @@ body.dark .switch::before {
   height: 100vh;
   width: calc(100% - 78px);
 }
-body.dark .home .text {
-  color: var(--text-color);
-}
 
-/* ESTILOS DEL ICONO DE PERFIL */
-/* Estilos para el modal */
+
+/* Estilos para el modal de perfil*/
+
 .modal {
   display: none; /* Oculto por defecto */
   position: fixed; /* Fijo */
@@ -580,6 +551,7 @@ body.dark .home .text {
 }
 
 .input-group {
+  border-radius: 30px 30px 30px 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -712,4 +684,31 @@ p {
 .read-notification {
   background-color: #dcebf4;  /* Color gris claro para las notificaciones leídas */
   color: #6c757d;  /* Color de texto gris oscuro */
+}
+
+/* Estilo para la lista de carreras */
+.li-carreras {
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 0.10rem;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.li-carreras:hover {
+  transform: scale(1.02);
+
+}
+
+.li-carreras i {
+  font-size: 1.5rem;
+}
+
+/* Links de carreras */
+.li-carreras a {
+  text-decoration: none;
+  color: #212529;
+}
+
+.li-carreras a:hover {
+  color: #0056b3;
 }

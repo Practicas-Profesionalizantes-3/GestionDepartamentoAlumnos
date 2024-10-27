@@ -42,6 +42,7 @@ $("#formulario").submit(function (event) {
         processData: false,
         dataType: "json",
         success: function (data) {
+            console.log(data)
             if (data.success && data.id_tramite) {
                 var idTramite = data.id_tramite;
 
@@ -50,9 +51,7 @@ $("#formulario").submit(function (event) {
                     id_tramite: idTramite,
                     id_notificacion_tipo: 3,
                     id_notificacion_estado: 4,
-                    fecha_envio_notificacion: new Date().toISOString()
                 };
-
                 $.ajax({
                     type: "POST",
                     url: "http://localhost/api/api-Alumnos/notificaciones.php",
@@ -60,7 +59,7 @@ $("#formulario").submit(function (event) {
                     contentType: "application/json",
                     success: function (notificacionResponse) {
                         Swal.fire({
-                            title: "Su trámite y notificación fueron creados con éxito!",
+                            title: "Su trámite fue creado con éxito!",
                             icon: "success",
                             confirmButtonColor: "#006699",
                         }).then(() => {
@@ -68,6 +67,7 @@ $("#formulario").submit(function (event) {
                         });
                     },
                     error: function (error) {
+                        console.log(error)
                         Swal.fire({
                             title: "Error",
                             text: "No se pudo crear la notificación. Intente nuevamente.",
