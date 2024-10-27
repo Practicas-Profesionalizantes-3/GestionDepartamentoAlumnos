@@ -34,10 +34,11 @@ if (!$aviso) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instituto Tecnologico Beltran</title>
+    <title>Modificar aviso - Instituto Tecnologico Beltran</title>
     <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="shortcut icon" href="../img/logo-fav.png" type="image/x-icon"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/templatemo-upright.css">
     <link rel="stylesheet" href="../css/style.css">
@@ -101,9 +102,6 @@ if (!$aviso) {
                 <div class="file-containerX">
                     <input type="file" accept=".pdf" class="form-control" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto" data-existing="<?= $aviso['adjunto'] ?? ''; ?>">
                     <?php if ($aviso["adjunto"] != "") { ?>
-                      <button type="button" id="eliminar-pdf" class="btn-iconX">
-                          <i class="bi bi-x"></i>
-                      </button>
                         <a href="data:application/pdf;base64,<?= $aviso["adjunto"]; ?>" download="<?= htmlspecialchars($aviso["titulo"]); ?>" class="download-link">Descargar adjunto</a>
                     <?php } ?>
                 </div>
@@ -118,9 +116,9 @@ if (!$aviso) {
             <div class="mb-3">
                 <label for="imagen" class="form-label">Imagen:</label>
                 <div class="file-containerX">
-                    <input type="file" accept="image/jpeg, image/png" class="form-control mr-2" name="imagen" id="imagen" placeholder="Imagen" aria-describedby="fileHelpId" data-existing="<?= $aviso['imagen'] ?? ''; ?>">
-                    <?php if ($aviso["imagen"] != "") { ?>
-                        <a href="data:image/jpeg;base64,<?= $aviso["imagen"]; ?>" download="<?= htmlspecialchars($aviso["titulo"]) . '.jpg'; ?>">Descargar imagen</a>
+                  <?php if ($aviso["imagen"] != "") { ?>
+                    <input type="file" accept="image/jpeg, image/png" class="form-control mr-2" name="imagen" id="imagen" placeholder="Imagen"  aria-describedby="fileHelpId" data-existing="<?= $aviso['imagen'] ?? ''; ?>">
+                    <a href="data:image/jpeg;base64,<?= $aviso["imagen"]; ?>" download="<?= htmlspecialchars($aviso["titulo"]) . '.jpg'; ?>">Descargar imagen</a>
                     <?php } else { ?>
                     <?php } ?>
                 </div>
@@ -136,13 +134,14 @@ if (!$aviso) {
             <input type="text" value="<?= $aviso["id_usuario"] ?>" name="id_usuario" id="id_usuario" readonly hidden />
             <div class="d-flex justify-content-center">
               <button type="submit" class="btn btn-success mr-2" id="agregar-anuncio">Moficar</button>
-              <button type="button" class="btn btn-info  ml-2" id="cancelar-anuncio">Cancelar</button>
+              <button type="button" class="btn btn-info ml-2" id="cancelar-anuncio">Cancelar</button>
             </div>
           </form>
         <?php } ?>
       </div>
     </div>
   </div>
+
 
   <script src="../js/navbar.js"></script>
   <script src="../js/index.js"></script>
