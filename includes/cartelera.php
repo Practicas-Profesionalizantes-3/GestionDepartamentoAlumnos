@@ -73,16 +73,16 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
             }
         }
 
+        // Búsqueda con caracteres especiales
         if (isset($_POST['buscar'])) {
-            $search_term = strtolower($_POST['search-input']);
-    
+            $search_term = mb_strtolower($_POST['search-input'], 'UTF-8');
             $datos_filtrados = array_filter($datos, function ($item) use ($search_term) {
-                return strpos(strtolower($item['titulo']), $search_term) !== false ||
-                    strpos(strtolower($item['descripcion']), $search_term) !== false;
+                return strpos(mb_strtolower($item['titulo'], 'UTF-8'), $search_term) !== false ||
+                    strpos(mb_strtolower($item['descripcion'], 'UTF-8'), $search_term) !== false;
             });
-    
             $datos = $datos_filtrados;
         }
+        
     ?>
 
     <div class="row justify-content-center">
