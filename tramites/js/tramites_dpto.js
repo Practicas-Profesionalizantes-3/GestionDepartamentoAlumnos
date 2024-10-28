@@ -63,6 +63,7 @@ function drop(ev) {
 
 // Función para actualizar el estado del trámite en la API
 function actualizarEstadoTramite(idTramite, estado) {
+    var usuario = JSON.parse(sessionStorage.getItem("usuario"));
     return fetch('http://localhost/api/api-Alumnos/tramite_responsables.php', {
         method: 'PUT',
         headers: {

@@ -45,7 +45,6 @@ if (isset($_GET['id'])) {
         $descripcion = htmlspecialchars($tramite_encontrado['descripcion']);
         $fecha_creacion = htmlspecialchars($tramite_encontrado['fecha_creacion']);
         $estado_tramite = htmlspecialchars($tramite_encontrado['estado_tramite']);
-        $comentarios_tramite = htmlspecialchars($tramite_encontrado['comentarios']);
         $adjunto = isset($tramite_encontrado['archivo']) ? $tramite_encontrado['archivo'] : null;
         
         // Formatear la fecha y hora
@@ -76,6 +75,20 @@ if (isset($_GET['id'])) {
 
     if (!is_array($movimientos) || empty($movimientos)) {
         $movimientos = []; // Si no hay movimientos, inicializar como un array vacío
+    }
+
+    // Ordenar movimientos por fecha
+    usort($movimientos, function ($a, $b) {
+        return strtotime($b['fecha_movimiento']) - strtotime($a['fecha_movimiento']); // Ordenar de más reciente a más antiguo
+    });
+
+    // Lógica para obtener los comentarios del trámite
+    $api_comentarios_url = 'http://localhost/api/api-Alumnos/tramite_comentarios.php?id_tramite=' . $tramite_encontrado['id_tramite'];
+    $comentarios_response = @file_get_contents($api_comentarios_url);
+    $comentarios = json_decode($comentarios_response, true);
+
+    if (!is_array($comentarios) || empty($comentarios)) {
+        $comentarios = []; // Si no hay comentarios, inicializar como un array vacío
     }
 } else {
     die("Error: No se recibió el ID de la notificación.");
@@ -128,25 +141,31 @@ if (isset($_GET['id'])) {
                                 <p class="card-text">Descripción: <span id="descripcion-tramite"></span></p>
                                 <p class="card-text">Fecha de Creación: <span id="fecha-tramite"></span></p>
                                 <p class="card-text">Estado del Trámite: <span id="estado-tramite" class="estado"></span></p>
-                                <p class="card-text">Comentarios: <span id="comentario-tramite"></span></p>
                                 <p class="card-text">Movimientos del Trámite: </p>
                                 <ul id="movimientos-list" class="list-group">
                                     <?php if (!empty($movimientos)): ?>
                                         <?php foreach ($movimientos as $movimiento): ?>
-                                            <?php
-                                            // Formatear la fecha y hora
-                                            $fecha_movimiento_obj = new DateTime($movimiento['fecha_movimiento']);
-                                            $fecha_movimiento_formateada = $fecha_movimiento_obj->format('d/m/Y H:i');
-                                            ?>
-                                            <li class="list-group-item">
-                                                <strong>Fecha:</strong> <?php echo htmlspecialchars($fecha_movimiento_formateada); ?> - 
-                                                <strong>Observación:</strong> <?php echo htmlspecialchars($movimiento['observacion']); ?>
-                                            </li>
+                                        <li class="list-group-item">
+                                            <strong><?php echo date('d/m/Y H:i', strtotime($movimiento['fecha_movimiento'])); ?></strong> - 
+                                            <span><?php echo $movimiento['observacion']; ?></span>
+                                        </li>
                                         <?php endforeach; ?>
                                     <?php else: ?>
                                         <li class="list-group-item">No hay movimientos registrados para este trámite.</li>
                                     <?php endif; ?>
                                 </ul>
+
+                                <?php if (!empty($comentarios)): ?>
+                                    <p class="card-text mt-3">Comentarios:</p>
+                                    <ul class="list-group mb-3">
+                                        <?php foreach ($comentarios as $comentario): ?>
+                                            <li class="list-group-item">
+                                                <strong><?php echo date('d/m/Y H:i', strtotime($comentario['fecha_comentario'])); ?></strong> - <?php echo htmlspecialchars($comentario['comentario']); ?>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                <?php endif; ?>
+
                                 <!-- Mostrar botón de descarga si el adjunto existe -->
                                 <?php if ($adjunto): ?>
                                     <div class="d-flex justify-content-end mt-3">
@@ -175,7 +194,6 @@ if (isset($_GET['id'])) {
         // Mostrar los datos del trámite en el frontend
         document.getElementById("titulo-tramite").innerText = "<?php echo $titulo; ?>";
         document.getElementById("descripcion-tramite").innerText = "<?php echo $descripcion; ?>";
-        document.getElementById("comentario-tramite").innerText = "<?php echo $comentarios_tramite; ?>";
         document.getElementById("fecha-tramite").innerText = "<?php echo $fecha_formateada; ?>";
         document.getElementById("estado-tramite").innerText = "<?php echo $estado_tramite; ?>";
         document.getElementById("estado-tramite").classList.add("<?php echo $estado_clase; ?>");

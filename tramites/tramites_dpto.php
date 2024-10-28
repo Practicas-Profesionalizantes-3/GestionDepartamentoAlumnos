@@ -19,7 +19,6 @@ if ($response !== false) {
         $data = $tramites;
     }
 }
-// Función para generar el HTML del trámite
 function generar_tramite_html($datos) {
     // Verificar si todas las claves necesarias están presentes
     if (!isset($datos['id_tramite'], $datos['tipo_tramite'], $datos['descripcion'], $datos['estado_tramite'], $datos['responsable'], $datos['nombre'], $datos['apellido'], $datos['fecha_creacion'])) {
@@ -28,34 +27,66 @@ function generar_tramite_html($datos) {
 
     // Clase de color basada en el estado del trámite
     $clase_estado = strtolower(str_replace(' ', '-', $datos['estado_tramite'])); // Reemplazar espacios por guiones
+    // Lógica para obtener los comentarios del trámite
 
-    return "
-    <div class='container_tramites_dpto {$clase_estado}' draggable='true' ondragstart='drag(event)' id='tramite-{$datos['id_tramite']}'>
-        <h4 class='titlulo_tramites_dpto'>{$datos['tipo_tramite']}</h4>
-        <p class='subtitle_tramites_dpto'>{$datos['descripcion']}</p>
-        <div class='actions-tramites_dpto'>
-            <label class='responsable_tramites_dpto'>Responsable: {$datos['responsable']}</label>
+    $api_comentarios_url = 'http://localhost/api/api-Alumnos/tramite_comentarios.php?id_tramite=' . $datos['id_tramite'];
+    $comentarios_response = @file_get_contents($api_comentarios_url);
+    $comentarios = json_decode($comentarios_response, true);
+
+    if (!is_array($comentarios) || empty($comentarios)) {
+        $comentarios = []; // Si no hay comentarios, inicializar como un array vacío
+    }
+
+    $comentarios_html = '';
+    if (!empty($comentarios)) {
+        $comentarios_html .= '<div class="div-comentarios">
+            <p class="fecha_dpto">Comentarios:</p>
+            <ul class="list-group mb-3">';
+        foreach ($comentarios as $comentario) {
+            $comentarios_html .= '<li class="list-group-item">
+                <strong>' . date('d/m/Y H:i', strtotime($comentario['fecha_comentario'])) . '</strong> - ' . htmlspecialchars($comentario['comentario']).'
+            </li>';
+        }
+        $comentarios_html .= '</ul></div>';
+    }
+
+    // Generar HTML para el adjunto si existe
+    $archivo_html = '';
+    if (isset($datos['archivo']) && !empty($datos['archivo'])) {
+        $archivo_html = '<div>
+            <a href="data:image/jpeg;base64,' . htmlspecialchars($datos['archivo']) . '" class="btn btn-secondary" download>📥 Descargar</a>
+        </div>';
+    }
+    
+    
+    return '
+    <div class="container_tramites_dpto ' . $clase_estado . '" draggable="true" ondragstart="drag(event)" id="tramite-' . $datos['id_tramite'] . '">
+        <h4 class="titlulo_tramites_dpto">' . htmlspecialchars($datos['tipo_tramite']) . '</h4>
+        <p class="subtitle_tramites_dpto">' . htmlspecialchars($datos['descripcion']) . '</p>
+        <div class="actions-tramites_dpto">
+            <label class="responsable_tramites_dpto">Responsable: ' . htmlspecialchars($datos['responsable']) . '</label>
         </div>
-        <div class='d-flex justify-content-between'>
-            <label class='estado_tramites_dpto'>Estado: {$datos['estado_tramite']}</label>
-            <label class='avatar_dpto'>Usuario: {$datos['nombre']} {$datos['apellido']}</label>
+        <div class="d-flex justify-content-between estado-nombre">
+            <label class="estado_tramites_dpto">Estado: ' . htmlspecialchars($datos['estado_tramite']) . '</label>
+            <label class="avatar_dpto">Usuario: ' . htmlspecialchars($datos['nombre']) . ' ' . htmlspecialchars($datos['apellido']) . '</label>
         </div>
-        <div class='d-flex justify-content-between'>
-            <label class='comentarios'>Comentarios: {$datos['comentarios']}</label>
+        <div class="d-flex justify-content-between">
+            <p class="fecha_dpto">' . date('d-m-Y H:i', strtotime($datos['fecha_creacion'])) . '</p>
         </div>
-        <div class='d-flex justify-content-between'>
-            <p class='fecha_dpto'>" . date('d-m-Y H:i', strtotime($datos['fecha_creacion'])) . "</p>
-        </div>
-        <div class='d-flex justify-content-between align-items-center'>
+        ' . $comentarios_html . '
+
+        <div class="d-flex justify-content-between align-items-center">
             <div>
-                <button class='btn btn-comentar' onclick='comentarTramite({$datos['id_tramite']}); return false;'>💬 Comentar</button>
+                <button class="btn btn-comentar" onclick="comentarTramite(' . $datos['id_tramite'] . '); return false;">💬 Comentar</button>
             </div>
+        ' . $archivo_html . '
             <div>
-                <button class='btn btn-secondary' onclick='imprimirTarjeta({$datos['id_tramite']})'>🖨️ Imprimir</button>
+                <button class="btn btn-secondary" onclick="imprimirTarjeta(' . $datos['id_tramite'] . ')">🖨️ Imprimir</button>
             </div>
         </div>
-    </div>";
+    </div>';
 }
+
 
 // Manejo de la paginación
 $items_per_page = 100; // Número de filas por página

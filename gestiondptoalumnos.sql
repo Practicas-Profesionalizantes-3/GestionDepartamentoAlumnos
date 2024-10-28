@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-10-2024 a las 07:13:06
+-- Tiempo de generación: 28-10-2024 a las 03:03:43
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -689,7 +689,6 @@ CREATE TABLE `tramites` (
   `id_tramite_tipo` int(11) NOT NULL,
   `id_estado_tramite` int(11) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
-  `comentarios` varchar(255) DEFAULT NULL,
   `fecha_creacion` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -725,6 +724,19 @@ INSERT INTO `tramites_tipo` (`id_tramite_tipo`, `descripcion`) VALUES
 CREATE TABLE `tramite_adjuntos` (
   `id_tramite` int(11) NOT NULL,
   `archivo` mediumblob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tramite_comentarios`
+--
+
+CREATE TABLE `tramite_comentarios` (
+  `id_tramite_comentario` int(11) NOT NULL,
+  `id_tramite` int(11) NOT NULL,
+  `comentario` varchar(255) NOT NULL,
+  `fecha_comentario` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -965,6 +977,12 @@ ALTER TABLE `tramite_adjuntos`
   ADD KEY `fk_idtramite` (`id_tramite`);
 
 --
+-- Indices de la tabla `tramite_comentarios`
+--
+ALTER TABLE `tramite_comentarios`
+  ADD PRIMARY KEY (`id_tramite_comentario`);
+
+--
 -- Indices de la tabla `tramite_estados`
 --
 ALTER TABLE `tramite_estados`
@@ -1079,6 +1097,12 @@ ALTER TABLE `tipo_notificaciones`
 --
 ALTER TABLE `tramites`
   MODIFY `id_tramite` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tramite_comentarios`
+--
+ALTER TABLE `tramite_comentarios`
+  MODIFY `id_tramite_comentario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
