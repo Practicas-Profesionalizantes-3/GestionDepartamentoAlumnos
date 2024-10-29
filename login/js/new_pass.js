@@ -35,7 +35,7 @@ $("#formulario").on("submit", function (event) {
                 contentType: "application/json",
                 dataType: "json",
                 success: function (data) {
-                    if (data.success == true) {
+                    if (data.success === true) {
                         console.log("funciono", data);
                         Swal.fire({
                             icon: "success",
@@ -43,8 +43,11 @@ $("#formulario").on("submit", function (event) {
                             text: "Tu contraseña ha sido restablecida con éxito.",
                             confirmButtonText: "Aceptar",
                             confirmButtonColor: "#3085d6",
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "../login/index.html"; // Redirigir a la página de login
+                            }
                         });
-                        window.location.href = "../login/index.html"
                     } else {
                         Swal.fire({
                             icon: "error",

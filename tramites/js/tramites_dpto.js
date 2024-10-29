@@ -38,6 +38,15 @@ function drop(ev) {
     actualizarEstadoTramite(idTramite, estado)
         .then(() => registrarMovimientoTramite(idTramite, estado))
         .then(() => {
+            // Crear la notificación
+            var notificacionData = {
+                id_tramite: idTramite,
+                id_notificacion_tipo: 3,
+                id_notificacion_estado: 4,
+            };
+            return crearNotificacion(notificacionData);
+        })
+        .then(() => {
             // Mover el trámite a la columna correcta
             ev.target.appendChild(tramite);
             tramite.classList.add("dragged");
@@ -60,9 +69,27 @@ function drop(ev) {
         .catch(error => console.error(error));
 }
 
+// Función para crear la notificación usando fetch
+function crearNotificacion(notificacionData) {
+    return fetch('http://localhost/api/api-Alumnos/notificaciones.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(notificacionData)
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Error en la actualización de la notificacion');
+        }
+    });
+}
 
 // Función para actualizar el estado del trámite en la API
 function actualizarEstadoTramite(idTramite, estado) {
+    var usuario = JSON.parse(sessionStorage.getItem("usuario"));
     return fetch('http://localhost/api/api-Alumnos/tramite_responsables.php', {
         method: 'PUT',
         headers: {
@@ -85,6 +112,7 @@ function actualizarEstadoTramite(idTramite, estado) {
 
 // Función para registrar el movimiento del trámite en la API
 function registrarMovimientoTramite(idTramite, estado) {
+    var usuario = JSON.parse(sessionStorage.getItem("usuario")); // Asegúrate de definir usuario aquí
     return fetch('http://localhost/api/api-Alumnos/tramite_movimientos.php', {
         method: 'POST',
         headers: {
@@ -108,7 +136,6 @@ function registrarMovimientoTramite(idTramite, estado) {
         }
     });
 }
-
 
 // Evento para remover la clase 'dragged' cuando el elemento es soltado
 document.addEventListener("dragend", function(event) {

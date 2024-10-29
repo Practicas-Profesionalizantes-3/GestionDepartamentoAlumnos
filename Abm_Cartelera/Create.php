@@ -1,7 +1,7 @@
 <?php
-$combo_aviso_tipo_url = "http://localhost/api/api-Alumnos/aviso_tipo.php";
-$response_aviso_tipos = file_get_contents($combo_aviso_tipo_url);
-$data_aviso_tipos = json_decode($response_aviso_tipos, true);
+    $combo_aviso_tipo_url = "http://localhost/api/api-Alumnos/aviso_tipo.php";
+    $response_aviso_tipos = file_get_contents($combo_aviso_tipo_url);
+    $data_aviso_tipos = json_decode($response_aviso_tipos, true);
 ?>
 
 <!DOCTYPE html>
@@ -10,10 +10,11 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instituto Tecnologico Beltran</title>
+    <title>Crear aviso - Instituto Tecnologico Beltran</title>
     <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="shortcut icon" href="../img/logo-fav.png" type="image/x-icon"/>
     <link rel="stylesheet" href="/gestiondepartamentoalumnos/css/bootstrap.min.css">
     <link rel="stylesheet" href="/gestiondepartamentoalumnos/css/templatemo-upright.css">
     <link rel="stylesheet" href="/gestiondepartamentoalumnos/css/style.css">
@@ -79,7 +80,7 @@ $data_aviso_tipos = json_decode($response_aviso_tipos, true);
                     </div>
                     <div class="mb-3">
                         <label for="fecha_vencimiento" class="form-label">Fecha de Vencimiento:</label>
-                        <input type="date" class="form-control" name="fecha_vencimiento" id="fecha_vencimiento" aria-describedby="helpId" placeholder="Fecha de Vencimiento" required value="<?php $hoy = date("Y-m-d", strtotime("+1 day")); echo $hoy; ?>">
+                        <input type="date" class="form-control" name="fecha_vencimiento" id="fecha_vencimiento" aria-describedby="helpId" placeholder="Fecha de Vencimiento" required value="<?php date_default_timezone_set('America/Argentina/Buenos_Aires'); $hoy = date('Y-m-d', strtotime('+1 day')); echo $hoy; ?>">
                     </div>
                     <div class="mb-3">
                         <label for="adjunto" class="form-label">Adjunto:</label>

@@ -6,8 +6,8 @@ $("#formulario").submit(function (event) {
         return;
     }
     let tramite = {
-        id_usuario_creacion: JSON.parse(usuario.id_usuario),
-        id_usuario_responsable: JSON.parse(usuario.id_usuario),
+        id_usuario_creacion: usuario.id_usuario,
+        id_usuario_responsable: usuario.id_usuario,
         id_tramite_tipo: $("#id_tramite_tipo").val(),
         descripcion: $("#carrera").find(":selected").text() + " " + 
                      $("#materia").find(":selected").text() + " " + 
@@ -42,6 +42,7 @@ $("#formulario").submit(function (event) {
         processData: false,
         dataType: "json",
         success: function (data) {
+            console.log(data);
             if (data.success && data.id_tramite) {
                 var idTramite = data.id_tramite;
 
@@ -50,17 +51,15 @@ $("#formulario").submit(function (event) {
                     id_tramite: idTramite,
                     id_notificacion_tipo: 3,
                     id_notificacion_estado: 4,
-                    fecha_envio_notificacion: new Date().toISOString()
                 };
-
                 $.ajax({
                     type: "POST",
                     url: "http://localhost/api/api-Alumnos/notificaciones.php",
                     data: JSON.stringify(notificacionData),
                     contentType: "application/json",
-                    success: function (notificacionResponse) {
+                    success: function () {
                         Swal.fire({
-                            title: "Su trámite y notificación fueron creados con éxito!",
+                            title: "Su trámite fue creado con éxito!",
                             icon: "success",
                             confirmButtonColor: "#006699",
                         }).then(() => {
@@ -68,6 +67,7 @@ $("#formulario").submit(function (event) {
                         });
                     },
                     error: function (error) {
+                        console.log(error);
                         Swal.fire({
                             title: "Error",
                             text: "No se pudo crear la notificación. Intente nuevamente.",
@@ -76,6 +76,10 @@ $("#formulario").submit(function (event) {
                         });
                     }
                 });
+
+                // Registrar movimiento del trámite
+                registrarMovimientoTramite(idTramite, 1); // Aquí puedes ajustar el estado inicial si es necesario
+
             } else {
                 console.log("No se pudo crear el trámite o no se devolvió el ID del trámite", data);
                 Swal.fire({
@@ -97,3 +101,40 @@ $("#formulario").submit(function (event) {
         }
     });
 });
+
+// Función para registrar el movimiento del trámite en la API
+function registrarMovimientoTramite(idTramite, estado) {
+    var usuario = JSON.parse(sessionStorage.getItem("usuario"));
+    var columna = "pendiente"; // Ajustar según el estado que corresponda
+    fetch('http://localhost/api/api-Alumnos/tramite_movimientos.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id_tramite: idTramite,
+            fecha_movimiento: new Date().toISOString().split('T')[0], // Fecha en formato YYYY-MM-DD
+            id_usuario: usuario.id_usuario, 
+            observacion: "Cambio de estado a " + columna, 
+            id_estado_tramite: estado
+        })
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            return response.text().then(text => {
+                throw new Error(`Error en el registro del movimiento: ${text}`);
+            });
+        }
+    })
+    .catch(error => {
+        console.log(error);
+        Swal.fire({
+            title: "Error",
+            text: "No se pudo registrar el movimiento del trámite.",
+            icon: "error",
+            confirmButtonColor: "#006699"
+        });
+    });
+}

@@ -38,16 +38,16 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
         if (isset($_SESSION['mostrar_opciones_cartelera'])) {
             $mostrar_opciones = $_SESSION['mostrar_opciones_cartelera'];
             if ($mostrar_opciones == "opciones1") {
-    ?>
-                <h2 class="tm-text-primary">Centro de Tecnológia e Innovación</h2>
-                <hr class="mb-5">
-    <?php
+        ?>
+            <h2 class="tm-text-primary mt-3">Centro de Tecnológia e Innovación</h2>
+            <hr class="mb-2">
+        <?php
             }
         }
     ?>
 
     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-        <h2 class="mb-5"><span class="tm-text-primary">Cartelera de Alumnos - Noticias & Novedades</span></h2>
+        <h2 class="mb-5 mt-3"><span class="tm-text-primary">Cartelera de Alumnos - Noticias & Novedades</span></h2>
     </div>
 
     <?php
@@ -74,14 +74,13 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
         // Búsqueda con caracteres especiales
         if (isset($_POST['buscar'])) {
             $search_term = mb_strtolower($_POST['search-input'], 'UTF-8');
-    
             $datos_filtrados = array_filter($datos, function ($item) use ($search_term) {
                 return strpos(mb_strtolower($item['titulo'], 'UTF-8'), $search_term) !== false ||
                     strpos(mb_strtolower($item['descripcion'], 'UTF-8'), $search_term) !== false;
             });
-    
             $datos = $datos_filtrados;
         }
+        
     ?>
 
     <div class="row justify-content-center">
@@ -89,13 +88,16 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
             <?php foreach ($datos as $index => $item) : ?>
                 <div class="col-lg-4 tm-col-home mb-4" data-wow-delay="0.1s">
                     <div class="position-relative border-cartelera" id="cartelera-<?php echo $index; ?>">
+                        <?php echo $item['fijado'] == 1 ? '<i class="fas fa-thumbtack icon-fijado" title="Fijado"></i>' : '' ;?>
                         <div class="img-cartelera mb-3">
                             <img class="img-cartelera-item" src="<?= $item["imagen"] != "" ? "data:image/jpeg;base64," . $item["imagen"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheiic81_IfFML2GH1T9qtee4KTajErPLBmg&s" ?>" />
                         </div>
                         <hr style="width: 50%;" class="d-flex m-auto">
                         <div class="img-container mt-3">
                             <div class="overlay">
-                                <h5 class="mb-3 cartelera-titulo"><?php echo htmlspecialchars($item['titulo']); ?></h5>
+                                <h5 class="mb-3 cartelera-titulo">
+                                    <?php echo htmlspecialchars($item['titulo']); ?>
+                                </h5>
 
                                 <!-- Contenedor de descripción -->
                                 <div class="descripcion-container">

@@ -46,10 +46,11 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instituto Tecnologico Beltran</title>
+    <title>Mis tramites - Instituto Tecnologico Beltran</title>
     <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="shortcut icon" href="../img/logo-fav.png" type="image/x-icon"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/templatemo-upright.css">
     <link rel="stylesheet" href="../css/style.css">
@@ -59,6 +60,7 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"> <!-- Toastify CSS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script> <!-- Toastify JS-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SwettAlert -->
+    
 </head>
 
 <body>
@@ -81,7 +83,7 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
                         <h1 class="tm-text-primary">Mis trámites</h1>
                     </div>
 
-                    <div class="listadoAvisos">
+                    <div>
                         <a type="button" class="btn btn-primary btn-volver" href="index.php" role="button">Volver</a>
                     </div>
 
@@ -145,16 +147,13 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
         }
     </script>
 
-    <script src="js/validar.js"></script>
     <script src="../js/index.js"></script>
     <script src="../js/navbar.js"></script>
     <script src="../js/perfil.js"></script>
     <script src="../js/notificaciones.js"></script>
+    <script src="js/validar.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5Pil2tXdHhjTvQ9lQS6yIiwnyF3vухQ9Etqkibi1DwYLPSAOxocnipl" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0J9d9n00bu9XR4GQ6fhY7xQpfPtcp7tF" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 </html>

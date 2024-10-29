@@ -34,6 +34,11 @@ function imprimirTarjeta(id) {
                 display: flex;
                 justify-content: center;
             }
+            .estado-nombre{
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+            }
             div {
                 margin: 20px 0px;
             }
@@ -43,6 +48,12 @@ function imprimirTarjeta(id) {
                 justify-content: space-between;
             }   
             button {
+                display: none;
+            }
+            a{
+                display: none;
+            }
+            .div-comentarios{
                 display: none;
             }
         </style>

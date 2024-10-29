@@ -1,38 +1,39 @@
 <?php
-$api_url = 'http://localhost/api/api-Alumnos/usuarios.php';
+    $api_url = 'http://localhost/api/api-Alumnos/usuarios.php';
 
-$response = file_get_contents($api_url);
-$datas = json_decode($response, true);
-$data = $datas["data"];
-usort($data, function ($a, $b) {
-    return $a['id_usuario'] - $b['id_usuario'];
-});
+    $response = file_get_contents($api_url);
+    $datas = json_decode($response, true);
+    $data = $datas["data"];
+    usort($data, function ($a, $b) {
+        return $a['id_usuario'] - $b['id_usuario'];
+    });
 
-$usuarios = $data;
+    $usuarios = $data;
 
-$items_per_page = 5; // Número de filas por página
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
-$offset = ($page - 1) * $items_per_page; // Desplazamiento
+    $items_per_page = 5; // Número de filas por página
+    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página actual
+    $offset = ($page - 1) * $items_per_page; // Desplazamiento
 
-// Obtener el total de usuarios 
-$total_usuarios = count($usuarios);
+    // Obtener el total de usuarios 
+    $total_usuarios = count($usuarios);
 
-// Calcular el total de páginas
-$total_pages = ceil($total_usuarios  / $items_per_page);
+    // Calcular el total de páginas
+    $total_pages = ceil($total_usuarios  / $items_per_page);
 
-// Obtener los usuarios  para la página actual
-$current_page_usuarios  = array_slice($usuarios, $offset, $items_per_page);
-echo "<script>console.log(" . $response . ")</script>";
+    // Obtener los usuarios  para la página actual
+    $current_page_usuarios  = array_slice($usuarios, $offset, $items_per_page);
+    echo "<script>console.log(" . $response . ")</script>";
 ?>
 <!DOCTYPE html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instituto Tecnologico Beltran</title>
+    <title>Usuarios - Instituto Tecnologico Beltran</title>
     <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="shortcut icon" href="../img/logo-fav.png" type="image/x-icon"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/templatemo-upright.css">
     <link rel="stylesheet" href="../css/style.css">

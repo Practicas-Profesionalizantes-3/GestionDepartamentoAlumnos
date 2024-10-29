@@ -2,11 +2,12 @@
 <html lang="es">
 
 <head>
-    <title>Instituto Tecnológico Beltran</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Recuperar contraseña - Instituto Tecnológico Beltran</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="../img/logo-fav.png" type="image/x-icon"/>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="scss/style.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"> <!-- Toastify CSS -->
@@ -26,7 +27,7 @@
             <div class="form-container mt-5">
                 <form signin-form" id="formulario" method="post">
                     <div class="form-group">
-                        <input id="email" type="email" class="form-control" placeholder="Email" name="email" required>
+                        <input id="email" type="email" class="form-control" placeholder="Email" name="email">
                     </div>
 
                     <div class="form-group mt-4">

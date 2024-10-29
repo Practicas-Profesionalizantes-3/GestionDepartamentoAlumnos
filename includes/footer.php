@@ -37,12 +37,12 @@
                 <div class="single-footer-widget text-light">
                     <h2 class="single-footer-titulo">Enlaces útiles</h2>
                     <ul class="footer-list">
-                        <li><a href="autoridades.php" class="text-light">Autoridades</a></li>
-                        <li><a href="inscripcion_telefonica.php" class="text-light">Inscripción Telefonica</a></li>
-                        <li><a href="trabaja_nosotros.php" class="text-light">Trabaja con Nosotros</a></li>
-                        <li><a href="contacto.php" class="text-light">Informes y Consultas</a></li>
-                        <li><a href="index.php" class="text-light">Términos y condiciones</a></li>
-                        <li><a href="index.php" class="text-light">Política de Privacidad</a></li>
+                        <li><a href="https://www.ibeltran.com.ar/autoridades.php" class="text-light">Autoridades</a></li>
+                        <li><a href="https://www.ibeltran.com.ar/inscripcion_telefonica.php" class="text-light">Inscripción Telefonica</a></li>
+                        <li><a href="https://www.ibeltran.com.ar/trabaja_nosotros.php" class="text-light">Trabaja con Nosotros</a></li>
+                        <li><a href="https://www.ibeltran.com.ar/contacto.php" class="text-light">Informes y Consultas</a></li>
+                        <li><a href="https://www.ibeltran.com.ar/index.php" class="text-light">Términos y condiciones</a></li>
+                        <li><a href="https://www.ibeltran.com.ar/index.php" class="text-light">Política de Privacidad</a></li>
                     </ul>
                 </div>
             </div>   
