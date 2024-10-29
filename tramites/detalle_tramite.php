@@ -36,6 +36,7 @@ if (isset($_GET['id'])) {
             break;
         }
     }
+}
 
     // Verificar si se encontró el trámite
     if ($tramite_encontrado) {
