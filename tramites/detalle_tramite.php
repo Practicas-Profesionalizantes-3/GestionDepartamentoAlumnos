@@ -180,6 +180,10 @@ if (isset($_GET['id'])) {
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="../js/index.js"></script>
     <script src="../js/navbar.js"></script>
