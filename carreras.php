@@ -71,7 +71,7 @@
                                     <li class="d-flex justify-content-between align-items-center li-carreras">
                                         <span>
                                             <i class="<?php echo $icono; ?> text-primary me-2"></i>
-                                            <a href="<?php echo $carrera["url"]; ?>" class="text-dark fw-bold"><?php echo $carrera["descripcion"]; ?></a>
+                                            <a href="<?php echo $carrera["url"]; ?>" class="text-dark fw-bold"  target="_blank"><?php echo $carrera["descripcion"]; ?></a>
                                         </span>
                                         <i class="bi bi-bookmark-star-fill text-primary"></i>
                                     </li>
