@@ -41,8 +41,12 @@ if (isset($_GET['id'])) {
     // Verificar si se encontró el trámite
     if ($tramite_encontrado) {
         // Asignar los valores del trámite encontrado a variables
+       
         $titulo = htmlspecialchars($tramite_encontrado['tipo_tramite']);
         $descripcion = htmlspecialchars($tramite_encontrado['descripcion']);
+        $responsable = htmlspecialchars($tramite_encontrado['responsable']);
+        $responsable_apellido = htmlspecialchars($tramite_encontrado['responsable_apellido']);
+        $responsable_completo = $responsable_apellido . " " .  $responsable;
         $fecha_creacion = htmlspecialchars($tramite_encontrado['fecha_creacion']);
         $estado_tramite = htmlspecialchars($tramite_encontrado['estado_tramite']);
         $adjunto = isset($tramite_encontrado['archivo']) ? $tramite_encontrado['archivo'] : null;
@@ -140,6 +144,7 @@ if (isset($_GET['id'])) {
                                 <h5 class="card-title" style="color: black;">Título: <span id="titulo-tramite"></span></h5>
                                 <p class="card-text">Descripción: <span id="descripcion-tramite"></span></p>
                                 <p class="card-text">Fecha de Creación: <span id="fecha-tramite"></span></p>
+                                <p class="card-text">Responsable: <span id="responsable"></span></p>
                                 <p class="card-text">Estado del Trámite: <span id="estado-tramite" class="estado"></span></p>
                                 <p class="card-text">Movimientos del Trámite: </p>
                                 <ul id="movimientos-list" class="list-group">
@@ -198,6 +203,7 @@ if (isset($_GET['id'])) {
         // Mostrar los datos del trámite en el frontend
         document.getElementById("titulo-tramite").innerText = "<?php echo $titulo; ?>";
         document.getElementById("descripcion-tramite").innerText = "<?php echo $descripcion; ?>";
+        document.getElementById("responsable").innerText = "<?php echo $responsable_completo; ?>";
         document.getElementById("fecha-tramite").innerText = "<?php echo $fecha_formateada; ?>";
         document.getElementById("estado-tramite").innerText = "<?php echo $estado_tramite; ?>";
         document.getElementById("estado-tramite").classList.add("<?php echo $estado_clase; ?>");

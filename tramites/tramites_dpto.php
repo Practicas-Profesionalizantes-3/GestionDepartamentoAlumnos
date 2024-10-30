@@ -64,7 +64,7 @@ function generar_tramite_html($datos) {
         <h4 class="titlulo_tramites_dpto">' . htmlspecialchars($datos['tipo_tramite']) . '</h4>
         <p class="subtitle_tramites_dpto">' . htmlspecialchars($datos['descripcion']) . '</p>
         <div class="actions-tramites_dpto">
-            <label class="responsable_tramites_dpto">Responsable: ' . htmlspecialchars($datos['responsable']) . '</label>
+            <label class="responsable_tramites_dpto">Responsable: ' . htmlspecialchars($datos['responsable_apellido']) . " " . htmlspecialchars($datos['responsable']) . '</label>
         </div>
         <div class="d-flex justify-content-between estado-nombre">
             <label class="estado_tramites_dpto">Estado: ' . htmlspecialchars($datos['estado_tramite']) . '</label>
@@ -86,7 +86,7 @@ function generar_tramite_html($datos) {
         </div>
     </div>';
 }
-
+   
 
 // Manejo de la paginación
 $items_per_page = 100; // Número de filas por página
