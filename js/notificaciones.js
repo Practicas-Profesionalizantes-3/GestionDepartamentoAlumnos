@@ -52,11 +52,6 @@ function actualizarContadorNotificaciones() {
             // Filtrar solo las notificaciones no leídas
             const notificaciones_no_leidas = data.filter(notificacion => notificacion.id_notificacion_estado != 3);
             const notificaciones_count = notificaciones_no_leidas.length;
-<<<<<<< HEAD
-
-            // Actualizar el contador en la interfaz
-            document.getElementById('count-label').textContent = notificaciones_count;
-=======
             const contador = document.getElementById("count-label");
 
             // Actualizar el contador en la interfaz
@@ -65,7 +60,6 @@ function actualizarContadorNotificaciones() {
             if (notificaciones_count == 0) {
                 contador.style.display="none";
             }
->>>>>>> e39c28f36b2ec4ec3a34e5ad8765b0b1c0eea07e
         })
         .catch(error => {
             console.error('Error al obtener notificaciones:', error);
@@ -73,8 +67,4 @@ function actualizarContadorNotificaciones() {
 }
 
 // Actualizar el contador de notificaciones cada 5 segundos
-<<<<<<< HEAD
-setInterval(actualizarContadorNotificaciones, 5000);  // 5000 ms = 5 segundos
-=======
 // setInterval(actualizarContadorNotificaciones, 5000);  // 5000 ms = 5 segundos
->>>>>>> e39c28f36b2ec4ec3a34e5ad8765b0b1c0eea07e

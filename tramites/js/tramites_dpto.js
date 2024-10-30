@@ -17,13 +17,13 @@ function drop(ev) {
     // Determinar el nuevo estado basado en la columna
     var estado = "";
     switch (columna) {
-        case "Pendiente":
+        case "pendiente":
             estado = "1"; // ID para 'Pendiente'
             break;
-        case "En Proceso":
+        case "en-proceso":
             estado = "2"; // ID para 'En Proceso'
             break;
-        case "Completado":
+        case "terminado":
             estado = "3"; // ID para 'Completado'
             break;
         default:
@@ -122,7 +122,7 @@ function registrarMovimientoTramite(idTramite, estado) {
             id_tramite: idTramite,
             fecha_movimiento: new Date().toISOString().split('T')[0], // Fecha en formato YYYY-MM-DD
             id_usuario: usuario.id_usuario, // Asegúrate de que esto esté definido
-            observacion: columna, // Observación
+            observacion: "Cambio de estado a " + columna, // Observación
             id_estado_tramite: estado
         })
     })

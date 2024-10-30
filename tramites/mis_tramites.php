@@ -42,6 +42,7 @@ $total_pages = ceil($total_tramites / $items_per_page);
 $current_page_tramites = array_slice($data, $offset, $items_per_page);
 ?>
 
+
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -99,7 +100,7 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
                                     <h2 class="titulo"><?php echo $datos['tipo_tramite']; ?></h2>
                                     <p class="subtitle"><?php echo $datos['descripcion']; ?></p>
                                     <div class="actions">
-                                        <label class="responsable">Responsable: <?php echo $datos['apellido'] . ' ' . $datos['nombre']; ?></label>
+                                        <label class="responsable">Responsable: <?php echo $datos['apellido']; ?> <?php echo $datos['responsable']; ?></label>
                                     </div>
                                     <div class="info">
                                         <label class="estado"><?php echo $datos['estado_tramite']; ?></label>

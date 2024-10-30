@@ -1,10 +1,11 @@
+
 <?php
 // Ajustar la zona horaria
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 
 // Obtener la fecha y hora actual en Buenos Aires
 $fecha_actual = new DateTime();
-$fecha_actual_formateada = $fecha_actual->format('d \-\ m \-\ Y  H:i');
+$fecha_actual_formateada = $fecha_actual->format('d/m/Y H:i');
 
 // Verificar si se recibió el ID de la notificación
 if (isset($_GET['id'])) {
@@ -36,20 +37,23 @@ if (isset($_GET['id'])) {
             break;
         }
     }
-}
 
     // Verificar si se encontró el trámite
     if ($tramite_encontrado) {
         // Asignar los valores del trámite encontrado a variables
+       
         $titulo = htmlspecialchars($tramite_encontrado['tipo_tramite']);
         $descripcion = htmlspecialchars($tramite_encontrado['descripcion']);
+        $responsable = htmlspecialchars($tramite_encontrado['responsable']);
+        $responsable_apellido = htmlspecialchars($tramite_encontrado['responsable_apellido']);
+        $responsable_completo = $responsable_apellido . " " .  $responsable;
         $fecha_creacion = htmlspecialchars($tramite_encontrado['fecha_creacion']);
         $estado_tramite = htmlspecialchars($tramite_encontrado['estado_tramite']);
         $adjunto = isset($tramite_encontrado['archivo']) ? $tramite_encontrado['archivo'] : null;
         
         // Formatear la fecha y hora
         $fecha_obj = new DateTime($fecha_creacion);
-        $fecha_formateada = $fecha_obj->format('d \-\ m \-\ Y'); // Formato día, mes y año
+        $fecha_formateada = $fecha_obj->format('d/m/Y H:i');
 
         // Clase CSS del estado
         $estado_clase = "";
@@ -64,13 +68,14 @@ if (isset($_GET['id'])) {
                 $estado_clase = "estado-completado";
                 break;
         }
-        
-        $adjunto = isset($tramite_encontrado['adjunto']) ? $tramite_encontrado['adjunto'] : null;
+    } else {
+        die("Error: No se encontró un trámite con ese ID.");
+    }
 
-        // Lógica para obtener los movimientos del trámite
-        $api_movimientos_url = 'http://localhost/api/api-Alumnos/tramite_movimientos.php?id_tramite=' . $tramite_encontrado['id_tramite'];
-        $movimientos_response = @file_get_contents($api_movimientos_url);
-        $movimientos = json_decode($movimientos_response, true);
+    // Lógica para obtener los movimientos del trámite
+    $api_movimientos_url = 'http://localhost/api/api-Alumnos/tramite_movimientos.php?id_tramite=' . $tramite_encontrado['id_tramite'];
+    $movimientos_response = @file_get_contents($api_movimientos_url);
+    $movimientos = json_decode($movimientos_response, true);
 
     if (!is_array($movimientos) || empty($movimientos)) {
         $movimientos = []; // Si no hay movimientos, inicializar como un array vacío
@@ -108,7 +113,7 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="css/style.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> <!----===== Boxicons CSS ===== -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"> <!-- Toastify CSS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script> <!-- Toastify JS-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  <!-- SwettAlert -->
@@ -139,6 +144,7 @@ if (isset($_GET['id'])) {
                                 <h5 class="card-title" style="color: black;">Título: <span id="titulo-tramite"></span></h5>
                                 <p class="card-text">Descripción: <span id="descripcion-tramite"></span></p>
                                 <p class="card-text">Fecha de Creación: <span id="fecha-tramite"></span></p>
+                                <p class="card-text">Responsable: <span id="responsable"></span></p>
                                 <p class="card-text">Estado del Trámite: <span id="estado-tramite" class="estado"></span></p>
                                 <p class="card-text">Movimientos del Trámite: </p>
                                 <ul id="movimientos-list" class="list-group">
@@ -193,6 +199,7 @@ if (isset($_GET['id'])) {
         // Mostrar los datos del trámite en el frontend
         document.getElementById("titulo-tramite").innerText = "<?php echo $titulo; ?>";
         document.getElementById("descripcion-tramite").innerText = "<?php echo $descripcion; ?>";
+        document.getElementById("responsable").innerText = "<?php echo $responsable_completo; ?>";
         document.getElementById("fecha-tramite").innerText = "<?php echo $fecha_formateada; ?>";
         document.getElementById("estado-tramite").innerText = "<?php echo $estado_tramite; ?>";
         document.getElementById("estado-tramite").classList.add("<?php echo $estado_clase; ?>");

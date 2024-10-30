@@ -1,44 +1,16 @@
-<<<<<<< HEAD
-html, body {
-  height: 100%;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f8f9fa;
-  font-family: 'Arial', sans-serif;
-}
-
-=======
->>>>>>> 353cebc9ea709331dee12620557abd57b87fd0b7
 .container {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-<<<<<<< HEAD
-  margin: 40px 0;
-=======
   border-radius: 15px;
->>>>>>> 353cebc9ea709331dee12620557abd57b87fd0b7
 }
 
-/* Estilos de la tarjeta */
 .card {
   position: relative;
   width: 100%;
   max-width: 700px;
   border: 1px solid #25b6d0;
-<<<<<<< HEAD
-  border-radius: 0.5rem;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-}
-
-.card-header {
-  background-color: #25b6d0;
-  color: white;
-  font-size: 1.25rem;
-=======
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 
 }
@@ -47,7 +19,6 @@ html, body {
   color: white;
   font-size: 1.25rem;
   text-align: center;
->>>>>>> 353cebc9ea709331dee12620557abd57b87fd0b7
   font-weight: bold;
   padding: 10px 20px;
   border-top-left-radius: 0.5rem;
@@ -68,8 +39,8 @@ html, body {
 .card-body {
   background-color: white;
   padding: 40px;
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 .card-title {
@@ -83,75 +54,35 @@ html, body {
 .card-text {
   color: #555;
   font-family: 'Kumbh Sans', Arial, sans-serif;
-<<<<<<< HEAD
-  font-size: 1rem;
-=======
   font-size: 1.25rem;
->>>>>>> 353cebc9ea709331dee12620557abd57b87fd0b7
   line-height: 1.5;
 }
 
-/* Estado de los trámites */
 .estado {
   font-weight: bold;
   padding: 0.2rem 0.4rem;
   border-radius: 0.25rem;
 }
 
+/* Diferentes colores para el estado del trámite */
 .estado-pendiente {
   background-color: #ffc107;
-<<<<<<< HEAD
-  color: #212529;
-=======
   color: rgb(255, 255, 255);
   text-shadow: 1px 1px 1px black;
->>>>>>> 353cebc9ea709331dee12620557abd57b87fd0b7
 }
 
 .estado-proceso {
   background-color: #17a2b8;
   color: white;
-<<<<<<< HEAD
-=======
   text-shadow: 1px 1px 1px black;
->>>>>>> 353cebc9ea709331dee12620557abd57b87fd0b7
 }
 
 .estado-completado {
   background-color: #28a745;
-<<<<<<< HEAD
-  color: white;
-=======
   color: #fff;
   text-shadow: 1px 1px 1px black;
->>>>>>> 353cebc9ea709331dee12620557abd57b87fd0b7
 }
 
-/* Comentarios de estado */
-.comentario-pendiente, .comentario-proceso, .comentario-completado {
-  color: white;
-  font-weight: bold;
-}
-
-.comentario-pendiente {
-  background-color: #ffc107;
-}
-
-.comentario-proceso {
-  background-color: #17a2b8;
-}
-
-.comentario-completado {
-  background-color: #28a745;
-}
-
-/* Estilo del nombre del responsable */
-.nombre-responsable {
-  color: #2980b9;
-  font-weight: bold;
-}
-
-/* Botón de descarga */
 .btn-download {
   margin-top: 25px;
   background-color: #007bff;
@@ -161,27 +92,8 @@ html, body {
   border-radius: 8px;
   text-decoration: none;
   font-size: 1.2rem;
-  display: inline-block;
-  text-align: center;
 }
 
 .btn-download:hover {
   background-color: #0056b3;
-  color: white;
-}
-
-/* Estilo personalizado para el botón "Volver a Mis Trámites" */
-.btn-secondary {
-  background-color: #25b6d0 !important; /* Color de fondo */
-  color: white !important; /* Color de texto */
-  border: none;
-  padding: 12px 20px;
-  font-size: 1rem;
-  text-decoration: none;
-  border-radius: 8px;
-}
-
-.btn-secondary:hover {
-  background-color: #1e94ab !important; /* Color más oscuro al pasar el mouse */
-  color: white !important;
 }

@@ -17,13 +17,6 @@ if ($response !== false) {
     // Verificar si el JSON se decodificó correctamente y es un array
     if (json_last_error() === JSON_ERROR_NONE && is_array($tramites)) {
         $data = $tramites;
-
-        // Aplicar la lógica de subconsulta para obtener los trámites con la fecha de creación más reciente
-        $data = array_filter($data, function ($item) use ($data) {
-            return $item['fecha_creacion'] === max(array_column(array_filter($data, function ($t) use ($item) {
-                return $t['id_tramite'] === $item['id_tramite'];
-            }), 'fecha_creacion'));
-        });
     }
 }
 function generar_tramite_html($datos) {
@@ -71,7 +64,7 @@ function generar_tramite_html($datos) {
         <h4 class="titlulo_tramites_dpto">' . htmlspecialchars($datos['tipo_tramite']) . '</h4>
         <p class="subtitle_tramites_dpto">' . htmlspecialchars($datos['descripcion']) . '</p>
         <div class="actions-tramites_dpto">
-            <label class="responsable_tramites_dpto">Responsable: ' . htmlspecialchars($datos['responsable']) . '</label>
+            <label class="responsable_tramites_dpto">Responsable: ' . htmlspecialchars($datos['responsable_apellido']) . " " . htmlspecialchars($datos['responsable']) . '</label>
         </div>
         <div class="d-flex justify-content-between estado-nombre">
             <label class="estado_tramites_dpto">Estado: ' . htmlspecialchars($datos['estado_tramite']) . '</label>
@@ -93,7 +86,7 @@ function generar_tramite_html($datos) {
         </div>
     </div>';
 }
-
+   
 
 // Manejo de la paginación
 $items_per_page = 100; // Número de filas por página

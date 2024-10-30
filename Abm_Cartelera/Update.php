@@ -53,21 +53,6 @@ if (!$aviso) {
   <!-- Include de Navbar  -->
   <?php include("../includes/navbar.php"); ?>
 
-<<<<<<< HEAD
-  <script>
-    var loggedIn = sessionStorage.getItem('loggedIn');
-    if (!loggedIn) {
-      window.location.href = '../index.php'; // Redirigir al index si no está logueado
-    } else {
-      var usuario = JSON.parse(sessionStorage.getItem("usuario"));
-      if (usuario.id_usuario_estado != 1) {
-        window.location.href = '../index.php';
-      }
-    }
-  </script>
-
-=======
->>>>>>> e39c28f36b2ec4ec3a34e5ad8765b0b1c0eea07e
   <div class="container">
     <div class="card">
       <div class="card-header">
