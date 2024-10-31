@@ -70,7 +70,7 @@ $(document).ready(function() {
                         contentType: "application/json",
                         success: function(notificacionResponse) {
                             Swal.fire({
-                                title: "Su aviso y notificación fueron creados con éxito!",
+                                title: "Su aviso fue creado con éxito!",
                                 icon: "success",
                                 confirmButtonColor: "#006699",
                             }).then(() => {

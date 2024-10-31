@@ -52,12 +52,18 @@
                     <span class="text nav-text">Listar usuarios</span>
                 </a>
             </li>
+            <li class="search-box" style="display: none;" id="siu-guarani">
+                <a href="https://siu.ibeltran.com.ar/autogestion/" target="_blank">
+                    <i class="fa-solid fa-graduation-cap icon"></i>
+                    <span class="text nav-text">Siu Guarani</span>
+                </a>
+            </li>
         </div>
         <div class="bottom-content">
             <li class="search-box">
                 <a href="/gestiondepartamentoalumnos/login/index.html" id="loginButton">
                     <i class='bx bx-log-out icon'></i>
-                    <span class="text nav-text" id="texto">Campus</span>
+                    <span class="text nav-text" id="texto"></span>
                 </a>
             </li>
         </div>

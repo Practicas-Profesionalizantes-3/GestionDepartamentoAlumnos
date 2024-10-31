@@ -19,7 +19,6 @@ if ($response !== false) {
         $data = $tramites;
     }
 }
-// Función para generar el HTML del trámite
 function generar_tramite_html($datos) {
     // Verificar si todas las claves necesarias están presentes
     if (!isset($datos['id_tramite'], $datos['tipo_tramite'], $datos['descripcion'], $datos['estado_tramite'], $datos['responsable'], $datos['nombre'], $datos['apellido'], $datos['fecha_creacion'])) {
@@ -28,34 +27,66 @@ function generar_tramite_html($datos) {
 
     // Clase de color basada en el estado del trámite
     $clase_estado = strtolower(str_replace(' ', '-', $datos['estado_tramite'])); // Reemplazar espacios por guiones
+    // Lógica para obtener los comentarios del trámite
 
-    return "
-    <div class='container_tramites_dpto {$clase_estado}' draggable='true' ondragstart='drag(event)' id='tramite-{$datos['id_tramite']}'>
-        <h4 class='titlulo_tramites_dpto'>{$datos['tipo_tramite']}</h4>
-        <p class='subtitle_tramites_dpto'>{$datos['descripcion']}</p>
-        <div class='actions-tramites_dpto'>
-            <label class='responsable_tramites_dpto'>Responsable: {$datos['responsable']}</label>
+    $api_comentarios_url = 'http://localhost/api/api-Alumnos/tramite_comentarios.php?id_tramite=' . $datos['id_tramite'];
+    $comentarios_response = @file_get_contents($api_comentarios_url);
+    $comentarios = json_decode($comentarios_response, true);
+
+    if (!is_array($comentarios) || empty($comentarios)) {
+        $comentarios = []; // Si no hay comentarios, inicializar como un array vacío
+    }
+
+    $comentarios_html = '';
+    if (!empty($comentarios)) {
+        $comentarios_html .= '<div class="div-comentarios">
+            <p class="fecha_dpto">Comentarios:</p>
+            <ul class="list-group mb-3">';
+        foreach ($comentarios as $comentario) {
+            $comentarios_html .= '<li class="list-group-item">
+                <strong>' . date('d/m/Y H:i', strtotime($comentario['fecha_comentario'])) . '</strong> - ' . htmlspecialchars($comentario['comentario']).'
+            </li>';
+        }
+        $comentarios_html .= '</ul></div>';
+    }
+
+    // Generar HTML para el adjunto si existe
+    $archivo_html = '';
+    if (isset($datos['archivo']) && !empty($datos['archivo'])) {
+        $archivo_html = '<div>
+            <a href="data:image/jpeg;base64,' . htmlspecialchars($datos['archivo']) . '" class="btn btn-secondary" download>📥 Descargar</a>
+        </div>';
+    }
+    
+    
+    return '
+    <div class="container_tramites_dpto ' . $clase_estado . '" draggable="true" ondragstart="drag(event)" id="tramite-' . $datos['id_tramite'] . '">
+        <h4 class="titlulo_tramites_dpto">' . htmlspecialchars($datos['tipo_tramite']) . '</h4>
+        <p class="subtitle_tramites_dpto">' . htmlspecialchars($datos['descripcion']) . '</p>
+        <div class="actions-tramites_dpto">
+            <label class="responsable_tramites_dpto">Responsable: ' . htmlspecialchars($datos['responsable_apellido']) . " " . htmlspecialchars($datos['responsable']) . '</label>
         </div>
-        <div class='d-flex justify-content-between'>
-            <label class='estado_tramites_dpto'>Estado: {$datos['estado_tramite']}</label>
-            <label class='avatar_dpto'>Usuario: {$datos['nombre']} {$datos['apellido']}</label>
+        <div class="d-flex justify-content-between estado-nombre">
+            <label class="estado_tramites_dpto">Estado: ' . htmlspecialchars($datos['estado_tramite']) . '</label>
+            <label class="avatar_dpto">Usuario: ' . htmlspecialchars($datos['nombre']) . ' ' . htmlspecialchars($datos['apellido']) . '</label>
         </div>
-        <div class='d-flex justify-content-between'>
-            <label class='comentarios'>Comentarios: {$datos['comentarios']}</label>
+        <div class="d-flex justify-content-between">
+            <p class="fecha_dpto">' . date('d-m-Y H:i', strtotime($datos['fecha_creacion'])) . '</p>
         </div>
-        <div class='d-flex justify-content-between'>
-            <p class='fecha_dpto'>" . date('d-m-Y H:i', strtotime($datos['fecha_creacion'])) . "</p>
-        </div>
-        <div class='d-flex justify-content-between align-items-center'>
+        ' . $comentarios_html . '
+
+        <div class="d-flex justify-content-between align-items-center">
             <div>
-                <button class='btn btn-comentar' onclick='comentarTramite({$datos['id_tramite']}); return false;'>💬 Comentar</button>
+                <button class="btn btn-comentar" onclick="comentarTramite(' . $datos['id_tramite'] . '); return false;">💬 Comentar</button>
             </div>
+        ' . $archivo_html . '
             <div>
-                <button class='btn btn-secondary' onclick='imprimirTarjeta({$datos['id_tramite']})'>🖨️ Imprimir</button>
+                <button class="btn btn-secondary" onclick="imprimirTarjeta(' . $datos['id_tramite'] . ')">🖨️ Imprimir</button>
             </div>
         </div>
-    </div>";
+    </div>';
 }
+   
 
 // Manejo de la paginación
 $items_per_page = 100; // Número de filas por página
@@ -76,10 +107,11 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instituto Tecnologico Beltran</title>
+    <title>Tramites Departamento de Alumnos - Instituto Tecnologico Beltran</title>
     <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="shortcut icon" href="../img/logo-fav.png" type="image/x-icon"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/templatemo-upright.css">
     <link rel="stylesheet" href="../css/style.css">
@@ -196,13 +228,10 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
     <script src="../js/index.js"></script>
     <script src="../js/navbar.js"></script>
     <script src="../js/perfil.js"></script>
-    <script src="js/validar-dpto.js"></script>
-    <script src="js/delete.js"></script>
     <script src="js/imprimir.js"></script>
+    <script src="js/validar-dpto.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/9de136d298.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5Pil2tXdHhjTvQ9lQS6yIiwnyF3vухQ9Etqkibi1DwYLPSAOxocnipl" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0J9d9n00bu9XR4GQ6fhY7xQpfPtcp7tF" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </body>
 </html>

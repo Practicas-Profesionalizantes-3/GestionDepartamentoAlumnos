@@ -6,15 +6,12 @@ $("#formulario").submit(function (event) {
     }
 
     if (usuario.email == "") {
-        Toastify({
-            text: "⚠️ Por favor ingrese el email⚠️",
-            duration: 1500,
-            gravity: "top",
-            style: {
-                background: "#c41e1e",
-                color: "#fff"
-            }
-        }).showToast();
+        Swal.fire({
+            title: "¡Por favor ingrese el email!",
+            icon: "warning",
+            confirmButtonColor: "#006699",
+            color: "#721c24"
+        });
     } else {
         $.ajax({
             type: "GET",
@@ -23,32 +20,34 @@ $("#formulario").submit(function (event) {
             success: function (data) {
                 if (data.success == true) {
                     const idUsuario = JSON.parse(data.data[0].id_usuario);
+                    const linkRecupero = "http://localhost/GestionDepartamentoAlumnos/login/nuevo_pass.php?id=" + idUsuario;
+                    const mensajeHTML = `
+                            <p>Estimado usuario, </p>
+                            <p>Utilice el siguiente <a href="${linkRecupero}" target="_blank">enlace</a> para poder restablecer su password:</p>
+                        `;
                     $.ajax({
                         type: "GET",
                         url: "http://localhost/api/api-Alumnos/MailSender/SendMail.php",
                         data: {
                             sendTo: usuario.email,
                             asunto: "Recupero de password",
-                            mensaje: "Estimado usuario, utilice el siguiente link para poder restablecer su contraseña: http://localhost/GestionDepartamentoAlumnos/login/nuevo_pass.php?id=" + idUsuario
+                            mensaje: mensajeHTML
                         },
                         success: function (respuesta) {
                             if (respuesta.success == true) {
                                 Swal.fire({
-                                    title: "Email enviado!",
-                                    confirmButtonColor: "#006699",
+                                    title: "¡Email enviado!",
                                     icon: "success",
-                                    iconColor: "#118911",
+                                    confirmButtonColor: "#006699",
+                                    text: "Revisa tu bandeja de entrada.",
                                 });
                             } else {
-                                Toastify({
-                                    text: "⚠️ Hubo un problema, intente mas tarde⚠️",
-                                    duration: 1500,
-                                    gravity: "top",
-                                    style: {
-                                        background: "#c41e1e",
-                                        color: "#fff"
-                                    }
-                                }).showToast();
+                                Swal.fire({
+                                    title: "¡Hubo un problema!",
+                                    text: "Intente más tarde.",
+                                    icon: "error",
+                                    confirmButtonColor: "#c41e1e",
+                                });
                             }
                         },
                         error: function (errorThrown) {
@@ -56,19 +55,16 @@ $("#formulario").submit(function (event) {
                         }
                     });
                 } else {
-                    Toastify({
-                        text: "⚠️ Usuario no encontrado⚠️",
-                        duration: 1500,
-                        gravity: "top",
-                        style: {
-                            background: "#c41e1e",
-                            color: "#fff"
-                        }
-                    }).showToast();
                     console.log("no funciono", data);
                 }
             },
             error: function (errorThrown) {
+                Swal.fire({
+                    title: "¡Usuario no encontrado!",
+                    icon: "error",
+                    confirmButtonColor: "#c41e1e",
+                    text: "Por favor verifique el email ingresado.",
+                });
                 console.log("error", errorThrown);
             }
         });
