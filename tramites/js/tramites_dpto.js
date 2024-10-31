@@ -78,13 +78,13 @@ function crearNotificacion(notificacionData) {
         },
         body: JSON.stringify(notificacionData)
     })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error('Error en la actualización de la notificacion');
-        }
-    });
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Error en la actualización de la notificacion');
+            }
+        });
 }
 
 // Función para actualizar el estado del trámite en la API
@@ -101,13 +101,13 @@ function actualizarEstadoTramite(idTramite, estado) {
             id_usuario_responsable: usuario.id_usuario
         })
     })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error('Error en la actualización del trámite');
-        }
-    });
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Error en la actualización del trámite');
+            }
+        });
 }
 
 // Función para registrar el movimiento del trámite en la API
@@ -122,23 +122,26 @@ function registrarMovimientoTramite(idTramite, estado) {
             id_tramite: idTramite,
             fecha_movimiento: new Date().toISOString().split('T')[0], // Fecha en formato YYYY-MM-DD
             id_usuario: usuario.id_usuario, // Asegúrate de que esto esté definido
-            observacion: "Cambio de estado a " + columna, // Observación
+            observacion: String(columna)
+                .split('-')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                .join(' '),
             id_estado_tramite: estado
         })
     })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            return response.text().then(text => { // Captura el texto de respuesta
-                throw new Error(`Error en el registro del movimiento: ${text}`);
-            });
-        }
-    });
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                return response.text().then(text => { // Captura el texto de respuesta
+                    throw new Error(`Error en el registro del movimiento: ${text}`);
+                });
+            }
+        });
 }
 
 // Evento para remover la clase 'dragged' cuando el elemento es soltado
-document.addEventListener("dragend", function(event) {
+document.addEventListener("dragend", function (event) {
     var tramite = document.getElementById(event.target.id);
     tramite.classList.remove("dragged");
 });

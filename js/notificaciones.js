@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault();
             
             const notificacionId = this.getAttribute('data-id');  // Obtener el id_notificacion
-            const href = this.getAttribute('href');
             
             // Verificar si el id_notificacion se obtiene correctamente
             console.log("ID de notificación:", notificacionId);
@@ -38,9 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => {
                 console.error('Error en la solicitud:', error);
             });
-
-            // Redirigir al detalle de la notificación
-            window.location.href = href;  
         });
     });
 });
@@ -66,5 +62,46 @@ function actualizarContadorNotificaciones() {
         });
 }
 
+var modal = document.getElementById("notificacionModal");
+var btn = document.getElementById("openModalBtn");
+var span = document.getElementsByClassName("close")[0];
+
+// Abre el modal
+btn.onclick = function () {
+};
+function openModal(){
+    modal.style.display = "block";
+}
+function closeModal(){
+    modal.style.display = "none";
+}
+// Cierra el modal
+span.onclick = function () {
+  closeModal()
+};
+
+// Cierra el modal si el usuario hace clic fuera del contenido
+window.onclick = function (event) {
+  if (event.target == modal) {
+    closeModal()
+  }
+};
+
+function formatDate(fecha) {
+    const date = new Date(fecha);
+
+    // Verificar si la fecha es válida
+    if (isNaN(date.getTime())) {
+        console.error('Fecha inválida');
+    } else {
+        const day = String(date.getDate()).padStart(2, '0'); // Día
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Mes (0-11)
+        const year = date.getFullYear(); // Año
+        const hours = String(date.getHours()).padStart(2, '0'); // Horas
+        const minutes = String(date.getMinutes()).padStart(2, '0'); // Minutos
+        
+        return (`${day}-${month}-${year} ${hours}:${minutes}`); // Imprime la fecha en formato "d-m-Y H:i"
+    }
+}
 // Actualizar el contador de notificaciones cada 5 segundos
 // setInterval(actualizarContadorNotificaciones, 5000);  // 5000 ms = 5 segundos
