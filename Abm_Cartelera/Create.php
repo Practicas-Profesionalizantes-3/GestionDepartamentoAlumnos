@@ -37,12 +37,6 @@
                 window.location.href = '../index.php';
             }
         }
-
-        $(document).ready(function() {
-            var usuario = JSON.parse(sessionStorage.getItem("usuario"));
-            $("#nombre").val(usuario.nombre + " " + usuario.apellido); // Establecer el valor del campo id_usuario
-            $("#id_usuario").val(usuario.id_usuario);
-        });
     </script>
 
     <!-- Include Navbar -->
@@ -82,9 +76,14 @@
                         <label for="fecha_vencimiento" class="form-label">Fecha de Vencimiento:</label>
                         <input type="date" class="form-control" name="fecha_vencimiento" id="fecha_vencimiento" aria-describedby="helpId" placeholder="Fecha de Vencimiento" required value="<?php date_default_timezone_set('America/Argentina/Buenos_Aires'); $hoy = date('Y-m-d', strtotime('+1 day')); echo $hoy; ?>">
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3"> 
                         <label for="adjunto" class="form-label">Adjunto:</label>
-                        <input type="file" accept=".pdf" class="form-control" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto">
+                        <div class="file-containerX">
+                            <input type="file" accept=".pdf" class="form-control" name="adjunto" id="adjunto" aria-describedby="helpId" placeholder="Adjunto">
+                            <button type="button" id="eliminar-pdf" class="btn-iconX" style="display: none;">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="fijado" class="form-label">Fijado:</label>
@@ -93,9 +92,14 @@
                             <option value="1">Si</option>
                         </select>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3">            
                         <label for="imagen" class="form-label">Imagen:</label>
-                        <input type="file" accept="image/jpeg, image/png" class="form-control" name="imagen" id="imagen" placeholder="Imagen" aria-describedby="fileHelpId">
+                        <div class="file-containerX">
+                            <input type="file" accept="image/jpeg, image/png" class="form-control" name="imagen" id="imagen" placeholder="Imagen" aria-describedby="fileHelpId">
+                            <button type="button" id="eliminar-imagen" class="btn-iconX" style="display: none;">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="id_aviso_estado" class="form-label">Estado del aviso:</label>

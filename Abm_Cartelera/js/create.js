@@ -3,6 +3,33 @@ $(document).ready(function() {
     $("#nombre").val(usuario.nombre + " " + usuario.apellido); // Establecer el valor del campo id_usuario
     $("#id_usuario").val(usuario.id_usuario);
 
+    const adjuntoInput = document.getElementById('adjunto');
+    const eliminarBtn = document.getElementById('eliminar-pdf');
+    const imagenInput = document.getElementById('imagen');
+    const eliminarImagen = document.getElementById('eliminar-imagen');
+
+    adjuntoInput.addEventListener('change', function() {
+        // Mostrar el botón si se selecciona un archivo
+        eliminarBtn.style.display = adjuntoInput.files.length ? 'inline-block' : 'none';
+    });
+
+    imagenInput.addEventListener('change', function() {
+        // Mostrar el botón si se selecciona un archivo
+        eliminarImagen.style.display = imagenInput.files.length ? 'inline-block' : 'none';
+    });
+
+    eliminarBtn.addEventListener('click', function() {
+        // Elimina el archivo seleccionado y oculta el botón
+        adjuntoInput.value = '';
+        eliminarBtn.style.display = 'none';
+    });
+
+    eliminarImagen.addEventListener('click', function() {
+        // Elimina el archivo seleccionado y oculta el botón
+        imagenInput.value = '';
+        eliminarImagen.style.display = 'none';
+    });
+
     // Evento para el botón Cancelar
     $("#cancelar-anuncio").click(function() {
         // Redirigir a la página deseada
@@ -21,7 +48,7 @@ $(document).ready(function() {
                 confirmButtonColor: "#006699"
             });
             return;
-        }
+        } 
 
         // Obtener la fecha de vencimiento y la fecha de hoy
         var fechaVencimiento = new Date($("#fecha_vencimiento").val());
@@ -43,7 +70,7 @@ $(document).ready(function() {
         }
 
         var formData = new FormData(this); // Captura todos los datos del formulario
-
+        
         // Crear el aviso
         $.ajax({
             type: "POST",

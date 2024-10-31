@@ -97,6 +97,7 @@ if (!$aviso) {
               <label for="fecha_vencimiento" class="form-label">Fecha de vencimiento:</label>
               <input type="date" class="form-control" value="<?php echo $aviso['fecha_vencimiento']; ?>" name="fecha_vencimiento" id="fecha_vencimiento" aria-describedby="helpId" placeholder="Fecha de vencimiento">
             </div>
+
             <div class="mb-3">    
                 <label for="adjunto" class="form-label">Adjunto:</label>
                 <div class="file-containerX">
@@ -106,6 +107,7 @@ if (!$aviso) {
                     <?php } ?>
                 </div>
             </div>
+
             <div class="mb-3">
               <label for="fijado" class="form-label">Fijado:</label>
               <select class="form-control" name="fijado" id="fijado">
@@ -113,14 +115,15 @@ if (!$aviso) {
                 <option value="1" <?= $aviso["fijado"] == "1" ? 'selected="selected"' : "" ?>>Si</option>
               </select>
             </div>
+
             <div class="mb-3">
                 <label for="imagen" class="form-label">Imagen:</label>
                 <div class="file-containerX">
-                  <?php if ($aviso["imagen"] != "") { ?>
-                    <input type="file" accept="image/jpeg, image/png" class="form-control mr-2" name="imagen" id="imagen" placeholder="Imagen"  aria-describedby="fileHelpId" data-existing="<?= $aviso['imagen'] ?? ''; ?>">
-                    <a href="data:image/jpeg;base64,<?= $aviso["imagen"]; ?>" download="<?= htmlspecialchars($aviso["titulo"]) . '.jpg'; ?>">Descargar imagen</a>
-                    <?php } else { ?>
+                    <input type="file" accept="image/jpeg, image/png" class="form-control" name="imagen" id="imagen" placeholder="Imagen" aria-describedby="fileHelpId" data-existing="<?= $aviso['imagen'] ?? ''; ?>">
+                    <?php if ($aviso["imagen"] != "") { ?>
+                        <a href="data:image/jpeg;base64,<?= $aviso["imagen"]; ?>" download="<?= htmlspecialchars($aviso["titulo"]) . '.jpg'; ?>" class="download-link">Descargar imagen</a>
                     <?php } ?>
+      
                 </div>
             </div>
 

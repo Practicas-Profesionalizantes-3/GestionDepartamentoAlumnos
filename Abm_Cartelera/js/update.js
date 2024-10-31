@@ -11,18 +11,22 @@ $(document).ready(function() {
     
         const adjuntoFile = $("#adjunto")[0].files[0];
         const imagenFile = $("#imagen")[0].files[0];
-    
+
         let adjuntoBase64 = "";
         let imagenBase64 = "";
     
         if (adjuntoFile) {
             adjuntoBase64 = await toBase64(adjuntoFile);
+        } else{
+            adjuntoBase64 = $("#adjunto").data("existing"); // Obtener el valor existente
         }
-    
+        
         if (imagenFile) {
-            imagenBase64 = await toBase64(imagenFile);
+            imagenBase64 = await toBase64(imagenFile, 1000, 650);
+        } else {
+            imagenBase64 = $("#imagen").data("existing"); // Obtener el valor existente
         }
-    
+
         const aviso = {
             id_aviso: $("#id_aviso").val(),
             id_aviso_tipo: $("#id_aviso_tipo").val(),
@@ -91,13 +95,33 @@ $(document).ready(function() {
                 }
             });
         }
-        function toBase64(file) {
+        function toBase64(file, width = 1000, height = 650) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result.split(',')[1]);
+                
+                reader.onload = () => {
+                    const img = new Image();
+                    img.src = reader.result;
+                    
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = width;
+                        canvas.height = height;
+                        
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        
+                        const resizedBase64 = canvas.toDataURL(file.type).split(',')[1];
+                        resolve(resizedBase64);
+                    };
+        
+                    img.onerror = error => reject(error);
+                };
+                
                 reader.onerror = error => reject(error);
             });
         }
+        
     });
 });

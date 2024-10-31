@@ -96,7 +96,7 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
                         </div>
                         <hr style="width: 50%;" class="d-flex m-auto">
                         <div class="img-container mt-3">
-                            <div class="overlay">
+                            <div class="text-center">
                                 <h5 class="mb-3 cartelera-titulo">
                                     <?php echo htmlspecialchars($item['titulo']); ?>
                                 </h5>
@@ -115,25 +115,26 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
                                         <?php echo htmlspecialchars($item['descripcion']); ?>
                                     </p>
 
-                                    <!-- Mostrar el botón de descargar adjunto si existe -->
-                                    <?php if (!empty($item["adjunto"])) : ?>
-                                        <div class="descargar-adjunto" style="display: none;" id="descargar-adjunto-<?php echo $index; ?>">
-                                            <a href="data:application/pdf;base64,<?= $item["adjunto"]; ?>" download="<?= htmlspecialchars($item["titulo"]); ?>">Descargar adjunto</a>
-                                        </div>
-                                    <?php endif; ?>
                                 </div>
-
+                                
                                 <!-- Contenedor para los botones -->
                                 <div class="botones-container">
                                     <?php if (strlen($item['descripcion']) > 100) : ?>
                                         <button class="btn btn-primary" onclick="toggleDescription(<?php echo $index; ?>)" id="toggle-btn-<?php echo $index; ?>">Ver Más</button>
                                     <?php endif; ?>
                                 </div>
-
+                                    
                                 <!-- Contenedor para la fecha, ahora siempre visible -->
                                 <div class="fecha-container">
                                     <p><?php echo date('d-m-Y H:i', strtotime($item['fecha_publicacion'])); ?></p>                               
                                 </div>
+                                
+                                <!-- Mostrar el botón de descargar adjunto si existe -->
+                                <?php if (!empty($item["adjunto"])) : ?>
+                                    <div class="descargar-adjunto" style="display: none;" id="descargar-adjunto-<?php echo $index; ?>">
+                                        <a href="data:application/pdf;base64,<?= $item["adjunto"]; ?>" download="<?= htmlspecialchars($item["titulo"]); ?>">Descargar adjunto</a>
+                                    </div>
+                                <?php endif; ?>  
                             </div>
                         </div>
                     </div>
