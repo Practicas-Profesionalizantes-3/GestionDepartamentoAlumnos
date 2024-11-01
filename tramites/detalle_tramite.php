@@ -112,6 +112,7 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="../css/templatemo-upright.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/tramites/css/estilos.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> <!----===== Boxicons CSS ===== -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"> <!-- Toastify CSS -->
@@ -152,7 +153,7 @@ if (isset($_GET['id'])) {
                                         <?php foreach ($movimientos as $movimiento): ?>
                                         <li class="list-group-item">
                                             <strong><?php echo date('d/m/Y H:i', strtotime($movimiento['fecha_movimiento'])); ?></strong> - 
-                                            <span><?php echo $movimiento['observacion']; ?></span>
+                                            <span style="padding: 4px; border-radius: 4px; font-weight: bold" class="<?php echo $movimiento['observacion'] == "Pendiente" ? "estado-pendiente":($movimiento['observacion'] == "En Proceso"? "estado-proceso": "estado-completado" ) ;?>"><?php echo $movimiento['observacion']; ?></span>
                                         </li>
                                         <?php endforeach; ?>
                                     <?php else: ?>

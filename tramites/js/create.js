@@ -9,9 +9,9 @@ $("#formulario").submit(function (event) {
         id_usuario_creacion: usuario.id_usuario,
         id_usuario_responsable: usuario.id_usuario,
         id_tramite_tipo: $("#id_tramite_tipo").val(),
-        descripcion: $("#carrera").find(":selected").text() + " " + 
-                     $("#materia").find(":selected").text() + " " + 
-                     $("#turno").find(":selected").text(),
+        descripcion: $("#carrera").find(":selected").text() + " " +
+            $("#materia").find(":selected").text() + " " +
+            $("#turno").find(":selected").text(),
     };
 
     // Comprobar si hay archivos adjuntos y ajustar la descripción según corresponda
@@ -114,27 +114,30 @@ function registrarMovimientoTramite(idTramite, estado) {
         body: JSON.stringify({
             id_tramite: idTramite,
             fecha_movimiento: new Date().toISOString().split('T')[0], // Fecha en formato YYYY-MM-DD
-            id_usuario: usuario.id_usuario, 
-            observacion: "Cambio de estado a " + columna, 
+            id_usuario: usuario.id_usuario,
+            observacion: String(columna)
+                .split('-')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                .join(' '),
             id_estado_tramite: estado
         })
     })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            return response.text().then(text => {
-                throw new Error(`Error en el registro del movimiento: ${text}`);
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                return response.text().then(text => {
+                    throw new Error(`Error en el registro del movimiento: ${text}`);
+                });
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            Swal.fire({
+                title: "Error",
+                text: "No se pudo registrar el movimiento del trámite.",
+                icon: "error",
+                confirmButtonColor: "#006699"
             });
-        }
-    })
-    .catch(error => {
-        console.log(error);
-        Swal.fire({
-            title: "Error",
-            text: "No se pudo registrar el movimiento del trámite.",
-            icon: "error",
-            confirmButtonColor: "#006699"
         });
-    });
 }
