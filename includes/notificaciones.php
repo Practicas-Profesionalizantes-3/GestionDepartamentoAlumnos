@@ -243,7 +243,7 @@ if ($response !== false) {
                                 <p class="fecha"><b>Fecha de creacion:</b> ${tramite.fecha_creacion}</p>
                                 ${tramite.adjunto ? `
                                 <div>
-                                <a href="data:application/pdf;base64,${tramite.adjunto}" download="${tramite.titulo}" class="btn btn-primary">Descargar adjunto</a>
+                                <a href="data:image/jpeg;base64,${tramite.adjunto}" download="${tramite.titulo}" class="btn btn-primary">Descargar adjunto</a>
                                 </div>
                                 ` : ''}
                                 </div>
