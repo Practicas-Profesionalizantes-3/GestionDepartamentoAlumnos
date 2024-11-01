@@ -235,7 +235,7 @@ if ($response !== false) {
             <div class="mt-2">
                             <div class="aviso-completo bg-light">
                                 <h1 class="mb-3 text-center" style="color: black;">${tramite.titulo}</h1>
-                                <h4 class="mb-3 text-center" style="color: red;">Hay novedades sobre tu tramite!</h4>
+                                <h4 class="mb-3 text-center" style="color: red;">¡Hay novedades sobre tu tramite!</h4>
                                 <p class="descripcion-completa" style="color: black;">Responsable: ${tramite.responsable}</p>
                                 <p class="descripcion-completa" style="color: black;"><bold>Estado:</bold> <span class="${estadoTramite}" style="padding: 4px; border-radius: 4px; font-weight: bold">${tramite.estado_tramite}</span></p>
                                 

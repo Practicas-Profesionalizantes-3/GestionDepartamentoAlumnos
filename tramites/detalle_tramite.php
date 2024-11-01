@@ -153,7 +153,7 @@ if (isset($_GET['id'])) {
                                         <?php foreach ($movimientos as $movimiento): ?>
                                         <li class="list-group-item">
                                             <strong><?php echo date('d/m/Y H:i', strtotime($movimiento['fecha_movimiento'])); ?></strong> - 
-                                            <span style="padding: 4px; border-radius: 4px; font-weight: bold" class="<?php echo $movimiento['observacion'] == "Pendiente" ? "estado-pendiente":($movimiento['observacion'] == "En Proceso"? "estado-proceso": "estado-completado" ) ;?>"><?php echo $movimiento['observacion']; ?></span>
+                                            <span style="padding: 4px; border-radius: 4px; font-weight: bold" class="<?php echo $movimiento['observacion'] == "Pendiente" ? "estado-pendiente":($movimiento['observacion'] == "En Proceso"? "estado-proceso": "estado-completado" ) ;?>"><?php echo $movimiento['observacion']=="Terminado"?"Completado": $movimiento['observacion']; ?></span>
                                         </li>
                                         <?php endforeach; ?>
                                     <?php else: ?>
