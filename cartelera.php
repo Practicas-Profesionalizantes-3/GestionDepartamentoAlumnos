@@ -32,7 +32,7 @@ $data = json_decode($response, true);
     <!-- Include notificaciones -->
     <?php include("includes/notificaciones.php");?>
 
-    <div class="container-fluid" style="margin-bottom: 401px;">
+    <div class="container-fluid">
         <div class="row">
             <!-- Include Navbar -->
             <?php include("includes/navbar.php");?>

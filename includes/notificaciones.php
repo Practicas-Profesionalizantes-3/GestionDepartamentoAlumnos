@@ -160,7 +160,7 @@ if ($response !== false) {
 </div>
 <div id="notificacionModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
+        <span class="close close-notificaciones" onclick="closeModal()">&times;</span>
         <div id="cuerpo">
         </div>
     </div>

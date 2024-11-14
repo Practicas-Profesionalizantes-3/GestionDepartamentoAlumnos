@@ -331,6 +331,22 @@ hr {
 }
 
 /* Footer area */
+
+.social-icons a{
+	font-size: 1.2rem;
+	margin: 0px 3px;
+}
+
+.social-icons .icon-insta:hover {
+	color: #8134AF;
+}
+.social-icons .icon-youtube:hover {
+	color: #c4302b;
+}
+.social-icons .icon-tw:hover {
+	color: #00acee;
+}
+
 .footer-widget-area{
 	margin-left: 88px;
 	padding: 10px;

@@ -61,7 +61,7 @@
                     <!-- Carreras -->
                     <div class="container">
                         <h2 class="tm-text-primary mt-3 mb-4">Carreras del Instituto Superior De Formación Técnica N° 197</h2>
-                        <section class="p-5 rounded">
+                        <section class="rounded">
                             <ul class="list-group list-group-flush">
                                 <?php foreach ($data_carreras as $carrera): ?>
                                     <?php

@@ -452,15 +452,17 @@ header .image-text .profession {
   box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra */
 }
 
-.close {
+.close-perfil {
   color: #aaa;
-  float: right;
-  font-size: 28px;
+  font-size: 30px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
   font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.close-perfil:hover,
+.close-perfil:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
@@ -509,17 +511,15 @@ header .image-text .profession {
   transform: translateY(-2px); /* Efecto de elevación */
 }
 
-
-/*perfil*/
 .form-botones{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
 }
 .button-pass {
   background-color: #0d6dd3;
-  height: 45px;
-  width: 40%;
+  height: 50px;
+  width: 45%;
   border-radius: 30px;
   color: white;
   font-size: 14px;
@@ -528,8 +528,8 @@ header .image-text .profession {
 }
 .button-cancelar {
   background-color: #d30d0d;
-  height: 45px;
-  width: 40%;
+  height: 50px;
+  width: 45%;
   border-radius: 30px;
   color: white;
   font-size: 14px;
@@ -624,6 +624,22 @@ p {
 }
 
 /* Notificaciones  */
+
+.close-notificaciones {
+  color: #aaa;
+  font-size: 30px;
+  display: flex;
+  justify-content: end;
+  font-weight: bold;
+}
+
+.close-notificaciones:hover,
+.close-notificaciones:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 
 .icon-notificaciones{
   background-color: #4b5158; /* Color de fondo */

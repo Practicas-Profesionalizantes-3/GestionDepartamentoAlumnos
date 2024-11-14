@@ -6,7 +6,7 @@
 <!-- El Modal -->  
 <div id="perfilModal" class="modal">
     <div class="modal-content">
-        <span class="close">&times;</span>
+        <span class="close close-perfil">&times;</span>
         <div class="modal-header">
             <h2 class="tm-text-primary m-auto"><span id="bienvenida"></span></h2>
         </div>
@@ -44,7 +44,7 @@
                     <label for="confirm_password"><strong>Reingrese su Contraseña: </strong></label>
                     <input class="input-pass" type="password" name="confirm_password" id="confirm_password" required>
                 </div>
-                <div class="form-botones">
+                <div class="d-flex justify-content-around">
                     <button class="button-pass" id="cambiarPasswordBtn" type="submit">Cambiar Contraseña</button>
                     <button class="button-cancelar" id="cancelarCambioBtn" type="button">Cancelar</button>
                 </div>

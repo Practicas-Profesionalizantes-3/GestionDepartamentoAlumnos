@@ -10,9 +10,9 @@
                     <span>Centro de Tecnología e Innovación Avellaneda-Buenos Aires - Argentina</span>
                     <div class="social-icons mt-3">
                         <a href="https://www.facebook.com/institutobeltran" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/instbeltran/" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://twitter.com/#!/CentroBeltran" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.youtube.com/channel/UC_XbNNufdrjoXTo4oaLjnaQ" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/instbeltran/" target="_blank" class="icon-insta"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/#!/CentroBeltran" target="_blank" class="icon-tw"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.youtube.com/channel/UC_XbNNufdrjoXTo4oaLjnaQ" target="_blank"  class="icon-youtube"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
             </div>
@@ -37,12 +37,12 @@
                 <div class="single-footer-widget text-light">
                     <h2 class="single-footer-titulo">Enlaces útiles</h2>
                     <ul class="footer-list">
-                        <li><a href="https://www.ibeltran.com.ar/autoridades.php" class="text-light">Autoridades</a></li>
-                        <li><a href="https://www.ibeltran.com.ar/inscripcion_telefonica.php" class="text-light">Inscripción Telefonica</a></li>
-                        <li><a href="https://www.ibeltran.com.ar/trabaja_nosotros.php" class="text-light">Trabaja con Nosotros</a></li>
-                        <li><a href="https://www.ibeltran.com.ar/contacto.php" class="text-light">Informes y Consultas</a></li>
-                        <li><a href="https://www.ibeltran.com.ar/index.php" class="text-light">Términos y condiciones</a></li>
-                        <li><a href="https://www.ibeltran.com.ar/index.php" class="text-light">Política de Privacidad</a></li>
+                        <li><a href="https://www.ibeltran.com.ar/autoridades.php" class="text-light" target="_blank">Autoridades</a></li>
+                        <li><a href="https://www.ibeltran.com.ar/inscripcion_telefonica.php" class="text-light" target="_blank">Inscripción Telefonica</a></li>
+                        <li><a href="https://www.ibeltran.com.ar/trabaja_nosotros.php" class="text-light" target="_blank">Trabaja con Nosotros</a></li>
+                        <li><a href="https://www.ibeltran.com.ar/contacto.php" class="text-light" target="_blank">Informes y Consultas</a></li>
+                        <li><a href="https://www.ibeltran.com.ar/index.php" class="text-light" target="_blank">Términos y condiciones</a></li>
+                        <li><a href="https://www.ibeltran.com.ar/index.php" class="text-light" target="_blank">Política de Privacidad</a></li>
                     </ul>
                 </div>
             </div>   
