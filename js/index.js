@@ -16,7 +16,7 @@ function contactar(){
                     url: "http://localhost/api/api-Alumnos/MailSender/SendMail.php",
                     data: {
                         sendTo: dtoAlumno.email,
-                        asunto: "Formulario de Contacto ITB" + asunto,
+                        asunto: "Formulario de Contacto ITB" + " - " + asunto,
                         mensaje: cuerpoEmail
                     },
                     success: function (respuesta) {
