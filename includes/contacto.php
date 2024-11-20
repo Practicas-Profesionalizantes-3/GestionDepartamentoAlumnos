@@ -5,24 +5,24 @@
         <hr class="mb-5">
         <div class="row">
             <div class="col-xl-6 tm-contact-col-l mb-4">
-                <form id="contact-form" action="" method="POST" class="tm-contact-form">
+                <aside id="contact-form" class="tm-contact-form">
                     <div class="form-group">
-                        <input type="text" name="nombre" class="form-control rounded-0" placeholder="Nombre" required />
+                        <input type="text" id="userNombre" name="nombre" class="form-control rounded-0" placeholder="Nombre" required />
                     </div>
                     <div class="form-group">
-                        <input type="email" name="email" class="form-control rounded-0" placeholder="Email" required />
+                        <input type="email" id="userEmail" name="email" class="form-control rounded-0" placeholder="Email" required />
                     </div>
                     <div class="form-group">
-                        <input type="asunto" name="asunto" class="form-control rounded-0" placeholder="Asunto" required />
+                        <input type="asunto" id="asuntoEmail" name="asunto" class="form-control rounded-0" placeholder="Asunto" required />
                     </div>
                     <div class="form-group">
-                        <textarea rows="8" style="resize: none;" name="message" class="form-control rounded-0" placeholder="Mensaje" required=></textarea>
+                        <textarea rows="8" style="resize: none;" id="cuerpoEmail" name="message" class="form-control rounded-0" placeholder="Mensaje" required=></textarea>
                     </div>
 
                     <div class="form-group tm-text-right text-center">
-                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        <button type="submit" onclick="contactar()" class="btn btn-primary">Enviar</button>
                     </div>
-                </form>
+                </aside>
             </div>
             <div class="col-xl-6 tm-contact-col-r">
                 <!-- Map -->
@@ -57,3 +57,6 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!--<title>Dashboard Sidebar Menu</title>-->
+<script src="/gestiondepartamentoalumnos/js/index.js"></script>
