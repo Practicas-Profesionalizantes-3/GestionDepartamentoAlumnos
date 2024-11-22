@@ -85,7 +85,7 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
         
     ?>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center <?php echo empty($datos) ? 'div-alto' : ''; ?>">
         <?php if ($datos) : ?>
             <?php foreach ($datos as $index => $item) : ?>
                 <div class="col-lg-4 tm-col-home mb-4" data-wow-delay="0.1s">
@@ -142,7 +142,9 @@ if (isset($_SESSION['mostrar_opciones_cartelera'])) {
             <?php endforeach; ?>
         <?php else : ?>
             <!-- Mostrar mensaje si no hay avisos -->
-            <h3 class="text-center mt-3 mb-5">No hay avisos nuevos para mostrar</h3>
+            <h3 class="text-center mt-3 mb-5">
+                <i class="fas fa-bullhorn"></i> No hay avisos nuevos para mostrar
+            </h3>
         <?php endif; ?>
     </div>
 </section>

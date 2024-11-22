@@ -91,8 +91,11 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
 
                     <div class="row justify-content-center">
                         <?php if (empty($current_page_tramites)) { ?>
-                            <div class="sin-tramites text-center" role="alert">
-                                Sin trámites disponibles.
+                            <div class="row justify-content-center <?php echo (empty($current_page_tramites)) ? 'div-alto' : ''; ?>">
+                                <h3 class="text-center">
+                                    <i class="fas fa-folder-open" style="margin-right: 8px;"></i>
+                                    Sin trámites disponibles
+                                </h3>
                             </div>
                         <?php } else { ?>
                             <?php foreach ($current_page_tramites as $datos) { ?>

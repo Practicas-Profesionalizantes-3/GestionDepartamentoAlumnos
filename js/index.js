@@ -4,6 +4,17 @@ function contactar(){
     let asunto = $("#asuntoEmail").val();
     let cuerpo = $("#cuerpoEmail").val();
     
+    // Validaciones
+    if (!nombre || !userEmail || !asunto || !cuerpo) {
+        Swal.fire({
+            title: "¡Campos incompletos!",
+            text: "Por favor completa todos los campos antes de enviar.",
+            icon: "warning",
+            confirmButtonColor: "#006699",
+        });
+        return; // Detener la ejecución si algún campo está vacío
+    }
+
     $.ajax({
         type: "GET",
         url: "http://localhost/api/api-Alumnos/usuarios.php",

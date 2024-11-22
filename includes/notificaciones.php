@@ -149,7 +149,11 @@ if ($response !== false) {
                             <?php endforeach; ?>
                         <?php else: ?>
                             <div class="notificationContent">
-                                <span>No hay notificaciones.</span>
+                            <span>
+                                <i class="fas fa-bell-slash" style="margin-right: 5px;"></i>
+                                No hay notificaciones.
+                            </span>
+
                             </div>
                         <?php endif; ?>
                     </div>
