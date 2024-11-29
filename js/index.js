@@ -37,6 +37,12 @@ function contactar(){
                                 icon: "success",
                                 confirmButtonColor: "#006699",
                                 text: "Revisa tu bandeja de entrada.",
+                            }).then(() => {
+                                // Limpiar los campos
+                                $("#userNombre").val('');
+                                $("#userEmail").val('');
+                                $("#asuntoEmail").val('');
+                                $("#cuerpoEmail").val('');
                             });
                         } else {
                             Swal.fire({

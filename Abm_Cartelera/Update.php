@@ -136,7 +136,7 @@ if (!$aviso) {
             </div>
             <input type="text" value="<?= $aviso["id_usuario"] ?>" name="id_usuario" id="id_usuario" readonly hidden />
             <div class="d-flex justify-content-center">
-              <button type="submit" class="btn btn-success mr-2" id="agregar-anuncio">Moficar</button>
+              <button type="submit" class="btn btn-success mr-2" id="agregar-anuncio">Modificar</button>
               <button type="button" class="btn btn-info ml-2" id="cancelar-anuncio">Cancelar</button>
             </div>
           </form>
