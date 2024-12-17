@@ -136,7 +136,7 @@ $current_page_tramites = array_slice($data, $offset, $items_per_page);
         </div>
 
         <div class="listadoAvisos">
-            <a type="button" class="btn btn-primary btn-volver" href="index.php" role="button">Volver</a>
+            <a type="button" class="btn btn-primary btn-volver-dpto" href="index.php" role="button">Volver</a>
         </div>
 
         <div class="buscador">
