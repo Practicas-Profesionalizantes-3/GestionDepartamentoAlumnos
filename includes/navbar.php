@@ -53,7 +53,7 @@
                 </a>
             </li>
             <li class="search-box" style="display: none;" id="siu-guarani">
-                <a href="https://siu.ibeltran.com.ar/autogestion/" target="_blank">
+                <a href="https://siuguarani.ibeltran.com.ar/autogestion/" target="_blank">
                     <i class="fa-solid fa-graduation-cap icon"></i>
                     <span class="text nav-text">Siu Guarani</span>
                 </a>

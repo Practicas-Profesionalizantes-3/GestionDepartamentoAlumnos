@@ -159,7 +159,7 @@ function cerrarsesion() {
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    cancelButtonText: "cancelar",
+    cancelButtonText: "Cancelar",
     confirmButtonText: "Si, cerrar!"
   }).then((result) => {
     if (result.isConfirmed) {
