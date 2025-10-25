@@ -60,85 +60,61 @@
                     <!-- Carreras -->
                     <div class="container">
                         <h2 class="tm-text-primary mt-3 mb-4">Carreras del Instituto Superior De Formación Técnica N° 197</h2>
-                        <!-- Carrera: Tecnicatura Superior en Análisis de Sistemas -->
+                        <!-- Carrera: Técnicatura Superior en Higiene y Seguridad en el Trabajo -->
                         <section class="py-5 text-dark">
                             <div class="text-center mb-5">
-                            <h1 class="fw-bold text-uppercase titulo-primary mb-3"><i class="bi bi-laptop career-icon"></i> Tecnicatura Superior en Análisis de Sistemas</h1>
+                            <h1 class="fw-bold text-uppercase titulo-primary mb-3"><i class="bi bi-shield-lock career-icon"></i> Técnicatura Superior en Higiene y Seguridad en el Trabajo</h1>
                             <p class="lead">
-                                <strong>Título:</strong> Analista de Sistemas<br>
+                                <strong>Título:</strong> Técnico Superior en Higiene y Seguridad en el Trabajo<br>
                                 <strong>Nivel:</strong> Terciario<br>
                                 <strong>Modalidad:</strong> Presencial<br>
                                 <strong>Duración:</strong> 3 años<br>
-                                <strong>Cantidad de horas:</strong> 1856 horas<br>
                                 <strong>Resolución:</strong>
-                                <a href="https://www.ibeltran.com.ar/archivos/Resolucion%20TSAS%20-6790-19.pdf" target="_blank" class="text-decoration-none fw-semibold">
-                                6790/19 - DGCyE Pcia. de Buenos Aires
+                                <a href="https://www.ibeltran.com.ar/archivos/Resolucion%20320-13%20TS%20Higiene%20y%20Seguridad%20en%20el%20Trabajo.pdf" target="_blank" class="text-decoration-none fw-semibold">
+                                320/13 de la Dirección General de Cultura y Educación de la Provincia de Buenos Aires
                                 </a>
                             </p>
                             </div>
                             <div class="border-0 rounded-4 p-4 mb-5">
                                 <h3 class="titulo-primary fw-bold mb-3 border-titulo-carreras">Fundamentación</h3>
                                 <p class="text-justify">
-                                    Desde hace décadas, la informática se ha instalado en nuestra sociedad como un sistema que colabora con el
-                                    estudio del procesamiento de la información. El profesional en Análisis de Sistemas se encuentra vinculado a
-                                    organizaciones que utilizan sistemas de información y requieren su análisis para la toma de decisiones.
+                                    La Argentina ha sido pionera en el desarrollo de legislación sobre salud laboral. El constante avance científico y tecnológico en el área disciplinar, hacen necesario la creación de un perfil profesional capaz de un asesoramiento integral en higiene y seguridad a todos los niveles de una organización pública y/o privada.
+                                </p>
+                                <p class="text-justify">
+                                    Es por ello, que la Tecnicatura en Seguridad e Higiene propone la formación integral de los estudiantes, con una mirada sistémica, que les proporcione las herramientas pertinentes para desempeñarse en los Servicios de Seguridad e Higiene, colaborando con el Ingeniero o Licenciado Especialista en Higiene y Seguridad.
                                 </p>
                                 <p class="text-justify mb-0">
-                                    Por ello, esta carrera ofrece una formación integral en informática, sistemas de información, programación,
-                                    software y gestión organizacional. Además, promueve la comprensión de los avances científico-tecnológicos y el
-                                    perfeccionamiento continuo de sus egresados.
+                                    En igual modo, el egresado se encontrará capacitado para formar equipos de seguridad, aplicar planes de evacuación y demás medidas para la emergencia.
                                 </p>
                             </div>
 
                             <div class="border-0 rounded-4 p-4 mb-5">
-                            <h3 class="titulo-primary fw-bold mb-3 border-titulo-carreras">Perfil Profesional</h3>
-
-                            <h5 class="fw-semibold text-dark">Competencia General</h5>
+                            <h3 class="titulo-primary fw-bold mb-3 border-titulo-carreras">Perfil Profesional y Competencia General</h3>
                             <p>
-                                El Analista de Sistemas estará capacitado para planificar y gestionar proyectos de desarrollo, diagnosticar
-                                problemas y diseñar soluciones informáticas que optimicen los procesos de las organizaciones, actuando conforme
-                                a las normas técnicas y legales vigentes.
+                                El Técnico Superior en Seguridad e Higiene en el Trabajo es un profesional competente para la organización, la planificación y organización de actividades, el diseño, la gestión de los recursos de los servicios, la evaluación y control y la capacitación en aspectos inherentes a la higiene y seguridad en el trabajo.
                             </p>
-
-                            <h5 class="fw-semibold mt-4 text-dark">Áreas de Competencia</h5>
-                            <ul class="list-group list-group-flush list-unstyled">
-                                <li class="border-0">✔ Planificar, dirigir, realizar y evaluar proyectos de sistemas de información.</li>
-                                <li class="border-0">✔ Identificar y diagnosticar problemas organizacionales para diseñar soluciones informáticas.</li>
-                                <li class="border-0">✔ Organizar y controlar áreas técnicas relacionadas con sistemas de información.</li>
-                                <li class="border-0">✔ Actuar como vínculo entre el área técnica y las demás áreas de la organización.</li>
-                                <li class="border-0">✔ Elaborar propuestas de capacitación sobre sistemas de información.</li>
-                                <li class="border-0">✔ Gestionar el ciclo completo de vida de proyectos informáticos.</li>
-                                <li class="border-0">✔ Participar en análisis, diseño, construcción e integración de soluciones informáticas.</li>
-                                <li class="border-0">✔ Realizar tareas de auditoría, arbitraje y peritaje en sistemas de información.</li>
-                            </ul>
-                            </div>
-
-                            <div class="border-0 rounded-4 p-4 mb-5">
-                            <h3 class="titulo-primary fw-bold mb-3 border-titulo-carreras">Área Ocupacional</h3>
                             <p>
-                                El Analista de Sistemas podrá desempeñarse en organizaciones públicas o privadas, liderando proyectos de
-                                desarrollo, mantenimiento y control de sistemas de información. También podrá trabajar de forma independiente
-                                como consultor, auditor o coordinador de equipos técnicos.
+                                Puede diseñar, inspeccionar y controlar equipos y elementos de protección personal y colectiva, como así también; instalaciones en ambientes de trabajo en los que se desarrollen actividades con riesgos.
+                            </p>
+                            <p class="mb-0">
+                                Realiza el análisis, evaluación y control de situaciones en las que existen contaminantes. Colabora en la implementación y desarrollo programas de trabajo en materia de higiene y seguridad laboral y programas de capacitación para la prevención y la protección de riesgos laborales.
                             </p>
                             </div>
 
                             <div class="border-0 rounded-4 p-4 mb-5">
                             <h3 class="titulo-primary fw-bold mb-3 border-titulo-carreras">Plan de Estudios</h3>
                             <p>
-                                Planes y correlatividades según el año de ingreso del estudiante:
+                                Planes de Estudio y Correlatividades de las diferentes carreras correspondientes según el año de ingreso de cada estudiante:
                             </p>
                             <ul class="list-unstyled">
-                                <li>• TSAS (Resol. 6790/19) ingresantes 2020 en adelante – 
-                                <a href="https://www.ibeltran.com.ar/archivos/planes/Estructura%20Curricular%20y%20Correlatividades%20-%20TSAS%20-%202024.pdf" target="_blank" class="fw-semibold text-decoration-none">Descargar</a>
+                                <li>• Para alumnos que ingresaron en el año 2014 – 
+                                <a href="https://www.ibeltran.com.ar/archivos/planes/Estructura%20Curricular%20y%20Correlatividades%20-%20Higiene%20y%20Seguridad%20320-2014.pdf" target="_blank" class="fw-semibold text-decoration-none">Descargar</a>
                                 </li>
-                                <li>• TECAS (Resol. 5817/03) ingresantes 2017–2019 – 
-                                <a href="https://www.ibeltran.com.ar/archivos/planes/Estructura%20Curricular%20y%20Correlatividades%20-%20Analista%20de%20Sistemas%20-2017.pdf" target="_blank" class="fw-semibold text-decoration-none">Descargar</a>
+                                <li>• Para alumnos que ingresaron a partir del año 2015 inclusive – 
+                                <a href="https://www.ibeltran.com.ar/archivos/planes/Estructura%20Curricular%20y%20Correlatividades%20-%20Higiene%20y%20Seguridad%20320-2015.pdf" target="_blank" class="fw-semibold text-decoration-none">Descargar</a>
                                 </li>
-                                <li>• TECAS (Resol. 5817/03) ingresantes 2015–2016 – 
-                                <a href="https://www.ibeltran.com.ar/archivos/planes/Estructura%20Curricular%20y%20Correlatividades%20-%20Analista%20de%20Sistemas%20-2015.pdf" target="_blank" class="fw-semibold text-decoration-none">Descargar</a>
-                                </li>
-                                <li>• TECAS (Resol. 5817/03) ingresantes 2012–2014 – 
-                                <a href="https://www.ibeltran.com.ar/archivos/planes/Estructura%20Curricular%20y%20Correlatividades%20-%20Analista%20de%20Sistemas%20-2012-2013-2014.pdf" target="_blank" class="fw-semibold text-decoration-none">Descargar</a>
+                                <li>• Para alumnos que ingresaron a partir del año 2017 inclusive – 
+                                <a href="https://www.ibeltran.com.ar/archivos/planes/Estructura%20Curricular%20y%20Correlatividades%20-%20TEHST%20-%202024.pdf" target="_blank" class="fw-semibold text-decoration-none">Descargar</a>
                                 </li>
                             </ul>
                             </div>
@@ -150,43 +126,45 @@
                                 <div class="col-md-4">
                                 <h5 class="fw-semibold border-boton-car text-dark">1er Año</h5>
                                 <ul class="list-unstyled mb-0">
-                                    <li>Inglés I</li>
-                                    <li>Ciencia, Tecnología y Sociedad</li>
-                                    <li>Análisis Matemático I</li>
-                                    <li>Álgebra</li>
-                                    <li>Algoritmos y Estructuras de Datos I</li>
-                                    <li>Sistemas y Organizaciones</li>
-                                    <li>Arquitectura de Computadores</li>
-                                    <li>Prácticas Profesionalizantes I</li>
+                                    <li>Administración de las Organizaciones</li>
+                                    <li>Psicología Laboral</li>
+                                    <li>Física I</li>
+                                    <li>Química I</li>
+                                    <li>Medios de Representación</li>
+                                    <li>Medicina del Trabajo I</li>
+                                    <li>Seguridad I</li>
+                                    <li>Derecho del Trabajo</li>
+                                    <li>Práctica Profesionalizante</li>
                                 </ul>
                                 </div>
                                 <div class="col-md-4">
                                 <h5 class="fw-semibold border-boton-car text-dark">2do Año</h5>
                                 <ul class="list-unstyled mb-0">
-                                    <li>Inglés II</li>
-                                    <li>Análisis Matemático II</li>
                                     <li>Estadística</li>
-                                    <li>Ingeniería de Software I</li>
-                                    <li>Algoritmos y Estructuras de Datos II</li>
-                                    <li>Sistemas Operativos</li>
-                                    <li>Base de Datos</li>
-                                    <li>Prácticas Profesionalizantes II</li>
+                                    <li>Física II</li>
+                                    <li>Química II</li>
+                                    <li>Inglés Técnico</li>
+                                    <li>Ergonomía</li>
+                                    <li>Seguridad II</li>
+                                    <li>Higiene Laboral y Medio Ambiente I</li>
+                                    <li>Medicina del Trabajo II</li>
+                                    <li>Práctica Profesionalizante II</li>
                                 </ul>
                                 </div>
                                 <div class="col-md-4">
                                 <h5 class="fw-semibold border-boton-car text-dark">3er Año</h5>
                                 <ul class="list-unstyled mb-0">
-                                    <li>Inglés III</li>
-                                    <li>Aspectos Legales de la Profesión</li>
-                                    <li>Seminario de Actualización</li>
-                                    <li>Redes y Comunicaciones</li>
-                                    <li>Ingeniería de Software II</li>
-                                    <li>Algoritmos y Estructuras de Datos III</li>
-                                    <li>Prácticas Profesionalizantes III</li>
+                                    <li>Comunicación y Administración de Medios</li>
+                                    <li>Capacitación de Personal</li>
+                                    <li>Seguridad III</li>
+                                    <li>Higiene Laboral y Medio Ambiente II</li>
+                                    <li>Control de la Contaminación</li>
+                                    <li>Práctica Profesionalizante III</li>
                                 </ul>
                                 </div>
                             </div>
                             </div>
+
                         </section>
                         <!-- Botón Volver -->
                         <div class="text-center mt-3">

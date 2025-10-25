@@ -30,12 +30,13 @@ $(document).ready(function() {
         $('#loginButton').on('click', function(e) {
             sessionStorage.removeItem('loggedIn');
             sessionStorage.removeItem('usuario');
-            window.location.href = 'login/index.html';
+            window.location.href = '/gestiondepartamentoalumnos/login/index.html';
+
         });
     } else {
         // Si no está logueado
         $('#texto').text('Campus');
-        $('#loginButton').attr('href', 'login/index.html');
+        $('#loginButton').attr('href', '/gestiondepartamentoalumnos/login/index.html');
     }
 });
 

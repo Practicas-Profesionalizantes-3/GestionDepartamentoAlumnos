@@ -730,15 +730,24 @@ p {
 }
 
 /* Estilo para la lista de carreras */
-.li-carreras {
-  border-radius: 8px;
-  padding: 1rem;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+.titulo-primary{
+  color: #006699 !important;
+}
+.border-titulo-carreras{
+  border-left: 5px solid #006699;
+  padding-left: 10px;
+  font-weight: 700;
 }
 
-.li-carreras:hover {
-  transform: scale(1.02);
+.border-boton-car{
+    border-bottom: 3px solid #006699;
+    display: inline-block;
+    padding-bottom: 8px;
+}
 
+.li-carreras {
+  border-radius: 8px;
+  padding: 1rem 0;
 }
 
 .li-carreras i {
@@ -748,11 +757,7 @@ p {
 /* Links de carreras */
 .li-carreras a {
   text-decoration: none;
-  color: #212529;
-}
-
-.li-carreras a:hover {
-  color: #0056b3;
+  color: #222b33;
 }
 
 /* boton eliminar pdf e img*/
@@ -781,3 +786,4 @@ p {
   margin-left: 10px; /* Ajusta el valor según sea necesario */
   display: inline-block; /* Asegura que se trate como un bloque en línea */
 }
+

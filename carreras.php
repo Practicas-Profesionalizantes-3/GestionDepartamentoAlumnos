@@ -70,10 +70,10 @@
                                     ?>
                                     <li class="d-flex justify-content-between align-items-center li-carreras">
                                         <span>
-                                            <i class="<?php echo $icono; ?> text-primary me-2"></i>
-                                            <a href="<?php echo $carrera["url"]; ?>" class="text-dark fw-bold"  target="_blank"><?php echo $carrera["descripcion"]; ?></a>
+                                            <i class="<?php echo $icono; ?> titulo-primary me-2"></i>
+                                            <a href="<?php echo $carrera["url"]; ?>" class="text-dark fw-bold a-carreras"><?php echo $carrera["descripcion"]; ?></a>
                                         </span>
-                                        <i class="bi bi-bookmark-star-fill text-primary"></i>
+                                        <i class="bi bi-bookmark-star-fill titulo-primary"></i>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>

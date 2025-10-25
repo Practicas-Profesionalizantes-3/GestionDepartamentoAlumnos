@@ -60,85 +60,57 @@
                     <!-- Carreras -->
                     <div class="container">
                         <h2 class="tm-text-primary mt-3 mb-4">Carreras del Instituto Superior De Formación Técnica N° 197</h2>
-                        <!-- Carrera: Tecnicatura Superior en Análisis de Sistemas -->
+                        <!-- Carrera: Tecnicatura Superior en Comunicación Multimedial -->
                         <section class="py-5 text-dark">
                             <div class="text-center mb-5">
-                            <h1 class="fw-bold text-uppercase titulo-primary mb-3"><i class="bi bi-laptop career-icon"></i> Tecnicatura Superior en Análisis de Sistemas</h1>
+                            <h1 class="fw-bold text-uppercase titulo-primary mb-3"><i class="bi bi-camera-video career-icon"></i> Tecnicatura Superior en Comunicación Multimedial</h1>
                             <p class="lead">
-                                <strong>Título:</strong> Analista de Sistemas<br>
+                                <strong>Título:</strong> Técnico Superior en Comunicación Multimedial<br>
                                 <strong>Nivel:</strong> Terciario<br>
                                 <strong>Modalidad:</strong> Presencial<br>
                                 <strong>Duración:</strong> 3 años<br>
-                                <strong>Cantidad de horas:</strong> 1856 horas<br>
+                                <strong>Cantidad de horas:</strong> 1824 horas<br>
                                 <strong>Resolución:</strong>
-                                <a href="https://www.ibeltran.com.ar/archivos/Resolucion%20TSAS%20-6790-19.pdf" target="_blank" class="text-decoration-none fw-semibold">
-                                6790/19 - DGCyE Pcia. de Buenos Aires
+                                <a href="https://www.ibeltran.com.ar/archivos/Resolucion%206179-03%20Comunicacion%20Multimedial.pdf" target="_blank" class="text-decoration-none fw-semibold">
+                                6179/03 de la Dirección General de Cultura y Educación de la Provincia de Buenos Aires
                                 </a>
                             </p>
                             </div>
                             <div class="border-0 rounded-4 p-4 mb-5">
                                 <h3 class="titulo-primary fw-bold mb-3 border-titulo-carreras">Fundamentación</h3>
                                 <p class="text-justify">
-                                    Desde hace décadas, la informática se ha instalado en nuestra sociedad como un sistema que colabora con el
-                                    estudio del procesamiento de la información. El profesional en Análisis de Sistemas se encuentra vinculado a
-                                    organizaciones que utilizan sistemas de información y requieren su análisis para la toma de decisiones.
+                                    Las nuevas tecnologías de la información y la comunicación están produciendo inusitados cambios en todos los aspectos de la vida social actual.
                                 </p>
                                 <p class="text-justify mb-0">
-                                    Por ello, esta carrera ofrece una formación integral en informática, sistemas de información, programación,
-                                    software y gestión organizacional. Además, promueve la comprensión de los avances científico-tecnológicos y el
-                                    perfeccionamiento continuo de sus egresados.
+                                    La relación hombre máquina se intensifica permanentemente, crece la cantidad de computadoras y sus aplicaciones vinculadas con la comunicación posibilitan cada día más la interactividad. Esta nueva forma de comunicación abre horizontes desconocidos para el desarrollo humano.
                                 </p>
                             </div>
 
                             <div class="border-0 rounded-4 p-4 mb-5">
                             <h3 class="titulo-primary fw-bold mb-3 border-titulo-carreras">Perfil Profesional</h3>
-
-                            <h5 class="fw-semibold text-dark">Competencia General</h5>
                             <p>
-                                El Analista de Sistemas estará capacitado para planificar y gestionar proyectos de desarrollo, diagnosticar
-                                problemas y diseñar soluciones informáticas que optimicen los procesos de las organizaciones, actuando conforme
-                                a las normas técnicas y legales vigentes.
+                                Implica la habilidad para la gestión integral de proyectos y el conocimiento de la legislación vigente sobre derechos de autor y propiedad intelectual. El Técnico en Comunicación Multimedial podrá desempeñarse de manera independiente o en relación de dependencia en todo tipo de emprendimiento que requieran la producción de sistemas multimediales de difusión, propaganda, publicidad o comunicación institucional.
                             </p>
-
-                            <h5 class="fw-semibold mt-4 text-dark">Áreas de Competencia</h5>
-                            <ul class="list-group list-group-flush list-unstyled">
-                                <li class="border-0">✔ Planificar, dirigir, realizar y evaluar proyectos de sistemas de información.</li>
-                                <li class="border-0">✔ Identificar y diagnosticar problemas organizacionales para diseñar soluciones informáticas.</li>
-                                <li class="border-0">✔ Organizar y controlar áreas técnicas relacionadas con sistemas de información.</li>
-                                <li class="border-0">✔ Actuar como vínculo entre el área técnica y las demás áreas de la organización.</li>
-                                <li class="border-0">✔ Elaborar propuestas de capacitación sobre sistemas de información.</li>
-                                <li class="border-0">✔ Gestionar el ciclo completo de vida de proyectos informáticos.</li>
-                                <li class="border-0">✔ Participar en análisis, diseño, construcción e integración de soluciones informáticas.</li>
-                                <li class="border-0">✔ Realizar tareas de auditoría, arbitraje y peritaje en sistemas de información.</li>
-                            </ul>
                             </div>
 
                             <div class="border-0 rounded-4 p-4 mb-5">
-                            <h3 class="titulo-primary fw-bold mb-3 border-titulo-carreras">Área Ocupacional</h3>
+                            <h3 class="titulo-primary fw-bold mb-3 border-titulo-carreras">Áreas de Competencia</h3>
                             <p>
-                                El Analista de Sistemas podrá desempeñarse en organizaciones públicas o privadas, liderando proyectos de
-                                desarrollo, mantenimiento y control de sistemas de información. También podrá trabajar de forma independiente
-                                como consultor, auditor o coordinador de equipos técnicos.
+                                El Técnico Superior en Comunicación Multimedial estará capacitado para desarrollar actividades profesionales, individualmente o integrando equipos de trabajo, en lo referente a interpretación, transformación y transmisión de información a través de la aplicación de tecnologías multimediales y la utilización de aplicaciones informáticas en medios de comunicación.
+                            </p>
+                            <p class="mb-0">
+                                Mediante la interacción con profesionales de áreas artísticas estará capacitado para diseñar, compaginar y producir publicaciones visuales y gráficas.
                             </p>
                             </div>
 
                             <div class="border-0 rounded-4 p-4 mb-5">
                             <h3 class="titulo-primary fw-bold mb-3 border-titulo-carreras">Plan de Estudios</h3>
                             <p>
-                                Planes y correlatividades según el año de ingreso del estudiante:
+                                Planes de Estudio y Correlatividades de la carrera según el año de ingreso de cada estudiante:
                             </p>
                             <ul class="list-unstyled">
-                                <li>• TSAS (Resol. 6790/19) ingresantes 2020 en adelante – 
-                                <a href="https://www.ibeltran.com.ar/archivos/planes/Estructura%20Curricular%20y%20Correlatividades%20-%20TSAS%20-%202024.pdf" target="_blank" class="fw-semibold text-decoration-none">Descargar</a>
-                                </li>
-                                <li>• TECAS (Resol. 5817/03) ingresantes 2017–2019 – 
-                                <a href="https://www.ibeltran.com.ar/archivos/planes/Estructura%20Curricular%20y%20Correlatividades%20-%20Analista%20de%20Sistemas%20-2017.pdf" target="_blank" class="fw-semibold text-decoration-none">Descargar</a>
-                                </li>
-                                <li>• TECAS (Resol. 5817/03) ingresantes 2015–2016 – 
-                                <a href="https://www.ibeltran.com.ar/archivos/planes/Estructura%20Curricular%20y%20Correlatividades%20-%20Analista%20de%20Sistemas%20-2015.pdf" target="_blank" class="fw-semibold text-decoration-none">Descargar</a>
-                                </li>
-                                <li>• TECAS (Resol. 5817/03) ingresantes 2012–2014 – 
-                                <a href="https://www.ibeltran.com.ar/archivos/planes/Estructura%20Curricular%20y%20Correlatividades%20-%20Analista%20de%20Sistemas%20-2012-2013-2014.pdf" target="_blank" class="fw-semibold text-decoration-none">Descargar</a>
+                                <li>• Para alumnos que ingresaron a partir del año 2020 inclusive – 
+                                <a href="https://www.ibeltran.com.ar/archivos/planes/Estructura%20Curricular%20y%20Correlatividades%20-%20TECUM%20-%202024.pdf" target="_blank" class="fw-semibold text-decoration-none">Descargar</a>
                                 </li>
                             </ul>
                             </div>
@@ -150,39 +122,42 @@
                                 <div class="col-md-4">
                                 <h5 class="fw-semibold border-boton-car text-dark">1er Año</h5>
                                 <ul class="list-unstyled mb-0">
-                                    <li>Inglés I</li>
-                                    <li>Ciencia, Tecnología y Sociedad</li>
-                                    <li>Análisis Matemático I</li>
-                                    <li>Álgebra</li>
-                                    <li>Algoritmos y Estructuras de Datos I</li>
-                                    <li>Sistemas y Organizaciones</li>
-                                    <li>Arquitectura de Computadores</li>
-                                    <li>Prácticas Profesionalizantes I</li>
+                                    <li>Algebra</li>
+                                    <li>Análisis Matemático</li>
+                                    <li>Inglés Técnico I</li>
+                                    <li>Administración de las Organizaciones</li>
+                                    <li>Metodología de la Investigación</li>
+                                    <li>Introducción a la Programación</li>
+                                    <li>Fundamentos de Fotografía, Imagen y Sonido</li>
+                                    <li>Comunicación</li>
+                                    <li>Diseño de Información Conceptual</li>
+                                    <li>Laboratorio de Medios Digitales I</li>
                                 </ul>
                                 </div>
                                 <div class="col-md-4">
                                 <h5 class="fw-semibold border-boton-car text-dark">2do Año</h5>
                                 <ul class="list-unstyled mb-0">
-                                    <li>Inglés II</li>
+                                    <li>Probabilidad y Estadística</li>
                                     <li>Análisis Matemático II</li>
-                                    <li>Estadística</li>
-                                    <li>Ingeniería de Software I</li>
-                                    <li>Algoritmos y Estructuras de Datos II</li>
-                                    <li>Sistemas Operativos</li>
-                                    <li>Base de Datos</li>
-                                    <li>Prácticas Profesionalizantes II</li>
+                                    <li>Inglés Técnico II</li>
+                                    <li>Programación Web</li>
+                                    <li>Medios Audiovisuales</li>
+                                    <li>Medios Editoriales</li>
+                                    <li>Laboratorio de Medios Digitales II</li>
+                                    <li>Espacio de Definición Institucional</li>
                                 </ul>
                                 </div>
                                 <div class="col-md-4">
                                 <h5 class="fw-semibold border-boton-car text-dark">3er Año</h5>
                                 <ul class="list-unstyled mb-0">
-                                    <li>Inglés III</li>
-                                    <li>Aspectos Legales de la Profesión</li>
-                                    <li>Seminario de Actualización</li>
-                                    <li>Redes y Comunicaciones</li>
-                                    <li>Ingeniería de Software II</li>
-                                    <li>Algoritmos y Estructuras de Datos III</li>
-                                    <li>Prácticas Profesionalizantes III</li>
+                                    <li>Investigación Operativa</li>
+                                    <li>Economía Empresarial</li>
+                                    <li>Inglés Técnico III</li>
+                                    <li>Marketing Aplicado</li>
+                                    <li>Edición de Video</li>
+                                    <li>Proyecto</li>
+                                    <li>Práctica Profesional</li>
+                                    <li>Espacio de Definición Institucional</li>
                                 </ul>
                                 </div>
                             </div>
