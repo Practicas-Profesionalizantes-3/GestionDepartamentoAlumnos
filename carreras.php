@@ -78,34 +78,36 @@
                                 <?php endforeach; ?>
                             </ul>
     
-                            <hr class="my-4">
-                            <p class="text-muted">
-                                Dirección General de Cultura y Educación, Provincia de Buenos Aires<br>
-                                Resolución de Creación N° 3293 del 12 de Octubre del 2011<br>
-                                Títulos Terciarios OFICIALES
-                            </p>
-                            <p class="text-muted">La Educación Superior:
-                                <br>
-                                Los cambios producidos en el mundo de la ciencia y especialmente, en el campo de la tecnología, se han reflejado en el ámbito de la economía y del trabajo, inaugurando nuevas perspectivas en los sistemas organizacionales, en los regímenes de trabajo y en la producción industrial y tecnológica. Los avances en este campo, a la par de modificar las relaciones entre trabajo y producción, han invadido otras esferas de la vida social, lo que ha llevado a una necesaria reflexión sobre la calidad de vida humana, en el marco de un mundo altamente tecnificado y de profundos desequilibrios sociales.
-                                <br>
-                                En La Ley de Educación Superior se formulan entre otros los siguientes objetivos:
-                                <br>
-                                a) Formar científicos, profesionales y técnicos que se caractericen por la solidez de su formación y por su compromiso con la sociedad de que forman parte.
-                                <br>
-                                b) Garantizar crecientes niveles de calidad y excelencia en todas las opciones institucionales del sistema.
-                                <br>
-                                c) Articular la oferta educativa de los diferentes tipos de instituciones que la integran.
-                                <br>
-                                d) Promover una adecuada diversificación de los estudios de nivel superior, que atiendan tanto a las expectativas y demandas de la población como los requerimientos del sistema cultural y de la estructura productiva”.
-                                <br>
-                                e) Propender a la formación profesional en distintas carreras técnicas que tengan vinculación directa con las necesidades socio-económicas y los requerimientos de empleo de la región.
-                            </p>
-                            <p class="text-muted">INSTITUTO TECNOLÓGICO BELTRÁN
-                                Avenida Belgrano 1191, Avellaneda, Buenos Aires, Argentina.
-                                Instituto Superior de Formación Técnica 197
-                                Contacto: Secretaría, secretaria197@ibeltran.com.ar
-                                (011) 4265.0247 / 4265.0342 / 4203.0222 / 4203.0134
-                            </p>   
+                            <hr class="my-4 border-primary border-2 w-75 mx-auto">
+
+                            <div class="text-muted small lh-lg">
+                                <p class="mb-3">
+                                    Dirección General de Cultura y Educación, Provincia de Buenos Aires<br>
+                                    Resolución de Creación N° 3293 del 12 de Octubre del 2011<br>
+                                    Títulos Terciarios OFICIALES
+                                </p>
+                                <p class="mb-3">
+                                    <strong>La Educación Superior:</strong><br>
+                                    Los cambios producidos en el mundo de la ciencia y especialmente, en el campo de la tecnología, se han reflejado en el ámbito de la economía y del trabajo, inaugurando nuevas perspectivas en los sistemas organizacionales, en los regímenes de trabajo y en la producción industrial y tecnológica. Los avances en este campo, a la par de modificar las relaciones entre trabajo y producción, han invadido otras esferas de la vida social, lo que ha llevado a una necesaria reflexión sobre la calidad de vida humana, en el marco de un mundo altamente tecnificado y de profundos desequilibrios sociales.
+                                </p>
+                                <p class="mb-3">
+                                    En La Ley de Educación Superior se formulan entre otros los siguientes objetivos:
+                                    <ul class="mt-2">
+                                        <li>Formar científicos, profesionales y técnicos comprometidos con la sociedad.</li>
+                                        <li>Garantizar niveles de calidad y excelencia educativa.</li>
+                                        <li>Articular la oferta educativa de las distintas instituciones.</li>
+                                        <li>Promover la diversificación de estudios según demandas sociales y productivas.</li>
+                                        <li>Fomentar la formación técnica vinculada al empleo regional.</li>
+                                    </ul>
+                                </p>
+                                <p class="mt-4">
+                                    <strong>INSTITUTO TECNOLÓGICO BELTRÁN</strong><br>
+                                    Avenida Belgrano 1191, Avellaneda, Buenos Aires, Argentina.<br>
+                                    Instituto Superior de Formación Técnica 197<br>
+                                    <span class="fw-semibold">Contacto:</span> Secretaría — secretaria197@ibeltran.com.ar<br>
+                                    <span class="fw-semibold">Tel.:</span> (011) 4265.0247 / 4265.0342 / 4203.0222 / 4203.0134
+                                </p>
+                            </div>
                         </section>
                     </div>
                 </div> <!-- .tm-section-wrap -->
