@@ -28,9 +28,8 @@ $(document).ready(function() {
         $('#texto').text('Cerrar sesión');
         // Manejar cerrar sesión
         $('#loginButton').on('click', function(e) {
-            sessionStorage.removeItem('loggedIn');
-            sessionStorage.removeItem('usuario');
-            window.location.href = '/gestiondepartamentoalumnos/login/index.html';
+            e.preventDefault(); // Evita que el enlace redirija inmediatamente
+            cerrarsesion();
 
         });
     } else {
@@ -54,3 +53,27 @@ searchBtn.addEventListener("click", () => {
     sidebar.classList.remove("close");
 })
 
+function cerrarsesion() {
+  // Mostrar alerta de confirmación
+  Swal.fire({
+    title: "Cerrar sesión",
+    text: "¿Estás seguro de que deseas cerrar sesión?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    cancelButtonText: "Cancelar",
+    confirmButtonText: "Si, cerrar!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Destruir la sesión
+      sessionStorage.removeItem('loggedIn');
+      sessionStorage.removeItem('usuario');
+
+      // Redirigir al usuario a la página de inicio de sesión
+      window.location.href = '../../GestionDepartamentoAlumnos/login/index.html';
+
+    }
+  });
+
+}
