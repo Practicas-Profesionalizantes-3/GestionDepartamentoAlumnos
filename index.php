@@ -41,6 +41,9 @@
                     $_SESSION['mostrar_opciones_cartelera'] = 'opciones1';
                     include("includes/cartelera.php")
                     ?>
+                    <!-- Include banner de inscripciones -->
+                    <?php include("includes/inscripciones.php")?>
+
                     <!-- Include Contacto -->
                     <?php include("includes/contacto.php")?>
                 </div> <!-- .tm-section-wrap -->
