@@ -645,6 +645,15 @@ p {
   cursor: pointer;
 }
 
+.img-responsive {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.modal-agosti{
+  z-index: 10000 !important;
+}
 
 .icon-notificaciones{
   background-color: #4b5158; /* Color de fondo */

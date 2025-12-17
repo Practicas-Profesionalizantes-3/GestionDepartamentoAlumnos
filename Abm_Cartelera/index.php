@@ -117,7 +117,14 @@
                                     <td><?php echo $datos['aviso_tipo']; ?></td>
                                     <td><?php echo isset($usuarios_nombres[$datos['id_usuario']]) ? $usuarios_nombres[$datos['id_usuario']] : 'Usuario desconocido'; ?></td>
                                     <td><?php echo $datos['titulo']; ?></td>
-                                    <td><?php echo $datos['descripcion']; ?></td>
+                                    <td>
+                                        <?php 
+                                            $descripcion = $datos['descripcion'];
+                                            echo strlen($descripcion) > 60 
+                                                ? substr($descripcion, 0, 60) . '...' 
+                                                : $descripcion;
+                                        ?>
+                                    </td>
                                     <td><?php echo date('d-m-Y H:i', strtotime($datos['fecha_publicacion'])); ?></td>
                                     <td><?php echo date('d-m-Y', strtotime($datos['fecha_vencimiento'])); ?></td>
                                     <td><?php if($datos["adjunto"] != ""){ ?>
