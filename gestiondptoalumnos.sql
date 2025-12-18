@@ -3,13 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-10-2024 a las 03:03:43
+-- Tiempo de generación: 18-12-2025 a las 17:00:19
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "-03:00";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -32,7 +32,7 @@ CREATE TABLE `avisos` (
   `id_aviso_tipo` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
   `titulo` varchar(255) NOT NULL,
-  `descripcion` varchar(255) NOT NULL,
+  `descripcion` varchar(2000) NOT NULL,
   `fecha_publicacion` datetime DEFAULT NULL,
   `fecha_vencimiento` date DEFAULT NULL,
   `adjunto` mediumblob DEFAULT NULL,
@@ -110,16 +110,16 @@ CREATE TABLE `carreras` (
 --
 
 INSERT INTO `carreras` (`id_carrera`, `descripcion`, `url`) VALUES
-(1, 'Análisis De Sistemas', 'https://www.ibeltran.com.ar/analista_sistemas.php'),
-(2, 'Diseño Industrial', 'https://www.ibeltran.com.ar/disenio_industrial.php'),
-(3, 'Enfermería', 'https://www.ibeltran.com.ar/ts_enfermeria.php'),
-(4, 'Radiología', 'https://www.ibeltran.com.ar/radiologia.php'),
-(5, 'Higiene Y Seguridad En El Trabajo', 'https://www.ibeltran.com.ar/higiene_seguridad.php'),
-(6, 'Comunicación Multimedial', 'https://www.ibeltran.com.ar/comunicacion_multimedial.php'),
-(7, 'Administración Contable', 'https://www.ibeltran.com.ar/adm_contable.php'),
-(8, 'Administración De Pequeñas Y Medianas Empresas', 'https://www.ibeltran.com.ar/adm_empresas.php'),
-(9, 'Certificación Superior En Salud Mental', 'https://www.ibeltran.com.ar/certificacion_superior_mental.php'),
-(10, 'Tecnicatura Superior En Ciencia De Datos E Inteligencia Artificial', 'https://www.ibeltran.com.ar/cienciadatos_IA.php');
+(1, 'Análisis De Sistemas', 'carreras/analisis_de_sistemas.php'),
+(2, 'Diseño Industrial', 'carreras/disenio_industrial.php'),
+(3, 'Enfermería', 'carreras/enfermeria.php'),
+(4, 'Radiología', 'carreras/radiologia.php'),
+(5, 'Higiene Y Seguridad En El Trabajo', 'carreras/higiene_seguridad.php'),
+(6, 'Comunicación Multimedial', 'carreras/comunicacion_multimedial.php'),
+(7, 'Administración Contable', 'carreras/adm_contable.php'),
+(8, 'Administración De Pequeñas Y Medianas Empresas', 'carreras/adm_empresas.php'),
+(9, 'Certificación Superior En Salud Mental', 'carreras/certificacion_superior_mental.php'),
+(10, 'Tecnicatura Superior En Ciencia De Datos E Inteligencia Artificial', 'carreras/cienciadatos_IA.php');
 
 -- --------------------------------------------------------
 
@@ -795,8 +795,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `password`, `email`, `id_documento_tipo`, `id_usuario_estado`, `numero_documento`) VALUES
-(1, 'Benjamin', 'Lazarte', '$2y$10$v5akvlrb50cuhNRz17knzOyj985RROuq5rlj9lkjT1hS7gmHeMg.6', '42027184@itbeltran.com.ar', 1, 1, 42027184),
-(2, 'Maximiliano', 'Lopez', '$2y$10$bvqjBSaLNeQQE4W1ioZhBOvvK4H3NJ8KguFJf2AUFMnz4OfjeRkkm', 'Maximilianolopez@gmail.com.ar', 1, 1, 33222132);
+(1, 'Benjamin', 'Lazarte', '$2y$10$D6xiU.vCpAD57U9tFo2vIOChGtcidedXIvOwiNwZbCQhPvNpJ0NfS', '42027184@itbeltran.com.ar', 1, 1, 42027184),
+(2, 'Leonel', 'Hidalgo', '$2y$10$zqKNClTKVF93cTbvkSPC6OxgV7UKFNnf6e8eJTywa78XJ6Tz2IxeS', '41163838@itbeltran.com.ar', 1, 1, 41163838),
+(3, 'Maximiliano', 'Lopez', '$2y$10$LMtfzceADImH81SVcMGsLuH50zwGvCu4OZYfSWiYY6hijr1BgXdOi', '31918166@itbeltran.com.ar', 1, 1, 31918166);
 
 -- --------------------------------------------------------
 
@@ -816,8 +817,9 @@ CREATE TABLE `usuario_carreras` (
 --
 
 INSERT INTO `usuario_carreras` (`id_usuario`, `id_carrera`, `anio`, `comision`) VALUES
-(1, 1, 3, '2da'),
-(2, 1, 3, '2da');
+(1, 1, 2025, '3ro 2da'),
+(2, 1, 2025, '3ro 2da'),
+(3, 10, 2025, '1ro 1ra');
 
 -- --------------------------------------------------------
 
@@ -866,8 +868,9 @@ CREATE TABLE `usuario_roles` (
 --
 
 INSERT INTO `usuario_roles` (`id_usuario`, `id_usuario_tipo`) VALUES
-(1, 2),
-(2, 3);
+(1, 3),
+(2, 1),
+(3, 2);
 
 -- --------------------------------------------------------
 
@@ -1108,7 +1111,7 @@ ALTER TABLE `tramite_comentarios`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_notificaciones`
