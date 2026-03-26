@@ -39,7 +39,7 @@ Mejorar la eficiencia administrativa, reducir el uso de papel y brindar una expe
 
 ## 👨‍💻 Autores
 
-**Benjamin Lazarte**
-**Maximiliano Lopez**
-**Luciano Gomez**
+**Benjamin Lazarte**<<<<<<<<<br>
+**Maximiliano Lopez**<br>
+**Luciano Gomez**<br>
 **Santiago Guzman**
